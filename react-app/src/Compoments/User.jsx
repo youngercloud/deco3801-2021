@@ -26,7 +26,6 @@ class User extends Component {
     getData = () => {
         let api = "/api/CaoCao"
         axios.get(api).then((response) => {
-            console.log(response.data)
             this.setState({name: response.data.name})
         }).catch(function (err) {console.log(err)});
     }

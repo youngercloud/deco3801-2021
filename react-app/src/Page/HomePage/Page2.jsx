@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import "./static/Page2.css"
-import {Menu, Row, Col, Icon, Button, Popover, Badge, Space, Typography} from 'antd';
+import { Row, Col, Button, Typography} from 'antd';
 
 const { Title, Text } = Typography;
 class Page2 extends Component {

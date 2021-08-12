@@ -63,3 +63,5 @@ func SpecHandler(c *gin.Context)  {
 	}
 	c.AbortWithStatus(http.StatusNotFound)
 }
+
+

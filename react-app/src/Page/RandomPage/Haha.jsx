@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import Home from './Page/HomePage/Home'
-class App extends Component {
+
+class Haha extends Component {
     render() {
         return (
             <div>
-                <Home/>
+
             </div>
         );
     }
 }
 
-export default App;
+export default Haha;

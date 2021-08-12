@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Menu, Row, Col, Icon, Button, Popover, Badge, Space } from 'antd';
 import { Image } from 'antd';
 import "./static/header.css"
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {FacebookFilled, InstagramFilled, TwitterCircleFilled} from "@ant-design/icons";
 
 export default class Header extends Component {

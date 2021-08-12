@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import "./static/banner.css"
 import { Row, Col, Image } from 'antd';
-import { Typography} from 'antd';
 
-const { Title, Paragraph, Text, Link } = Typography;
 export default class Banner extends Component {
     render() {
         return (
