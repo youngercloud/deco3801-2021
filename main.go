@@ -83,7 +83,7 @@ var pa = []Patient {
 	{3, "ZhangJiuling"},
 }
 
-//asdasdadasd
+//asdasdadasdadasd
 func SpecHandler(c *gin.Context)  {
 	c.Header("Content-Type", "application/json")
 	pName := c.Param("patientName")
