@@ -56,6 +56,4 @@ func databaseSetup() {
 	if err != nil {
 		return
 	}
-
-
 }
