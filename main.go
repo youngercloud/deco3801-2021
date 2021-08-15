@@ -4,9 +4,11 @@ import (
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"time"
 )
 
 func main()  {
+	databaseSetup()
 	router:= gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 	api := router.Group("./api")
@@ -40,15 +42,10 @@ func PatientHandler(c *gin.Context) {
 	})
 }
 
-type Patient struct {
-	ID int `json:"id" binding:"required"`
-	Name string `json:"name"`
-}
 
 var pa = []Patient {
-	{1, "WangChangling"},
-	{2, "CaoCao"},
-	{3, "ZhangJiuling"},
+	{1, "ChangLing", "Wang", time.Date(666, time.Month(1), 1, 0, 0, 0, 0, time.UTC), 1, ""},
+	{2, "Cao", "Cao", time.Date(190, time.Month(1), 2, 0, 0, 0, 0, time.UTC), 1, ""},
 }
 
 
@@ -56,7 +53,7 @@ func SpecHandler(c *gin.Context)  {
 	c.Header("Content-Type", "application/json")
 	pName := c.Param("patientName")
 	for i := 0; i < len(pa); i++ {
-		if pa[i].Name == pName {
+		if pa[i].FirstName == pName {
 			c.JSON(http.StatusOK, &pa[i])
 			return
 		}
