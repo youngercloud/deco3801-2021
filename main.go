@@ -48,6 +48,10 @@ var pa = []Patient {
 	{2, "Cao", "Cao", time.Date(190, time.Month(1), 2, 0, 0, 0, 0, time.UTC), 1, ""},
 }
 
+func Test (a string) string {
+	println(a)
+	return a
+}
 
 func SpecHandler(c *gin.Context)  {
 	c.Header("Content-Type", "application/json")
