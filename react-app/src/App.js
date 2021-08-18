@@ -5,8 +5,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                {/*<Home/>*/}
-                <LoginPage/>
+                <Home/>
+                {/*<LoginPage/>*/}
             </div>
         );
     }
