@@ -31,7 +31,13 @@ class SignUpPage extends Component {
                     <Col span={16}>
                         <div className="form-wrap">
                             <div>
-                            <h2>Welcome, please sign up your account</h2>
+                                <div id="login">
+                                    <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000"}}>
+                                        Already a member? Log in
+                                    </button>
+                                </div>
+                                <h2>Please sign up your account</h2>
+
                             <Form name="normal_login" className="login-form" initialValues={{remember: true}} onFinish={onFinish}>
                                 <Form.Item name="username"
                                            rules={[{required: true, message: 'Please input your Username!'}]}>
@@ -76,9 +82,7 @@ class SignUpPage extends Component {
                                     <Button type="primary" htmlType="submit" className="login-form-button"><p>Sign Up</p></Button>
                                 </Form.Item>
                             </Form>
-                            <button type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000"}}>
-                                Login in
-                            </button>
+
                             </div>
                         </div>
                     </Col>
