@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { Layout } from 'antd';
+import {  Col, Layout, Row} from 'antd';
 import "./static/login.css";
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import Radio from "antd/es/radio/radio";
 const { Header, Footer, Sider, Content } = Layout;
 
 const onFinish = (values) => {
@@ -13,30 +14,66 @@ const onFinish = (values) => {
 class LoginPage extends Component {
     render() {
         return (
-            <div class="form-wrap">
-                <div>
-                    <div class="form-header">
-                        <span>Welcome, please login in with your account</span>
-                    </div>
-                    <div class="form-content">
-                        <Form name="normal_login" className="login-form" initialValues={{ remember: true }} onFinish={onFinish}>
-                            <Form.Item name="username" rules={[{ required: true, message: 'Please input your Username!' }]}>
-                                <p>username:</p>
-                                <Input  prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-                            </Form.Item>
 
-                            <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]}>
-                                <p>password:</p>
-                                <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password"/>
-                            </Form.Item>
-
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit" className="login-form-button">Log in</Button>
-                            </Form.Item>
-                        </Form>
+            <Row>
+                <Col span={8}>
+                    <div class="sidebar">
                     </div>
-                </div>
-            </div>
+                </Col>
+                <Col span={16}>
+                    <div className="form-wrap">
+                        <div>
+                            <div id="signUp">
+                                <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000/signuppage"}}>
+                                    Sign up
+                                </button>
+                            </div>
+                            <div className="form-header">
+                                <h2>Welcome, please login in with your account</h2>
+                            </div>
+                            <div className="form-content">
+                                <Form name="normal_login" className="login-form" initialValues={{remember: true}}
+                                      onFinish={onFinish}>
+                                    <Form.Item name="username"
+                                               rules={[{required: true, message: 'Please input your Username!'}]}>
+                                        <p>username:</p>
+                                        <Input prefix={<UserOutlined className="site-form-item-icon"/>}
+                                               placeholder="Username"/>
+                                    </Form.Item>
+                                    <Row>
+                                        <Col span={12}>
+                                            <Form.Item name="password"
+                                                       rules={[{required: true, message: 'Please input your Password!'}]}>
+                                                <p>password:</p>
+                                                <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
+                                                       placeholder="Password"/>
+                                            </Form.Item>
+                                        </Col>
+                                        <Col/>
+                                    </Row>
+
+                                    <div>
+                                        <Radio.Group  name="identity" defaultValue={1} >
+
+                                            <Radio value={1} ><p>User</p></Radio>
+                                            <Radio value={2}><p>Clinic / Hospital</p></Radio>
+                                        </Radio.Group>
+                                    </div>
+
+                                    <Form.Item>
+                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                            <p>Log in</p>
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
+
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+
+
         );
     }
 }

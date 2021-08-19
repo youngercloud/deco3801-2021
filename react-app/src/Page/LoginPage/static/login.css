@@ -10,7 +10,7 @@ body {
 
 .form-wrap{
     display: flex;
-    width:300px;
+    width:500px;
     margin:auto;
     height:100vh;
     align-items: center;
@@ -21,6 +21,8 @@ body {
     line-height: 56px;
     color: black;
 }
+
+
 
 .column{
     float: left;
@@ -36,4 +38,21 @@ span{
 
 .form-text{
     background-color: black;
+}
+
+#signUp{
+    margin-bottom: -15px;
+}
+
+#signUp button{
+    float:right;
+    font-size: 15px;
+    color: #AAAAAA;
+    border: none;
+}
+
+#signUp button:hover
+{
+    background-color:#AAAAAA;
+    color: #FFFFFF;
 }

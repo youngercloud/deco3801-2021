@@ -1,0 +1,87 @@
+@import "../../../../node_modules/antd/dist/antd.css";
+html,
+body {
+    height: auto;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+.sidebar{
+    background-color: #DDDDDD;
+    height:100%;
+
+}
+
+.sidebar h1{
+    font-size: 36px;
+    text-align:center;
+    padding-top: 48%;
+}
+.sidebar ul{
+    padding-left: 25%;
+
+}
+.sidebar li{
+    font-size: 22px;
+    color: #6B6363;
+    padding-bottom:35px;
+    text-align:left;
+}
+
+.form-wrap {
+    width: 95%;
+    margin-left: 20%;
+}
+
+.form-wrap h2{
+    margin-bottom: 20px;
+}
+
+.form-wrap form{
+    width: 550px;
+}
+
+.form-wrap form input{
+    height: 35px;
+}
+
+.form-wrap form p{
+    color: #888888;
+    font-size: 15px;
+}
+
+.form-wrap form button{
+    margin-top: 20px;
+    float:right;
+    height: 50px;
+    width: 130px;
+    background-color: #AAAAAA;
+}
+
+
+.form-wrap form button p{
+    font-size: 20px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+#login{
+    margin-bottom: -8px;
+}
+
+#login button{
+    float:right;
+    font-size: 15px;
+    color: #AAAAAA;
+    border: none;
+}
+
+#login button:hover
+{
+    background-color:#AAAAAA;
+    color: #FFFFFF;
+}
+
+
