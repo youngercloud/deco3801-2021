@@ -9,6 +9,7 @@ import (
 
 func main()  {
 	databaseSetup()
+	SignUpDatabaseSetup()
 	router:= gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 	api := router.Group("./api")
@@ -60,5 +61,4 @@ func SpecHandler(c *gin.Context)  {
 	}
 	c.AbortWithStatus(http.StatusNotFound)
 }
-
 
