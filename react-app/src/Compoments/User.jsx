@@ -24,10 +24,15 @@ class User extends Component {
     }
 
     getData = () => {
-        let api = "/api/CaoCao"
-        axios.get(api).then((response) => {
-            this.setState({name: response.data.name})
-        }).catch(function (err) {console.log(err)});
+        let api = "/api/signup"
+        axios.post(api, {
+            firstName: 'Fred',
+            PhoneNumber: 123124
+        }).then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 }
 
