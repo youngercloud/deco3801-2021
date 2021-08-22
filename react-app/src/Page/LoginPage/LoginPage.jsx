@@ -17,7 +17,7 @@ class LoginPage extends Component {
 
             <Row>
                 <Col span={8}>
-                    <div class="sidebar">
+                    <div className="sidebar">
                     </div>
                 </Col>
                 <Col span={16}>

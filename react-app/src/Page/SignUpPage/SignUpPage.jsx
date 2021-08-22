@@ -3,23 +3,71 @@ import {Col, Layout, Row} from 'antd';
 import "./static/signUp.css";
 import { Form, Input, Button, Checkbox } from 'antd';
 import {UserOutlined, LockOutlined, QuestionCircleFilled} from '@ant-design/icons';
-import Title from "antd/es/typography/Title";
-import Text from "antd/es/typography/Text";
 import Radio from "antd/es/radio/radio";
-const { Header, Footer, Sider, Content } = Layout;
 
-
-const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-};
 
 class SignUpPage extends Component {
+    constructor(opt) {
+        super(opt);
+        this.state={
+            Name:'',
+            Mail:'',
+            Validate:{
+                Name:{
+                    required:true,
+                    validate:true,
+                    minLen:6,
+                    maxLen:10,
+                    msg:"name must greater 6"
+                }
+            }
+        };
+    }
+
+    handlerChange=(e)=>{
+        this.setState({
+            [e.target.name]:e.target.value
+        },()=>{
+           this.validateInput();
+        });
+
+    };
+
+    handlerSubmit = (e) =>{
+        e.preventDefault();
+        this.validateInput();
+        alert('d');
+    };
+
+    test = (e) =>{
+        console.log(e);
+    };
+
+    validateInput(){
+        let {Name, Validate} = this.state;
+        let temValidate = false;
+        const len = Name.length;
+        const min = Validate.Name.minLen;
+        const max = Validate.Name.maxLen;
+        if (len>= min && len<= max){
+            temValidate = true;
+        }
+        this.setState(preState => {
+            return Object.assign({},preState,{
+                Validate:{
+                    Name:Object.assign({},preState.Validate.Name,{
+                        validate: temValidate,
+                    })
+                }
+            });
+        })
+    }
+
     render() {
         return (
-
                 <Row>
                     <Col span={8}>
-                        <div class="sidebar">
+                        <div className="sidebar">
                             <h1>Why our service?</h1>
                             <ul>
                                 <li>We’re professional medical platform</li>
@@ -38,36 +86,38 @@ class SignUpPage extends Component {
                                 </div>
                                 <h2>Please sign up your account</h2>
 
-                            <Form name="normal_login" className="login-form" initialValues={{remember: true}} onFinish={onFinish}>
-                                <Form.Item name="username"
-                                           rules={[{required: true, message: 'Please input your Username!'}]}>
+                            <Form name="normal_login" className="login-form" initialValues={{remember: true}}  onSubmit={this.handlerSubmit}>
+                                <Form.Item >
                                     <p>username:</p>
                                     <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                                           placeholder="Username"/>
+                                           placeholder="Username"
+                                           onChange={this.handlerChange}
+                                            name="Name"
+                                    />
                                 </Form.Item>
 
-                                <Form.Item name="e-mail"
-                                           rules={[{required: true, message: 'Please input your E-mail address!'}]}>
+                                <Form.Item>
                                     <p>E-mail:</p>
                                     <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                                           placeholder="Email"/>
+                                           placeholder="Email"
+                                           name="Mail"
+                                           onChange={this.handlerChange}
+                                    />
                                 </Form.Item>
                                 <Row>
                                     <Col span={11}>
-                                        <Form.Item name="password"
-                                                   rules={[{required: true, message: 'Please input your Password!'}]}>
+                                        <Form.Item>
                                             <p>password:</p>
                                             <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
-                                                   placeholder="Password"/>
+                                                   placeholder="Password" />
                                         </Form.Item>
                                     </Col>
                                     <Col span={2}/>
                                     <Col span={11}>
-                                        <Form.Item name="password"
-                                                   rules={[{required: true, message: 'Please input your Password!'}]}>
+                                        <Form.Item>
                                             <p>password:</p>
                                             <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
-                                                   placeholder="Password"/>
+                                                   placeholder="Confirm password" />
                                         </Form.Item>
                                     </Col>
                                 </Row>
@@ -77,12 +127,18 @@ class SignUpPage extends Component {
                                         <Radio value={2}><p>Clinic / Hospital</p></Radio>
                                     </Radio.Group>
                                 </div>
-
                                 <Form.Item>
-                                    <Button type="primary" htmlType="submit" className="login-form-button"><p>Sign Up</p></Button>
+                                    <Button type="primary" htmlType="submit" className="login-form-button" value="Submit" ><p>Sign Up</p></Button>
                                 </Form.Item>
                             </Form>
 
+                                <p>
+                                    username:{this.state.Name} <br/>
+                                    email to : {this.state.Mail}
+                                </p>
+                                {!this.state.Validate.Name.validate &&  <span style={{color:'red'}}>{this.state.Validate.Name.msg}</span>}
+
+                                <Button onClick={(e)=>this.test(this.state)}>test</Button>
                             </div>
                         </div>
                     </Col>
