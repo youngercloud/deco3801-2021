@@ -35,52 +35,31 @@ type Doctors struct {
 }
 
 
-func SignUpDatabaseSetup() {
-	dsn := "stu:deco3801@tcp(34.116.85.107:3306)/booking?charset=utf8mb4&parseTime=True&loc=Local"
+func SignUpDatabaseSetup() *gorm.DB{
+	dsn := "stu:deco3801@tcp(34.87.198.176:3306)/users?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	println(1)
 	if err != nil {
 		println(err)
 	}
 
 	err = db.AutoMigrate(&Users{}, &Doctor{})
 	if err != nil {
-		return
+		return nil
 	}
+	return db
 }
 
-func SignUpUser() {
-	dsn := "stu:deco3801@tcp(34.116.85.107:3306)/booking?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		println(err)
-	}
-	NewSignUp := Users{
-		UserId:1,
-		Password:"password",
-		FirstName:"Dasima",
-		LastName:"Wuhu",
-		DOB:time.Now(),
-		Gender:"123456",
-		Email:"Roudanchongji@qq.com",
-		PhoneNumber:030,
-		Address:"",
-		Language:"",
-		Nationality:"",
-	}
-	db.Create(&NewSignUp)
-	if err := db.Create(&NewSignUp).Error; err != nil {
+func SignUpUser(UserData Users, db gorm.DB) {
+	db.Create(&UserData)
+	if err := db.Create(&UserData).Error; err != nil {
 		fmt.Println("InsertFail", err)
 		return
 	}
 }
 
-func SignUpDoctor() {
-	dsn := "stu:deco3801@tcp(34.116.85.107:3306)/booking?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		println(err)
-	}
+
+func SignUpDoctor(db gorm.DB) {
+
 	NewSignUpDoctor := Doctors{
 		DoctorId:         1,
 		Password:         "password",
