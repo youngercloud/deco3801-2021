@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -19,7 +18,7 @@ func main()  {
 			})
 		})
 
-
+		api.GET("/login", LoginHandler)
 		//path need to be changed after page path has been determined
 		api.POST("/signup", SignUpHandler)
 		//api.GET("/patients", PatientHandler)
@@ -29,15 +28,7 @@ func main()  {
 
 	router.Run(":8081")
 }
-func SignUpHandler(c *gin.Context) {
-	//var db = SignUpDatabaseSetup();
-	var userData Users
-	c.Bind(&userData)
-	fmt.Println(userData.FirstName)
-	fmt.Println(userData.PhoneNumber)
-	c.String(http.StatusOK, "Accept data from front-end!")
-	//SignUpUser(userData, *db)
-}
+
 
 func NoResponse(c *gin.Context) {
 	c.JSON(http.StatusNotFound, gin.H{

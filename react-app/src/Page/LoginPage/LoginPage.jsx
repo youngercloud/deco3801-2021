@@ -24,7 +24,7 @@ class LoginPage extends Component {
                     <div className="form-wrap">
                         <div>
                             <div id="signUp">
-                                <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000/signuppage"}}>
+                                <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3006/signuppage"}}>
                                     Sign up
                                 </button>
                             </div>

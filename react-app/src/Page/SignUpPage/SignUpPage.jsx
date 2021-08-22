@@ -4,6 +4,7 @@ import "./static/signUp.css";
 import { Form, Input, Button, Checkbox } from 'antd';
 import {UserOutlined, LockOutlined, QuestionCircleFilled} from '@ant-design/icons';
 import Radio from "antd/es/radio/radio";
+import axios from "axios";
 
 
 class SignUpPage extends Component {
@@ -40,7 +41,14 @@ class SignUpPage extends Component {
     };
 
     test = (e) =>{
-        console.log(e);
+        if (this.state.Validate.Name.validate===true){
+            let api = "/api/signup"
+            axios.post(api, e).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     };
 
     validateInput(){
