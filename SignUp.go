@@ -9,13 +9,13 @@ import (
 )
 
 type Users struct {
-	UserId uint `gorm:"primary_key"`
+	//UserId uint `gorm:"primary_key"`
+	Name string `gorm:"primary_key;size:256"`
 	Password string `gorm:"not null;size:256"`
-	Name string `gorm:"not null;size:256"`
-	DOB time.Time
+	//DOB time.Time
 	Gender string `gorm:"size:256"`
 	Mail string `gorm:"not null;size:256"`
-	PhoneNumber int `gorm:"size:256"`
+	PhoneNumber string `gorm:"size:256"`
 	Address string `gorm:"size:256"`
 	Language string `gorm:"size:256"`
 	Nationality string `gorm:"size:256"`
