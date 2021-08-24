@@ -8,8 +8,8 @@ class App extends Component {
         return (
             <div>
                 {/*<Home/>*/}
-                <LoginPage/>
-                {/*<SignUpPage/>*/}
+                {/*<LoginPage/>*/}
+                <SignUpPage/>
                 {/*<UserPage/>*/}
             </div>
         );

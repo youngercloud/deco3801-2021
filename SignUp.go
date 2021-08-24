@@ -36,9 +36,15 @@ type Doctors struct {
 }
 
 func SignUpHandler(c *gin.Context) {
-	var db = SignUpDatabaseSetup();
+	var db = SignUpDatabaseSetup()
 	var userData Users
-	c.Bind(&userData)
+
+	err := c.Bind(&userData)
+	if err != nil {
+		return 
+	}
+
+	fmt.Println(userData)
 	c.String(http.StatusOK, "Accept data from front-end!")
 	SignUpUser(userData, *db)
 }
