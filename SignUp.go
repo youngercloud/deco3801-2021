@@ -5,15 +5,17 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 )
 
 type Users struct {
-	//UserId uint `gorm:"primary_key"`
 	Name string `gorm:"primary_key;size:256"`
 	Password string `gorm:"not null;size:256"`
-	//DOB time.Time
 	Gender string `gorm:"size:256"`
+	Dob string `gorm:"size:256"`
+	Age int `gorm:"size:256"`
 	Mail string `gorm:"not null;size:256"`
 	PhoneNumber string `gorm:"size:256"`
 	Address string `gorm:"size:256"`
@@ -26,13 +28,22 @@ type Doctors struct {
 	Password string `gorm:"not null;size:256"`
 	FirstName string `gorm:"not null;size:256"`
 	LastName string `gorm:"not null;size:256"`
-	DOB time.Time
+	DOB string `gorm:"size:256"`
 	Gender string `gorm:"not null;size:256"`
 	Email string `gorm:"not null;size:256"`
 	PhoneNumber int `gorm:"size:256"`
 	ClinicOrHospital string `gorm:"size:256"`
 	Specialty string `gorm:"size:256"`
 	Language string `gorm:"size:256"`
+}
+
+func GetAge(Dob string) int {
+	var DobList = strings.Split(Dob, "/")
+	var year, err = strconv.Atoi(DobList[0])
+	if err != nil {
+		return -1
+	}
+	return time.Time{}.Year() - year
 }
 
 func SignUpHandler(c *gin.Context) {
@@ -64,31 +75,14 @@ func SignUpDatabaseSetup() *gorm.DB{
 }
 
 func SignUpUser(UserData Users, db gorm.DB) {
-	db.Create(&UserData)
 	if err := db.Create(&UserData).Error; err != nil {
 		fmt.Println("InsertFail", err)
 		return
 	}
 }
 
-
-func SignUpDoctor(db gorm.DB) {
-
-	NewSignUpDoctor := Doctors{
-		DoctorId:         1,
-		Password:         "password",
-		FirstName:        "Dasima",
-		LastName:         "Wuhu",
-		DOB:              time.Now(),
-		Gender:           "123456",
-		Email:            "Roudanchongji@qq.com",
-		PhoneNumber:      030,
-		ClinicOrHospital: "",
-		Specialty:        "",
-		Language:         "",
-	}
-	db.Create(&NewSignUpDoctor)
-	if err := db.Create(&NewSignUpDoctor).Error; err != nil {
+func SignUpDoctor(DocData Doctors, db gorm.DB) {
+	if err := db.Create(&DocData).Error; err != nil {
 		fmt.Println("InsertFail", err)
 		return
 	}
