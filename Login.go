@@ -42,10 +42,10 @@ func LoginDatabaseSetup() *gorm.DB{
 }
 
 func Login(UserName string, Password string, db gorm.DB) bool {
-	user := Users{};
-	db.Where("Name = ? and Password = ?",UserName,Password).Take(&user)
-	errType := db.Take(&user).Error
-	if errors.Is(errType, gorm.ErrRecordNotFound) {
+	user := Users{}
+	err := db.Where("name = ? AND password = ?",UserName,Password).First(&user).Error
+
+	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("There is no result")
 		return false
 	}  else{
