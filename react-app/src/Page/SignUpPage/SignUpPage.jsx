@@ -13,6 +13,8 @@ class SignUpPage extends Component {
         this.state={
             Name:'',
             Mail:'',
+            Password:'',
+            PasswordConfirm:'',
             Validate:{
                 Name:{
                     required:true,
@@ -34,6 +36,7 @@ class SignUpPage extends Component {
 
     };
 
+
     handlerSubmit = (e) =>{
         e.preventDefault();
         this.validateInput();
@@ -41,14 +44,16 @@ class SignUpPage extends Component {
     };
 
     test = (e) =>{
-        if (this.state.Validate.Name.validate===true){
+        if (this.state.Validate.Name.validate===true && this.state.Password===this.state.PasswordConfirm){
             let api = "/api/signup"
             axios.post(api, e).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);
+
             });
         }
+        // console.log(e);
     };
 
     validateInput(){
@@ -88,7 +93,7 @@ class SignUpPage extends Component {
                         <div className="form-wrap">
                             <div>
                                 <div id="login">
-                                    <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000"}}>
+                                    <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3006"}}>
                                         Already a member? Log in
                                     </button>
                                 </div>
@@ -99,9 +104,11 @@ class SignUpPage extends Component {
                                     <p>username:</p>
                                     <Input prefix={<UserOutlined className="site-form-item-icon"/>}
                                            placeholder="Username"
+                                           onChange={this.demo}
                                            onChange={this.handlerChange}
                                             name="Name"
                                     />
+
                                 </Form.Item>
 
                                 <Form.Item>
@@ -117,7 +124,10 @@ class SignUpPage extends Component {
                                         <Form.Item>
                                             <p>password:</p>
                                             <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
-                                                   placeholder="Password" />
+                                                   placeholder="Password"
+                                                   name="Password"
+                                                   onChange={this.handlerChange}
+                                            />
                                         </Form.Item>
                                     </Col>
                                     <Col span={2}/>
@@ -125,7 +135,10 @@ class SignUpPage extends Component {
                                         <Form.Item>
                                             <p>password:</p>
                                             <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
-                                                   placeholder="Confirm password" />
+                                                   placeholder="Confirm password"
+                                                   name="PasswordConfirm"
+                                                   onChange={this.handlerChange}
+                                            />
                                         </Form.Item>
                                     </Col>
                                 </Row>
@@ -146,7 +159,9 @@ class SignUpPage extends Component {
                                 </p>
                                 {!this.state.Validate.Name.validate &&  <span style={{color:'red'}}>{this.state.Validate.Name.msg}</span>}
 
-                                <Button onClick={(e)=>this.test(this.state)}>test</Button>
+                                <Button onClick={(e)=>this.test(this.state)}>
+                                    test
+                                </Button>
                             </div>
                         </div>
                     </Col>
