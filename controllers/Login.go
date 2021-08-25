@@ -1,10 +1,10 @@
-package main
+package controllers
 
 import (
+	"deco3801/models"
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"net/http"
 )
@@ -15,34 +15,23 @@ type userLogin struct {
 }
 
 func LoginHandler(c *gin.Context)  {
-	var db = LoginDatabaseSetup()
+	var db = models.InitDB()
 	var userLoginData userLogin
-	c.Bind(&userLoginData)
+	err := c.Bind(&userLoginData)
+	if err != nil {
+		return 
+	}
 	var isValid = Login(userLoginData.UserName, userLoginData.Password, *db)
 
 	c.JSON(http.StatusNotFound, gin.H{
 		"UserName" : userLoginData.UserName,
 		"isValid" : isValid,
 	})
-
 }
 
-func LoginDatabaseSetup() *gorm.DB{
-	dsn := "stu:deco3801@tcp(34.87.198.176:3306)/users?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		println(err)
-	}
-
-	err = db.AutoMigrate(&Users{}, &Doctor{})
-	if err != nil {
-		return nil
-	}
-	return db
-}
 
 func Login(UserName string, Password string, db gorm.DB) bool {
-	user := Users{}
+	user := models.User{}
 	err := db.Where("name = ? AND password = ?",UserName,Password).First(&user).Error
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {

@@ -10,20 +10,21 @@ import axios from "axios";
 class SignUpPage extends Component {
     constructor(opt) {
         super(opt);
-        this.state={
-            Name:'',
-            Mail:'',
-            Password:'',
-            PasswordConfirm:'',
+        this.state = {
+            Name: '',
+            Mail: '',
+            Password: '',
+            PasswordConfirm: '',
             Validate:{
                 Name:{
-                    required:true,
-                    validate:true,
-                    minLen:6,
-                    maxLen:10,
-                    msg:"name must greater 6"
+                    required: true,
+                    validate: true,
+                    minLen: 6,
+                    maxLen: 10,
+                    msg: "The length of the name must greater than 6."
                 }
-            }
+            },
+            currentUser: '1'
         };
     }
 
@@ -36,7 +37,6 @@ class SignUpPage extends Component {
 
     };
 
-
     handlerSubmit = (e) =>{
         e.preventDefault();
         this.validateInput();
@@ -45,15 +45,18 @@ class SignUpPage extends Component {
 
     test = (e) =>{
         if (this.state.Validate.Name.validate===true && this.state.Password===this.state.PasswordConfirm){
-            let api = "/api/signup"
+            let api;
+            if (this.state.currentUser === '1') {
+                api = "/api/signup/user"
+            } else {
+                api = "/api/signup/doctor"
+            }
             axios.post(api, e).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);
-
             });
         }
-        // console.log(e);
     };
 
     validateInput(){
@@ -104,7 +107,6 @@ class SignUpPage extends Component {
                                     <p>username:</p>
                                     <Input prefix={<UserOutlined className="site-form-item-icon"/>}
                                            placeholder="Username"
-                                           onChange={this.demo}
                                            onChange={this.handlerChange}
                                             name="Name"
                                     />
@@ -144,8 +146,8 @@ class SignUpPage extends Component {
                                 </Row>
                                 <div>
                                     <Radio.Group  name="identity" defaultValue={1} >
-                                        <Radio value={1} ><p>User</p></Radio>
-                                        <Radio value={2}><p>Clinic / Hospital</p></Radio>
+                                        <Radio value={1} onClick={() => this.setState({currentUser: "1"})}><p>User</p></Radio>
+                                        <Radio value={2} onClick={() => this.setState({currentUser: "2"})}><p>Clinic / Hospital</p></Radio>
                                     </Radio.Group>
                                 </div>
                                 <Form.Item>
@@ -159,7 +161,7 @@ class SignUpPage extends Component {
                                 </p>
                                 {!this.state.Validate.Name.validate &&  <span style={{color:'red'}}>{this.state.Validate.Name.msg}</span>}
 
-                                <Button onClick={(e)=>this.test(this.state)}>
+                                <Button onClick={()=>this.test(this.state)}>
                                     test
                                 </Button>
                             </div>
