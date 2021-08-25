@@ -19,7 +19,7 @@ class SignUpPage extends Component {
 
                 <Row>
                     <Col span={8}>
-                        <div class="sidebar">
+                        <div className="sidebar">
                             <h1>Why our service?</h1>
                             <ul>
                                 <li>We’re professional medical platform</li>
