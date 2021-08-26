@@ -11,7 +11,7 @@ ReactDOM.render(
     <Router history={history} forceRefresh={true} >
         <Switch>
             <Route exact path="/" component={App}/>
-            <Route  path="/" component={SignUpPage}/>
+            <Route  path="/d" component={SignUpPage}/>
             <Route path="/user123" component={User}/>
         </Switch>
     </Router>,

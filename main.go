@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -8,8 +9,8 @@ import (
 )
 
 func main()  {
-	databaseSetup()
-	SignUpDatabaseSetup()
+	//databaseSetup()
+	//SignUpDatabaseSetup()
 	router:= gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 	api := router.Group("./api")
@@ -19,13 +20,39 @@ func main()  {
 				"message": "pong",
 			})
 		})
+		//"a" 就是向你进行请求的文件路径
+		api.GET("/a", test)
+		//收取数据
+		api.POST("/asd", testPost)
 
-		api.GET("/patients", PatientHandler)
-		api.GET("/:patientName", SpecHandler)
+		//api.GET("/patients", PatientHandler)
+		//api.GET("/:patientName", SpecHandler)
 	}
 	router.NoRoute(NoResponse)
 
 	router.Run(":8081")
+}
+
+type testUser struct {
+	Id 		 string `json:"userId"`
+	Password string `json:"passWord"`
+}
+
+func testPost(c *gin.Context) {
+
+	//gin.H 是什么？是数据结构吗？
+	//c.JSON是什么？？
+	a := Users{}
+	c.Bind(&a)
+	fmt.Println(a.Id)
+	c.String(http.StatusOK, "success!")
+}
+
+func test(c *gin.Context) {
+	c.JSON(http.StatusNotFound, gin.H{
+		"a": "a",
+		"b": "b",
+	})
 }
 
 func NoResponse(c *gin.Context) {
@@ -48,7 +75,6 @@ var pa = []Patient {
 	{1, "ChangLing", "Wang", time.Date(666, time.Month(1), 1, 0, 0, 0, 0, time.UTC), 1, ""},
 	{2, "Cao", "Cao", time.Date(190, time.Month(1), 2, 0, 0, 0, 0, time.UTC), 1, ""},
 }
-
 
 func SpecHandler(c *gin.Context)  {
 	c.Header("Content-Type", "application/json")

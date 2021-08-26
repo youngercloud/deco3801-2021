@@ -24,11 +24,23 @@ class User extends Component {
     }
 
     getData = () => {
-        let api = "/api/CaoCao"
-        axios.get(api).then((response) => {
-            this.setState({name: response.data.name})
-        }).catch(function (err) {console.log(err)});
+        // let dataPath = "/api/a"
+        // //response.data == return 回来的东西
+        // axios.get(dataPath).then((response) => {
+        //     this.setState({name: response.data})
+        // }).catch(function (err) {console.log(err)});
+
+        let dataPath = "/api/asd"
+        axios.post(dataPath, {
+            "username": "Dollar0712",
+            "email" : "124253645",
+            "password": "123456789",
+            "doubleCheck" : "afgaag"
+        }).then(function(deliver) {
+            console.log(deliver);})
+        .catch(function (err) {console.log(err)});
     }
+
 }
 
 export default withRouter(User);
