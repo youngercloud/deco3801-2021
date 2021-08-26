@@ -5,7 +5,7 @@ import App from './App';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import User from "./Compoments/User";
-import Home from './Page/HomePage/Home';
+import Home from './Page/MainPage/MainPage';
 import SignUpPage from "./Page/SignUpPage/SignUpPage";
 
 ReactDOM.render(
@@ -15,6 +15,7 @@ ReactDOM.render(
             <Route  path="/SignUpPage" component={SignUpPage}/>
             <Route  path="/home" component={Home}/>
             <Route path="/user123" component={User}/>
+
         </Switch>
     </Router>,
     document.getElementById('root'));

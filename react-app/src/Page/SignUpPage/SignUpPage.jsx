@@ -22,9 +22,10 @@ class SignUpPage extends Component {
                     minLen: 6,
                     maxLen: 10,
                     msg: "The length of the name must greater than 6."
-                }
+                },
             },
-            currentUser: '1'
+            currentUser: '1',
+            enter:false,
         };
     }
 
@@ -56,7 +57,25 @@ class SignUpPage extends Component {
             }).catch(function (error) {
                 console.log(error);
             });
+
+            //demo
+            let api2 = "/api/enter"
+            axios.get(api2).then((response) => {
+                this.setState({enter: response.data})
+            }).catch(function (err) {console.log(err)});
+
+            if (this.state.enter===true){
+                window.location.href = "http://localhost:3000/home";
+            }else {
+                window.location.href = "http://localhost:3000/SignUpPage";
+                alert("sorry, the username exists")
+            }
+        }else{
+            alert("please, complete the form.")
+
         }
+
+
     };
 
     validateInput(){
@@ -96,7 +115,7 @@ class SignUpPage extends Component {
                         <div className="form-wrap">
                             <div>
                                 <div id="login">
-                                    <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3006"}}>
+                                    <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000"}}>
                                         Already a member? Log in
                                     </button>
                                 </div>
