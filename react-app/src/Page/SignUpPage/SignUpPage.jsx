@@ -16,12 +16,11 @@ class SignUpPage extends Component {
             Password: '',
             PasswordConfirm: '',
             Validate:{
-                Name:{
+                Password: {
                     required: true,
                     validate: true,
                     minLen: 6,
-                    maxLen: 10,
-                    msg: "The length of the name must greater than 6."
+                    msg:"The length of the password must greater than 6.",
                 },
             },
             currentUser: '1',
@@ -38,26 +37,24 @@ class SignUpPage extends Component {
 
     };
 
-    handlerSubmit = (e) =>{
-        e.preventDefault();
-        this.validateInput();
-        alert('d');
-    };
+    // handlerSubmit = (e) =>{
+    //     e.preventDefault();
+    //     this.validateInput();
+    //     alert('d');
+    // };
 
     test = (e) =>{
-        if (this.state.Validate.Name.validate===true && this.state.Password===this.state.PasswordConfirm){
+        if (this.state.Name!=null && this.state.Validate.Password.validate===true && this.state.Password===this.state.PasswordConfirm){
             let api;
-
             if (this.state.currentUser === '1') {
                 api = "/api/signup/user"
             } else {
                 api = "/api/signup/doctor"
             }
-
             axios.post(api, e).then((response) => {
                 if (response.data.creation === "true"){
                     window.location.href = "http://localhost:3000/home";
-                }else {
+                }else if (response.data.creation === "false"){
                     window.location.href = "http://localhost:3000/SignUpPage";
                     alert("sorry, the username exists")
                 }
@@ -67,28 +64,28 @@ class SignUpPage extends Component {
         } else {
             alert("please, complete the form.")
         }
-
-
     };
 
     validateInput(){
-        let {Name, Validate} = this.state;
-        let temValidate = false;
-        const len = Name.length;
-        const min = Validate.Name.minLen;
-        const max = Validate.Name.maxLen;
-        if (len>= min && len<= max){
-            temValidate = true;
+        let {Password,Validate} = this.state;
+        let passwordValidate = false;
+
+        const Len = Password.length;
+        const Min = Validate.Password.minLen;
+
+        if (Len>= Min ){
+            passwordValidate = true;
         }
         this.setState(preState => {
             return Object.assign({},preState,{
                 Validate:{
-                    Name:Object.assign({},preState.Validate.Name,{
-                        validate: temValidate,
+                    Password:Object.assign({},preState.Validate.Password,{
+                        validate: passwordValidate,
                     })
                 }
             });
         })
+
     }
 
     render() {
@@ -114,7 +111,7 @@ class SignUpPage extends Component {
                                 </div>
                                 <h2>Please sign up your account</h2>
 
-                            <Form name="normal_login" className="login-form" initialValues={{remember: true}}  onSubmit={this.handlerSubmit}>
+                            <Form name="normal_login" className="login-form" initialValues={{remember: true}}  >
                                 <Form.Item >
                                     <p>username:</p>
                                     <Input prefix={<UserOutlined className="site-form-item-icon"/>}
@@ -142,40 +139,35 @@ class SignUpPage extends Component {
                                                    name="Password"
                                                    onChange={this.handlerChange}
                                             />
+                                            {!this.state.Validate.Password.validate &&  <span style={{color:'red'}}>{this.state.Validate.Password.msg}</span>}
                                         </Form.Item>
                                     </Col>
                                     <Col span={2}/>
                                     <Col span={11}>
                                         <Form.Item>
-                                            <p>password:</p>
+                                            <p>check password:</p>
                                             <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
                                                    placeholder="Confirm password"
                                                    name="PasswordConfirm"
                                                    onChange={this.handlerChange}
                                             />
+
                                         </Form.Item>
                                     </Col>
                                 </Row>
                                 <div>
                                     <Radio.Group  name="identity" defaultValue={1} >
                                         <Radio value={1} onClick={() => this.setState({currentUser: "1"})}><p>User</p></Radio>
-                                        <Radio value={2} onClick={() => this.setState({currentUser: "2"})}><p>Clinic / Hospital</p></Radio>
+                                        <Radio value={2} onClick={() => this.setState({currentUser: "2"})}><p>Doctor</p></Radio>
                                     </Radio.Group>
                                 </div>
-                                <Form.Item>
-                                    <Button type="primary" htmlType="submit" className="login-form-button" value="Submit" ><p>Sign Up</p></Button>
-                                </Form.Item>
-                            </Form>
-
-                                <p>
-                                    username:{this.state.Name} <br/>
-                                    email to : {this.state.Mail}
-                                </p>
-                                {!this.state.Validate.Name.validate &&  <span style={{color:'red'}}>{this.state.Validate.Name.msg}</span>}
 
                                 <Button onClick={()=>this.test(this.state)}>
-                                    test
+                                    <p>Sign up</p>
                                 </Button>
+                            </Form>
+
+
                             </div>
                         </div>
                     </Col>

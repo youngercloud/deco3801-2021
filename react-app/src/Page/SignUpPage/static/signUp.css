@@ -61,7 +61,8 @@ body {
 }
 
 
-.form-wrap form button p{
+button p{
+    margin-top: 5px;
     font-size: 20px;
     color: #FFFFFF;
     font-weight: bold;
