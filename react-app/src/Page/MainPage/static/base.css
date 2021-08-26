@@ -1,0 +1,16 @@
+@import "~antd/dist/antd.css";
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.centralization {
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  display: -webkit-box;
+  display: -moz-box;
+}
+/*# sourceMappingURL=base.css.map */

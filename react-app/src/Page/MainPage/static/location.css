@@ -1,0 +1,36 @@
+@import "~antd/dist/antd.css";
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+.centralization {
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  display: -webkit-box;
+  display: -moz-box;
+}
+.location-selection {
+  height: 900px;
+  width: 100%;
+}
+.location-selection .location-selection-title span {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 28px;
+  text-align: center;
+  width: 100%;
+}
+.location-selection .location-selection-body .location-selection-search {
+  height: 100px;
+  min-height: 100px;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  display: -webkit-box;
+  display: -moz-box;
+  margin: auto;
+}
+/*# sourceMappingURL=location.css.map */
