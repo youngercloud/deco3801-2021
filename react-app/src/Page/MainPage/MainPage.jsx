@@ -6,7 +6,7 @@ import {
     CompassOutlined,
     FieldTimeOutlined,
     PoweroffOutlined,
-    SearchOutlined,
+    SearchOutlined, UserOutlined,
     WomanOutlined
 } from "@ant-design/icons";
 import { Steps } from 'antd';
@@ -14,6 +14,7 @@ import Gender from "./Gender";
 import Location from "./Location";
 import Language from "./Language";
 import Time from "./Time";
+import DoctorSelection from "./DoctorSelection";
 const { Step } = Steps;
 
 const onSearch = (value) => {
@@ -29,10 +30,12 @@ class MainPage extends Component {
             genderDisplay: false,
             locationDisplay: true,
             timeDisplay: false,
+            doctorDisplay: false,
             languageStep: 'wait',
             genderStep: 'wait',
             locationStep: 'process',
             timeStep: 'wait',
+            doctorStep: 'wait',
         }
     }
 
@@ -55,8 +58,15 @@ class MainPage extends Component {
         } else if (name === 'Time') {
             this.setState({
                 timeDisplay: false,
-                languageDisplay: true,
+                doctorDisplay: true,
                 timeStep: 'wait',
+                doctorStep: 'process',
+            })
+        } else if (name === 'DoctorSelection') {
+            this.setState({
+                doctorDisplay: false,
+                languageDisplay: true,
+                doctorStep: 'wait',
                 languageStep: 'process',
             })
         }
@@ -81,8 +91,15 @@ class MainPage extends Component {
         } else if (name === 'Language') {
             this.setState({
                 languageDisplay: false,
-                timeDisplay: true,
+                doctorDisplay: true,
                 languageStep: 'finish',
+                doctorStep: 'process',
+            })
+        } else if (name === 'DoctorSelection') {
+            this.setState({
+                doctorDisplay: false,
+                timeDisplay: true,
+                doctorStep: 'finish',
                 timeStep: 'process',
             })
         }
@@ -180,6 +197,8 @@ class MainPage extends Component {
                                     style={{fontSize: 20, position: "relative", left: '13px', top: '7px'}}/>} />
                                 <Step status={this.state.languageStep} title="Language" icon={<CommentOutlined
                                     style={{fontSize: 20, position: "relative", left: '13px', top: '7px'}}/>} />
+                                <Step status={this.state.doctorStep} title="Doctor" icon={<UserOutlined
+                                    style={{fontSize: 20, position: "relative", left: '13px', top: '7px'}}/>} />
                                 <Step status={this.state.timeStep} title="Time" icon={<FieldTimeOutlined
                                     style={{fontSize: 20, position: "relative", left: '13px', top: '7px'}}/>} />
                             </Steps>
@@ -194,14 +213,18 @@ class MainPage extends Component {
                                 <Gender changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
                                 changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
                                 : null }
-                            {this.state.languageDisplay ?
+
+                                {this.state.languageDisplay ?
                                 <Language changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
                                           changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
-                                : null
-                            }
+                                : null}
+                            {this.state.doctorDisplay ? <DoctorSelection changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
+                                                                         changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                : null}
                             { this.state.timeDisplay ? <Time changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
                                                              changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
                                 : null }
+
 
                         </div>
                     </Col>

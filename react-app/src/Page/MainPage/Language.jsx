@@ -45,12 +45,12 @@ class Language extends Component {
 
                 <Row className="booking-process-button">
                     <Space size="middle">
-                        <Button onClick={() => {this.bookingGoBack(this.constructor.name)}} type="primary" shape="round" icon={<LeftOutlined style={{position: "relative",
-                            top: "3px"}} />}>
+                        <Button onClick={() => {this.bookingGoBack(this.constructor.name)}} type="primary" shape="round"
+                                icon={<LeftOutlined style={{position: "relative", top: "3px"}} />}>
                             Back
                         </Button>
-                        <Button onClick={() => {this.bookingGoNext(this.constructor.name)}} type="primary" shape="round" icon={<RightOutlined style={{position: "relative",
-                            top: "3px"}}/>}>
+                        <Button onClick={() => {this.bookingGoNext(this.constructor.name)}} type="primary" shape="round"
+                                icon={<RightOutlined style={{position: "relative", top: "3px"}}/>}>
                             Next
                         </Button>
                     </Space>
