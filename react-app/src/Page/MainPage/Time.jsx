@@ -32,13 +32,15 @@ class Time extends Component {
                 </Row>
                 <Row className="booking-process-button">
                     <Space size="middle">
-                        <Button type="primary" onClick={() => {this.bookingGoBack(this.constructor.name)}} shape="round" icon={<LeftOutlined style={{position: "relative",
+                        <Button type="primary" onClick={() => {this.bookingGoBack(this.constructor.name)}}
+                                shape="round" icon={<LeftOutlined style={{position: "relative",
                             top: "3px"}} />}>
                             Back
                         </Button>
-                        <Button type="primary" shape="round" icon={<RightOutlined style={{position: "relative",
+                        <Button type="primary" onClick={() => {this.bookingGoNext(this.constructor.name)}}
+                                shape="round" icon={<RightOutlined style={{position: "relative",
                             top: "3px"}} />}>
-                            Submit
+                            Next
                         </Button>
                     </Space>
                 </Row>
