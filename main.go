@@ -15,7 +15,6 @@ func main()  {
 	{
 		api.POST("/signup/user", controllers.SignUpUser)
 		api.POST("/signup/doctor", controllers.SignUpDoctor)
-		
 	}
 	router.NoRoute(controllers.NoResponse)
 
