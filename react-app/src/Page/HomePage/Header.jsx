@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Menu, Row, Col, Icon, Button, Popover, Badge, Space } from 'antd';
+import { Menu, Row, Col, Button, Space } from 'antd';
 import { Image } from 'antd';
 import "./static/header.css"
 import { Link } from 'react-router-dom';

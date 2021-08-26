@@ -27,12 +27,16 @@ func SignUpUser(c *gin.Context) {
 	if err != nil {
 		return
 	}
-	c.String(http.StatusOK, "Accept data from front-end! USER")
-
+	fmt.Println(userData)
 	if err := db.Create(&userData).Error; err != nil {
-		fmt.Println("InsertFail", err)
+		c.JSON(200, gin.H{
+			"creation": "false",
+		})
 		return
 	}
+	c.JSON(200, gin.H{
+		"creation": "true",
+	})
 }
 
 func SignUpDoctor(c *gin.Context) {
@@ -44,7 +48,12 @@ func SignUpDoctor(c *gin.Context) {
 	}
 	c.String(http.StatusOK, "Accept data from front-end! USER")
 	if err := db.Create(&doctorData).Error; err != nil {
-		fmt.Println("InsertFail", err)
+		c.JSON(200, gin.H{
+			"creation": "false",
+		})
 		return
 	}
+	c.JSON(200, gin.H{
+		"creation": "true",
+	})
 }

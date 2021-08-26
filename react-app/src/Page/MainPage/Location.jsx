@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './static/location.css'
 import {Button, Col, Row, Select, Space} from "antd";
 import {Option} from "antd/es/mentions";
-import {LeftOutlined, RightOutlined} from "@ant-design/icons";
+import {RightOutlined} from "@ant-design/icons";
 
 
 class Location extends Component {

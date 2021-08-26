@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import { Menu, Row, Col, Icon, Button, Popover, Badge, Space } from 'antd';
+import { Row, Col } from 'antd';
 import { Carousel } from 'antd';
 import { Typography } from 'antd';
 import "./static/Page3.css"
-import {QuestionCircleFilled} from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 const contentStyle = {

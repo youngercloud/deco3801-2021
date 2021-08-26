@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {  Col, Layout, Row} from 'antd';
 import "./static/login.css";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Radio from "antd/es/radio/radio";
-const { Header, Footer, Sider, Content } = Layout;
 
 const onFinish = (values) => {
     console.log('Received values of form: ', values);

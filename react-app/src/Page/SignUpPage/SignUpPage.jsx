@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Col, Layout, Row} from 'antd';
+import {Col, Row} from 'antd';
 import "./static/signUp.css";
-import { Form, Input, Button, Checkbox } from 'antd';
-import {UserOutlined, LockOutlined, QuestionCircleFilled} from '@ant-design/icons';
+import { Form, Input, Button } from 'antd';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import Radio from "antd/es/radio/radio";
 import axios from "axios";
 
@@ -25,7 +25,7 @@ class SignUpPage extends Component {
                 },
             },
             currentUser: '1',
-            enter:false,
+            enter:'',
         };
     }
 
@@ -47,32 +47,25 @@ class SignUpPage extends Component {
     test = (e) =>{
         if (this.state.Validate.Name.validate===true && this.state.Password===this.state.PasswordConfirm){
             let api;
+
             if (this.state.currentUser === '1') {
                 api = "/api/signup/user"
             } else {
                 api = "/api/signup/doctor"
             }
-            axios.post(api, e).then(function (response) {
-                console.log(response);
+
+            axios.post(api, e).then((response) => {
+                if (response.data.creation === "true"){
+                    window.location.href = "http://localhost:3000/home";
+                }else {
+                    window.location.href = "http://localhost:3000/SignUpPage";
+                    alert("sorry, the username exists")
+                }
             }).catch(function (error) {
                 console.log(error);
             });
-
-            //demo
-            let api2 = "/api/enter"
-            axios.get(api2).then((response) => {
-                this.setState({enter: response.data})
-            }).catch(function (err) {console.log(err)});
-
-            if (this.state.enter===true){
-                window.location.href = "http://localhost:3000/home";
-            }else {
-                window.location.href = "http://localhost:3000/SignUpPage";
-                alert("sorry, the username exists")
-            }
-        }else{
+        } else {
             alert("please, complete the form.")
-
         }
 
 
