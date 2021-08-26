@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
-import {Col, Layout, Row} from 'antd';
+import {Col, Row} from 'antd';
 import "./static/signUp.css";
-import { Form, Input, Button, Checkbox } from 'antd';
-import {UserOutlined, LockOutlined, QuestionCircleFilled} from '@ant-design/icons';
-import Title from "antd/es/typography/Title";
-import Text from "antd/es/typography/Text";
+import { Form, Input, Button } from 'antd';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import Radio from "antd/es/radio/radio";
-const { Header, Footer, Sider, Content } = Layout;
-
 
 const onFinish = (values) => {
     console.log('Received values of form: ', values);
