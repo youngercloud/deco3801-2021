@@ -24,21 +24,15 @@ class User extends Component {
     }
 
     getData = () => {
-        // let dataPath = "/api/a"
-        // //response.data == return 回来的东西
-        // axios.get(dataPath).then((response) => {
-        //     this.setState({name: response.data})
-        // }).catch(function (err) {console.log(err)});
-
-        let dataPath = "/api/asd"
-        axios.post(dataPath, {
-            "username": "Dollar0712",
-            "email" : "124253645",
-            "password": "123456789",
-            "doubleCheck" : "afgaag"
-        }).then(function(deliver) {
-            console.log(deliver);})
-        .catch(function (err) {console.log(err)});
+        let api = "/api/signup"
+        axios.post(api, {
+            firstName: 'Fred',
+            PhoneNumber: 123124
+        }).then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
 }

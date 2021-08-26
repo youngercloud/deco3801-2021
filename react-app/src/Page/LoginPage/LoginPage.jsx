@@ -17,14 +17,14 @@ class LoginPage extends Component {
 
             <Row>
                 <Col span={8}>
-                    <div class="sidebar">
+                    <div className="sidebar">
                     </div>
                 </Col>
                 <Col span={16}>
                     <div className="form-wrap">
                         <div>
                             <div id="signUp">
-                                <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000/signuppage"}}>
+                                <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3006/SignUpPage"}}>
                                     Sign up
                                 </button>
                             </div>
