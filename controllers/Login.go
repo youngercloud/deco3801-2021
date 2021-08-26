@@ -29,9 +29,7 @@ func LoginHandler(c *gin.Context)  {
 	})
 }
 
-func Test(c *gin.Context) {
-	c.String(http.StatusOK, "true")
-}
+
 
 func Login(UserName string, Password string, db gorm.DB) bool {
 	user := models.User{}
