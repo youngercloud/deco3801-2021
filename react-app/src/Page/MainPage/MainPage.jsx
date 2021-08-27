@@ -15,10 +15,12 @@ import Location from "./Location";
 import Language from "./Language";
 import Time from "./Time";
 import DoctorSelection from "./DoctorSelection";
+import axios from "axios";
 const { Step } = Steps;
 
 
 let userOptions = {locationSelect:"", genderSelection:"", languageSelection:""};
+let foundDoctor = {doctorData: ""}
 
 class MainPage extends Component {
 
@@ -116,7 +118,7 @@ class MainPage extends Component {
                 this.openErrorGender()
                 return
             }
-            userOptions.GenderSelection = options;
+            userOptions.genderSelection = options;
             this.setState({
                 genderDisplay: false,
                 languageDisplay: true,
@@ -129,12 +131,24 @@ class MainPage extends Component {
                 return
             }
             userOptions.languageSelection = options;
-            this.setState({
-                languageDisplay: false,
-                doctorDisplay: true,
-                languageStep: 'finish',
-                doctorStep: 'process',
-            })
+            let api = "/api/doctors"
+            axios.get(api, {
+                params: {
+                    location: userOptions.locationSelect,
+                    gender: userOptions.genderSelection,
+                    language: userOptions.languageSelection,
+                }
+            }).then((response) => {
+                foundDoctor.doctorData = response.data;
+                this.setState({
+                    languageDisplay: false,
+                    doctorDisplay: true,
+                    languageStep: 'finish',
+                    doctorStep: 'process',
+                })
+            }).catch(function (error) {
+                console.log(error);
+            });
         } else if (name === 'DoctorSelection') {
             this.setState({
                 doctorDisplay: false,
@@ -258,8 +272,9 @@ class MainPage extends Component {
                                 <Language changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
                                           changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null}
-                            {this.state.doctorDisplay ? <DoctorSelection changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                                                         changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                            {this.state.doctorDisplay ? <DoctorSelection doctorData={foundDoctor.doctorData}
+                                    changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
+                                    changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
                                 : null}
                             { this.state.timeDisplay ? <Time changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
                                                              changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>

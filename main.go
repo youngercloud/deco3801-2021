@@ -13,6 +13,7 @@ func main()  {
 	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 	api := router.Group("./api")
 	{
+		api.GET("/doctors", controllers.GetAvailableDoctor)
 		api.POST("/signup/user", controllers.SignUpUser)
 		api.POST("/signup/doctor", controllers.SignUpDoctor)
 	}

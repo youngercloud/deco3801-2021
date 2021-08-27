@@ -41,5 +41,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8081"
+  "proxy": "http://localhost:8081",
+  "devDependencies": {
+    "html-react-parser": "^1.2.8"
+  }
 }

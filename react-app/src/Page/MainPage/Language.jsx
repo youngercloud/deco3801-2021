@@ -25,7 +25,7 @@ class Language extends Component {
             <div className="language-selection">
                 <Row className="language-selection-title">
                     <Col span={24}>
-                        <span >Which Language you expect your doctor to speak?</span>
+                        <span> Which Language you expect your doctor to speak?</span>
                     </Col>
                 </Row>
 
