@@ -11,9 +11,11 @@ class Language extends Component {
         this.props.changeDisplayBack(e)
     }
 
-    bookingGoNext(e) {
-        this.props.changeDisplayNext(e)
+    bookingGoNext(e, select) {
+        this.props.changeDisplayNext(e, select)
     }
+
+    state = {select: ''}
 
     render() {
         const GP_LIST =["Česky", "Dansk", "Deutsch", "English", "Español", "Ελληνική", "Français", "Italiano",
@@ -32,9 +34,12 @@ class Language extends Component {
                         <Select
                             className="language-selection-search"
                             showSearch
-                            style={{ width: 300, textAlign: "center"}}
+                            style={{ width: 450, textAlign: "center"}}
                             placeholder="Select a Language"
                             optionFilterProp="children"
+                            onChange={(v) => {
+                                this.setState({select: v})
+                            }}
                             filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }>
@@ -49,7 +54,7 @@ class Language extends Component {
                                 icon={<LeftOutlined style={{position: "relative", top: "3px"}} />}>
                             Back
                         </Button>
-                        <Button onClick={() => {this.bookingGoNext(this.constructor.name)}} type="primary" shape="round"
+                        <Button onClick={() => {this.bookingGoNext(this.constructor.name, this.state.select)}} type="primary" shape="round"
                                 icon={<RightOutlined style={{position: "relative", top: "3px"}}/>}>
                             Next
                         </Button>

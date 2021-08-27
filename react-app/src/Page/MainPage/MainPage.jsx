@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Button, Space, Input, Tooltip, Divider} from 'antd';
+import {Row, Col, Button, Space, Input, Tooltip, Divider, notification} from 'antd';
 import "./static/style.css"
 import {
     CommentOutlined,
@@ -17,9 +17,8 @@ import Time from "./Time";
 import DoctorSelection from "./DoctorSelection";
 const { Step } = Steps;
 
-const onSearch = (value) => {
-    console.log(value);
-}
+
+let userOptions = {locationSelect:"", genderSelection:"", languageSelection:""};
 
 class MainPage extends Component {
 
@@ -39,8 +38,9 @@ class MainPage extends Component {
         }
     }
 
+
+
     changeDisplayBack(name){
-        console.log(name)
         if (name === 'Language') {
             this.setState({
                 languageDisplay: false,
@@ -72,9 +72,39 @@ class MainPage extends Component {
         }
     }
 
-    changeDisplayNext(name){
-        console.log(name)
+    openErrorLocation = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please choose the GP you are looking for in the selection bar.',
+        });
+    };
+
+    openErrorGender = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please choose the gender of the doctor that you prefer.' +
+                'If you are not sure about it yet, you may choose no requirements on gender.',
+        });
+    };
+
+    openErrorLanguage = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please choose which language that your doctor speak.',
+        });
+    }
+
+
+    changeDisplayNext(name, options){
         if (name === 'Location') {
+            if (options === '') {
+                this.openErrorLocation()
+                return
+            }
+            userOptions.locationSelect = options;
             this.setState({
                 locationDisplay: false,
                 genderDisplay: true,
@@ -82,6 +112,11 @@ class MainPage extends Component {
                 genderStep: 'process',
             })
         } else if (name === 'Gender') {
+            if (options === '') {
+                this.openErrorGender()
+                return
+            }
+            userOptions.GenderSelection = options;
             this.setState({
                 genderDisplay: false,
                 languageDisplay: true,
@@ -89,6 +124,11 @@ class MainPage extends Component {
                 languageStep: 'process',
             })
         } else if (name === 'Language') {
+            if (options === '') {
+                this.openErrorLanguage()
+                return
+            }
+            userOptions.languageSelection = options;
             this.setState({
                 languageDisplay: false,
                 doctorDisplay: true,
@@ -205,18 +245,18 @@ class MainPage extends Component {
                             <Divider style={{background: '#bbb'}}/>
 
                             {this.state.locationDisplay ?
-                                <Location changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                <Location changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null
                             }
 
                             {this.state.genderDisplay ?
                                 <Gender changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null }
 
                                 {this.state.languageDisplay ?
                                 <Language changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                          changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                          changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null}
                             {this.state.doctorDisplay ? <DoctorSelection changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
                                                                          changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
