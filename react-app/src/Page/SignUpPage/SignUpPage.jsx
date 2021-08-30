@@ -42,6 +42,11 @@ class SignUpPage extends Component {
     //     this.validateInput();
     //     alert('d');
     // };
+    demo = (e) => {
+        sessionStorage.setItem("name",this.state.Name);
+        const value = sessionStorage.getItem("name");
+        alert(value);
+    }
 
     test = (e) =>{
         if (this.state.Name!=null && this.state.Validate.Password.validate===true && this.state.Password===this.state.PasswordConfirm){
@@ -167,7 +172,7 @@ class SignUpPage extends Component {
                                 </Button>
                             </Form>
 
-
+                                <Button onClick={()=>this.demo(this.state)}> <p>demo</p> </Button>
                             </div>
                         </div>
                     </Col>

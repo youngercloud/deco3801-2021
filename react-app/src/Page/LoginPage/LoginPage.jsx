@@ -11,6 +11,12 @@ const onFinish = (values) => {
 
 
 class LoginPage extends Component {
+    demo2 = () => {
+
+        const value = sessionStorage.getItem("name");
+        alert(value);
+    }
+
     render() {
         return (
 
@@ -65,7 +71,7 @@ class LoginPage extends Component {
                                         </Button>
                                     </Form.Item>
                                 </Form>
-
+                                <Button onClick={()=>this.demo2()}> <p>demo2</p> </Button>
                             </div>
                         </div>
                     </div>
