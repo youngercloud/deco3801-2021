@@ -6,12 +6,14 @@ import {LeftOutlined, RightOutlined} from "@ant-design/icons";
 
 class Time extends Component {
 
+    state = {select_date: '', select_time: ''}
+
     bookingGoBack(e) {
         this.props.changeDisplayBack(e)
     }
 
-    bookingGoNext(e) {
-        this.props.changeDisplayNext(e)
+    bookingGoSubmission(e, date, time) {
+        this.props.changeDisplaySubmission(e, date, time)
     }
 
     render() {
@@ -25,8 +27,20 @@ class Time extends Component {
                 <Row className="time-selection-body">
                     <Col span={24} className="time-selection-form">
                         <Space size="large" direction="vertical">
-                            <DatePicker/>
-                            <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')}/>
+                            <DatePicker style={{width: "450px"}}
+                            onChange={(date, dateString) => {
+                                this.setState({
+                                    select_date: dateString
+                                })
+                            }}
+                            />
+                            <TimePicker style={{width: "450px"}}
+                            onChange={(time, timeString) => {
+                                this.setState({
+                                    select_time: timeString
+                                })
+                            }}
+                            defaultOpenValue={moment('00:00:00', 'HH:mm:ss')}/>
                         </Space>
                     </Col>
                 </Row>
@@ -37,10 +51,11 @@ class Time extends Component {
                             top: "3px"}} />}>
                             Back
                         </Button>
-                        <Button type="primary" onClick={() => {this.bookingGoNext(this.constructor.name)}}
+                        <Button type="primary" onClick={() => {this.bookingGoSubmission(this.constructor.name,
+                            this.state.select_date, this.state.select_time)}}
                                 shape="round" icon={<RightOutlined style={{position: "relative",
                             top: "3px"}} />}>
-                            Next
+                            Submit
                         </Button>
                     </Space>
                 </Row>

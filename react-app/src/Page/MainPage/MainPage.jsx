@@ -16,10 +16,11 @@ import Language from "./Language";
 import Time from "./Time";
 import DoctorSelection from "./DoctorSelection";
 import axios from "axios";
+import moment from "moment";
 const { Step } = Steps;
 
 
-let userOptions = {locationSelect:"", genderSelection:"", languageSelection:""};
+let userOptions = {locationSelect:"", genderSelection:"", languageSelection:"", doctorSelection: ""};
 let foundDoctor = {doctorData: ""}
 
 class MainPage extends Component {
@@ -99,6 +100,21 @@ class MainPage extends Component {
         });
     }
 
+    openDoctorSelectionError = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please select the doctor you wish to make.',
+        });
+    }
+
+    openTimeSelectionError = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please select the time that you wish to see your doctor.',
+        });
+    }
 
     changeDisplayNext(name, options){
         if (name === 'Location') {
@@ -150,6 +166,11 @@ class MainPage extends Component {
                 console.log(error);
             });
         } else if (name === 'DoctorSelection') {
+            if (options === '') {
+                this.openDoctorSelectionError()
+                return
+            }
+            userOptions.doctorSelection = options;
             this.setState({
                 doctorDisplay: false,
                 timeDisplay: true,
@@ -159,6 +180,23 @@ class MainPage extends Component {
         }
     }
 
+    changeDisplaySubmission(name, d, t) {
+        if (name === 'Time') {
+            if (d === '' || t === '') {
+                this.openTimeSelectionError()
+                return
+            }
+            let Date = moment(d + " " + t).toDate();
+            let UserID = 80;       // HARD CODED WARNING
+            let DoctorID = userOptions.doctorSelection
+            axios.post("/api/booking", {
+                Date: Date,
+                UserID: UserID,
+                DoctorID: DoctorID
+            }, {}).then(response => response.status)
+                .catch(err => console.warn(err));
+        }
+    }
 
     render() {
         return (
@@ -274,13 +312,12 @@ class MainPage extends Component {
                                 : null}
                             {this.state.doctorDisplay ? <DoctorSelection doctorData={foundDoctor.doctorData}
                                     changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                    changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                    changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null}
                             { this.state.timeDisplay ? <Time changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                                             changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                                             changeDisplaySubmission={(e, d, t) =>
+                                                             {this.changeDisplaySubmission(e, d, t)}}/>
                                 : null }
-
-
                         </div>
                     </Col>
                 </Row>
