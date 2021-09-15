@@ -114,11 +114,11 @@ class SignUpPage extends Component {
                                         Already a member? Log in
                                     </button>
                                 </div>
-                                <h2>Please sign up your account</h2>
 
-                            <Form name="normal_login" className="login-form" initialValues={{remember: true}}  >
+
+                            <Form name="normal_login" className="sign-form" initialValues={{remember: true}}  >
                                 <Form.Item >
-                                    <p>username:</p>
+                                    <p>Account name:</p>
                                     <Input prefix={<UserOutlined className="site-form-item-icon"/>}
                                            placeholder="Username"
                                            onChange={this.handlerChange}
@@ -128,7 +128,7 @@ class SignUpPage extends Component {
                                 </Form.Item>
 
                                 <Form.Item>
-                                    <p>E-mail:</p>
+                                    <p>Email address:</p>
                                     <Input prefix={<UserOutlined className="site-form-item-icon"/>}
                                            placeholder="Email"
                                            name="Mail"
@@ -138,7 +138,7 @@ class SignUpPage extends Component {
                                 <Row>
                                     <Col span={11}>
                                         <Form.Item>
-                                            <p>password:</p>
+                                            <p>Password:</p>
                                             <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
                                                    placeholder="Password"
                                                    name="Password"
@@ -150,33 +150,34 @@ class SignUpPage extends Component {
                                     <Col span={2}/>
                                     <Col span={11}>
                                         <Form.Item>
-                                            <p>check password:</p>
+                                            <p>Confirm password:</p>
                                             <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
                                                    placeholder="Confirm password"
                                                    name="PasswordConfirm"
                                                    onChange={this.handlerChange}
                                             />
-
                                         </Form.Item>
                                     </Col>
                                 </Row>
                                 <div>
                                     <Radio.Group  name="identity" defaultValue={1} >
-                                        <Radio value={1} onClick={() => this.setState({currentUser: "1"})}><p>User</p></Radio>
-                                        <Radio value={2} onClick={() => this.setState({currentUser: "2"})}><p>Doctor</p></Radio>
+                                        <Radio value={1} onClick={() => this.setState({currentUser: "1"})} className="chosen">User</Radio>
+                                        <Radio value={2} onClick={() => this.setState({currentUser: "2"})} className="chosen">Doctor</Radio>
                                     </Radio.Group>
                                 </div>
 
-                                <Button onClick={()=>this.test(this.state)}>
+                                <Button id="submit" onClick={()=>this.test(this.state)}>
                                     <p>Sign up</p>
                                 </Button>
-                            </Form>
 
+                            </Form>
                                 <Button onClick={()=>this.demo(this.state)}> <p>demo</p> </Button>
                             </div>
+
                         </div>
                     </Col>
                 </Row>
+
         );
     }
 }

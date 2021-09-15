@@ -9,12 +9,13 @@ body {
 }
 
 .sidebar{
-    background-color: #DDDDDD;
+    background-color: #354E57;
     height:100%;
 
 }
 
 .sidebar h1{
+    color: #EEF3F4;
     font-size: 36px;
     text-align:center;
     padding-top: 48%;
@@ -25,7 +26,7 @@ body {
 }
 .sidebar li{
     font-size: 22px;
-    color: #6B6363;
+    color: #EEF3F4;
     padding-bottom:35px;
     text-align:left;
 }
@@ -48,8 +49,9 @@ body {
 }
 
 .form-wrap form p{
-    color: #888888;
-    font-size: 15px;
+    color: #354E57;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .form-wrap form button{
@@ -57,7 +59,13 @@ body {
     float:right;
     height: 50px;
     width: 130px;
-    background-color: #AAAAAA;
+    background-color: #354E57;
+}
+
+
+.chosen{
+    color: #AAAAAA;
+    font-size: 20px;
 }
 
 
@@ -77,6 +85,7 @@ button p{
     font-size: 15px;
     color: #AAAAAA;
     border: none;
+
 }
 
 #login button:hover
@@ -84,5 +93,17 @@ button p{
     background-color:#AAAAAA;
     color: #FFFFFF;
 }
+
+.sign-form button p{
+    color: #EEF3F4;
+    font-size: 15px;
+    text-align:center;
+}
+
+.sign-form button p:hover{
+    color: #354E57;
+}
+
+
 
 
