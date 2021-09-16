@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Button, Space, Input, Tooltip, Divider} from 'antd';
+import {Row, Col, Button, Space, Input, Tooltip, Divider, notification} from 'antd';
 import "./static/style.css"
 import {
     CommentOutlined,
@@ -15,11 +15,13 @@ import Location from "./Location";
 import Language from "./Language";
 import Time from "./Time";
 import DoctorSelection from "./DoctorSelection";
+import axios from "axios";
+import moment from "moment";
 const { Step } = Steps;
 
-const onSearch = (value) => {
-    console.log(value);
-}
+
+let userOptions = {locationSelect:"", genderSelection:"", languageSelection:"", doctorSelection: ""};
+let foundDoctor = {doctorData: ""}
 
 class MainPage extends Component {
 
@@ -39,8 +41,9 @@ class MainPage extends Component {
         }
     }
 
+
+
     changeDisplayBack(name){
-        console.log(name)
         if (name === 'Language') {
             this.setState({
                 languageDisplay: false,
@@ -72,9 +75,54 @@ class MainPage extends Component {
         }
     }
 
-    changeDisplayNext(name){
-        console.log(name)
+    openErrorLocation = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please choose the GP you are looking for in the selection bar.',
+        });
+    };
+
+    openErrorGender = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please choose the gender of the doctor that you prefer.' +
+                'If you are not sure about it yet, you may choose no requirements on gender.',
+        });
+    };
+
+    openErrorLanguage = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please choose which language that your doctor speak.',
+        });
+    }
+
+    openDoctorSelectionError = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please select the doctor you wish to make.',
+        });
+    }
+
+    openTimeSelectionError = () => {
+        notification.open({
+            message: 'Whoops! We get an error',
+            description:
+                'Please select the time that you wish to see your doctor.',
+        });
+    }
+
+    changeDisplayNext(name, options){
         if (name === 'Location') {
+            if (options === '') {
+                this.openErrorLocation()
+                return
+            }
+            userOptions.locationSelect = options;
             this.setState({
                 locationDisplay: false,
                 genderDisplay: true,
@@ -82,6 +130,11 @@ class MainPage extends Component {
                 genderStep: 'process',
             })
         } else if (name === 'Gender') {
+            if (options === '') {
+                this.openErrorGender()
+                return
+            }
+            userOptions.genderSelection = options;
             this.setState({
                 genderDisplay: false,
                 languageDisplay: true,
@@ -89,13 +142,35 @@ class MainPage extends Component {
                 languageStep: 'process',
             })
         } else if (name === 'Language') {
-            this.setState({
-                languageDisplay: false,
-                doctorDisplay: true,
-                languageStep: 'finish',
-                doctorStep: 'process',
-            })
+            if (options === '') {
+                this.openErrorLanguage()
+                return
+            }
+            userOptions.languageSelection = options;
+            let api = "/api/doctors"
+            axios.get(api, {
+                params: {
+                    location: userOptions.locationSelect,
+                    gender: userOptions.genderSelection,
+                    language: userOptions.languageSelection,
+                }
+            }).then((response) => {
+                foundDoctor.doctorData = response.data;
+                this.setState({
+                    languageDisplay: false,
+                    doctorDisplay: true,
+                    languageStep: 'finish',
+                    doctorStep: 'process',
+                })
+            }).catch(function (error) {
+                console.log(error);
+            });
         } else if (name === 'DoctorSelection') {
+            if (options === '') {
+                this.openDoctorSelectionError()
+                return
+            }
+            userOptions.doctorSelection = options;
             this.setState({
                 doctorDisplay: false,
                 timeDisplay: true,
@@ -105,6 +180,23 @@ class MainPage extends Component {
         }
     }
 
+    changeDisplaySubmission(name, d, t) {
+        if (name === 'Time') {
+            if (d === '' || t === '') {
+                this.openTimeSelectionError()
+                return
+            }
+            let Date = moment(d + " " + t).toDate();
+            let UserID = 80;       // HARD CODED WARNING
+            let DoctorID = userOptions.doctorSelection
+            axios.post("/api/booking", {
+                Date: Date,
+                UserID: UserID,
+                DoctorID: DoctorID
+            }, {}).then(response => response.status)
+                .catch(err => console.warn(err));
+        }
+    }
 
     render() {
         return (
@@ -205,27 +297,27 @@ class MainPage extends Component {
                             <Divider style={{background: '#bbb'}}/>
 
                             {this.state.locationDisplay ?
-                                <Location changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                <Location changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null
                             }
 
                             {this.state.genderDisplay ?
                                 <Gender changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null }
 
                                 {this.state.languageDisplay ?
                                 <Language changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                          changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                          changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null}
-                            {this.state.doctorDisplay ? <DoctorSelection changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                                                         changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                            {this.state.doctorDisplay ? <DoctorSelection doctorData={foundDoctor.doctorData}
+                                    changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
+                                    changeDisplayNext={(e, l) => {this.changeDisplayNext(e, l)}}/>
                                 : null}
                             { this.state.timeDisplay ? <Time changeDisplayBack={(e) => {this.changeDisplayBack(e)}}
-                                                             changeDisplayNext={(e) => {this.changeDisplayNext(e)}}/>
+                                                             changeDisplaySubmission={(e, d, t) =>
+                                                             {this.changeDisplaySubmission(e, d, t)}}/>
                                 : null }
-
-
                         </div>
                     </Col>
                 </Row>

@@ -15,7 +15,6 @@ ReactDOM.render(
             <Route  path="/SignUpPage" component={SignUpPage}/>
             <Route  path="/home" component={Home}/>
             <Route path="/user123" component={User}/>
-
         </Switch>
     </Router>,
     document.getElementById('root'));
