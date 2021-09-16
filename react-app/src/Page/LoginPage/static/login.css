@@ -51,8 +51,11 @@ span{
     border: none;
 }
 
-/*#signUp button:hover*/
-/*{*/
-/*    background-color:#AAAAAA;*/
-/*    color: #FFFFFF;*/
-/*}*/
+#signUp button:hover
+{
+    background-color:#AAAAAA;
+    color: #FFFFFF;
+}
+#login-form-button p{
+    color: #EEF3F4;
+}
