@@ -3,12 +3,12 @@ import './static/location.css'
 import {Button, Col, Row, Select, Space} from "antd";
 import {Option} from "antd/es/mentions";
 import {RightOutlined} from "@ant-design/icons";
-
-
 class Location extends Component {
 
-    bookingGoNext(e) {
-        this.props.changeDisplayNext(e)
+    state = {select: ''}
+
+    bookingGoNext(e, select) {
+        this.props.changeDisplayNext(e, select)
     }
 
     render() {
@@ -27,9 +27,12 @@ class Location extends Component {
                         <Select
                             className="location-selection-search"
                             showSearch
-                            style={{ width: 300, textAlign: "center"}}
+                            style={{ width: 450, textAlign: "center"}}
                             placeholder="Select a GP"
                             optionFilterProp="children"
+                            onChange={(v) => {
+                                this.setState({select: v})
+                            }}
                             filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }>
@@ -39,7 +42,8 @@ class Location extends Component {
                 </Row>
                 <Row className="booking-process-button">
                     <Space size="middle">
-                        <Button type="primary" onClick={() => {this.bookingGoNext(this.constructor.name)}} shape="round"
+                        <Button type="primary" onClick={() => {this.bookingGoNext(this.constructor.name,
+                            this.state.select)}} shape="round"
                                 icon={<RightOutlined style={{position: "relative",
                             top: "3px"}}/>}>
                             Next

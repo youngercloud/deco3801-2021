@@ -1,55 +1,55 @@
 import React, {Component} from 'react';
 import './static/doctor.css'
-import {Button, Card, Col, Row, Space} from "antd";
+import {Button, Col, Row, Space} from "antd";
 import {LeftOutlined, RightOutlined} from "@ant-design/icons";
-const { Meta } = Card;
+import Card from "./Card";
 
 class DoctorSelection extends Component {
+
+    state = {select: ''}
+    constructor() {
+        super();
+        this.rowRef = React.createRef()
+    }
+
+    changeColor = (e) => {
+        console.log(this.rowRef.current.childNodes)
+        this.rowRef.current.childNodes.forEach((re) => {
+            re.firstChild.style.border = '1px solid rgba(0,0,0,0.3)';
+        })
+        e.currentTarget.style.border = 'green solid 2px';
+    }
 
     bookingGoBack(e) {
         this.props.changeDisplayBack(e)
     }
 
-    bookingGoNext(e) {
-        this.props.changeDisplayNext(e)
+    bookingGoNext(e, select) {
+        this.props.changeDisplayNext(e, select)
     }
 
     render() {
+        let Doctor_LIST =[];
+        this.props.doctorData.forEach(function (o) {Doctor_LIST.push(o)})
+        const info = Doctor_LIST.map((d) =>
+            <Col span={8} className="doctor-selection-box">
+                <Card onClick={(e) => {
+                        this.changeColor(e)
+                        this.setState({select: d.ID})
+                    }} firstName={d.FirstName} lastName={d.LastName}>
+                </Card>
+            </Col>
+        );
         return (
             <div className="doctor-selection">
                 <Row className="doctor-selection-title">
                     <Col span={24}>
-                        <span >Choose the doctor you prefer</span>
+                        <span>Choose the doctor you prefer</span>
                     </Col>
                 </Row>
 
-                <Row className="doctor-selection-title" style={{marginTop: "50px"}}>
-                    <Col span={8} className="doctor-selection-box" >
-                        <Card
-                            hoverable
-                            style={{ width: 240 }}
-                            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-                        ><Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
-                    <Col span={8} className="doctor-selection-box">
-                        <Card
-                            hoverable
-                            style={{ width: 240 }}
-                            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-                        >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
-                    <Col span={8} className="doctor-selection-box">
-                        <Card
-                            hoverable
-                            style={{ width: 240 }}
-                            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-                        >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
-                        </Card>
-                    </Col>
+                <Row className="doctor-selection-title" style={{marginTop: "50px"}} ref={this.rowRef}>
+                    {info}
                 </Row>
 
                 <Row className="booking-process-button" style={{marginTop: "50px"}}>
@@ -58,7 +58,7 @@ class DoctorSelection extends Component {
                                 icon={<LeftOutlined style={{position: "relative", top: "3px"}} />}>
                             Back
                         </Button>
-                        <Button onClick={() => {this.bookingGoNext(this.constructor.name)}} type="primary" shape="round"
+                        <Button onClick={() => {this.bookingGoNext(this.constructor.name, this.state.select)}} type="primary" shape="round"
                                 icon={<RightOutlined style={{position: "relative", top: "3px"}}/>}>
                             Next
                         </Button>

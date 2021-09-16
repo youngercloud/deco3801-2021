@@ -11,6 +11,12 @@ const onFinish = (values) => {
 
 
 class LoginPage extends Component {
+    demo2 = () => {
+
+        const value = sessionStorage.getItem("name");
+        alert(value);
+    }
+
     render() {
         return (
 
@@ -27,15 +33,13 @@ class LoginPage extends Component {
                                     Sign up
                                 </button>
                             </div>
-                            <div className="form-header">
-                                <h2>Welcome, please login in with your account</h2>
-                            </div>
+
                             <div className="form-content">
                                 <Form name="normal_login" className="login-form" initialValues={{remember: true}}
                                       onFinish={onFinish}>
                                     <Form.Item name="username"
                                                rules={[{required: true, message: 'Please input your Username!'}]}>
-                                        <p>username:</p>
+                                        <p>Account name:</p>
                                         <Input prefix={<UserOutlined className="site-form-item-icon"/>}
                                                placeholder="Username"/>
                                     </Form.Item>
@@ -43,7 +47,7 @@ class LoginPage extends Component {
                                         <Col span={12}>
                                             <Form.Item name="password"
                                                        rules={[{required: true, message: 'Please input your Password!'}]}>
-                                                <p>password:</p>
+                                                <p>Password:</p>
                                                 <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
                                                        placeholder="Password"/>
                                             </Form.Item>
@@ -54,18 +58,18 @@ class LoginPage extends Component {
                                     <div>
                                         <Radio.Group  name="identity" defaultValue={1} >
 
-                                            <Radio value={1} ><p>User</p></Radio>
-                                            <Radio value={2}><p>Clinic / Hospital</p></Radio>
+                                            <Radio className="chosen" value={1}>User</Radio>
+                                            <Radio className="chosen" value={2}>Clinic / Hospital</Radio>
                                         </Radio.Group>
                                     </div>
 
                                     <Form.Item>
-                                        <Button type="primary" htmlType="submit" className="login-form-button">
+                                        <Button type="primary" htmlType="submit" id="login-form-button">
                                             <p>Log in</p>
                                         </Button>
                                     </Form.Item>
                                 </Form>
-
+                                <Button onClick={()=>this.demo2()}> <p>demo2</p> </Button>
                             </div>
                         </div>
                     </div>
