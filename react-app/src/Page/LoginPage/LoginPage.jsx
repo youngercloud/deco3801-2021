@@ -4,6 +4,7 @@ import "./static/login.css";
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Radio from "antd/es/radio/radio";
+import axios from "axios";
 
 const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -11,15 +12,53 @@ const onFinish = (values) => {
 
 
 class LoginPage extends Component {
-    demo2 = () => {
+    constructor(opt) {
+        super(opt);
+        this.state={
+            Name:'',
+            Password:'',
+            currentUser: '1',
+            enter:'',
+        };
+    }
 
+    handlerChange=(e)=>{
+        this.setState({
+            [e.target.name]:e.target.value
+        })
+    };
+
+    test = (e) => {
+        if (this.state.Name!=null && this.state.Password!=null){
+            let api;
+            if (this.state.currentUser==="1"){
+                api = "/api/login/user"
+            }else {
+                api = "/api/login/doctor"
+            }
+            axios.post(api, e).then((response) => {
+                if (response.data.creation === "true"){
+                    sessionStorage.setItem("name",this.state.Name);
+                    window.location.href = "http://localhost:3000/home";
+                }else if (response.data.creation === "false"){
+                    window.location.href = "http://localhost:3000/login";
+                    alert("sorry, the password is incorrect or account not exists")
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        } else {
+            alert("please, complete the form.")
+        }
+    };
+
+    demo2 = () => {
         const value = sessionStorage.getItem("name");
         alert(value);
     }
 
     render() {
         return (
-
             <Row>
                 <Col span={8}>
                     <div className="sidebar">
@@ -33,7 +72,6 @@ class LoginPage extends Component {
                                     Sign up
                                 </button>
                             </div>
-
                             <div className="form-content">
                                 <Form name="normal_login" className="login-form" initialValues={{remember: true}}
                                       onFinish={onFinish}>
@@ -41,35 +79,34 @@ class LoginPage extends Component {
                                                rules={[{required: true, message: 'Please input your Username!'}]}>
                                         <p>Account name:</p>
                                         <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                                               placeholder="Username"/>
+                                               placeholder="Username"
+                                               onChange={this.handlerChange}
+                                               name="Name"
+                                        />
                                     </Form.Item>
-                                    <Row>
-                                        <Col span={12}>
-                                            <Form.Item name="password"
+                                    <Form.Item name="password"
                                                        rules={[{required: true, message: 'Please input your Password!'}]}>
-                                                <p>Password:</p>
-                                                <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
-                                                       placeholder="Password"/>
-                                            </Form.Item>
-                                        </Col>
-                                        <Col/>
-                                    </Row>
+                                        <p>Password:</p>
+                                        <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
+                                               placeholder="Password"
+                                               name="Password"
+                                               onChange={this.handlerChange}
+                                        />
+                                    </Form.Item>
 
                                     <div>
                                         <Radio.Group  name="identity" defaultValue={1} >
-
-                                            <Radio className="chosen" value={1}>User</Radio>
-                                            <Radio className="chosen" value={2}>Clinic / Hospital</Radio>
+                                            <Radio onClick={()=>this.setState({currentUser: "1"})} className="chosen" value={1}>User</Radio>
+                                            <Radio onClick={()=>this.setState({currentUser: "2"})} className="chosen" value={2}>Clinic / Hospital</Radio>
                                         </Radio.Group>
                                     </div>
 
-                                    <Form.Item>
-                                        <Button type="primary" htmlType="submit" id="login-form-button">
-                                            <p>Log in</p>
-                                        </Button>
-                                    </Form.Item>
+                                    <Button type="primary"  id="login-form-button" onClick={()=>this.test(this.state)}>
+                                        <p>Log in</p>
+                                    </Button>
+
                                 </Form>
-                                <Button onClick={()=>this.demo2()}> <p>demo2</p> </Button>
+                                {/*<Button onClick={()=>this.demo2()}> <p>demo2</p> </Button>*/}
                             </div>
                         </div>
                     </div>

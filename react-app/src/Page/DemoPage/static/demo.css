@@ -1,0 +1,70 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    min-height: inherit;
+}
+
+
+.container{
+    text-align:center;
+
+}
+
+#components-layout-demo-custom-trigger .trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/*设置高度出现问题？*/
+.site-layout{
+    min-height: 720px;
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+.demo{
+    background-color: #354E57;
+}
+
+
+.ant-menu-item-selected{
+    color: #EEF3F4;
+
+}
+.ant-menu-item{
+    color: #EEF3F4;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+    background-color: #A67744;
+}
+
+.image{
+    text-align:center;
+    padding: 5%;
+
+}
+
+
+.controlBar{
+    float: left;
+    margin-top: 50px;
+}
