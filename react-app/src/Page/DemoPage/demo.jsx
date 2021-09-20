@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import "./static/demo.css";
 import logo from "./static/logo.png"
-import {Affix, Layout, Menu} from 'antd';
+import {Affix, Breadcrumb, Layout, Menu} from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
-import Location from "../MainPage/Location";
+import Location from "./bookLocation";
 import Language from "../MainPage/Language";
 import Time from "../MainPage/Time";
 
@@ -44,9 +44,9 @@ class demo extends Component {
                 <Layout >
                     <Sider className="demo" trigger={null} collapsible collapsed={this.state.collapsed} width="15%" >
                             <Affix offsetTop={20}>
-                                <Menu className="demo" mode="inline" defaultSelectedKeys={['1']}>
+                                <Menu  className="demo" mode="inline" defaultSelectedKeys={['1']} >
                                     <div className="image">
-                                        <img src={logo} width={30}/>
+                                        <img src={logo} width={50}/>
                                     </div>
                                     <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize:28}}/>} onClick={() => this.handleClick("1")}>
                                         Medical Service
@@ -62,7 +62,7 @@ class demo extends Component {
 
                     </Sider>
                     <div className="controlBar">
-                        <Affix offsetTop={50}>
+                        <Affix offsetTop={80}>
                         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                             className: 'trigger',
                             onClick: this.toggle,
@@ -70,7 +70,20 @@ class demo extends Component {
                         </Affix>
                     </div>
                     <Layout className="site-layout">
-                        <Header className="site-layout-background" style={{ padding: 0 }}> </Header>
+                        <Header className="site-layout-background" style={{ padding: 5 }} >
+                            <Breadcrumb separator=">">
+                                {/*<Breadcrumb.Item><p>Home</p></Breadcrumb.Item>*/}
+                                {this.state.showElem==='1' ?  <Breadcrumb.Item>
+                                    <p>Medical Service</p>
+                                </Breadcrumb.Item> : null}
+
+                                {this.state.showElem==='2' ?  <Breadcrumb.Item>
+                                    <p>Online Booking</p>
+                                </Breadcrumb.Item> : null}
+
+                            </Breadcrumb>
+                        </Header>
+                        <div style={{width:'94%',marginLeft:'3%'}}><hr/></div>
                         <Content className="site-layout-background" style={{
                                 margin: '24px 16px',
                                 padding: 24,
@@ -78,11 +91,11 @@ class demo extends Component {
                             }}
                         >
                             {
-                                this.state.showElem==='1' ? <Location/> : null
+                                this.state.showElem==='1' ? <Language/>: null
                             }
 
                             {
-                                this.state.showElem==='2' ? <Language/> : null
+                                this.state.showElem==='2' ? <Location/> : null
                             }
 
                             {

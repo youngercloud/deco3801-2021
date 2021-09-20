@@ -1,0 +1,50 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+}
+
+.location{
+
+    min-height: 900px;
+
+}
+
+.select-before {
+    width: 90px;
+}
+
+.select-after {
+    width: 80px;
+}
+
+[data-theme='compact'] .select-before {
+    width: 71px;
+}
+
+[data-theme='compact'] .select-after {
+    width: 65px;
+}
+
+.ant-select-selection-placeholder{
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #354E57;
+}
+.ant-select-selection-item{
+    font-size: 14px;
+    font-weight: bold;
+    color: #354E57;
+
+}
+
+.ant-input-lg{
+    color: #354E57;
+    font-size: 16.5px;
+    font-weight: bold;
+    /*border-color: red;*/
+}
+
+

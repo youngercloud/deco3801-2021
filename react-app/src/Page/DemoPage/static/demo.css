@@ -1,3 +1,4 @@
+
 html,
 body {
     width: 100%;
@@ -34,21 +35,44 @@ body {
 /*设置高度出现问题？*/
 .site-layout{
     height: inherit;
+
 }
 
 .site-layout .site-layout-background {
     background: #EEF3F4;
+    margin-left: 50px;
+    margin-top: 20px;
 }
+.site-layout .site-layout-background p{
+    color: #354E57;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.ant-breadcrumb-separator{
+    color: #354E57;
+    font-size: 28px;
+    font-weight: bold;
+}
+
 
 .demo{
     background-color: #354E57;
 }
 
 
-.ant-menu-item-selected{
-    color: #EEF3F4;
 
+.ant-menu-item-selected{
+    color: #EEF3F4 !important;
 }
+
+.ant-menu-root{
+    border-right: 0.5px;
+}
+.ant-menu-item:active{
+    background-color: #A67744;
+}
+
 .ant-menu-item{
     color: #EEF3F4;
 }
@@ -59,7 +83,8 @@ body {
 
 .image{
     text-align:center;
-    padding: 5%;
+
+    padding-bottom: 60px;
 
 }
 
@@ -76,3 +101,5 @@ html,body,#root{
 .ant-layout{
     height: 100%;
 }
+
+
