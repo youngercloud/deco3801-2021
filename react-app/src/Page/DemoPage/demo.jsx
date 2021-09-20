@@ -3,6 +3,11 @@ import "./static/demo.css";
 import logo from "./static/logo.png"
 import {Affix, Layout, Menu} from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
+import Location from "../MainPage/Location";
+import Language from "../MainPage/Language";
+import Time from "../MainPage/Time";
+
+
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -10,6 +15,7 @@ import {
     VideoCameraOutlined,
     UploadOutlined,
 } from '@ant-design/icons';
+import Gender from "../MainPage/Gender";
 
 const { Header, Sider, Content } = Layout;
 const MyIcon = createFromIconfontCN({
@@ -19,6 +25,7 @@ class demo extends Component {
 
     state = {
         collapsed: true,
+        showElem:'1',
     };
 
     toggle = () => {
@@ -27,23 +34,27 @@ class demo extends Component {
         });
     };
 
+    handleClick(letter) {
+        this.setState({ showElem: letter });
+    }
+
     render() {
         return (
             <div className="container">
-                <Layout>
+                <Layout >
                     <Sider className="demo" trigger={null} collapsible collapsed={this.state.collapsed} width="15%" >
                             <Affix offsetTop={20}>
                                 <Menu className="demo" mode="inline" defaultSelectedKeys={['1']}>
                                     <div className="image">
                                         <img src={logo} width={30}/>
                                     </div>
-                                    <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize:28}}/>}>
+                                    <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize:28}}/>} onClick={() => this.handleClick("1")}>
                                         Medical Service
                                     </Menu.Item>
-                                    <Menu.Item key="2" icon={<MyIcon type="icon-yuyue1" style={{fontSize:28}}/>}>
+                                    <Menu.Item key="2" icon={<MyIcon type="icon-yuyue1" style={{fontSize:28}}/>} onClick={() => this.handleClick("2")}>
                                         Medical Booking
                                     </Menu.Item>
-                                    <Menu.Item key="3" icon={<MyIcon type="icon-account" style={{fontSize:28}}/>}>
+                                    <Menu.Item key="3" icon={<MyIcon type="icon-account" style={{fontSize:28}}/>} onClick={() => this.handleClick("3")}>
                                         My Account
                                     </Menu.Item>
                                 </Menu>
@@ -59,82 +70,24 @@ class demo extends Component {
                         </Affix>
                     </div>
                     <Layout className="site-layout">
-                        <Header className="site-layout-background" style={{ padding: 0 }}>
-                        </Header>
-                        <Content
-                            className="site-layout-background"
-                            style={{
+                        <Header className="site-layout-background" style={{ padding: 0 }}> </Header>
+                        <Content className="site-layout-background" style={{
                                 margin: '24px 16px',
                                 padding: 24,
-                                minHeight: 280,
+
                             }}
                         >
-                            <p >dd</p>
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            v
-                            Content
-                            <br/>
-                            <br/>
-                            v
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>
-                            Content
-                            <br/>
-                            <br/>Content
-                            <br/>
-                            <br/>
+                            {
+                                this.state.showElem==='1' ? <Location/> : null
+                            }
+
+                            {
+                                this.state.showElem==='2' ? <Language/> : null
+                            }
+
+                            {
+                                this.state.showElem==='3' ? <Time/> : null
+                            }
 
 
 

@@ -33,11 +33,11 @@ body {
 
 /*设置高度出现问题？*/
 .site-layout{
-    min-height: 720px;
+    height: inherit;
 }
 
 .site-layout .site-layout-background {
-    background: #fff;
+    background: #EEF3F4;
 }
 
 .demo{
@@ -67,4 +67,12 @@ body {
 .controlBar{
     float: left;
     margin-top: 50px;
+}
+
+html,body,#root{
+    width: 100%;
+    height: 100%;
+}
+.ant-layout{
+    height: 100%;
 }
