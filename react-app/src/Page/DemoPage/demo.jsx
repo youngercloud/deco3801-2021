@@ -6,8 +6,6 @@ import { createFromIconfontCN } from '@ant-design/icons';
 import Location from "./bookLocation";
 import Language from "../MainPage/Language";
 import Time from "../MainPage/Time";
-
-
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -15,7 +13,8 @@ import {
     VideoCameraOutlined,
     UploadOutlined,
 } from '@ant-design/icons';
-import Gender from "../MainPage/Gender";
+
+
 
 const { Header, Sider, Content } = Layout;
 const MyIcon = createFromIconfontCN({
@@ -26,6 +25,7 @@ class demo extends Component {
     state = {
         collapsed: true,
         showElem:'1',
+        gp:"",
     };
 
     toggle = () => {
@@ -84,12 +84,14 @@ class demo extends Component {
                             </Breadcrumb>
                         </Header>
                         <div style={{width:'94%',marginLeft:'3%'}}><hr/></div>
+
                         <Content className="site-layout-background" style={{
                                 margin: '24px 16px',
                                 padding: 24,
 
                             }}
                         >
+
                             {
                                 this.state.showElem==='1' ? <Language/>: null
                             }
@@ -101,8 +103,6 @@ class demo extends Component {
                             {
                                 this.state.showElem==='3' ? <Time/> : null
                             }
-
-
 
                         </Content>
                     </Layout>

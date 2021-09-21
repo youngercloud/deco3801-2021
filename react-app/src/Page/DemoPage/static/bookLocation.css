@@ -6,9 +6,11 @@ body {
 }
 
 .location{
-
     min-height: 900px;
+}
 
+.location button{
+    background-color: #354E57;
 }
 
 .select-before {
