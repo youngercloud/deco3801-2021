@@ -49,4 +49,51 @@ body {
     /*border-color: red;*/
 }
 
+.inputData{
+    padding-bottom: 80px;
+}
+
+
+.ant-card-body{
+    background-color: #FAFAFA;
+    margin-bottom: 50px;
+}
+
+.ant-card-body h1{
+    font-size: 32px;
+    color: #354E57;
+    text-align: left;
+
+}
+
+.ant-card-body img{
+    margin-right: 20px;
+}
+
+.ant-card-body h2{
+    text-align: left;
+    font-size: 15px;
+    color: #354E57;
+}
+
+.ant-card-body button:hover {
+    background-color:#AAAAAA;
+    color: #FFFFFF;
+}
+
+.ant-card-body button {
+    float: left;
+    width: 218px;
+    font-size: 15px;
+    color: #FFFFFF;
+    border: none;
+
+}
+
+
+
+
+
+
+
 
