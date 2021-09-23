@@ -6,6 +6,7 @@ import { createFromIconfontCN } from '@ant-design/icons';
 import Location from "./bookLocation";
 import Language from "../MainPage/Language";
 import Time from "../MainPage/Time";
+import MyAccountPage from "./MyAccountPage";
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -60,7 +61,7 @@ class demo extends Component {
                                     <Menu.Item key="2" icon={<MyIcon type="icon-yuyue1" style={{fontSize:28}}/>} onClick={() => this.handleClick("2")}>
                                         Medical Booking
                                     </Menu.Item>
-                                    <Menu.Item key="3" icon={<MyIcon type="icon-account" style={{fontSize:28}}/>} onClick={() => this.handleClick("3")}>
+                                    <Menu.Item key="4" icon={<MyIcon type="icon-account" style={{fontSize:28}}/>} onClick={() => this.handleClick("4")}>
                                         My Account
                                         <Button style={{marginBottom:20,marginLeft:20}} onClick={()=>this.logout()}>
                                             {sessionStorage.getItem("name")===null ? "login in":"logout"}
@@ -92,6 +93,9 @@ class demo extends Component {
                                     <p>Online Booking</p>
                                 </Breadcrumb.Item> : null}
 
+                                {this.state.showElem==='4' ?  <Breadcrumb.Item>
+                                    <p>My information</p>
+                                </Breadcrumb.Item> : null}
                             </Breadcrumb>
                         </Header>
                         <div style={{width:'94%',marginLeft:'3%'}}><hr/></div>
@@ -104,7 +108,7 @@ class demo extends Component {
                         >
 
                             {
-                                this.state.showElem==='1' ? <Language/>: null
+                                this.state.showElem==='1' ? <Language/> : null
                             }
 
                             {
@@ -112,13 +116,16 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.showElem==='3' && sessionStorage.getItem('name')!== null ? <Time/> : null
+                                this.state.showElem==='3' && sessionStorage.getItem('name') !== null ? <Time/> : null
                             }
 
                             {
-                                this.state.showElem==='3' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
+                                this.state.showElem==='3' && sessionStorage.getItem('name') === null ? this.props.history.push("/login") : null
                             }
 
+                            {
+                                this.state.showElem === '4' ? <MyAccountPage/> : null
+                            }
                         </Content>
                     </Layout>
                 </Layout>
