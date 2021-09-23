@@ -22,8 +22,8 @@ func LoginUser(c *gin.Context)  {
 	if err != nil {
 		return 
 	}
+	bookSearch()
 	var validation = Login(userLoginData.Name, userLoginData.Password, *db)
-	fmt.Println(validation)
 	c.JSON(http.StatusOK, gin.H{
 		"UserName" : userLoginData.Name,
 		"validation" : validation,
