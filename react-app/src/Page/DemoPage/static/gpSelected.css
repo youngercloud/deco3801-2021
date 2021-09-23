@@ -2,5 +2,24 @@ html,
 body {
     margin: 0;
     padding: 0;
+}
+
+.gp{
+    height: 900px;
 
 }
+
+.steps{
+    width: 50%;
+    margin-left: 25%;
+}
+
+.steps p{
+    color:#354E57;
+    font-size: 20px;
+}
+
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after{
+    background-color: #B9C1C4;
+}
+

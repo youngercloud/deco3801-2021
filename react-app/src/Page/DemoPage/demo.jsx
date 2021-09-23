@@ -6,7 +6,7 @@ import { createFromIconfontCN } from '@ant-design/icons';
 import Location from "./bookLocation";
 import Language from "../MainPage/Language";
 import Time from "../MainPage/Time";
-import gpSelected from "./gpSelected";
+import GpSelected from "./gpSelected";
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -42,6 +42,10 @@ class demo extends Component {
     logout(){
         sessionStorage.removeItem("name")
         this.props.history.push("/login")
+    }
+
+    gpSelected(info){
+        this.setState({gp:info})
     }
 
     render() {
@@ -107,7 +111,11 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.showElem==='2' ? <Location/> : null
+                                this.state.showElem==='2' && this.state.gp === null ? <Location gpSelected={(info)=>{this.gpSelected(info)}}/> : null
+                            }
+
+                            {
+                                this.state.showElem==='2' && this.state.gp !== null ? <GpSelected name={this.state.gp}/> : null
                             }
 
                             {
@@ -118,9 +126,7 @@ class demo extends Component {
                                 this.state.showElem==='3' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
                             }
 
-                            {
-                                this.state.gp!==null ? <gpSelected/> : null
-                            }
+
 
 
                         </Content>
