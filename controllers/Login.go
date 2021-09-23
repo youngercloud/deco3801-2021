@@ -14,6 +14,7 @@ type userLogin struct {
 	Password string `gorm:"not null;size:256"`
 }
 
+
 func LoginUser(c *gin.Context)  {
 	var db = models.InitDB()
 	var userLoginData userLogin

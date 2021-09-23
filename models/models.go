@@ -41,9 +41,10 @@ type Doctor struct {
 
 type Institution struct {
 	BaseModel
-	InstitutionName string `gorm:"not null;size:256"`
-	Classify string `gorm:"not null;size:256"`
+	Name string `gorm:"not null;size:256"`
+	Distance int `gorm:"size:256"`
 	Location string `gorm:"not null"`
+
 }
 
 type Booking struct {
