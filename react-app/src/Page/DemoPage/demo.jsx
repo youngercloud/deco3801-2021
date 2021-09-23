@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import "./static/demo.css";
 import logo from "./static/logo.png"
@@ -7,6 +8,7 @@ import Location from "./bookLocation";
 import Language from "../MainPage/Language";
 import Time from "../MainPage/Time";
 import GpSelected from "./gpSelected";
+import MyAccount from "./MyAccountPage"
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -95,6 +97,10 @@ class demo extends Component {
                                     <p>Online Booking</p>
                                 </Breadcrumb.Item> : null}
 
+                                {this.state.showElem==='3' ?  <Breadcrumb.Item>
+                                    <p>My Account</p>
+                                </Breadcrumb.Item> : null}
+
                             </Breadcrumb>
                         </Header>
                         <div style={{width:'94%',marginLeft:'3%'}}><hr/></div>
@@ -119,12 +125,14 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.showElem==='3' && sessionStorage.getItem('name')!== null ? <Time/> : null
+                                this.state.showElem==='3' && sessionStorage.getItem('name')!== null ?  <MyAccount/> : null
                             }
 
                             {
                                 this.state.showElem==='3' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
                             }
+
+
 
 
 

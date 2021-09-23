@@ -35,7 +35,6 @@ func LoginUser(c *gin.Context)  {
 func Login(UserName string, Password string, db gorm.DB) bool {
 	user := models.User{}
 	err := db.Where("name = ? AND password = ?",UserName,Password).First(&user).Error
-
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("There is no result")
 		return false
