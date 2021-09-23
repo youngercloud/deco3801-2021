@@ -83,9 +83,11 @@ body {
 
 .image{
     text-align:center;
+    padding-bottom: 50px;
+}
 
-    padding-bottom: 60px;
-
+.image p{
+    margin-top: 5px;
 }
 
 

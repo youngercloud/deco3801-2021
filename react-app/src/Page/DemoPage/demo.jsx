@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./static/demo.css";
 import logo from "./static/logo.png"
-import {Affix, Breadcrumb, Layout, Menu} from 'antd';
+import {Affix, Breadcrumb, Button, Layout, Menu} from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
 import Location from "./bookLocation";
 import Language from "../MainPage/Language";
@@ -38,6 +38,11 @@ class demo extends Component {
         this.setState({ showElem: letter });
     }
 
+    logout(){
+        sessionStorage.removeItem("name")
+        this.props.history.push("/login")
+    }
+
     render() {
         return (
             <div className="container">
@@ -46,7 +51,8 @@ class demo extends Component {
                             <Affix offsetTop={20}>
                                 <Menu  className="demo" mode="inline" defaultSelectedKeys={['1']} >
                                     <div className="image">
-                                        <img src={logo} width={50}/>
+                                        <img src={logo} width={40}/>
+                                        <p> welcome:</p> {sessionStorage.getItem('name')}
                                     </div>
                                     <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize:28}}/>} onClick={() => this.handleClick("1")}>
                                         Medical Service
@@ -56,7 +62,12 @@ class demo extends Component {
                                     </Menu.Item>
                                     <Menu.Item key="3" icon={<MyIcon type="icon-account" style={{fontSize:28}}/>} onClick={() => this.handleClick("3")}>
                                         My Account
+                                        <Button style={{marginBottom:20,marginLeft:20}} onClick={()=>this.logout()}>
+                                            {sessionStorage.getItem("name")===null ? "login in":"logout"}
+                                        </Button>
                                     </Menu.Item>
+
+
                                 </Menu>
                             </Affix>
 
@@ -101,7 +112,11 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.showElem==='3' ? <Time/> : null
+                                this.state.showElem==='3' && sessionStorage.getItem('name')!== null ? <Time/> : null
+                            }
+
+                            {
+                                this.state.showElem==='3' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
                             }
 
                         </Content>
