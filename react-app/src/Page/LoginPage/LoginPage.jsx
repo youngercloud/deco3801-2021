@@ -38,9 +38,8 @@ class LoginPage extends Component {
             }
             axios.post(api, e).then((response) => {
                 if (response.data.validation === true){
-                    alert(response.data.validation)
                     sessionStorage.setItem("name",this.state.Name);
-                    window.location.href = "http://localhost:3000/home";
+                    window.location.href = "http://localhost:3000/demo";
                 }else if (response.data.validation === false){
                     window.location.href = "http://localhost:3000/login";
                     alert("sorry, the password is incorrect or account not exists")
