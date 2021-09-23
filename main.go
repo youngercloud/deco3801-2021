@@ -17,6 +17,7 @@ func main()  {
 		api.POST("/booking", controllers.Booking)
 		api.POST("/signup/user", controllers.SignUpUser)
 		api.POST("/signup/doctor", controllers.SignUpDoctor)
+		api.POST("login/user", controllers.LoginUser)
 	}
 	router.NoRoute(controllers.NoResponse)
 

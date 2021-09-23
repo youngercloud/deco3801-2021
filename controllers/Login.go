@@ -10,22 +10,22 @@ import (
 )
 
 type userLogin struct {
-	UserName string `gorm:"not null;size:256"`
+	Name string `gorm:"not null;size:256"`
 	Password string `gorm:"not null;size:256"`
 }
 
-func LoginHandler(c *gin.Context)  {
+func LoginUser(c *gin.Context)  {
 	var db = models.InitDB()
 	var userLoginData userLogin
 	err := c.Bind(&userLoginData)
 	if err != nil {
 		return 
 	}
-	var isValid = Login(userLoginData.UserName, userLoginData.Password, *db)
-
-	c.JSON(http.StatusNotFound, gin.H{
-		"UserName" : userLoginData.UserName,
-		"isValid" : isValid,
+	var validation = Login(userLoginData.Name, userLoginData.Password, *db)
+	fmt.Println(validation)
+	c.JSON(http.StatusOK, gin.H{
+		"UserName" : userLoginData.Name,
+		"validation" : validation,
 	})
 }
 

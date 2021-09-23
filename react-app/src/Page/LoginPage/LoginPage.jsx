@@ -18,7 +18,7 @@ class LoginPage extends Component {
             Name:'',
             Password:'',
             currentUser: '1',
-            enter:'',
+            validation:'',
         };
     }
 
@@ -37,10 +37,11 @@ class LoginPage extends Component {
                 api = "/api/login/doctor"
             }
             axios.post(api, e).then((response) => {
-                if (response.data.creation === "true"){
+                if (response.data.validation === true){
+                    alert(response.data.validation)
                     sessionStorage.setItem("name",this.state.Name);
                     window.location.href = "http://localhost:3000/home";
-                }else if (response.data.creation === "false"){
+                }else if (response.data.validation === false){
                     window.location.href = "http://localhost:3000/login";
                     alert("sorry, the password is incorrect or account not exists")
                 }
