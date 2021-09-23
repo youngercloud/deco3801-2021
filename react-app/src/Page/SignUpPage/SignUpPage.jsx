@@ -58,7 +58,7 @@ class SignUpPage extends Component {
             axios.post(api, e).then((response) => {
                 if (response.data.creation === "true"){
                     sessionStorage.setItem("name",this.state.Name);
-                    window.location.href = "http://localhost:3000/home";
+                    window.location.href = "http://localhost:3000/demo";
                 }else if (response.data.creation === "false"){
                     window.location.href = "http://localhost:3000/SignUpPage";
                     alert("sorry, the username exists")
