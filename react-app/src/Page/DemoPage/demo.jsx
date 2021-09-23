@@ -6,6 +6,7 @@ import { createFromIconfontCN } from '@ant-design/icons';
 import Location from "./bookLocation";
 import Language from "../MainPage/Language";
 import Time from "../MainPage/Time";
+import gpSelected from "./gpSelected";
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -25,7 +26,7 @@ class demo extends Component {
     state = {
         collapsed: true,
         showElem:'1',
-        gp:"",
+        gp:null,
     };
 
     toggle = () => {
@@ -66,8 +67,6 @@ class demo extends Component {
                                             {sessionStorage.getItem("name")===null ? "login in":"logout"}
                                         </Button>
                                     </Menu.Item>
-
-
                                 </Menu>
                             </Affix>
 
@@ -118,6 +117,11 @@ class demo extends Component {
                             {
                                 this.state.showElem==='3' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
                             }
+
+                            {
+                                this.state.gp!==null ? <gpSelected/> : null
+                            }
+
 
                         </Content>
                     </Layout>

@@ -21,7 +21,7 @@ const languageOptions = [
 
 const { Meta } = Card;
 
-export default class Footer extends Component {
+export default class bookLocation extends Component {
     state={
         inputGP: null,
         distanceSelect:null,
@@ -80,7 +80,9 @@ export default class Footer extends Component {
                                 <h1>AAAAA CLINIC</h1>
                                 <h2>distances:</h2>
                                 <h2>language:</h2>
-                                <Button>$65 - Consultation</Button>
+                                <Button data-cname={c.CName} onClick={(e) => {
+                                    console.log(e.currentTarget.getAttribute('data-cname'));
+                                }}>$65 - Consultation</Button>
                             </Card>
                         </Col>
                         <Col span={9}>
