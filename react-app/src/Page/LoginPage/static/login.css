@@ -59,3 +59,7 @@ span{
 #login-form-button p{
     color: #EEF3F4;
 }
+
+.form-content{
+    float: left;
+}

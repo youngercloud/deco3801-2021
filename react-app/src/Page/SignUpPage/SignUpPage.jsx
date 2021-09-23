@@ -34,7 +34,6 @@ class SignUpPage extends Component {
         },()=>{
            this.validateInput();
         });
-
     };
 
     // handlerSubmit = (e) =>{
@@ -42,11 +41,11 @@ class SignUpPage extends Component {
     //     this.validateInput();
     //     alert('d');
     // };
-    demo = (e) => {
-        sessionStorage.setItem("name",this.state.Name);
-        const value = sessionStorage.getItem("name");
-        alert(value);
-    }
+    // demo = (e) => {
+    //     sessionStorage.setItem("name",this.state.Name);
+    //     // const value = sessionStorage.getItem("name");
+    //     // alert(value);
+    // }
 
     test = (e) =>{
         if (this.state.Name!=null && this.state.Validate.Password.validate===true && this.state.Password===this.state.PasswordConfirm){
@@ -58,6 +57,7 @@ class SignUpPage extends Component {
             }
             axios.post(api, e).then((response) => {
                 if (response.data.creation === "true"){
+                    sessionStorage.setItem("name",this.state.Name);
                     window.location.href = "http://localhost:3000/home";
                 }else if (response.data.creation === "false"){
                     window.location.href = "http://localhost:3000/SignUpPage";
@@ -110,68 +110,68 @@ class SignUpPage extends Component {
                         <div className="form-wrap">
                             <div>
                                 <div id="login">
-                                    <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000"}}>
+                                    <button  type='primary' icon={<UserOutlined/>} onClick={() => {window.location.href = "http://localhost:3000/login"}}>
                                         Already a member? Log in
                                     </button>
                                 </div>
-
-
-                            <Form name="normal_login" className="sign-form" initialValues={{remember: true}}  >
-                                <Form.Item >
-                                    <p>Account name:</p>
-                                    <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                                           placeholder="Username"
-                                           onChange={this.handlerChange}
-                                            name="Name"
-                                    />
-
-                                </Form.Item>
-
-                                <Form.Item>
-                                    <p>Email address:</p>
-                                    <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                                           placeholder="Email"
-                                           name="Mail"
-                                           onChange={this.handlerChange}
-                                    />
-                                </Form.Item>
-                                <Row>
-                                    <Col span={11}>
-                                        <Form.Item>
-                                            <p>Password:</p>
-                                            <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
-                                                   placeholder="Password"
-                                                   name="Password"
+                                <div id="signForm">
+                                    <Form name="normal_login" className="sign-form" initialValues={{remember: true}}  >
+                                        <Form.Item >
+                                            <p>Account name:</p>
+                                            <Input prefix={<UserOutlined className="site-form-item-icon"/>}
+                                                   placeholder="Username"
                                                    onChange={this.handlerChange}
+                                                   name="Name"
                                             />
-                                            {!this.state.Validate.Password.validate &&  <span style={{color:'red'}}>{this.state.Validate.Password.msg}</span>}
                                         </Form.Item>
-                                    </Col>
-                                    <Col span={2}/>
-                                    <Col span={11}>
+
                                         <Form.Item>
-                                            <p>Confirm password:</p>
-                                            <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
-                                                   placeholder="Confirm password"
-                                                   name="PasswordConfirm"
+                                            <p>Email address:</p>
+                                            <Input prefix={<UserOutlined className="site-form-item-icon"/>}
+                                                   placeholder="Email"
+                                                   name="Mail"
                                                    onChange={this.handlerChange}
                                             />
                                         </Form.Item>
-                                    </Col>
-                                </Row>
-                                <div>
-                                    <Radio.Group  name="identity" defaultValue={1} >
-                                        <Radio value={1} onClick={() => this.setState({currentUser: "1"})} className="chosen">User</Radio>
-                                        <Radio value={2} onClick={() => this.setState({currentUser: "2"})} className="chosen">Doctor</Radio>
-                                    </Radio.Group>
+                                        <Row>
+                                            <Col span={11}>
+                                                <Form.Item>
+                                                    <p>Password:</p>
+                                                    <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
+                                                           placeholder="Password"
+                                                           name="Password"
+                                                           onChange={this.handlerChange}
+                                                    />
+                                                    {!this.state.Validate.Password.validate &&  <span style={{color:'red'}}>{this.state.Validate.Password.msg}</span>}
+                                                </Form.Item>
+                                            </Col>
+                                            <Col span={2}/>
+                                            <Col span={11}>
+                                                <Form.Item>
+                                                    <p>Confirm password:</p>
+                                                    <Input prefix={<LockOutlined className="site-form-item-icon"/>} type="password"
+                                                           placeholder="Confirm password"
+                                                           name="PasswordConfirm"
+                                                           onChange={this.handlerChange}
+                                                    />
+                                                </Form.Item>
+                                            </Col>
+                                        </Row>
+                                        <div>
+                                            <Radio.Group  name="identity" defaultValue={1} >
+                                                <Radio value={1} onClick={() => this.setState({currentUser: "1"})} className="chosen">User</Radio>
+                                                <Radio value={2} onClick={() => this.setState({currentUser: "2"})} className="chosen">Doctor</Radio>
+                                            </Radio.Group>
+                                        </div>
+
+                                        <Button id="submit"  onClick={()=>this.test(this.state)}>
+                                            <p>Sign up</p>
+                                        </Button>
+
+                                    </Form>
                                 </div>
 
-                                <Button id="submit" onClick={()=>this.test(this.state)}>
-                                    <p>Sign up</p>
-                                </Button>
-
-                            </Form>
-                                <Button onClick={()=>this.demo(this.state)}> <p>demo</p> </Button>
+                                {/*<Button onClick={()=>this.demo(this.state)}> <p>demo</p> </Button>*/}
                             </div>
 
                         </div>

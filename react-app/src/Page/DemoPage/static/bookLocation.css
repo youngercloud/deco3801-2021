@@ -1,0 +1,99 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+}
+
+.location{
+    min-height: 900px;
+}
+
+.location button{
+    background-color: #354E57;
+}
+
+.select-before {
+    width: 90px;
+}
+
+.select-after {
+    width: 80px;
+}
+
+[data-theme='compact'] .select-before {
+    width: 71px;
+}
+
+[data-theme='compact'] .select-after {
+    width: 65px;
+}
+
+.ant-select-selection-placeholder{
+
+    font-size: 14px;
+    font-weight: bold;
+    color: #354E57;
+}
+.ant-select-selection-item{
+    font-size: 14px;
+    font-weight: bold;
+    color: #354E57;
+
+}
+
+.ant-input-lg{
+    color: #354E57;
+    font-size: 16.5px;
+    font-weight: bold;
+    /*border-color: red;*/
+}
+
+.inputData{
+    padding-bottom: 80px;
+}
+
+
+.ant-card-body{
+    background-color: #FAFAFA;
+    margin-bottom: 50px;
+}
+
+.ant-card-body h1{
+    font-size: 32px;
+    color: #354E57;
+    text-align: left;
+
+}
+
+.ant-card-body img{
+    margin-right: 20px;
+}
+
+.ant-card-body h2{
+    text-align: left;
+    font-size: 15px;
+    color: #354E57;
+}
+
+.ant-card-body button:hover {
+    background-color:#AAAAAA;
+    color: #FFFFFF;
+}
+
+.ant-card-body button {
+    float: left;
+    width: 218px;
+    font-size: 15px;
+    color: #FFFFFF;
+    border: none;
+
+}
+
+
+
+
+
+
+
+
