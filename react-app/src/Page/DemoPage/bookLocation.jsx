@@ -12,8 +12,8 @@ import axios from "axios";
 
 
 const distanceOptions=[
-    { value: '1km', label: '1km' },
-    { value: '1km-3km', label: '1km-3km' },
+    { value: '0,1', label: '1km' },
+    { value: '1,3', label: '1km-3km' },
 ];
 
 const languageOptions = [
@@ -29,9 +29,9 @@ export default class bookLocation extends Component {
     info;
     state={
         inputGP: null,
-        distanceSelect:null,
+        distanceSelectMin:'0',
+        distanceSelectMax:'9999',
         languageSelect:null,
-
     }
     handleGetInputValue = (event) => {
         this.setState({
@@ -41,8 +41,10 @@ export default class bookLocation extends Component {
 
     handleDistanceValue = distanceSelect => {
         this.setState({
-            distanceSelect : distanceSelect,
+            distanceSelectMin : distanceSelect.replace(",","")[0],
+            distanceSelectMax : distanceSelect.replace(",","")[1],
         })
+
     };
 
     handleLanguageValue = languageSelect => {
@@ -58,31 +60,28 @@ export default class bookLocation extends Component {
 
 
     submit = (e) => {
-            let api;
-            api = "/api/searchGp"
-            axios.post(api, e).then((response) => {
-                const json = response;
-                const arr = [];
-                Object.keys(json).forEach(function(key) {
-                    arr.push(json[key]);
-                });
-                this.info = arr.map((d) =>
-                    <Col span={9} >
-                        <Card>
-                            <img alt="example" src={d.image} style={{width:177,float:"left"}}/>
-                            <h1>{d.name}</h1>
-                            <h2>{d.distance}</h2>
-                            <h2>{d.language}</h2>
-                            <Button  onClick={() => {this.gpSelected(d.name)}}>$65 - Consultation</Button>
-                        </Card>
-                    </Col>
-
-
-                );
-
-            }).catch(function (error) {
-                console.log(error);
+        let api;
+        api = "/api/searchGp"
+        axios.post(api, e).then((response) => {
+            const json = response;
+            const arr = [];
+            Object.keys(json).forEach(function(key) {
+                arr.push(json[key]);
             });
+            this.info = arr.map((d) =>
+                <Col span={9} >
+                    <Card>
+                        <img alt="example" src={d.image} style={{width:177,float:"left"}}/>
+                        <h1>{d.name}</h1>
+                        <h2>{d.distance}</h2>
+                        <h2>{d.language}</h2>
+                        <Button  onClick={() => {this.gpSelected(d.name)}}>$65 - Consultation</Button>
+                    </Card>
+                </Col>
+            );
+        }).catch(function (error) {
+            console.log(error);
+        });
     };
 
     render() {
@@ -104,7 +103,7 @@ export default class bookLocation extends Component {
                             {/*<Option value="Chinese">Chinese</Option>*/}
                             {/*<Option value="Japanese">Japanese</Option>*/}
                         </Select>
-                        <Button type="primary" icon={<SearchOutlined style={{fontSize:20,paddingLeft:8}}/> }size="large" />
+                        <Button type="primary" icon={<SearchOutlined style={{fontSize:20,paddingLeft:8}}/>}size="large" onClick={()=>this.submit(this.state)}/>
                     </Input.Group>
                 </div>
 
@@ -154,7 +153,6 @@ export default class bookLocation extends Component {
                         </Col>
                     </Row>
                 </div>
-
             </div>
 
         );
