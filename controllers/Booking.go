@@ -6,7 +6,11 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-playground/validator/v10/translations/en"
+	"gorm.io/gorm"
 	"math"
+	"regexp"
+	"strconv"
+	"strings"
 )
 
 func Booking(c *gin.Context)  {
@@ -43,11 +47,18 @@ func insertCl() {
 		fmt.Println("error!")
 	}
 }
+
 func calDistance(cunX int, cunY int, gpX int, gpY int) int {
 	var distance = math.Cbrt(float64((cunX - gpX)*(cunX-gpX) + (cunY - gpY)*(cunY-gpY)))
 	return int(distance)
 }
+
+//回来看怎么用正则表达式找到postcode
 func checkedPost(input string) bool{
+	dataType := regexp.MustCompile(`/d/d/d/d`)
+	if dataType == nil {
+		return false
+	}
 	return false
 }
 
@@ -58,47 +69,87 @@ type InputData struct{
 	language string
 }
 
-func bookSearch(data InputData)  {
-	var db = models.InitDB()
-	//var myLocationX = 0
-	//var myLocationY = 0
-	//var distanceMin = data.distanceMin
-	//var distanceMax = data.distanceMax
-	var input =  data.input
-	var language = data.language
-	//var command = "SELECT * FROM hospital_gps"
-	var GpInformation []*models.HospitalGp
-
-	if &input != nil {
-		db.Raw("SELECT A.* FROM hospital_gps A, doctors B WHERE A.id = B.clinic_or_hospital AND B.language = ? AND post_code = ?", language, input).Find(&GpInformation)
-	}
-
-	if &language != nil {
-
-	}
-
-	//弄明白怎么把符合条件的gp存到list里面
-	fmt.Println("start")
-
-	//if unicode.IsNumber(input) {
-		db.Raw("SELECT * FROM hospital_gps").Find(&GpInformation)
-	fmt.Println("end")
-	for i := 0; i < len(GpInformation); i++ {
-		fmt.Println(GpInformation[i].GpName)
-	}
-	//} else {
-	//	db.Raw("SELECT A.GpName A.LocationX A.LocationY FROM HostipalGp A, Doctor B WHERE A.id = B. ClinicOrHospital AND B.Language = ? AND GpName Like = ?", language, "%"+input+"%").Find(&GpInformation)
-	//}
-	//var RealDistance = calDistance(myLocationX,myLocationY, GpInformation.LocationX,GpInformation.LocationY)
-	//if RealDistance > distance {
-	//
-	//}
-
-
+type searchReData struct {
+	Gp models.HospitalGp
+	language []*string
+	distance string
 }
 
-//db.Joins("join Doctor as a on a.ClinicOrHospital = GP.ID").Where("A.Language Like ?", "%"+language+"%").Find(GpInformation)
+func bookSearch(data InputData) []*searchReData {
+	var dataList []*searchReData
+	var db = models.InitDB()
+	var myLocationX = 0
+	var myLocationY = 0
+	var command = "SELECT * FROM hospital_gps"
+	var GpInformation []*models.HospitalGp
 
-//func findLanguages(clinicName string) []string {
-//
-//}
+	//去除首尾空格
+	data.input = strings.TrimSpace(data.input)
+	if &data.input != nil || &data.language != nil {
+		command += " WHERE"
+	}
+
+	//Step 1: Get all the Gp that match the input data
+	if &data.input != nil {
+		if checkedPost(data.input) {
+			command += " pos_code = ?"
+		} else {
+			command += " gp_name = ?"
+		}
+		db.Raw(command, data.input).Find(&GpInformation)
+	}
+
+	//Step 2: Get the corresponding languages and distance of each gp
+	for _, gp := range GpInformation {
+		var eachData searchReData
+		eachData.Gp = *gp
+		//language
+		var language []*string
+		for _, doctor := range findDocByGp(db, gp.GpName) {
+			if !isContain(doctor.Language, language) {
+				language = append(language, &doctor.Language)
+			}
+		}
+		eachData.language = language
+		//distance int -> string
+		eachData.distance = strconv.Itoa(calDistance(myLocationX, myLocationY, gp.LocationX, gp.LocationY))
+		dataList = append(dataList, &eachData)
+	}
+
+	//Filtering languages and distance of data list
+	//If not match then delete it from data list
+	for i, eachData := range dataList {
+		//if language not match
+		if &data.language != nil {
+			if !isContain(data.language, eachData.language) {
+				dataList = append(dataList[:i], dataList[i+1:]...)
+				continue
+			}
+		}
+
+		//if distance not match
+		if eachData.distance < data.distanceMin || eachData.distance > data.distanceMax {
+			dataList = append(dataList[:i], dataList[i+1:]...)
+			continue
+		}
+	}
+	return dataList
+}
+
+/**
+Find all the doctors that belongs to the given Gp Name
+ */
+func findDocByGp(db *gorm.DB, GpName string) []*models.Doctor {
+	var doctors []*models.Doctor
+	db.Raw("SELECT * FROM doctors WHERE clinic_or_hospital = ?", GpName).Find(&doctors)
+	return doctors
+}
+
+func isContain(data string, dataList []*string) bool{
+	for _, str := range dataList {
+		if &data == str {
+			return true
+		}
+	}
+	return false
+}

@@ -23,7 +23,7 @@ func LoginUser(c *gin.Context)  {
 		return 
 	}
 	//insertCl()
-	bookSearch()
+	//bookSearch()
 	var validation = Login(userLoginData.Name, userLoginData.Password, *db)
 	c.JSON(http.StatusOK, gin.H{
 		"UserName" : userLoginData.Name,
