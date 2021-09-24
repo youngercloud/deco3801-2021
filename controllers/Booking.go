@@ -30,12 +30,12 @@ func Booking(c *gin.Context)  {
 func insertCl() {
 	var db = models.InitDB()
 	var data models.HospitalGp
-	data.GpName = "SB clinic"
+	data.GpName = "1213 clinic"
 	data.PostCode = "4066"
 	data.LocationX = 1
 	data.LocationY = 1
-	data.Address = "傻逼"
-	data.About = "都是傻逼"
+	data.Address = "sb"
+	data.About = "scscsc"
 	data.OpeningTime = "assdhgdfs"
 	data.Strengths = "asfdadA"
 
@@ -47,25 +47,45 @@ func calDistance(cunX int, cunY int, gpX int, gpY int) int {
 	var distance = math.Cbrt(float64((cunX - gpX)*(cunX-gpX) + (cunY - gpY)*(cunY-gpY)))
 	return int(distance)
 }
+func checkedPost(input string) bool{
+	return false
+}
 
+type InputData struct{
+	input string
+	distanceMin string
+	distanceMax string
+	language string
+}
 
-func bookSearch()  {
+func bookSearch(data InputData)  {
 	var db = models.InitDB()
 	//var myLocationX = 0
 	//var myLocationY = 0
-	//var distance = 0
-	var input =  "4066"
-	var language = ""
+	//var distanceMin = data.distanceMin
+	//var distanceMax = data.distanceMax
+	var input =  data.input
+	var language = data.language
+	//var command = "SELECT * FROM hospital_gps"
+	var GpInformation []*models.HospitalGp
 
+	if &input != nil {
+		db.Raw("SELECT A.* FROM hospital_gps A, doctors B WHERE A.id = B.clinic_or_hospital AND B.language = ? AND post_code = ?", language, input).Find(&GpInformation)
+	}
 
+	if &language != nil {
+
+	}
+
+	//弄明白怎么把符合条件的gp存到list里面
 	fmt.Println("start")
-	GpInformation := models.HospitalGp{}
 
 	//if unicode.IsNumber(input) {
-		db.Raw("SELECT A.* FROM hospital_gps A, doctors B WHERE A.id = B.clinic_or_hospital AND B.language = ? AND post_code = ?", language, input).Find(&GpInformation)
+		db.Raw("SELECT * FROM hospital_gps").Find(&GpInformation)
 	fmt.Println("end")
-	fmt.Println(GpInformation.GpName)
-
+	for i := 0; i < len(GpInformation); i++ {
+		fmt.Println(GpInformation[i].GpName)
+	}
 	//} else {
 	//	db.Raw("SELECT A.GpName A.LocationX A.LocationY FROM HostipalGp A, Doctor B WHERE A.id = B. ClinicOrHospital AND B.Language = ? AND GpName Like = ?", language, "%"+input+"%").Find(&GpInformation)
 	//}

@@ -22,6 +22,7 @@ func LoginUser(c *gin.Context)  {
 	if err != nil {
 		return 
 	}
+	//insertCl()
 	bookSearch()
 	var validation = Login(userLoginData.Name, userLoginData.Password, *db)
 	c.JSON(http.StatusOK, gin.H{
