@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import "./static/demo.css";
 import logo from "./static/logo.png"
@@ -6,7 +7,8 @@ import { createFromIconfontCN } from '@ant-design/icons';
 import Location from "./bookLocation";
 import Language from "../MainPage/Language";
 import Time from "../MainPage/Time";
-import MyAccountPage from "./MyAccountPage";
+import GpSelected from "./gpSelected";
+import MyAccount from "./MyAccountPage"
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -26,7 +28,7 @@ class demo extends Component {
     state = {
         collapsed: true,
         showElem:'1',
-        gp:"",
+        gp:null,
     };
 
     toggle = () => {
@@ -42,6 +44,10 @@ class demo extends Component {
     logout(){
         sessionStorage.removeItem("name")
         this.props.history.push("/login")
+    }
+
+    gpSelected(info){
+        this.setState({gp:info})
     }
 
     render() {
@@ -61,14 +67,12 @@ class demo extends Component {
                                     <Menu.Item key="2" icon={<MyIcon type="icon-yuyue1" style={{fontSize:28}}/>} onClick={() => this.handleClick("2")}>
                                         Medical Booking
                                     </Menu.Item>
-                                    <Menu.Item key="4" icon={<MyIcon type="icon-account" style={{fontSize:28}}/>} onClick={() => this.handleClick("4")}>
+                                    <Menu.Item key="3" icon={<MyIcon type="icon-account" style={{fontSize:28}}/>} onClick={() => this.handleClick("3")}>
                                         My Account
                                         <Button style={{marginBottom:20,marginLeft:20}} onClick={()=>this.logout()}>
                                             {sessionStorage.getItem("name")===null ? "login in":"logout"}
                                         </Button>
                                     </Menu.Item>
-
-
                                 </Menu>
                             </Affix>
 
@@ -93,9 +97,10 @@ class demo extends Component {
                                     <p>Online Booking</p>
                                 </Breadcrumb.Item> : null}
 
-                                {this.state.showElem==='4' ?  <Breadcrumb.Item>
-                                    <p>My information</p>
+                                {this.state.showElem==='3' ?  <Breadcrumb.Item>
+                                    <p>My Account</p>
                                 </Breadcrumb.Item> : null}
+
                             </Breadcrumb>
                         </Header>
                         <div style={{width:'94%',marginLeft:'3%'}}><hr/></div>
@@ -108,24 +113,30 @@ class demo extends Component {
                         >
 
                             {
-                                this.state.showElem==='1' ? <Language/> : null
+                                this.state.showElem==='1' ? <Language/>: null
                             }
 
                             {
-                                this.state.showElem==='2' ? <Location/> : null
+                                this.state.showElem==='2' && this.state.gp === null ? <Location gpSelected={(info)=>{this.gpSelected(info)}}/> : null
                             }
 
                             {
-                                this.state.showElem==='3' && sessionStorage.getItem('name') !== null ? <Time/> : null
+                                this.state.showElem==='2' && this.state.gp !== null ? <GpSelected name={this.state.gp}/> : null
                             }
 
                             {
-                                this.state.showElem==='3' && sessionStorage.getItem('name') === null ? this.props.history.push("/login") : null
+                                this.state.showElem==='3' && sessionStorage.getItem('name')!== null ?  <MyAccount/> : null
                             }
 
                             {
-                                this.state.showElem === '4' ? <MyAccountPage/> : null
+                                this.state.showElem==='3' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
                             }
+
+
+
+
+
+
                         </Content>
                     </Layout>
                 </Layout>
