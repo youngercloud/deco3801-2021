@@ -31,6 +31,7 @@ func Booking(c *gin.Context)  {
 	})
 }
 
+
 func insertCl() {
 	var db = models.InitDB()
 	var data models.HospitalGp
@@ -82,7 +83,24 @@ type searchReData struct {
 }
 
 
-func bookSearch(data InputData) []*searchReData {
+// HandleGpSearch This is the function that transfer the data of gp searching to front-end/**
+func HandleGpSearch(c *gin.Context)  {
+	var searchCond InputData
+	err := c.Bind(&searchCond)
+	if err != nil {
+		return
+	}
+
+	var dataList = gPSearch(searchCond)
+	c.JSON(200, gin.H{
+		"data": dataList,
+	})
+}
+
+/**
+This is the function that return the data of gp searching in booking interface
+ */
+func gPSearch(data InputData) []*searchReData {
 	var dataList []*searchReData
 	var db = models.InitDB()
 	var myLocationX = 0
@@ -127,6 +145,8 @@ func bookSearch(data InputData) []*searchReData {
 	//If not match then delete it from data list
 	for i, eachData := range dataList {
 		//if language not match
+
+		//报错有可能是language的类型是string而不是可nil的var
 		if &data.language != nil {
 			if !isContain(data.language, eachData.language) {
 				dataList = append(dataList[:i], dataList[i+1:]...)

@@ -18,6 +18,7 @@ func main()  {
 		api.POST("/signup/user", controllers.SignUpUser)
 		api.POST("/signup/doctor", controllers.SignUpDoctor)
 		api.POST("login/user", controllers.LoginUser)
+		api.GET("/booking/searchGp", controllers.HandleGpSearch)
 	}
 	router.NoRoute(controllers.NoResponse)
 
