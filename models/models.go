@@ -39,14 +39,6 @@ type Doctor struct {
 }
 
 
-type Institution struct {
-	BaseModel
-	Name string `gorm:"not null;size:256"`
-	Distance int `gorm:"size:256"`
-	Location string `gorm:"not null"`
-
-}
-
 type Booking struct {
 	BaseModel
 	DoctorID uint
