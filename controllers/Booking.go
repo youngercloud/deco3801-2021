@@ -53,11 +53,17 @@ func calDistance(cunX int, cunY int, gpX int, gpY int) int {
 	return int(distance)
 }
 
-//回来看怎么用正则表达式找到postcode
+/**
+Check if the given string is a post code
+ */
 func checkedPost(input string) bool{
-	dataType := regexp.MustCompile(`/d/d/d/d`)
-	if dataType == nil {
-		return false
+	var data = regexp.MustCompile(`\d{4}`)
+	var result = data.FindAllString(input, -1)
+	if len(result) == 1 {
+		input = strings.Replace(input, result[0], "", 1)
+		data = regexp.MustCompile(`\d+|\D+`)
+		result = data.FindAllString(input, -1)
+		return !(len(result) >= 1)
 	}
 	return false
 }
@@ -74,6 +80,7 @@ type searchReData struct {
 	language []*string
 	distance string
 }
+
 
 func bookSearch(data InputData) []*searchReData {
 	var dataList []*searchReData
