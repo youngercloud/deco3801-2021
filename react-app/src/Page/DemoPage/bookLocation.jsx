@@ -9,8 +9,6 @@ import {createFromIconfontCN, SettingOutlined} from '@ant-design/icons';
 import {Option} from "antd/es/mentions";
 import axios from "axios";
 
-
-
 const distanceOptions=[
     { value: '0,1', label: '1km' },
     { value: '1,3', label: '1km-3km' },
@@ -28,10 +26,10 @@ const { Meta } = Card;
 export default class bookLocation extends Component {
     info;
     state={
-        inputGP: null,
-        distanceSelectMin:'0',
-        distanceSelectMax:'9999',
-        languageSelect:null,
+        input: null,
+        distanceMin:'0',
+        distanceMax:'9999',
+        language:null,
     }
     handleGetInputValue = (event) => {
         this.setState({
@@ -41,15 +39,15 @@ export default class bookLocation extends Component {
 
     handleDistanceValue = distanceSelect => {
         this.setState({
-            distanceSelectMin : distanceSelect.replace(",","")[0],
-            distanceSelectMax : distanceSelect.replace(",","")[1],
+            distanceMin : distanceSelect.replace(",","")[0],
+            distanceMax : distanceSelect.replace(",","")[1],
         })
 
     };
 
     handleLanguageValue = languageSelect => {
         this.setState({
-            languageSelect : languageSelect,
+            language : languageSelect,
         })
     };
 
@@ -57,11 +55,9 @@ export default class bookLocation extends Component {
         this.props.gpSelected(info)
     }
 
-
-
     submit = (e) => {
         let api;
-        api = "/api/searchGp"
+        api = "/api/booking/searchGp"
         axios.post(api, e).then((response) => {
             const json = response;
             const arr = [];
@@ -131,27 +127,28 @@ export default class bookLocation extends Component {
                                 <Button>$65 - Consultation</Button>
                             </Card>
                         </Col>
+                        {this.info}
                     </Row>
-                    <Row gutter={[48, 48]} justify="center">
-                        <Col span={9}>
-                            <Card >
-                                <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{width:177,float:"left"}}/>
-                                <h1>AAAAA CLINIC</h1>
-                                <h2>distances:</h2>
-                                <h2>language:</h2>
-                                <Button>$65 - Consultation</Button>
-                            </Card>
-                        </Col>
-                        <Col span={9}>
-                            <Card >
-                                <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{width:177,float:"left"}}/>
-                                <h1>AAAAA CLINIC</h1>
-                                <h2>distances:</h2>
-                                <h2>language:</h2>
-                                <Button>$65 - Consultation</Button>
-                            </Card>
-                        </Col>
-                    </Row>
+                    {/*<Row gutter={[48, 48]} justify="center">*/}
+                    {/*    <Col span={9}>*/}
+                    {/*        <Card >*/}
+                    {/*            <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{width:177,float:"left"}}/>*/}
+                    {/*            <h1>AAAAA CLINIC</h1>*/}
+                    {/*            <h2>distances:</h2>*/}
+                    {/*            <h2>language:</h2>*/}
+                    {/*            <Button>$65 - Consultation</Button>*/}
+                    {/*        </Card>*/}
+                    {/*    </Col>*/}
+                    {/*    <Col span={9}>*/}
+                    {/*        <Card >*/}
+                    {/*            <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{width:177,float:"left"}}/>*/}
+                    {/*            <h1>AAAAA CLINIC</h1>*/}
+                    {/*            <h2>distances:</h2>*/}
+                    {/*            <h2>language:</h2>*/}
+                    {/*            <Button>$65 - Consultation</Button>*/}
+                    {/*        </Card>*/}
+                    {/*    </Col>*/}
+                    {/*</Row>*/}
                 </div>
             </div>
 

@@ -23,3 +23,20 @@ body {
     background-color: #B9C1C4;
 }
 
+.imagePart{
+    float: left;
+    width: 50%;
+
+}
+
+.imagePart .ant-col {
+    margin-bottom: 3%;
+    margin-right: 1%;
+}
+
+.gpContent{
+    margin-left: 50%;
+    width: 50%;
+
+}
+
