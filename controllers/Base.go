@@ -34,13 +34,13 @@ func InsertImage(c *gin.Context)  {
 
 // GetImages Get images
 func GetImages(imType models.ImageType, owner string, db gorm.DB) []models.Image {
-	var image []models.Image
-	err := db.Where("type = ? AND owner_name = ?", imType, owner).First(&image).Error
+	var images []models.Image
+	err := db.Where("type = ? AND owner_name = ?", imType, owner).Find(&images).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("There is no result")
 		return []models.Image{}
 	}
-	return image
+	return images
 }
 
 // MainImage Check which image is the main one and return it
@@ -74,9 +74,9 @@ func FakeCl() {
 func FakeImage() {
 	var db = models.InitDB()
 	var data models.Image
-	data.Path = "../../Images/4.png"
+	data.Path = "2.png"
 	data.Name = "testData"
-	data.OwnerName = "test clinic1"
+	data.OwnerName = "1213 clinic"
 	data.Type = models.GP
 	data.IsMain = true
 

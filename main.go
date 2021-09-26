@@ -8,7 +8,7 @@ import (
 )
 
 func main()  {
-	controllers.FakeImage()
+	//controllers.FakeImage()
 	models.InitDB()
 	router:= gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./views", true)))
