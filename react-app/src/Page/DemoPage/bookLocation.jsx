@@ -26,10 +26,11 @@ const { Meta } = Card;
 export default class bookLocation extends Component {
     info;
     state={
-        input: null,
+        input: '',
         distanceMin:'0',
         distanceMax:'9999',
-        language:null,
+        language:'',
+        distanceSelect: undefined
     }
     handleGetInputValue = (event) => {
         this.setState({
@@ -56,9 +57,11 @@ export default class bookLocation extends Component {
     }
 
     submit = (e) => {
+        console.log(e)
         let api;
         api = "/api/booking/searchGp"
         axios.post(api, e).then((response) => {
+            console.log(response.data)
             const json = response;
             const arr = [];
             Object.keys(json).forEach(function(key) {
@@ -85,7 +88,7 @@ export default class bookLocation extends Component {
             <div className="location">
                 <div className="inputData">
                     <Input.Group compact>
-                        <Input size="large" style={{ width: '50%' }} placeholder="Type Clinic name or Post Code" name="inputGP"
+                        <Input size="large" style={{ width: '50%' }} placeholder="Type Clinic name or Post Code" name="input"
                                onChange={this.handleGetInputValue} />
                         <Select size="large" placeholder="Distance" style={{ width: 120 }} value={this.state.distanceSelect}
                                 onChange={this.handleDistanceValue} options={distanceOptions}>

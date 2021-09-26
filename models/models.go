@@ -33,7 +33,7 @@ type Doctor struct {
 	Gender string `gorm:"not null;size:256"`
 	Email string `gorm:"not null;size:256"`
 	PhoneNumber int `gorm:"size:256"`
-	ClinicOrHospital int `gorm:"size:256"`
+	ClinicOrHospital string `gorm:"size:256"`
 	Specialty string `gorm:"size:256"`
 	Language string `gorm:"size:256"`
 }
