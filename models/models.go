@@ -61,6 +61,28 @@ type HospitalGp struct {
 	Strengths string `gorm:"not null;size:256"`
 }
 
+type imageType int32
+
+const (
+	GP imageType = 0
+	DOCTOR imageType = 1
+	HOSPITAL imageType = 3
+)
+
+type Images struct {
+	BaseModel
+	Path	string `gorm:"not null;size:256"`
+	Type      imageType `gorm:"not null;size:256"`
+	OwnerName string `gorm:"not null;size:256"`
+
+}
+
+const (
+	CN = "Chinese"
+	EN = "English"
+	JP = "Japanese"
+)
+
 func InitDB() *gorm.DB {
 	dsn := "stu:deco3801@tcp(34.87.198.176:3306)/users?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})

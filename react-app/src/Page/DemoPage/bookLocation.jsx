@@ -71,9 +71,9 @@ export default class bookLocation extends Component {
                 <Col span={9} >
                     <Card>
                         <img alt="example" src={d.image} style={{width:177,float:"left"}}/>
-                        <h1>{d.name}</h1>
-                        <h2>{d.distance}</h2>
-                        <h2>{d.language}</h2>
+                        <h1>{d[0].name}</h1>
+                        <h2>{d[0].distance}</h2>
+                        <h2>{d[0].language}</h2>
                         <Button  onClick={() => {this.gpSelected(d.name)}}>$65 - Consultation</Button>
                     </Card>
                 </Col>

@@ -32,17 +32,14 @@ func Booking(c *gin.Context)  {
 }
 
 
-func insertCl() {
+func InsertCl() {
 	var db = models.InitDB()
-	var data models.HospitalGp
-	data.GpName = "1213 clinic"
-	data.PostCode = "4066"
-	data.LocationX = 1
-	data.LocationY = 1
-	data.Address = "sb"
-	data.About = "scscsc"
-	data.OpeningTime = "assdhgdfs"
-	data.Strengths = "asfdadA"
+	var data models.Doctor
+	data.FirstName = "data7"
+	data.LastName = "testData"
+	data.Password = "1"
+	data.ClinicOrHospital = "test clinic1"
+	data.Language = models.CN
 
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
