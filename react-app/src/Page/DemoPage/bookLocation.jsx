@@ -73,8 +73,9 @@ export default class bookLocation extends Component {
             this.info = arr2.map((d) =>
                 <Col span={9} >
                     <Card>
-                        {/*{console.log(d)}*/}
-                        {/*<img alt="example" src={d.image} style={{width:177,float:"left"}}/>*/}
+                        {console.log(d.Images.Path)}
+
+                        <img alt="example" src={require('../../Images/'+d.Images.Path).default} style={{width:177,float:"left"}}/>
                         <h2>{d.Distance}</h2>
                         <h2>{d.Language}</h2>
                         <Button  onClick={() => {this.gpSelected(d.name)}}>$65 - Consultation</Button>
@@ -118,7 +119,9 @@ export default class bookLocation extends Component {
 
                         <Col span={9}>
                             <Card >
-                                <img alt="error" src={require('../../Images/gp1.png').default} style={{width:177,float:"left"}}/>
+
+                                <img alt="example" src={require('../../Images/gp1.png').default} style={{width:177,float:"left"}}/>
+
                                 <h1>AAAAA CLINIC</h1>
                                 <h2>distances:</h2>
                                 <h2>language:</h2>

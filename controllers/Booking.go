@@ -31,24 +31,6 @@ func Booking(c *gin.Context)  {
 	})
 }
 
-
-func insertCl() {
-	var db = models.InitDB()
-	var data models.HospitalGp
-	data.GpName = "1213 clinic"
-	data.PostCode = "4066"
-	data.LocationX = 1
-	data.LocationY = 1
-	data.Address = "sb"
-	data.About = "scscsc"
-	data.OpeningTime = "assdhgdfs"
-	data.Strengths = "asfdadA"
-
-	if err := db.Create(&data).Error; err != nil {
-		fmt.Println("error!")
-	}
-}
-
 func calDistance(cunX int, cunY int, gpX int, gpY int) int {
 	var distance = math.Cbrt(float64((cunX - gpX)*(cunX-gpX) + (cunY - gpY)*(cunY-gpY)))
 	return int(distance)
@@ -69,7 +51,7 @@ func checkedPost(input string) bool{
 	return false
 }
 
-// InputData 名字开头必须大写才能在其他文件被call
+// InputData 名字开头必须大写才能在其他文件被外部call
 type InputData struct{
 	Input string
 	DistanceMin string
@@ -81,6 +63,7 @@ type searchReData struct {
 	Gp models.HospitalGp
 	Language []string
 	Distance string
+	Images models.Image
 }
 
 
@@ -142,13 +125,14 @@ func gPSearch(data InputData) []*searchReData {
 		eachData.Language = language
 		//distance int -> string
 		eachData.Distance = strconv.Itoa(calDistance(myLocationX, myLocationY, gp.LocationX, gp.LocationY))
+		eachData.Images = MainImage(GetImages(models.GP, gp.GpName, *db))
 		dataList = append(dataList, &eachData)
 	}
-	//Filtering languages and distance of data list
-	//If not match then delete it from data list
 	for i, eachData := range dataList {
-		//if language not match
+		//Filtering languages and distance of data list
+		//If not match then delete it from data list
 
+		//if language not match
 		if data.Language != "" {
 			if !isContain(data.Language, eachData.Language) {
 				dataList = append(dataList[:i], dataList[i+1:]...)
@@ -182,3 +166,4 @@ func isContain(data string, dataList []string) bool{
 	}
 	return false
 }
+
