@@ -21,7 +21,7 @@ export default class gpSelected extends Component {
                     </Steps>
 
                 </div>
-                <div>
+                <div className="gpIntroduction">
                     <div className="imagePart">
                         <Row>
                             <Col span={9}/>
@@ -44,18 +44,27 @@ export default class gpSelected extends Component {
                     </div>
                     <div className="gpContent">
                         <Row>
-                            <Col span={12}>
-                                <p>{this.props.name}</p>
+                            <Col span={15}>
+                                <h2>{this.props.name}</h2>
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <h2>1 Kilometers</h2>
+                            <Col >
+                                <h3>1 Kilometers</h3>
                             </Col>
+                            <Col><p>||</p></Col>
                             <Col>
-
+                                <h3>Chinese</h3>
                             </Col>
                         </Row>
+                        <Row>
+                            <Col span={14} >
+                                <h3>About us</h3>
+                                <p >hiowdnalkcfnwaifhnaddddddddddddddddddddddDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD            DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</p>
+                            </Col>
+
+                        </Row>
+
 
                     </div>
                 </div>

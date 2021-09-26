@@ -23,6 +23,11 @@ body {
     background-color: #B9C1C4;
 }
 
+.gpIntroduction{
+
+    min-height: 100%;
+}
+
 .imagePart{
     float: left;
     width: 50%;
@@ -35,8 +40,31 @@ body {
 }
 
 .gpContent{
-    margin-left: 50%;
+    margin-left: 51%;
     width: 50%;
+}
 
+.gpContent .ant-col{
+    margin-left: 2%;
+}
+
+
+.gpContent .ant-col h2{
+    color: #354E57;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.gpContent .ant-col h3{
+    color: #354E57;
+    font-weight: bold;
+    text-align: left;
+}
+.gpContent .ant-col p{
+    color: #354E57;
+    font-size: 15px ;
+    font-weight: normal;
+    text-align: left;
+    background-color: red;
 }
 

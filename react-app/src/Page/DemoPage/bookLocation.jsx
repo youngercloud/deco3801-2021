@@ -4,9 +4,8 @@ import "./static/bookLocation.css";
 import {Input, Select, Space, Cascader, Button, Col, Row} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
-import gp1 from "../../Images/gp1.png";
-import {createFromIconfontCN, SettingOutlined} from '@ant-design/icons';
-import {Option} from "antd/es/mentions";
+
+
 import axios from "axios";
 
 const distanceOptions=[
@@ -21,7 +20,6 @@ const languageOptions = [
 ];
 
 const { Meta } = Card;
-
 
 export default class bookLocation extends Component {
     info;
@@ -83,6 +81,7 @@ export default class bookLocation extends Component {
                     </Card>
                 </Col>
             );
+
         }).catch(function (error) {
             console.log(error);
         });
@@ -119,7 +118,7 @@ export default class bookLocation extends Component {
 
                         <Col span={9}>
                             <Card >
-                                <img alt="example" src={require('../../Images/gp1.png')} style={{width:177,float:"left"}}/>
+                                <img alt="error" src={require('../../Images/gp1.png').default} style={{width:177,float:"left"}}/>
                                 <h1>AAAAA CLINIC</h1>
                                 <h2>distances:</h2>
                                 <h2>language:</h2>
