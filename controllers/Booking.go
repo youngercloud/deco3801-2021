@@ -31,21 +31,6 @@ func Booking(c *gin.Context)  {
 	})
 }
 
-
-func InsertCl() {
-	var db = models.InitDB()
-	var data models.Doctor
-	data.FirstName = "data7"
-	data.LastName = "testData"
-	data.Password = "1"
-	data.ClinicOrHospital = "test clinic1"
-	data.Language = models.CN
-
-	if err := db.Create(&data).Error; err != nil {
-		fmt.Println("error!")
-	}
-}
-
 func calDistance(cunX int, cunY int, gpX int, gpY int) int {
 	var distance = math.Cbrt(float64((cunX - gpX)*(cunX-gpX) + (cunY - gpY)*(cunY-gpY)))
 	return int(distance)
@@ -66,7 +51,7 @@ func checkedPost(input string) bool{
 	return false
 }
 
-// InputData 名字开头必须大写才能在其他文件被call
+// InputData 名字开头必须大写才能在其他文件被外部call
 type InputData struct{
 	Input string
 	DistanceMin string

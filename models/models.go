@@ -61,21 +61,24 @@ type HospitalGp struct {
 	Strengths string `gorm:"not null;size:256"`
 }
 
-type imageType int32
+type ImageType int32
 
 const (
-	GP imageType = 0
-	DOCTOR imageType = 1
-	HOSPITAL imageType = 3
+	GP ImageType = 0
+	DOCTOR ImageType = 1
+	HOSPITAL ImageType = 3
+	LANGUAGE ImageType = 4
 )
 
 type Images struct {
 	BaseModel
+	Name string `gorm:"not null;size:256"`
 	Path	string `gorm:"not null;size:256"`
-	Type      imageType `gorm:"not null;size:256"`
+	Type      ImageType `gorm:"not null;size:256"`
 	OwnerName string `gorm:"not null;size:256"`
 
 }
+
 
 const (
 	CN = "Chinese"
