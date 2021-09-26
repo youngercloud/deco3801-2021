@@ -13,7 +13,7 @@ import (
 //InsertImage Insert images
 func InsertImage(c *gin.Context)  {
 	var db = models.InitDB()
-	var data models.Images
+	var data models.Image
 	err := c.Bind(&data)
 	if err != nil {
 		return
@@ -33,16 +33,25 @@ func InsertImage(c *gin.Context)  {
 //Get from databases
 
 // GetImages Get images
-func GetImages(imType models.ImageType, owner string, db gorm.DB) []models.Images {
-	var image []models.Images
+func GetImages(imType models.ImageType, owner string, db gorm.DB) []models.Image {
+	var image []models.Image
 	err := db.Where("type = ? AND owner_name = ?", imType, owner).First(&image).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("There is no result")
-		return []models.Images{}
+		return []models.Image{}
 	}
 	return image
 }
 
+// MainImage Check which image is the main one and return it
+func MainImage(images []models.Image) models.Image {
+	for _, image := range images {
+		if image.IsMain == true {
+			return image
+		}
+	}
+	return models.Image{}
+}
 
 //Testing method
 
@@ -64,13 +73,40 @@ func FakeCl() {
 // FakeImage Insert fake images
 func FakeImage() {
 	var db = models.InitDB()
-	var data models.Images
-	data.Path = "data7"
+	var data models.Image
+	data.Path = "../../Images/4.png"
 	data.Name = "testData"
-	data.OwnerName = "1"
+	data.OwnerName = "test clinic1"
 	data.Type = models.GP
+	data.IsMain = true
 
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
+	}
+}
+
+// FakeGp Insert fake Gp
+func FakeGp() {
+	var db = models.InitDB()
+	var data models.HospitalGp
+	data.GpName = "test clinic1"
+	data.PostCode = "4066"
+	data.LocationX = 4
+	data.LocationY = 4
+	data.Address = "d1"
+	data.About = "A1"
+	data.OpeningTime = "1"
+	data.Strengths = "1"
+
+	if err := db.Create(&data).Error; err != nil {
+		fmt.Println("error!")
+	}
+}
+
+func FakeCreateTable() {
+	var db = models.InitDB()
+	err := db.AutoMigrate(&models.Image{})
+	if err != nil {
+		return 
 	}
 }

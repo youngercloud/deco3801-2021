@@ -63,6 +63,7 @@ type searchReData struct {
 	Gp models.HospitalGp
 	Language []string
 	Distance string
+	Images models.Image
 }
 
 
@@ -124,13 +125,14 @@ func gPSearch(data InputData) []*searchReData {
 		eachData.Language = language
 		//distance int -> string
 		eachData.Distance = strconv.Itoa(calDistance(myLocationX, myLocationY, gp.LocationX, gp.LocationY))
+		eachData.Images = MainImage(GetImages(models.GP, gp.GpName, *db))
 		dataList = append(dataList, &eachData)
 	}
-	//Filtering languages and distance of data list
-	//If not match then delete it from data list
 	for i, eachData := range dataList {
-		//if language not match
+		//Filtering languages and distance of data list
+		//If not match then delete it from data list
 
+		//if language not match
 		if data.Language != "" {
 			if !isContain(data.Language, eachData.Language) {
 				dataList = append(dataList[:i], dataList[i+1:]...)
@@ -164,3 +166,4 @@ func isContain(data string, dataList []string) bool{
 	}
 	return false
 }
+

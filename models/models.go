@@ -70,13 +70,13 @@ const (
 	LANGUAGE ImageType = 4
 )
 
-type Images struct {
+type Image struct {
 	BaseModel
 	Name string `gorm:"not null;size:256"`
 	Path	string `gorm:"not null;size:256"`
 	Type      ImageType `gorm:"not null;size:256"`
 	OwnerName string `gorm:"not null;size:256"`
-
+	IsMain bool `gorm:"not null;size:256"`
 }
 
 
