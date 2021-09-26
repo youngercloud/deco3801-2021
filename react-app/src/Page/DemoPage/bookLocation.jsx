@@ -4,7 +4,7 @@ import "./static/bookLocation.css";
 import {Input, Select, Space, Cascader, Button, Col, Row} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
-
+import gp1 from "../../Images/gp1.png";
 import {createFromIconfontCN, SettingOutlined} from '@ant-design/icons';
 import {Option} from "antd/es/mentions";
 import axios from "axios";
@@ -62,18 +62,23 @@ export default class bookLocation extends Component {
         api = "/api/booking/searchGp"
         axios.post(api, e).then((response) => {
             console.log(response.data)
-            const json = response;
+            const json = response.data;
             const arr = [];
+            let arr2=[];
             Object.keys(json).forEach(function(key) {
                 arr.push(json[key]);
             });
-            this.info = arr.map((d) =>
+            {console.log(arr)}
+
+            arr2=arr[0];
+            {console.log(arr2)}
+            this.info = arr2.map((d) =>
                 <Col span={9} >
                     <Card>
-                        <img alt="example" src={d.image} style={{width:177,float:"left"}}/>
-                        <h1>{d[0].name}</h1>
-                        <h2>{d[0].distance}</h2>
-                        <h2>{d[0].language}</h2>
+                        {/*{console.log(d)}*/}
+                        {/*<img alt="example" src={d.image} style={{width:177,float:"left"}}/>*/}
+                        <h2>{d.Distance}</h2>
+                        <h2>{d.Language}</h2>
                         <Button  onClick={() => {this.gpSelected(d.name)}}>$65 - Consultation</Button>
                     </Card>
                 </Col>
@@ -111,10 +116,10 @@ export default class bookLocation extends Component {
                 {/*<p>Select2: {this.state.languageSelect}</p>*/}
                 <div className="cards">
                     <Row gutter={[48, 48]} justify="center">
-                        {this.info}
+
                         <Col span={9}>
                             <Card >
-                                <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{width:177,float:"left"}}/>
+                                <img alt="example" src={require('../../Images/gp1.png')} style={{width:177,float:"left"}}/>
                                 <h1>AAAAA CLINIC</h1>
                                 <h2>distances:</h2>
                                 <h2>language:</h2>
