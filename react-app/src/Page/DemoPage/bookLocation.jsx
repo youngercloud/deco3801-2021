@@ -119,9 +119,7 @@ export default class bookLocation extends Component {
 
                         <Col span={9}>
                             <Card >
-
                                 <img alt="example" src={require('../../Images/gp1.png').default} style={{width:177,float:"left"}}/>
-
                                 <h1>AAAAA CLINIC</h1>
                                 <h2>distances:</h2>
                                 <h2>language:</h2>
@@ -161,7 +159,6 @@ export default class bookLocation extends Component {
                     {/*</Row>*/}
                 </div>
             </div>
-
         );
     }
 }
