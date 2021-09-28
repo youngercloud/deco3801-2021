@@ -4,10 +4,14 @@ import LoginPage from "./Page/LoginPage/LoginPage";
 import SignUpPage from "./Page/SignUpPage/SignUpPage";
 import UserPage from "./Compoments/User";
 import MainPage from "./Page/MainPage/MainPage";
-import Key from "react-app/privateData.json"
 import cookie from "react-cookies";
+import Key from "./privateData.json"
+let key = require('./privateData.json');
+console.log(key)
+console.log(key[0].keyTranslate);
 
-const googleTranslate = require("google-translate")(Key.keyTranslate);
+
+const googleTranslate = require("google-translate")(Key[0].keyTranslate);
 
 class App extends Component {
     state = {
