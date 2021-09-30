@@ -100,17 +100,16 @@ func gPSearch(data InputData) []*searchReData {
 
 	//去除首尾空格
 	data.Input = strings.TrimSpace(data.Input)
-	if data.Input != "" || data.Language != "" {
-		command += " WHERE"
-	}
+
+
 
 	//Step 1: Get all the Gp that match the input data
 	if data.Input != "" {
 		if checkedPost(data.Input) {
-			command += " post_code = ?"
+			command += " WHERE post_code = ?"
 		} else {
 			//以后可能会变为模糊搜索
-			command += " gp_name = ?"
+			command += " WHERE gp_name = ?"
 		}
 	}
 	db.Raw(command, data.Input).Find(&GpInformation)
