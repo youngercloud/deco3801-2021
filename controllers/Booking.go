@@ -154,29 +154,38 @@ func gPSearch(data InputData) []*searchReData {
 
 // HandleGpRequire Transfer the gp information back to front end
 func HandleGpRequire(c *gin.Context)  {
+	type gpInfo struct {
+		Gp models.HospitalGp
+		GpImages []models.Image
+		DocInfos []DocInfo
+		Distance int
+	}
+	var info gpInfo
 	var db = models.InitDB()
+
 	var gpName string
-	var GP models.HospitalGp
-	var images []models.Image
 	err := c.Bind(&gpName)
 	if err != nil {
 		fmt.Println("error booking require")
 	}
 
+	var GP models.HospitalGp
 	err = db.Where("gp_name = ? ",gpName).First(&GP).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("There is no Gp")
 	}
+	info.Gp = GP
 
-	err = db.Where("owner_name = ? AND type = ?",gpName, models.GP).Find(&images).Error
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		fmt.Println("There is no images of this Gp")
-	} else{
-		c.JSON(200, gin.H{
-			"gpInfo": GP,
-			"images": images,
-		})
-	}
+	images := GetImages(models.GP, gpName, *db)
+	info.GpImages = images
+
+	info.DocInfos = HandleDocSearch(gpName, *db)
+	info.Distance = calDistance(1,1, GP.LocationX, GP.LocationY)
+
+	c.JSON(200, gin.H{
+		"gpInfo": info,
+	})
+
 }
 
 func GetBookings(c *gin.Context) {

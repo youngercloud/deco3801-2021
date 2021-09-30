@@ -21,7 +21,6 @@ func main()  {
 		api.POST("/booking", controllers.BookingInsert)
 		api.POST("/booking/searchGp", controllers.HandleGpSearch)
 		api.GET("/booking/requireGp", controllers.HandleGpRequire)
-		api.GET("/booking/requireDocs", controllers.HandleDocSearch)
 	}
 	router.NoRoute(controllers.NoResponse)
 
