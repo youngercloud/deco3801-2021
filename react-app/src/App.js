@@ -5,13 +5,10 @@ import SignUpPage from "./Page/SignUpPage/SignUpPage";
 import UserPage from "./Compoments/User";
 import MainPage from "./Page/MainPage/MainPage";
 import cookie from "react-cookies";
-import Key from "./privateData.json"
+
 let key = require('./privateData.json');
-console.log(key)
-console.log(key[0].keyTranslate);
 
-
-const googleTranslate = require("google-translate")(Key[0].keyTranslate);
+const googleTranslate = require("google-translate")(key[0].keyTranslate);
 
 class App extends Component {
     state = {
@@ -43,11 +40,11 @@ class App extends Component {
             //     {/*<LoginPage/>*/}
             //     {/*<SignUpPage/>*/}
             //     {/*<UserPage/>*/}
-            //     {/*<MainPage/>*/}
+            //     <MainPage/>
             // </div>
             <div style={this.divStyle}>
                 <button>Translate it!</button>
-
+                
                 <p>{question}</p>
 
                 {/* iterate through language options to create a select box */}
