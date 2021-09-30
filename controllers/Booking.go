@@ -3,6 +3,7 @@ package controllers
 import (
 	_ "database/sql"
 	"deco3801/models"
+	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-playground/validator/v10/translations/en"
@@ -13,7 +14,7 @@ import (
 	"strings"
 )
 
-func Booking(c *gin.Context)  {
+func BookingInsert(c *gin.Context)  {
 	var db = models.InitDB()
 	var booking models.Booking
 	err := c.Bind(&booking)
@@ -59,12 +60,6 @@ type InputData struct{
 	Language string
 }
 
-type searchReData struct {
-	Gp models.HospitalGp
-	Language []string
-	Distance string
-	Images models.Image
-}
 
 
 // HandleGpSearch This is the function that transfer the data of gp searching to front-end/**
@@ -83,6 +78,15 @@ func HandleGpSearch(c *gin.Context)  {
 	})
 }
 
+type searchReData struct {
+	Gp models.HospitalGp
+	Language []string
+	Distance string
+	Images models.Image
+	GpImages []models.Image
+	DocInfos []DocInfo
+}
+
 /**
 This is the function that return the data of gp searching in booking interface
  */
@@ -96,20 +100,20 @@ func gPSearch(data InputData) []*searchReData {
 
 	//去除首尾空格
 	data.Input = strings.TrimSpace(data.Input)
-	if &data.Input != nil || &data.Language != nil {
+	if data.Input != "" || data.Language != "" {
 		command += " WHERE"
 	}
 
 	//Step 1: Get all the Gp that match the input data
-	if &data.Input != nil {
+	if data.Input != "" {
 		if checkedPost(data.Input) {
 			command += " post_code = ?"
 		} else {
 			//以后可能会变为模糊搜索
 			command += " gp_name = ?"
 		}
-		db.Raw(command, data.Input).Find(&GpInformation)
 	}
+	db.Raw(command, data.Input).Find(&GpInformation)
 
 	//Step 2: Get the corresponding languages and distance of each gp
 	for _, gp := range GpInformation {
@@ -117,7 +121,9 @@ func gPSearch(data InputData) []*searchReData {
 		eachData.Gp = gp
 		//language
 		var language []string
-		for _, doctor := range findDocByGp(db, gp.GpName) {
+		var doctors []models.Doctor
+		db.Where("clinic_or_hospital = ?", gp.GpName).Find(&doctors)
+		for _, doctor := range doctors {
 			if !isContain(doctor.Language, language) {
 				language = append(language, doctor.Language)
 			}
@@ -125,7 +131,9 @@ func gPSearch(data InputData) []*searchReData {
 		eachData.Language = language
 		//distance int -> string
 		eachData.Distance = strconv.Itoa(calDistance(myLocationX, myLocationY, gp.LocationX, gp.LocationY))
-		eachData.Images = MainImage(GetImages(models.GP, gp.GpName, *db))
+		eachData.Images = GetImages(models.GP, gp.GpName, 1, *db)[0]
+		eachData.GpImages = GetImages(models.GP, gp.GpName, 0, *db)
+		eachData.DocInfos = HandleDocSearch(gp.GpName, *db)
 		dataList = append(dataList, &eachData)
 	}
 	for i, eachData := range dataList {
@@ -149,21 +157,23 @@ func gPSearch(data InputData) []*searchReData {
 	return dataList
 }
 
-/**
-Find all the doctors that belongs to the given Gp Name
- */
-func findDocByGp(db *gorm.DB, GpName string) []models.Doctor {
-	var doctors []models.Doctor
-	db.Raw("SELECT * FROM doctors WHERE clinic_or_hospital = ?", GpName).Find(&doctors)
-	return doctors
+func GetBookings(c *gin.Context) {
+	var db = models.InitDB()
+	var userName string
+	var bookings []models.Booking
+	err := c.Bind(&userName)
+	if err != nil {
+		fmt.Println("error booking require")
+	}
+
+	err = db.Where("name = ? ",userName).Find(&bookings).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		fmt.Println("There is no Gp")
+	} else{
+		c.JSON(200, gin.H{
+			"myBookings": bookings,
+		})
+	}
 }
 
-func isContain(data string, dataList []string) bool{
-	for _, str := range dataList {
-		if data == str {
-			return true
-		}
-	}
-	return false
-}
 

@@ -38,15 +38,17 @@ type Doctor struct {
 	Language string `gorm:"size:256"`
 }
 
-
 type Booking struct {
 	BaseModel
-	DoctorID uint
-	Doctor Doctor
-	Date time.Time
-	UserID uint
-	User User
-	AcceptOrNot bool
+	UserId int `gorm:"not null;size:256"`
+	UserName string `gorm:"not null;size:256"`
+	GpName string `gorm:"not null;size:256"`
+	GpAddr string `gorm:"not null;size:256"`
+	DocName string `gorm:"not null;size:256"`
+	DocLang string `gorm:"not null;size:256"`
+	DocGender string `gorm:"not null;size:256"`
+	DocEmail string `gorm:"not null;size:256"`
+	BookTime string `gorm:"not null;size:256"`
 }
 
 type HospitalGp struct {

@@ -13,6 +13,7 @@ body {
     width: 50%;
     margin-left: 25%;
     margin-bottom: 2%;
+    font-size: 50px;
 }
 
 .steps p{
@@ -95,6 +96,16 @@ body {
     font-size: 20px;
     color: #FFFFFF;
     font-weight: bold;
+}
+
+#ni{
+    color: royalblue;
+    white-space: pre-line;
+}
+
+.ant-steps-item-icon .ant-steps-icon{
+    top:8px;
+    left: 11px;
 }
 
 

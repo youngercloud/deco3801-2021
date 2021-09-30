@@ -2,19 +2,27 @@ package controllers
 
 import (
 	"deco3801/models"
-	"github.com/gin-gonic/gin"
-	"net/http"
+	"gorm.io/gorm"
 )
 
-func GetAvailableDoctor(c *gin.Context)  {
-	type Result struct {
-		ID uint
-		FirstName string
-		LastName string
-	}
-	var docs []Result
-	var db = models.InitDB()
-	db.Table("doctors").Select([]string{"id", "first_name", "last_name"}).Limit(3).Scan(&docs)
-	c.JSON(http.StatusOK, docs)
+type DocInfo struct {
+	Doctor models.Doctor
+	Image []models.Image
 }
 
+func HandleDocSearch(gpName string, db gorm.DB) []DocInfo {
+	var docInfos []DocInfo
+	var doctors []models.Doctor
+	db.Where("clinic_or_hospital = ?", gpName).Find(&doctors)
+
+	for _, doctor := range doctors {
+		var images []models.Image
+		var docInfo DocInfo
+		db.Where("owner_name = ? AND type = ?", doctor.FirstName + " " + doctor.LastName, models.DOCTOR).Find(&images)
+		docInfo.Doctor = doctor
+		docInfo.Image = images
+		docInfos = append(docInfos, docInfo)
+	}
+
+	return docInfos
+}

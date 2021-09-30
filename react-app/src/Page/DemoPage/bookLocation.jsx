@@ -117,6 +117,7 @@ export default class bookLocation extends Component {
                 {/*<p>Select1: {this.state.distanceSelect}</p>*/}
                 {/*<p>Select2: {this.state.languageSelect}</p>*/}
                 <div className="cards">
+
                     <Row gutter={[48, 48]} >
 
                         {/*<Col span={9}>*/}
@@ -163,7 +164,6 @@ export default class bookLocation extends Component {
                     {/*</Row>*/}
                 </div>
             </div>
-
         );
     }
 }

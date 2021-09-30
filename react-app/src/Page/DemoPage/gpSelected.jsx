@@ -18,6 +18,7 @@ const MyIcon = createFromIconfontCN({
 });
 
 
+
 export default class gpSelected extends Component {
 
     gpSelected(info,e){
@@ -29,12 +30,9 @@ export default class gpSelected extends Component {
             <div className="gp">
                 <div className="steps">
                     <Steps current={0}>
-                        <Step  title="Location" icon={<CompassOutlined
-                            style={{fontSize: 20, position: "relative", left: '13px', top: '7px'}}/>} />
-                        <Step  title="Doctor" icon={<UserOutlined
-                            style={{fontSize: 20, position: "relative", left: '13px', top: '7px'}}/>} />
-                        <Step title="Time" icon={<FieldTimeOutlined
-                            style={{fontSize: 20, position: "relative", left: '13px', top: '7px'}}/>} />
+                        <Step title="Location"  />
+                        <Step title="Doctor"  />
+                        <Step title="Time"  />
                     </Steps>
 
                 </div>
