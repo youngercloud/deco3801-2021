@@ -3,6 +3,7 @@ package controllers
 import (
 	_ "database/sql"
 	"deco3801/models"
+	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-playground/validator/v10/translations/en"
@@ -13,7 +14,7 @@ import (
 	"strings"
 )
 
-func Booking(c *gin.Context)  {
+func BookingInsert(c *gin.Context)  {
 	var db = models.InitDB()
 	var booking models.Booking
 	err := c.Bind(&booking)
@@ -117,7 +118,9 @@ func gPSearch(data InputData) []*searchReData {
 		eachData.Gp = gp
 		//language
 		var language []string
-		for _, doctor := range findDocByGp(db, gp.GpName) {
+		var doctors []models.Doctor
+		db.Where("clinic_or_hospital = ?", gp.GpName).Find(&doctors)
+		for _, doctor := range doctors {
 			if !isContain(doctor.Language, language) {
 				language = append(language, doctor.Language)
 			}
@@ -149,21 +152,50 @@ func gPSearch(data InputData) []*searchReData {
 	return dataList
 }
 
-/**
-Find all the doctors that belongs to the given Gp Name
- */
-func findDocByGp(db *gorm.DB, GpName string) []models.Doctor {
-	var doctors []models.Doctor
-	db.Raw("SELECT * FROM doctors WHERE clinic_or_hospital = ?", GpName).Find(&doctors)
-	return doctors
+// HandleGpRequire Transfer the gp information back to front end
+func HandleGpRequire(c *gin.Context)  {
+	var db = models.InitDB()
+	var gpName string
+	var GP models.HospitalGp
+	var images []models.Image
+	err := c.Bind(&gpName)
+	if err != nil {
+		fmt.Println("error booking require")
+	}
+
+	err = db.Where("gp_name = ? ",gpName).First(&GP).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		fmt.Println("There is no Gp")
+	}
+
+	err = db.Where("owner_name = ? AND type = ?",gpName, models.GP).Find(&images).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		fmt.Println("There is no images of this Gp")
+	} else{
+		c.JSON(200, gin.H{
+			"gpInfo": GP,
+			"images": images,
+		})
+	}
 }
 
-func isContain(data string, dataList []string) bool{
-	for _, str := range dataList {
-		if data == str {
-			return true
-		}
+func GetBookings(c *gin.Context) {
+	var db = models.InitDB()
+	var userName string
+	var bookings []models.Booking
+	err := c.Bind(&userName)
+	if err != nil {
+		fmt.Println("error booking require")
 	}
-	return false
+
+	err = db.Where("name = ? ",userName).Find(&bookings).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		fmt.Println("There is no Gp")
+	} else{
+		c.JSON(200, gin.H{
+			"myBookings": bookings,
+		})
+	}
 }
+
 

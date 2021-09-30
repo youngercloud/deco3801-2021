@@ -8,6 +8,15 @@ import (
 	"gorm.io/gorm"
 )
 
+func isContain(data string, dataList []string) bool{
+	for _, str := range dataList {
+		if data == str {
+			return true
+		}
+	}
+	return false
+}
+
 //Inserting to databases
 
 //InsertImage Insert images
@@ -103,9 +112,28 @@ func FakeGp() {
 	}
 }
 
+// FakeBooking  Insert fake book information
+func FakeBooking()  {
+	var db = models.InitDB()
+	var data models.Booking
+	data.UserName = "Kaipeng Zhang"
+	data.UserId = 6
+	data.BookTime = "09/30/2021"
+	data.GpName = "SB clinic"
+	data.DocName = "Weijia Tang"
+	data.DocEmail = "weijiaT@gmail.com"
+	data.DocGender = "Unknown"
+	data.DocLang = "Chinese"
+	data.GpAddr = "Scape Mars"
+
+	if err := db.Create(&data).Error; err != nil {
+		fmt.Println("error!")
+	}
+}
+
 func FakeCreateTable() {
 	var db = models.InitDB()
-	err := db.AutoMigrate(&models.Image{})
+	err := db.AutoMigrate(&models.Booking{})
 	if err != nil {
 		return 
 	}
