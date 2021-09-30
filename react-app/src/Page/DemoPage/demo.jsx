@@ -29,6 +29,7 @@ class demo extends Component {
         collapsed: true,
         showElem:'1',
         gp:null,
+        bookingStep:null,
     };
 
     toggle = () => {
@@ -46,9 +47,13 @@ class demo extends Component {
         this.props.history.push("/login")
     }
 
-    gpSelected(info){
+    gpSelected(info,e){
         this.setState({gp:info})
+        this.setState({ bookingStep:e})
+
     }
+
+
 
     render() {
         return (
@@ -117,11 +122,21 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.showElem==='2' && this.state.gp === null ? <Location gpSelected={(info)=>{this.gpSelected(info)}}/> : null
+                                this.state.showElem==='2' && this.state.gp === null ? <Location gpSelected={(info,e)=>{this.gpSelected(info,e)}}/> : null
                             }
 
                             {
-                                this.state.showElem==='2' && this.state.gp !== null ? <GpSelected name={this.state.gp}/> : null
+                                this.state.bookingStep==="GpSelected" ? <GpSelected gpSelected={(info,e)=>{this.gpSelected(info,e)}} name={this.state.gp}/> : null
+                            }
+
+
+
+                            {
+                                this.state.bookingStep==="doctor" ? <p>this is doctor page</p> : null
+                            }
+
+                            {
+                                this.state.bookingStep==="backHome" ? <Location gpSelected={(info,e)=>{this.gpSelected(info,e)}}/> : null
                             }
 
                             {
@@ -131,11 +146,6 @@ class demo extends Component {
                             {
                                 this.state.showElem==='3' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
                             }
-
-
-
-
-
 
                         </Content>
                     </Layout>

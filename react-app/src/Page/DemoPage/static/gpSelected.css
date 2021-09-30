@@ -12,6 +12,7 @@ body {
 .steps{
     width: 50%;
     margin-left: 25%;
+    margin-bottom: 2%;
 }
 
 .steps p{
@@ -24,14 +25,16 @@ body {
 }
 
 .gpIntroduction{
-
-    min-height: 100%;
+    min-height: inherit;
 }
 
 .imagePart{
     float: left;
     width: 50%;
+}
 
+.imagePart img{
+    width: 90%;
 }
 
 .imagePart .ant-col {
@@ -65,6 +68,35 @@ body {
     font-size: 15px ;
     font-weight: normal;
     text-align: left;
-    background-color: red;
+    word-wrap: break-word;
+    word-break: break-all;
 }
+
+.ant-steps-item-tail {
+    background-color: royalblue;
+}
+
+.changePage{
+    float: left;
+    margin-left: 50%;
+    margin-top: 8%;
+    width: 100%;
+}
+
+.changePage button{
+
+    width: 35%;
+    background-color: #354E57;
+    margin-right: 60px;
+}
+
+.changePage button p{
+    padding-top: 3px;
+    font-size: 20px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+
+
 

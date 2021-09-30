@@ -28,7 +28,8 @@ export default class bookLocation extends Component {
         distanceMin:'0',
         distanceMax:'9999',
         language:'',
-        distanceSelect: undefined
+        distanceSelect: undefined,
+        getInfo:'false',
     }
     handleGetInputValue = (event) => {
         this.setState({
@@ -51,7 +52,7 @@ export default class bookLocation extends Component {
     };
 
     gpSelected(info){
-        this.props.gpSelected(info)
+        this.props.gpSelected(info,"GpSelected")
     }
 
     submit = (e) => {
@@ -73,15 +74,16 @@ export default class bookLocation extends Component {
             this.info = arr2.map((d) =>
                 <Col span={9} >
                     <Card>
-                        {console.log(d.Images.Path)}
-
+                        {console.log(d.Gp.GpName)}
                         <img alt="example" src={require('../../Images/'+d.Images.Path).default} style={{width:177,float:"left"}}/>
                         <h2>{d.Distance}</h2>
                         <h2>{d.Language}</h2>
-                        <Button  onClick={() => {this.gpSelected(d.name)}}>$65 - Consultation</Button>
+                        <h2>{d.Gp.GpName}</h2>
+                        <Button  onClick={() => {this.gpSelected(d)}}>$65 - Consultation</Button>
                     </Card>
                 </Col>
             );
+            this.setState({getInfo:'true'});
 
         }).catch(function (error) {
             console.log(error);
@@ -115,28 +117,28 @@ export default class bookLocation extends Component {
                 {/*<p>Select1: {this.state.distanceSelect}</p>*/}
                 {/*<p>Select2: {this.state.languageSelect}</p>*/}
                 <div className="cards">
-                    <Row gutter={[48, 48]} justify="center">
+                    <Row gutter={[48, 48]} >
 
-                        <Col span={9}>
-                            <Card >
+                        {/*<Col span={9}>*/}
+                        {/*    <Card >*/}
+                        {/*        <img alt="example" src={require('../../Images/gp1.png').default} style={{width:177,float:"left"}}/>*/}
 
-                                <img alt="example" src={require('../../Images/gp1.png').default} style={{width:177,float:"left"}}/>
+                        {/*        <h1>AAAAA CLINIC</h1>*/}
+                        {/*        <h2>distances:</h2>*/}
+                        {/*        <h2>language:</h2>*/}
+                        {/*        <Button  onClick={() => {this.gpSelected("AAAAA CLINIC")}}>$65 - Consultation</Button>*/}
+                        {/*    </Card>*/}
+                        {/*</Col>*/}
+                        {/*<Col span={9}>*/}
+                        {/*    <Card >*/}
+                        {/*        <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{width:177,float:"left"}}/>*/}
+                        {/*        <h1>AAAAA CLINIC</h1>*/}
+                        {/*        <h2>distances:</h2>*/}
+                        {/*        <h2>language:</h2>*/}
+                        {/*        <Button>$65 - Consultation</Button>*/}
+                        {/*    </Card>*/}
+                        {/*</Col>*/}
 
-                                <h1>AAAAA CLINIC</h1>
-                                <h2>distances:</h2>
-                                <h2>language:</h2>
-                                <Button  onClick={() => {this.gpSelected("AAAAA CLINIC")}}>$65 - Consultation</Button>
-                            </Card>
-                        </Col>
-                        <Col span={9}>
-                            <Card >
-                                <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{width:177,float:"left"}}/>
-                                <h1>AAAAA CLINIC</h1>
-                                <h2>distances:</h2>
-                                <h2>language:</h2>
-                                <Button>$65 - Consultation</Button>
-                            </Card>
-                        </Col>
                         {this.info}
                     </Row>
                     {/*<Row gutter={[48, 48]} justify="center">*/}

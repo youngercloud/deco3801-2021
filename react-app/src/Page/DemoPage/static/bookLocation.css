@@ -87,7 +87,9 @@ body {
     font-size: 15px;
     color: #FFFFFF;
     border: none;
-
+}
+.cards{
+    margin-left: 20%;
 }
 
 
