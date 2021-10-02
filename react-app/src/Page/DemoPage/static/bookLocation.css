@@ -55,6 +55,7 @@ body {
 
 
 .ant-card-body{
+    /*background-color: #FAFAFA;*/
     background-color: #FAFAFA;
     margin-bottom: 50px;
 }
@@ -82,11 +83,16 @@ body {
 }
 
 .ant-card-body button {
-    float: left;
-    width: 50%;
+    width: 40%;
     font-size: 15px;
     color: #FFFFFF;
     border: none;
+}
+
+.ant-card-body button p{
+    color: #FFFFFF;
+    font-size: 14px;
+    padding-top: 1px !important;
 }
 .cards{
     margin-left: 20%;
