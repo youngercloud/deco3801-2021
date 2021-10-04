@@ -35,7 +35,7 @@ export default class doctorPage extends Component {
         const doctorInfo = this.props.name.DocInfos.map((doctor)=>(
             <Col span={7}>
                 <Card onClick={(e) => {this.changeColor(e)
-                                        this.doctorSelect(doctor.Doctor.ID)}  } >
+                                        this.doctorSelect(doctor)}  } >
                     <img alt="example" src={require('../../Images/gp1.png').default} style={{width:177,}}/>
                     <h1>{doctor.Doctor.LastName}</h1>
                     <h2>{doctor.Doctor.Gender}</h2>

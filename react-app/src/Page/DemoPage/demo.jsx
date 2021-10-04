@@ -6,10 +6,11 @@ import {Affix, Breadcrumb, Button, Layout, Menu} from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
 import Location from "./bookLocation";
 import Language from "../MainPage/Language";
-import Time from "../MainPage/Time";
+
 import GpSelected from "./gpSelected";
 import MyAccount from "./MyAccountPage"
 import DoctorSelect from "./doctorPage"
+import Time from "./time"
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -30,7 +31,7 @@ class demo extends Component {
         collapsed: true,
         showElem:'1',
         gp:null,
-        doctorId:null,
+        doctor:null,
         bookingStep:null,
     };
 
@@ -49,10 +50,10 @@ class demo extends Component {
         this.props.history.push("/login")
     }
 
-    gpSelected(info,e,doctorId){
+    gpSelected(info,e,doctor){
         this.setState({gp:info})
         this.setState({ bookingStep:e})
-        this.setState({ doctorId:doctorId})
+        this.setState({ doctor:doctor})
     }
 
 
@@ -118,7 +119,7 @@ class demo extends Component {
 
                             }}
                         >
-                            <h1>doctor：{this.state.doctorId}</h1>
+
 
                             {
                                 this.state.showElem==='1' ? <Language/>: null
@@ -133,7 +134,11 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.bookingStep==="doctor" ? <DoctorSelect gpSelected={(info,e,doctorId)=>{this.gpSelected(info,e,doctorId)}} name={this.state.gp}/> : null
+                                this.state.bookingStep==="doctor" ? <DoctorSelect gpSelected={(info,e,doctor)=>{this.gpSelected(info,e,doctor)}} name={this.state.gp}/> : null
+                            }
+
+                            {
+                                this.state.bookingStep==="time" ? <Time gpSelected={(info,e,doctor)=>{this.gpSelected(info,e,doctor)}} name={this.state.doctor} doctor={this.state.doctor}/>: null
                             }
 
                             {
