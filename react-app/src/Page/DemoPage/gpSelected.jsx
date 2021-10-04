@@ -29,7 +29,7 @@ export default class gpSelected extends Component {
         return (
             <div className="gp">
                 <div className="steps">
-                    <Steps current={1}>
+                    <Steps current={0}>
                         <Step title="Location"  />
                         <Step title="Doctor"  />
                         <Step title="Time"  />

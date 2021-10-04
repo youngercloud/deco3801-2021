@@ -9,6 +9,7 @@ import Language from "../MainPage/Language";
 import Time from "../MainPage/Time";
 import GpSelected from "./gpSelected";
 import MyAccount from "./MyAccountPage"
+import DoctorSelect from "./doctorPage"
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -29,6 +30,7 @@ class demo extends Component {
         collapsed: true,
         showElem:'1',
         gp:null,
+        doctorId:null,
         bookingStep:null,
     };
 
@@ -47,10 +49,10 @@ class demo extends Component {
         this.props.history.push("/login")
     }
 
-    gpSelected(info,e){
+    gpSelected(info,e,doctorId){
         this.setState({gp:info})
         this.setState({ bookingStep:e})
-
+        this.setState({ doctorId:doctorId})
     }
 
 
@@ -116,6 +118,7 @@ class demo extends Component {
 
                             }}
                         >
+                            <h1>doctor：{this.state.doctorId}</h1>
 
                             {
                                 this.state.showElem==='1' ? <Language/>: null
@@ -129,10 +132,8 @@ class demo extends Component {
                                 this.state.bookingStep==="GpSelected" ? <GpSelected gpSelected={(info,e)=>{this.gpSelected(info,e)}} name={this.state.gp}/> : null
                             }
 
-
-
                             {
-                                this.state.bookingStep==="doctor" ? <p>this is doctor page</p> : null
+                                this.state.bookingStep==="doctor" ? <DoctorSelect gpSelected={(info,e,doctorId)=>{this.gpSelected(info,e,doctorId)}} name={this.state.gp}/> : null
                             }
 
                             {
