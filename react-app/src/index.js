@@ -9,6 +9,7 @@ import Home from './Page/MainPage/MainPage';
 import SignUpPage from "./Page/SignUpPage/SignUpPage";
 import LoginPage from "./Page/LoginPage/LoginPage";
 import demo from "./Page/DemoPage/demo";
+import main from "./Page/MainPage/MainPage";
 
 
 ReactDOM.render(
@@ -20,6 +21,7 @@ ReactDOM.render(
             <Route  path="/home" component={Home}/>
             <Route path="/user123" component={User}/>
             <Route path="/demo" component={demo}/>
+            <Route path="/main" component={main}/>
         </Switch>
     </Router>,
     document.getElementById('root'));

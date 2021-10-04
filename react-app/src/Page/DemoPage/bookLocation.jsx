@@ -1,7 +1,7 @@
 
 import React, {Component} from "react";
 import "./static/bookLocation.css";
-import {Input, Select, Space, Cascader, Button, Col, Row} from 'antd';
+import {Input, Select, Space, Cascader, Button, Col, Row, Steps} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 
@@ -79,7 +79,7 @@ export default class bookLocation extends Component {
                         <h2>{d.Distance}</h2>
                         <h2>{d.Language}</h2>
                         <h2>{d.Gp.GpName}</h2>
-                        <Button  onClick={() => {this.gpSelected(d)}}>$65 - Consultation</Button>
+                        <Button  onClick={() => {this.gpSelected(d)}}><p>$65 - Consultation</p></Button>
                     </Card>
                 </Col>
             );

@@ -57,8 +57,8 @@ export default class gpSelected extends Component {
                             </Col>
                         </Row>
                         <div className="changePage" >
-                            <button onClick={() => {this.gpSelected(this.props.name,"backHome")}}><p>ddd</p></button>
-                            <button onClick={() => {this.gpSelected(this.props.name,"doctor")}}><p>ddd</p></button>
+                            <button onClick={() => {this.gpSelected(this.props.name,"backHome")}}><p>Back</p></button>
+                            <button onClick={() => {this.gpSelected(this.props.name,"doctor")}}><p>Continue</p></button>
                         </div>
                     </div>
 
