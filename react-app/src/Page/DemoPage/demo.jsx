@@ -11,6 +11,7 @@ import GpSelected from "./gpSelected";
 import MyAccount from "./MyAccountPage"
 import DoctorSelect from "./doctorPage"
 import Time from "./time"
+import Information from "./bookInformation"
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -33,6 +34,8 @@ class demo extends Component {
         gp:null,
         doctor:null,
         bookingStep:null,
+        time:null,
+        date:null,
     };
 
     toggle = () => {
@@ -50,10 +53,12 @@ class demo extends Component {
         this.props.history.push("/login")
     }
 
-    gpSelected(info,e,doctor){
+    gpSelected(info,e,doctor,date,time){
         this.setState({gp:info})
         this.setState({ bookingStep:e})
         this.setState({ doctor:doctor})
+        this.setState({ date:date})
+        this.setState({ time:time})
     }
 
 
@@ -138,11 +143,15 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.bookingStep==="time" ? <Time gpSelected={(info,e,doctor)=>{this.gpSelected(info,e,doctor)}} name={this.state.doctor} doctor={this.state.doctor}/>: null
+                                this.state.bookingStep==="time" ? <Time gpSelected={(info,e,doctor,date,time)=>{this.gpSelected(info,e,doctor,date,time)}} name={this.state.gp} doctor={this.state.doctor}/>: null
                             }
 
                             {
                                 this.state.bookingStep==="backHome" ? <Location gpSelected={(info,e)=>{this.gpSelected(info,e)}}/> : null
+                            }
+
+                            {
+                                this.state.bookingStep==="finish" ? <Information gpSelected={(info,e)=>{this.gpSelected(info,e)}} name={this.state.gp} doctor={this.state.doctor} date={this.state.date} time={this.state.time}/> : null
                             }
 
                             {

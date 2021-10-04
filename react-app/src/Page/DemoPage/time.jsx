@@ -1,57 +1,70 @@
 import React, {Component} from "react";
-import {Button, Col, DatePicker, Row, Space, TimePicker} from "antd";
+import {Button, Col, DatePicker, Row, Space, Steps, TimePicker} from "antd";
 import moment from "moment";
 import {LeftOutlined, RightOutlined} from "@ant-design/icons";
 import axios from "axios";
-
+const { Step } = Steps;
 export default class doctorPage extends Component {
-    state = {date: '',
-            time:'',};
+    state = {date: null,
+            time:null,};
 
     timeShow;
 
     onChangeDate=(now)=> {
         let time = new Date(now._d)
         let d = new Date(time);
-        let dateValue = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
-        let api;
-
-        api = "/api/date"
-
-        axios.post(api, dateValue).then((response) => {
-            if (response.data.creation === "true"){
-                this.setState({date:dateValue})
-                this.timeShow= <TimePicker defaultValue={moment('12:00', 'HH')}
-                                           format={'HH'+":00"}
-                                           onChange={(value)=>{
-                                               const timeString = moment(value).format("HH");
-                                               this.onChangeTime(timeString)
-                                           }}
-                />;
-            }else if (response.data.creation === "false"){
-                alert("sorry, this date is not available")
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
-
+        let dateValue = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
+        this.setState({date:dateValue})
+        // let api;
+        //
+        // api = "/api/date"
+        //
+        // axios.post(api, dateValue).then((response) => {
+        //     if (response.data.creation === "true"){
+        //         this.setState({date:dateValue})
+        //         this.timeShow= <TimePicker defaultValue={moment('12:00', 'HH')}
+        //                                    format={'HH'+":00"}
+        //                                    onChange={(value)=>{
+        //                                        const timeString = moment(value).format("HH");
+        //                                        this.onChangeTime(timeString)
+        //                                    }}
+        //         />;
+        //     }else if (response.data.creation === "false"){
+        //         alert("sorry, this date is not available")
+        //     }
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
 
     }
 
     onChangeTime=(now)=> {
-        let api;
-        api = "/api/time"
-        axios.post(api, now).then((response) => {
-            if (response.data.creation === "true"){
-                this.setState({time:now})
+        this.setState({time:now+":00"})
+        // let api;
+        // api = "/api/time"
+        // axios.post(api, now).then((response) => {
+        //     if (response.data.creation === "true"){
+        //         this.setState({time:now})
+        //
+        //     }else if (response.data.creation === "false"){
+        //         alert("sorry, this time is not available")
+        //     }
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
 
-            }else if (response.data.creation === "false"){
-                alert("sorry, this time is not available")
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
+    }
 
+    checkSelect(info,e,doctor,date,time){
+        if (date!=null && time != null){
+            this.gpSelected(info,e,doctor,date,time);
+        }else{
+            alert("please complete form")
+        }
+    }
+
+    gpSelected(info,e,doctor,date,time){
+        this.props.gpSelected(info,e,doctor,date,time)
     }
 
     render() {
@@ -72,36 +85,46 @@ export default class doctorPage extends Component {
 
         return (
             <div className="time-selection">
+                <div className="steps">
+                    <Steps current={2}>
+                        <Step title="Location"  />
+                        <Step title="Doctor"  />
+                        <Step title="Time"  />
+                    </Steps>
+                </div>
                 <Row className="time-selection-title">
                     <Col span={24}>
                         <span>Choose a time</span>
                     </Col>
 
-                    {this.state.time}
                 </Row>
                 <Row className="time-selection-body">
                     <Col span={24} className="time-selection-form">
                         <Space size="large" direction="vertical">
                             <DatePicker
-                                format="YYYY-MM-DD "
+                                format="YYYY/MM/DD "
                                 disabledDate={disabledDate}
                                 onChange={this.onChangeDate.bind(this)}
                             />
 
                             {this.timeShow}
-                            {/*<TimePicker defaultValue={moment('12:00', 'HH')}*/}
-                            {/*            format={'HH'+":00"}*/}
-                            {/*            onChange={(value)=>{*/}
-                            {/*                const timeString = moment(value).format("HH");*/}
-                            {/*                this.onChangeTime(timeString)*/}
-                            {/*            }}*/}
+                            <TimePicker format={'HH'+":00"}
+                                        onChange={(value)=>{
+                                            const timeString = moment(value).format("HH");
+                                            this.onChangeTime(timeString)
+                                        }}
 
-                            {/*/>*/}
+                            />
 
                         </Space>
                     </Col>
                 </Row>
+                <div >
+                    <button onClick={() => {this.gpSelected(this.props.name,"doctor",this.props.doctor)}}><p>Back</p></button>
 
+                    <button onClick={() => {this.checkSelect(this.props.name,"finish",this.props.doctor,this.state.date,this.state.time)}}><p>Continue</p></button>
+                    {/*<button onClick={() => {this.gpSelected(this.props.name,"finish",this.props.doctor,this.state.date,this.state.time)}}><p>Continue</p></button>*/}
+                </div>
             </div>
         )
     }
