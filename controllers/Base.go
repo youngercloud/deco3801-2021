@@ -76,11 +76,17 @@ func MainImage(images []models.Image) models.Image {
 func FakeCl() {
 	var db = models.InitDB()
 	var data models.Doctor
-	data.FirstName = "data7"
+	data.FirstName = "data8"
 	data.LastName = "testData"
 	data.Password = "1"
-	data.ClinicOrHospital = "test clinic1"
+	data.ClinicOrHospital = "1213 clinic"
 	data.Language = models.CN
+	data.AvailableTime.Monday = "9:00-17:00"
+	data.AvailableTime.Tuesday = "9:00-17:00"
+	data.AvailableTime.Wednesday = "9:00-17:00"
+	data.AvailableTime.Thursday = "9:00-17:00"
+	data.AvailableTime.Saturday = "9:00-17:00"
+	data.AvailableTime.Sunday = "9:00-17:00"
 
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
