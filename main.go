@@ -2,15 +2,13 @@ package main
 
 import (
 	"deco3801/controllers"
-	"deco3801/models"
 	"fmt"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
 func main()  {
-	//controllers.FakeCl()
-	models.InitDB()
+	//controllers.FakeBooking()
 	router:= gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 	api := router.Group("./api")

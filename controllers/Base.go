@@ -76,18 +76,18 @@ func MainImage(images []models.Image) models.Image {
 func FakeCl() {
 	var db = models.InitDB()
 	var data models.Doctor
-	data.FirstName = "data8"
-	data.LastName = "testData"
+	data.FirstName = "Han"
+	data.LastName = "Li"
 	data.Password = "1"
-	data.ClinicOrHospital = "1213 clinic"
-	data.Language = models.CN
-	data.AvailableTime.Monday = "9:00-17:00"
-	data.AvailableTime.Tuesday = "9:00-17:00"
-	data.AvailableTime.Wednesday = "9:00-17:00"
-	data.AvailableTime.Thursday = "9:00-17:00"
-	data.AvailableTime.Saturday = "9:00-17:00"
-	data.AvailableTime.Sunday = "9:00-17:00"
-
+	data.ClinicOrHospital = "NB clinic"
+	data.Language = models.EN
+	data.Monday = "9:00-17:00"
+	data.Tuesday = "9:00-17:00"
+	data.Wednesday = "9:00-17:00"
+	data.Thursday = "9:00-17:00"
+	data.Friday = "9:00-17:00"
+	data.Saturday = "9:00-17:00"
+	data.Sunday = "9:00-17:00"
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
 	}
@@ -97,9 +97,9 @@ func FakeCl() {
 func FakeImage() {
 	var db = models.InitDB()
 	var data models.Image
-	data.Path = "2.png"
+	data.Path = "3.png"
 	data.Name = "testData"
-	data.OwnerName = "1213 clinic"
+	data.OwnerName = "NB clinic"
 	data.Type = models.GP
 	data.IsMain = true
 
@@ -112,15 +112,20 @@ func FakeImage() {
 func FakeGp() {
 	var db = models.InitDB()
 	var data models.HospitalGp
-	data.GpName = "test clinic1"
+	data.GpName = "NB clinic"
 	data.PostCode = "4066"
-	data.LocationX = 4
-	data.LocationY = 4
-	data.Address = "d1"
-	data.About = "A1"
-	data.OpeningTime = "1"
+	data.LocationX = 6
+	data.LocationY = 6
+	data.Address = "Level 10/39 Sherwood Rd, Toowong QLD 4066"
+	data.About = "Proud to be a Better Medical Practice\nWe are excited to announce that our SmartClinics centres have now joined the Better Medical group of practices.\n\nBetter Medical operates 85 high-quality practices across Australia, which all have one thing in common – we want to be the best we can be for our patients.\n\nBeing part of the Better Medical Group provides our doctors and team members with many benefits, including more opportunities for professional development and better access to enhanced technologies, meaning we are better equipped and supported to help you.\n\nBetter still, the same doctors and staff who have always provided you with the highest standard of care will continue to do so in our clinics.\n\nFor more information about Better Medical, please visit"
 	data.Strengths = "1"
-
+	data.Monday = "9:00-17:00"
+	data.Tuesday = "9:00-17:00"
+	data.Wednesday = "9:00-17:00"
+	data.Thursday = "9:00-17:00"
+	data.Friday = "9:00-17:00"
+	data.Saturday = "9:00-17:00"
+	data.Sunday = "9:00-17:00"
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
 	}
@@ -131,10 +136,10 @@ func FakeBooking()  {
 	var db = models.InitDB()
 	var data models.Booking
 	data.UserName = "Kaipeng Zhang"
-	data.UserId = 6
-	data.BookTime = "09/30/2021"
-	data.GpName = "SB clinic"
-	data.DocName = "Weijia Tang"
+	data.UserId = 1
+	data.BookTime = "2021/09/30,14:00-15:00"
+	data.GpName = "NB clinic"
+	data.DocName = "Han Li"
 	data.DocEmail = "weijiaT@gmail.com"
 	data.DocGender = "Unknown"
 	data.DocLang = "Chinese"
@@ -147,7 +152,7 @@ func FakeBooking()  {
 
 func FakeCreateTable() {
 	var db = models.InitDB()
-	err := db.AutoMigrate(&models.Booking{})
+	err := db.AutoMigrate(&models.Doctor{})
 	if err != nil {
 		return 
 	}

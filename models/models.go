@@ -45,7 +45,7 @@ type Doctor struct {
 	PhoneNumber int `gorm:"size:256"`
 	ClinicOrHospital string `gorm:"size:256"`
 	Specialty     string `gorm:"size:256"`
-	AvailableTime AvailableTime
+	AvailableTime `gorm:"size:256"`
 	Language      string `gorm:"size:256"`
 }
 
@@ -56,9 +56,9 @@ type HospitalGp struct {
 	LocationX int `gorm:"not null;size:256"`
 	LocationY int `gorm:"not null;size:256"`
 	Address string `gorm:"not null;size:256"`
-	About string `gorm:"not null;size:256"`
-	OpeningTime string `gorm:"not null;size:256"`
+	About string `gorm:"not null;size:65536"`
 	Strengths string `gorm:"not null;size:256"`
+	AvailableTime `gorm:"size:256"`
 }
 
 type Booking struct {
@@ -106,7 +106,6 @@ func InitDB() *gorm.DB {
 	if err != nil {
 		println(err)
 	}
-	err = db.AutoMigrate(&User{}, &Doctor{}, &Booking{}, &HospitalGp{})
 	return db
 }
 
