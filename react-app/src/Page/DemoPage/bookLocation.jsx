@@ -23,6 +23,7 @@ const { Meta } = Card;
 
 export default class bookLocation extends Component {
     info;
+    languages;
     state={
         input: '',
         distanceMin:'0',
@@ -63,23 +64,36 @@ export default class bookLocation extends Component {
             console.log(response.data)
             const json = response.data;
             const arr = [];
+
             let arr2=[];
             Object.keys(json).forEach(function(key) {
                 arr.push(json[key]);
             });
-            {console.log(arr)}
 
             arr2=arr[0];
             {console.log(arr2)}
             this.info = arr2.map((d) =>
-                <Col span={9} >
+                <Col span={10} >
                     <Card>
-                        {console.log(d.Gp.GpName)}
-                        <img alt="example" src={require('../../Images/'+d.Images.Path).default} style={{width:177,float:"left"}}/>
-                        <h2>{d.Distance}</h2>
-                        <h2>{d.Language}</h2>
-                        <h2>{d.Gp.GpName}</h2>
-                        <Button  onClick={() => {this.gpSelected(d)}}><p>$65 - Consultation</p></Button>
+                        <div >
+                            <img alt="example" src={require('../../Images/'+d.Images.Path).default} />
+                        </div>
+
+                        <div>
+                            <h1>{d.Gp.GpName}</h1>
+                            <h2>Distance: {d.Distance} Kilometer</h2>
+                            <h2>Language:</h2>
+                       
+                            <Row>
+                                {d.Language.map(item=>(
+                                    <Col><p>{item} &nbsp;</p></Col>
+                                ))}
+                            </Row>
+
+                            <Button  onClick={() => {this.gpSelected(d)}}><p>$65 - Consultation</p></Button>
+                        </div>
+
+
                     </Card>
                 </Col>
             );

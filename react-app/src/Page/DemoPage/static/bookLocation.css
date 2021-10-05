@@ -56,15 +56,15 @@ body {
 
 .ant-card-body{
     /*background-color: #FAFAFA;*/
-    background-color: #FAFAFA;
+    background-color: #CECECE;
     margin-bottom: 50px;
+
 }
 
 .ant-card-body h1{
-    font-size: 32px;
+    font-size: 24px;
     color: #354E57;
     text-align: left;
-
 }
 
 .ant-card-body img{
@@ -74,6 +74,13 @@ body {
 .ant-card-body h2{
     text-align: left;
     font-size: 15px;
+    color: #354E57;
+}
+
+.ant-card-body p{
+
+    font-size: 13px;
+    font-weight: unset;
     color: #354E57;
 }
 
@@ -87,16 +94,28 @@ body {
     font-size: 15px;
     color: #FFFFFF;
     border: none;
+
 }
 
 .ant-card-body button p{
     color: #FFFFFF;
     font-size: 14px;
     padding-top: 1px !important;
+
+
 }
 .cards{
-    margin-left: 20%;
+    margin-left: 10%;
 }
+
+.cards img{
+    width:40%;
+    height: 100%;
+    float:left;
+    padding-top: 2%;
+}
+
+
 
 
 
