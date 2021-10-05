@@ -24,6 +24,16 @@ type User struct {
 	Nationality string `gorm:"size:256"`
 }
 
+type AvailableTime struct {
+	Monday string `gorm:"size:256"`
+	Tuesday string `gorm:"size:256"`
+	Wednesday string `gorm:"size:256"`
+	Thursday  string `gorm:"size:256"`
+	Friday    string `gorm:"size:256"`
+	Saturday string `gorm:"size:256"`
+	Sunday string `gorm:"size:256"`
+}
+
 type Doctor struct {
 	BaseModel
 	Password string `gorm:"not null;size:256"`
@@ -34,8 +44,21 @@ type Doctor struct {
 	Email string `gorm:"not null;size:256"`
 	PhoneNumber int `gorm:"size:256"`
 	ClinicOrHospital string `gorm:"size:256"`
-	Specialty string `gorm:"size:256"`
-	Language string `gorm:"size:256"`
+	Specialty     string `gorm:"size:256"`
+	AvailableTime `gorm:"size:256"`
+	Language      string `gorm:"size:256"`
+}
+
+type HospitalGp struct {
+	BaseModel
+	GpName string `gorm:"not null;size:256"`
+	PostCode string `gorm:"not null;size:256"`
+	LocationX int `gorm:"not null;size:256"`
+	LocationY int `gorm:"not null;size:256"`
+	Address string `gorm:"not null;size:256"`
+	About string `gorm:"not null;size:65536"`
+	Strengths string `gorm:"not null;size:256"`
+	AvailableTime `gorm:"size:256"`
 }
 
 type Booking struct {
@@ -51,17 +74,6 @@ type Booking struct {
 	BookTime string `gorm:"not null;size:256"`
 }
 
-type HospitalGp struct {
-	BaseModel
-	GpName string `gorm:"not null;size:256"`
-	PostCode string `gorm:"not null;size:256"`
-	LocationX int `gorm:"not null;size:256"`
-	LocationY int `gorm:"not null;size:256"`
-	Address string `gorm:"not null;size:256"`
-	About string `gorm:"not null;size:256"`
-	OpeningTime string `gorm:"not null;size:256"`
-	Strengths string `gorm:"not null;size:256"`
-}
 
 type ImageType int32
 
@@ -94,7 +106,6 @@ func InitDB() *gorm.DB {
 	if err != nil {
 		println(err)
 	}
-	err = db.AutoMigrate(&User{}, &Doctor{}, &Booking{}, &HospitalGp{})
 	return db
 }
 

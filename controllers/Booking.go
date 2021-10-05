@@ -106,13 +106,15 @@ func gPSearch(data InputData) []*searchReData {
 	//Step 1: Get all the Gp that match the input data
 	if data.Input != "" {
 		if checkedPost(data.Input) {
-			command += " WHERE post_code = ?"
+			command += " WHERE post_code LIKE ?"
 		} else {
 			//以后可能会变为模糊搜索
-			command += " WHERE gp_name = ?"
+			command += " WHERE gp_name LIKE ?"
 		}
+		db.Raw(command, "%" + data.Input + "%").Find(&GpInformation)
+	} else {
+		db.Raw(command).Find(&GpInformation)
 	}
-	db.Raw(command, data.Input).Find(&GpInformation)
 
 	//Step 2: Get the corresponding languages and distance of each gp
 	for _, gp := range GpInformation {
@@ -130,7 +132,12 @@ func gPSearch(data InputData) []*searchReData {
 		eachData.Language = language
 		//distance int -> string
 		eachData.Distance = strconv.Itoa(calDistance(myLocationX, myLocationY, gp.LocationX, gp.LocationY))
-		eachData.Images = GetImages(models.GP, gp.GpName, 1, *db)[0]
+		images := GetImages(models.GP, gp.GpName, 1, *db)
+		if len(images) == 0 {
+			eachData.Images = models.Image{}
+		} else {
+			eachData.Images = images[0]
+		}
 		eachData.GpImages = GetImages(models.GP, gp.GpName, 0, *db)
 		eachData.DocInfos = HandleDocSearch(gp.GpName, *db)
 		dataList = append(dataList, &eachData)
@@ -156,7 +163,7 @@ func gPSearch(data InputData) []*searchReData {
 	return dataList
 }
 
-func GetBookings(c *gin.Context) {
+func GetAvailability(c *gin.Context)  {
 	var db = models.InitDB()
 	var userName string
 	var bookings []models.Booking
@@ -164,14 +171,40 @@ func GetBookings(c *gin.Context) {
 	if err != nil {
 		fmt.Println("error booking require")
 	}
-
-	err = db.Where("name = ? ",userName).Find(&bookings).Error
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		fmt.Println("There is no Gp")
-	} else{
+	bookings = GetBookings(userName, *db)
+	if bookings != nil {
 		c.JSON(200, gin.H{
 			"myBookings": bookings,
 		})
+	}
+}
+
+func HandleGetBookings(c *gin.Context) {
+	//type doctorCons struct {
+	//	name string
+	//	data string
+	//}
+	//var db = models.InitDB()
+	//var userName string
+	//var info doctorCons
+	//var bookings []models.Booking
+	//err := c.Bind(&userName)
+	//if err != nil {
+	//	fmt.Println("error booking require")
+	//}
+	//bookings = GetBookings(userName, *db)
+	//
+
+}
+
+func GetBookings(userName string, db gorm.DB) []models.Booking {
+	var bookings []models.Booking
+	err := db.Where("name = ? ", userName).Find(&bookings).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		fmt.Println("There is no Gp")
+		return nil
+	} else {
+		return bookings
 	}
 }
 
