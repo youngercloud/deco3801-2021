@@ -79,20 +79,45 @@ body {
 
 .changePage{
     float: left;
-    margin-left: 50%;
-    margin-top: 8%;
     width: 100%;
 }
 
-.changePage button{
+.changePage .continueButton{
+    width: 70%;
+    background-color: #354E57 !important;
+    border-style: none;
+    border-radius: 6px;
 
-    width: 35%;
-    background-color: #354E57;
-    margin-right: 60px;
 }
 
-.changePage button p{
-    padding-top: 3px;
+.changePage .continueButton:hover{
+    background-color: #B9C1C4 !important;
+
+}
+
+
+
+.changePage .continueButton p{
+    padding-top: 10px;
+    font-size: 20px;
+    color: #FFFFFF !important;
+    font-weight: bold;
+}
+
+.backButton{
+    width: 70%;
+    background-color: #B9C1C4;
+    border-style: none;
+    border-radius: 6px;
+}
+
+.changePage .backButton:hover{
+    background-color: #354E57 !important;
+
+}
+
+.backButton p{
+    padding-top: 10px;
     font-size: 20px;
     color: #FFFFFF;
     font-weight: bold;

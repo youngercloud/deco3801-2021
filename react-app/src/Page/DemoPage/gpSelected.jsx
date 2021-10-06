@@ -56,10 +56,7 @@ export default class gpSelected extends Component {
                                 <Image src={gp1} />
                             </Col>
                         </Row>
-                        <div className="changePage" >
-                            <button onClick={() => {this.gpSelected(this.props.name,"backHome")}}><p>Back</p></button>
-                            <button onClick={() => {this.gpSelected(this.props.name,"doctor")}}><p>Continue</p></button>
-                        </div>
+
                     </div>
 
                     <div className="gpContent">
@@ -102,11 +99,28 @@ export default class gpSelected extends Component {
                         <Row>
                             <Col span={14} >
                                 <h3>Opening Time</h3>
-                                <p>{this.props.name.Gp.OpeningTime}</p>
+                                <p>Monday: {this.props.name.Gp.Monday}</p>
+                                <p>Tuesday: {this.props.name.Gp.Tuesday}</p>
+                                <p>Thursday: {this.props.name.Gp.Thursday}</p>
+                                <p>Friday: {this.props.name.Gp.Friday}</p>
+                                <p>Saturday: {this.props.name.Gp.Saturday}</p>
+                                <p>Sunday: {this.props.name.Gp.Sunday}</p>
                             </Col>
                         </Row>
                     </div>
+                    <div className="changePage" >
+                        <Row justify="center">
+                            <Col span={6}/>
+                            <Col span={5}>
+                                <button className="backButton"  onClick={() => {this.gpSelected(this.props.name,"backHome")}}><p>Back</p></button>
+                            </Col>
+                            <Col span={5}>
+                                <button className="continueButton" onClick={() => {this.gpSelected(this.props.name,"doctor")}}><p>Continue</p></button>
+                            </Col>
+                            <Col span={6}/>
+                        </Row>
 
+                    </div>
                 </div>
 
             </div>

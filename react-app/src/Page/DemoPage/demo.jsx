@@ -45,7 +45,11 @@ class demo extends Component {
     };
 
     handleClick(letter) {
+        if (letter===1 || letter===3){
+            this.setState({bookingStep:null})
+        }
         this.setState({ showElem: letter });
+
     }
 
     logout(){
@@ -74,7 +78,7 @@ class demo extends Component {
                                         <img src={logo} width={40}/>
                                         <p> welcome:</p> {sessionStorage.getItem('name')}
                                     </div>
-                                    <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize:28}}/>} onClick={() => this.handleClick("1")}>
+                                    <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize:28}}/>} onClick={() => this.handleClick("1")} >
                                         Medical Service
                                     </Menu.Item>
                                     <Menu.Item key="2" icon={<MyIcon type="icon-yuyue1" style={{fontSize:28}}/>} onClick={() => this.handleClick("2")}>
@@ -135,23 +139,23 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.bookingStep==="GpSelected" ? <GpSelected gpSelected={(info,e)=>{this.gpSelected(info,e)}} name={this.state.gp}/> : null
+                                this.state.showElem==='2' && this.state.bookingStep==="GpSelected" ? <GpSelected gpSelected={(info,e)=>{this.gpSelected(info,e)}} name={this.state.gp}/> : null
                             }
 
                             {
-                                this.state.bookingStep==="doctor" ? <DoctorSelect gpSelected={(info,e,doctor)=>{this.gpSelected(info,e,doctor)}} name={this.state.gp}/> : null
+                                this.state.showElem==='2' && this.state.bookingStep==="doctor" ? <DoctorSelect gpSelected={(info,e,doctor)=>{this.gpSelected(info,e,doctor)}} name={this.state.gp}/> : null
                             }
 
                             {
-                                this.state.bookingStep==="time" ? <Time gpSelected={(info,e,doctor,date,time)=>{this.gpSelected(info,e,doctor,date,time)}} name={this.state.gp} doctor={this.state.doctor}/>: null
+                                this.state.showElem==='2' && this.state.bookingStep==="time" ? <Time gpSelected={(info,e,doctor,date,time)=>{this.gpSelected(info,e,doctor,date,time)}} name={this.state.gp} doctor={this.state.doctor}/>: null
                             }
 
                             {
-                                this.state.bookingStep==="backHome" ? <Location gpSelected={(info,e)=>{this.gpSelected(info,e)}}/> : null
+                                this.state.showElem==='2' && this.state.bookingStep==="backHome" ? <Location gpSelected={(info,e)=>{this.gpSelected(info,e)}}/> : null
                             }
 
                             {
-                                this.state.bookingStep==="finish" ? <Information gpSelected={(info,e)=>{this.gpSelected(info,e)}} name={this.state.gp} doctor={this.state.doctor} date={this.state.date} time={this.state.time}/> : null
+                                this.state.showElem==='2' && this.state.bookingStep==="finish" ? <Information gpSelected={(info,e)=>{this.gpSelected(info,e)}} name={this.state.gp} doctor={this.state.doctor} date={this.state.date} time={this.state.time}/> : null
                             }
 
                             {
@@ -161,7 +165,6 @@ class demo extends Component {
                             {
                                 this.state.showElem==='3' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
                             }
-
                         </Content>
                     </Layout>
                 </Layout>
