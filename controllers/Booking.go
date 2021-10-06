@@ -90,8 +90,9 @@ type searchReData struct {
 /**
 This is the function that return the data of gp searching in booking interface
  */
-func gPSearch(data InputData) []*searchReData {
-	var dataList []*searchReData
+func gPSearch(data InputData) []searchReData {
+	var rawList []searchReData
+	//var dataList []*searchReData
 	var db = models.InitDB()
 	var myLocationX = 0
 	var myLocationY = 0
@@ -140,27 +141,36 @@ func gPSearch(data InputData) []*searchReData {
 		}
 		eachData.GpImages = GetImages(models.GP, gp.GpName, 0, *db)
 		eachData.DocInfos = HandleDocSearch(gp.GpName, *db)
-		dataList = append(dataList, &eachData)
+		rawList = append(rawList, eachData)
 	}
-	for i, eachData := range dataList {
+
+	for _, eachData := range rawList {
+		fmt.Println(eachData.Language)
+	}
+
+	//待测试
+	for i := 0; i < len(rawList); i++ {
 		//Filtering languages and distance of data list
 		//If not match then delete it from data list
-
 		//if language not match
 		if data.Language != "" {
-			if !isContain(data.Language, eachData.Language) {
-				dataList = append(dataList[:i], dataList[i+1:]...)
+			if !isContain(data.Language, rawList[i].Language) {
+				rawList = append(rawList[:i], rawList[i+1:]...)
+				i--
 				continue
 			}
 		}
 
 		//if distance not match
-		if eachData.Distance < data.DistanceMin || eachData.Distance > data.DistanceMax {
-			dataList = append(dataList[:i], dataList[i+1:]...)
+		if rawList[i].Distance < data.DistanceMin || rawList[i].Distance > data.DistanceMax {
+			rawList = append(rawList[:i], rawList[i+1:]...)
+			i--
 			continue
 		}
 	}
-	return dataList
+
+
+	return rawList
 }
 
 func GetAvailability(c *gin.Context)  {
