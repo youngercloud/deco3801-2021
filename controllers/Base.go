@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"strconv"
 )
 
 func isContain(data string, dataList []string) bool{
@@ -139,7 +138,7 @@ func FakeBooking()  {
 		var data models.Booking
 		data.UserName = "Kaipeng Zhang"
 		data.UserId = 1
-		data.BookTime = "2021/11/1," + strconv.Itoa(9) + ":00-" + strconv.Itoa(9 + 1) + ":00"
+		data.BookTime = "2021/11/2,09:00-10:00"
 		fmt.Println(data.BookTime)
 		data.GpName = "NB clinic"
 		data.DocName = "Han Li"

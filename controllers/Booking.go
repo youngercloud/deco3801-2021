@@ -291,50 +291,17 @@ func CheckDocTime(c *gin.Context)  {
 		fmt.Println("error booking search")
 		return
 	}
-
+	fmt.Println(info.Date + ","+ info.Time)
 	//日期格式需要一致
-	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " + info.LastName, "%" + info.Date + "%").Find(&bookings)
+	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " + info.LastName, "%" + info.Date + ","+ info.Time + "%").Find(&bookings)
+	fmt.Println(bookings)
 	if len(bookings) == 0 {
 		c.JSON(200, gin.H{
 			"validation": true,
 		})
-		return
-	}
-
-	//已经被book过的不重复的时间
-	var antiTimes []int
-	for _, each := range bookings {
-		antiTime, _ :=  strconv.Atoi(strings.Split(strings.Split(strings.Split(each.BookTime, ",")[1], "-")[0], ":")[0])
-		antiTimes = append(antiTimes, antiTime)
-	}
-
-	//找到医生可以被book的时间段，with特定日期
-	var doctor models.Doctor
-	db.Where("first_name = ? AND last_name = ? AND clinic_or_hospital = ?", info.FirstName, info.LastName, info.GpName).Find(&doctor)
-
-	minTime, _ :=  strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[0], ":")[0])
-	maxTime, _ :=  strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[1], ":")[0])
-
-	//算出医生可用时间的总合
-	var sum = 0
-	for i := minTime; i < maxTime; i++ {
-		sum += i
-	}
-
-	//算出查询当天的不可用时间
-	var antiSum = 0
-	for _, time := range antiTimes {
-		antiSum += time
-	}
-
-	//对比医生的时间与不可用时间是否一致，一致则表明当天被订满了
-	if sum == antiSum {
-		c.JSON(200, gin.H{
-			"validation": false,
-		})
 	} else {
 		c.JSON(200, gin.H{
-			"validation": true,
+			"validation": false,
 		})
 	}
 }
