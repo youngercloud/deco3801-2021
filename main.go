@@ -19,6 +19,7 @@ func main()  {
 		api.POST("/booking", controllers.BookingInsert)
 		api.POST("/booking/searchGp", controllers.HandleGpSearch)
 		api.POST("/date", controllers.CheckDocDate)
+		api.POST("/time", controllers.CheckDocTime)
 	}
 	router.NoRoute(controllers.NoResponse)
 

@@ -71,8 +71,6 @@ func HandleGpSearch(c *gin.Context)  {
 		return
 	}
 	var dataList = gPSearch(searchCond)
-	fmt.Print("datalist: ")
-	fmt.Println(dataList)
 	c.JSON(200, gin.H{
 		"data": dataList,
 	})
@@ -142,10 +140,6 @@ func gPSearch(data InputData) []searchReData {
 		eachData.GpImages = GetImages(models.GP, gp.GpName, 0, *db)
 		eachData.DocInfos = HandleDocSearch(gp.GpName, *db)
 		rawList = append(rawList, eachData)
-	}
-
-	for _, eachData := range rawList {
-		fmt.Println(eachData.Language)
 	}
 
 	//待测试
@@ -219,28 +213,29 @@ func GetBookings(userName string, db gorm.DB) []models.Booking {
 }
 
 func CheckDocDate(c *gin.Context)  {
-	type docInfo struct {
-		gpName string
-		FirstName string
+	type DocInfo struct {
+		Date string
+		GpName string
 		LastName string
-		time string
+		FirstName string
 	}
 	var db = models.InitDB()
-	var info docInfo
+	var info DocInfo
 	var bookings []models.Booking
 	err := c.Bind(&info)
 	if err != nil {
 		fmt.Println("error booking search")
 		return
 	}
-	//日期格式需要一致
-	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.gpName, info.FirstName + " " + info.LastName, info.time).Find(&bookings)
-	if bookings != nil {
-		c.JSON(200, gin.H{
-			"validation": false,
-		})
-	}
 
+	//日期格式需要一致
+	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " + info.LastName, "%" + info.Date + "%").Find(&bookings)
+	if len(bookings) == 0 {
+		c.JSON(200, gin.H{
+			"validation": true,
+		})
+		return
+	}
 
 	//已经被book过的不重复的时间
 	var antiTimes []int
@@ -251,7 +246,72 @@ func CheckDocDate(c *gin.Context)  {
 
 	//找到医生可以被book的时间段，with特定日期
 	var doctor models.Doctor
-	db.Where("first_name = ? AND last_name = ? AND clinic_or_hospital = ?", info.FirstName, info.LastName, info.gpName).Find(&doctor)
+	db.Where("first_name = ? AND last_name = ? AND clinic_or_hospital = ?", info.FirstName, info.LastName, info.GpName).Find(&doctor)
+
+	minTime, _ :=  strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[0], ":")[0])
+	maxTime, _ :=  strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[1], ":")[0])
+
+	//算出医生可用时间的总合
+	var sum = 0
+	for i := minTime; i < maxTime; i++ {
+		sum += i
+	}
+
+	//算出查询当天的不可用时间
+	var antiSum = 0
+	for _, time := range antiTimes {
+		antiSum += time
+	}
+
+	//对比医生的时间与不可用时间是否一致，一致则表明当天被订满了
+	if sum == antiSum {
+		c.JSON(200, gin.H{
+			"validation": false,
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"validation": true,
+		})
+	}
+}
+
+func CheckDocTime(c *gin.Context)  {
+	type DocInfo struct {
+		Date string
+		Time string
+		GpName string
+		LastName string
+		FirstName string
+	}
+	var db = models.InitDB()
+	var info DocInfo
+	var bookings []models.Booking
+	err := c.Bind(&info)
+	if err != nil {
+		fmt.Println("error booking search")
+		return
+	}
+
+	//日期格式需要一致
+	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " + info.LastName, "%" + info.Date + "%").Find(&bookings)
+	if len(bookings) == 0 {
+		c.JSON(200, gin.H{
+			"validation": true,
+		})
+		return
+	}
+
+	//已经被book过的不重复的时间
+	var antiTimes []int
+	for _, each := range bookings {
+		antiTime, _ :=  strconv.Atoi(strings.Split(strings.Split(strings.Split(each.BookTime, ",")[1], "-")[0], ":")[0])
+		antiTimes = append(antiTimes, antiTime)
+	}
+
+	//找到医生可以被book的时间段，with特定日期
+	var doctor models.Doctor
+	db.Where("first_name = ? AND last_name = ? AND clinic_or_hospital = ?", info.FirstName, info.LastName, info.GpName).Find(&doctor)
+
 	minTime, _ :=  strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[0], ":")[0])
 	maxTime, _ :=  strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[1], ":")[0])
 
