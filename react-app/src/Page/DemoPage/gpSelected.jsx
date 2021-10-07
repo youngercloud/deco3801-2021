@@ -14,12 +14,32 @@ import logo from "./static/logo.png";
 const { Step } = Steps;
 
 const MyIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_2823620_rzkgof69ww.js', // 在 iconfont.cn 上生成
+    scriptUrl: '//at.alicdn.com/t/font_2823620_rrtlotzyts.js', // 在 iconfont.cn 上生成
 });
 
 
 
 export default class gpSelected extends Component {
+    state = {
+        strength:"none",
+        time:"none",
+    };
+
+    onChangeStrength=()=> {
+        if (this.state.strength==="none"){
+            this.setState({strength:"block"})
+        }else{
+            this.setState({strength:"none"})
+        }
+    }
+
+    onChangeTime=()=> {
+        if (this.state.time==="none"){
+            this.setState({time:"block"})
+        }else{
+            this.setState({time:"none"})
+        }
+    }
 
     gpSelected(info,e){
         this.props.gpSelected(info,e)
@@ -84,10 +104,12 @@ export default class gpSelected extends Component {
                         <Row>
                             <Col span={14} >
                                 <h3>Strength</h3>
-                                <p>{this.props.name.Gp.Strengths}</p>
+                                <div style={{display: this.state.strength}}>
+                                    <p>{this.props.name.Gp.Strengths}</p>
+                                </div>
                             </Col>
                             <Col>
-                                {<MyIcon type="icon-searchforfiles" style={{fontSize:15,marginTop:5}}/>}
+                                 {<MyIcon type="icon-jia" onClick={() => {this.onChangeStrength()}} style={{fontSize:15,marginTop:5}} />}
                             </Col>
                         </Row>
                         <Row>
@@ -99,12 +121,18 @@ export default class gpSelected extends Component {
                         <Row>
                             <Col span={14} >
                                 <h3>Opening Time</h3>
-                                <p>Monday: {this.props.name.Gp.Monday}</p>
-                                <p>Tuesday: {this.props.name.Gp.Tuesday}</p>
-                                <p>Thursday: {this.props.name.Gp.Thursday}</p>
-                                <p>Friday: {this.props.name.Gp.Friday}</p>
-                                <p>Saturday: {this.props.name.Gp.Saturday}</p>
-                                <p>Sunday: {this.props.name.Gp.Sunday}</p>
+                                <div style={{display: this.state.time}}>
+                                    <p>Monday: {this.props.name.Gp.Monday}</p>
+                                    <p>Tuesday: {this.props.name.Gp.Tuesday}</p>
+                                    <p>Thursday: {this.props.name.Gp.Thursday}</p>
+                                    <p>Friday: {this.props.name.Gp.Friday}</p>
+                                    <p>Saturday: {this.props.name.Gp.Saturday}</p>
+                                    <p>Sunday: {this.props.name.Gp.Sunday}</p>
+                                </div>
+
+                            </Col>
+                            <Col>
+                                {<MyIcon onClick={() => {this.onChangeTime()}} type="icon-jia" style={{fontSize:15,marginTop:5}}/>}
                             </Col>
                         </Row>
                     </div>
