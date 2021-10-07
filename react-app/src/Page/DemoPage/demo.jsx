@@ -24,7 +24,7 @@ import {
 
 const { Header, Sider, Content } = Layout;
 const MyIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_2823620_rzkgof69ww.js', // 在 iconfont.cn 上生成
+    scriptUrl: '//at.alicdn.com/t/font_2823620_zamhq7x1cg.js', // 在 iconfont.cn 上生成
 });
 class demo extends Component {
 
@@ -96,10 +96,12 @@ class demo extends Component {
                     </Sider>
                     <div className="controlBar">
                         <Affix offsetTop={80}>
-                        {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                            className: 'trigger',
-                            onClick: this.toggle,
-                        })}
+                            {<MyIcon  onClick={() => {this.toggle()}} type="icon-huadong" style={{fontSize:15,marginTop:5}}/>}
+                        {/*{React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {*/}
+                        {/*    className: 'trigger',*/}
+                        {/*    onClick: this.toggle,*/}
+
+                        {/*})}*/}
                         </Affix>
                     </div>
                     <Layout className="site-layout">

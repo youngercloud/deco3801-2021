@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import "./static/doctorPage.css";
 import {Button, Card, Col, Row, Steps} from "antd";
+import gpSelected from "./gpSelected";
 const { Step } = Steps;
 
 
@@ -11,7 +12,7 @@ export default class doctorPage extends Component {
 
     }
 
-    state = {select: ''};
+    state = {select: null};
 
     changeColor = (e) => {
         this.rowRef.current.childNodes.forEach((re) => {
@@ -26,8 +27,15 @@ export default class doctorPage extends Component {
     }
 
     gpSelected(info,e){
-
         this.props.gpSelected(info,e,this.state.select)
+    }
+
+    doctorCheck(info,e){
+        if (this.state.select!=null){
+            this.gpSelected(info,e);
+        }else{
+            alert("please select a doctor")
+        }
     }
 
 
@@ -88,9 +96,17 @@ export default class doctorPage extends Component {
                     {/*    </Col>*/}
                     </Row>
                 </div>
-                <div >
-                    <button onClick={() => {this.gpSelected(this.props.name,"GpSelected")}}><p>Back</p></button>
-                    <button onClick={() => {this.gpSelected(this.props.name,"time")}}><p>Continue</p></button>
+                <div className="changePage">
+                    <Row justify="center">
+                        <Col span={6}/>
+                        <Col span={5}>
+                            <button className="backButton"  onClick={() => {this.gpSelected(this.props.name,"GpSelected")}}><p>Back</p></button>
+                        </Col>
+                        <Col span={5}>
+                            <button className="continueButton" onClick={() => {this.doctorCheck(this.props.name,"time")}}><p>Continue</p></button>
+                        </Col>
+                        <Col span={6}/>
+                    </Row>
                 </div>
             </div>
         )}

@@ -7,7 +7,7 @@ const { Step } = Steps;
 export default class doctorPage extends Component {
     state = {date: null,
             time:null,
-            clinic:this.props.name.Gp.GpName,
+            GpName:this.props.name.Gp.GpName,
             lastName:this.props.doctor.Doctor.LastName,
             firstName:this.props.doctor.Doctor.FirstName,
     };
@@ -24,7 +24,7 @@ export default class doctorPage extends Component {
         api = "/api/date"
 
         axios.post(api, this.state).then((response) => {
-            if (response.data.creation === "true"){
+            if (response.data.validation === "true"){
 
                 this.timeShow= <TimePicker defaultValue={moment('12:00', 'HH')}
                                            format={'HH'+":00"}
@@ -125,12 +125,19 @@ export default class doctorPage extends Component {
                         </Space>
                     </Col>
                 </Row>
-                <div >
-                    <button onClick={() => {this.gpSelected(this.props.name,"doctor",this.props.doctor)}}><p>Back</p></button>
-
-                    <button onClick={() => {this.checkSelect(this.props.name,"finish",this.props.doctor,this.state.date,this.state.time)}}><p>Continue</p></button>
-                    {/*<button onClick={() => {this.gpSelected(this.props.name,"finish",this.props.doctor,this.state.date,this.state.time)}}><p>Continue</p></button>*/}
+                <div className="changePage">
+                    <Row justify="center">
+                        <Col span={6}/>
+                        <Col span={5}>
+                            <button className="backButton"  onClick={() => {this.gpSelected(this.props.name,"doctor",this.props.doctor)}}><p>Back</p></button>
+                        </Col>
+                        <Col span={5}>
+                            <button className="continueButton" onClick={() => {this.checkSelect(this.props.name,"finish",this.props.doctor,this.state.date,this.state.time)}}><p>Continue</p></button>
+                        </Col>
+                        <Col span={6}/>
+                    </Row>
                 </div>
+
             </div>
         )
     }
