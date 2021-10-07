@@ -15,20 +15,63 @@ import (
 )
 
 func BookingInsert(c *gin.Context)  {
+	type Info struct {
+		GpName string
+		GpAddr string
+		FirstName string
+		LastName string
+		UserName string
+		UserPassword string
+		DocLang string
+		DocGender string
+		DocEmail string
+		Date string
+		Time string
+	}
 	var db = models.InitDB()
-	var booking models.Booking
-	err := c.Bind(&booking)
+	var info Info
+	var newBooking models.Booking
+	err := c.Bind(&info)
 	if err != nil {
 		return
 	}
-	if err := db.Create(&booking).Error; err != nil {
+	var user models.User
+	err = db.Where("name = ? AND password = ?", info.UserName, info.UserPassword).First(&user).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		fmt.Println("There is no result")
+		return
+	}
+	time, err := strconv.Atoi( strings.Split(info.Time, ":")[0])
+	if err != nil {
+
+		return 
+	}
+
+	newBooking.GpName = info.GpName
+	newBooking.DocName = info.FirstName + " " + info.LastName
+	newBooking.UserName = info.UserName
+	newBooking.UserId = int(user.ID)
+	newBooking.GpAddr = info.GpAddr
+	newBooking.DocLang = info.DocLang
+	newBooking.DocGender = info.DocGender
+	newBooking.DocEmail = info.DocEmail
+
+	if  0 <= time && time <= 8 {
+		newBooking.BookTime = info.Date + "," + "0" + strconv.Itoa(time) + ":00" + "-" + "0" + strconv.Itoa(time + 1) + ":00"
+	} else if time == 9 {
+		newBooking.BookTime = info.Date + "," + "0" + strconv.Itoa(time) + ":00" + "-" + strconv.Itoa(time + 1) + ":00"
+	} else {
+		newBooking.BookTime = info.Date + "," + strconv.Itoa(time) + ":00" + "-" + strconv.Itoa(time + 1) + ":00"
+	}
+
+	if err := db.Create(&newBooking).Error; err != nil {
 		c.JSON(200, gin.H{
-			"creation": "false",
+			"validation": false,
 		})
 		return
 	}
 	c.JSON(200, gin.H{
-		"creation": "true",
+		"validation": true,
 	})
 }
 
