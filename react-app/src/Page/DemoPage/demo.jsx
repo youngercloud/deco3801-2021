@@ -137,7 +137,11 @@ class demo extends Component {
                             }
 
                             {
-                                this.state.showElem==='2' && this.state.gp === null ? <Location gpSelected={(info,e)=>{this.gpSelected(info,e)}}/> : null
+                                this.state.showElem==='2' && sessionStorage.getItem('name')===null ? this.props.history.push("/login") : null
+                            }
+
+                            {
+                                this.state.showElem==='2' && this.state.gp === null && sessionStorage.getItem('name')!== null ? <Location gpSelected={(info,e)=>{this.gpSelected(info,e)}}/> : null
                             }
 
                             {
