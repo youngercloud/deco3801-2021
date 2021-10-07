@@ -37,11 +37,11 @@ export default class doctorPage extends Component {
                 <Card onClick={(e) => {this.changeColor(e)
                                         this.doctorSelect(doctor)}  } >
                     <img alt="example" src={require('../../Images/gp1.png').default} style={{width:177,}}/>
-                    <h1>{doctor.Doctor.LastName}</h1>
-                    <h2>{doctor.Doctor.Gender}</h2>
-                    <h2>{doctor.Doctor.Language}</h2>
-                    <h2>{doctor.Doctor.Specialty}</h2>
-                    <h2>introduction</h2>
+                    <h1>Name: {doctor.Doctor.LastName}</h1>
+                    <h2>Gender: {doctor.Doctor.Gender}</h2>
+                    <h2>Language: {doctor.Doctor.Language}</h2>
+                    <h2>Introduction: {doctor.Doctor.Specialty}</h2>
+
                 </Card>
             </Col>
         ));

@@ -14,7 +14,7 @@ import logo from "./static/logo.png";
 const { Step } = Steps;
 
 const MyIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_2823620_rzkgof69ww.js', // 在 iconfont.cn 上生成
+    scriptUrl: '//at.alicdn.com/t/font_2823620_rrtlotzyts.js', // 在 iconfont.cn 上生成
 });
 
 
@@ -84,10 +84,12 @@ export default class gpSelected extends Component {
                         <Row>
                             <Col span={14} >
                                 <h3>Strength</h3>
-                                <p>{this.props.name.Gp.Strengths}</p>
+                                <div style={{}}>
+                                    <p>{this.props.name.Gp.Strengths}</p>
+                                </div>
                             </Col>
                             <Col>
-                                {<MyIcon type="icon-searchforfiles" style={{fontSize:15,marginTop:5}}/>}
+                                {<MyIcon type="icon-jia" style={{fontSize:15,marginTop:5}}/>}
                             </Col>
                         </Row>
                         <Row>
@@ -105,6 +107,9 @@ export default class gpSelected extends Component {
                                 <p>Friday: {this.props.name.Gp.Friday}</p>
                                 <p>Saturday: {this.props.name.Gp.Saturday}</p>
                                 <p>Sunday: {this.props.name.Gp.Sunday}</p>
+                            </Col>
+                            <Col>
+                                {<MyIcon type="icon-jia" style={{fontSize:15,marginTop:5}}/>}
                             </Col>
                         </Row>
                     </div>

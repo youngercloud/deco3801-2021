@@ -6,7 +6,11 @@ import axios from "axios";
 const { Step } = Steps;
 export default class doctorPage extends Component {
     state = {date: null,
-            time:null,};
+            time:null,
+            clinic:this.props.name.Gp.GpName,
+            lastName:this.props.doctor.Doctor.LastName,
+            firstName:this.props.doctor.Doctor.FirstName,
+    };
 
     timeShow;
 
@@ -15,43 +19,45 @@ export default class doctorPage extends Component {
         let d = new Date(time);
         let dateValue = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
         this.setState({date:dateValue})
-        // let api;
-        //
-        // api = "/api/date"
-        //
-        // axios.post(api, dateValue).then((response) => {
-        //     if (response.data.creation === "true"){
-        //         this.setState({date:dateValue})
-        //         this.timeShow= <TimePicker defaultValue={moment('12:00', 'HH')}
-        //                                    format={'HH'+":00"}
-        //                                    onChange={(value)=>{
-        //                                        const timeString = moment(value).format("HH");
-        //                                        this.onChangeTime(timeString)
-        //                                    }}
-        //         />;
-        //     }else if (response.data.creation === "false"){
-        //         alert("sorry, this date is not available")
-        //     }
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
+        let api;
+
+        api = "/api/date"
+
+        axios.post(api, this.state).then((response) => {
+            if (response.data.creation === "true"){
+
+                this.timeShow= <TimePicker defaultValue={moment('12:00', 'HH')}
+                                           format={'HH'+":00"}
+                                           onChange={(value)=>{
+                                               const timeString = moment(value).format("HH");
+                                               this.onChangeTime(timeString)
+                                           }}
+                />;
+            }else if (response.data.creation === "false"){
+                this.setState({date:null})
+                alert("sorry, this date is not available")
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
 
     }
 
     onChangeTime=(now)=> {
         this.setState({time:now+":00"})
-        // let api;
-        // api = "/api/time"
-        // axios.post(api, now).then((response) => {
-        //     if (response.data.creation === "true"){
-        //         this.setState({time:now})
-        //
-        //     }else if (response.data.creation === "false"){
-        //         alert("sorry, this time is not available")
-        //     }
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
+        let api;
+        api = "/api/time"
+        axios.post(api, this.state).then((response) => {
+            if (response.data.creation === "true"){
+
+
+            }else if (response.data.creation === "false"){
+                this.setState({time:null})
+                alert("sorry, this time is not available")
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
 
     }
 
@@ -96,7 +102,7 @@ export default class doctorPage extends Component {
                     <Col span={24}>
                         <span>Choose a time</span>
                     </Col>
-
+                    {/*{console.log(this.state)}*/}
                 </Row>
                 <Row className="time-selection-body">
                     <Col span={24} className="time-selection-form">
@@ -108,13 +114,13 @@ export default class doctorPage extends Component {
                             />
 
                             {this.timeShow}
-                            <TimePicker format={'HH'+":00"}
-                                        onChange={(value)=>{
-                                            const timeString = moment(value).format("HH");
-                                            this.onChangeTime(timeString)
-                                        }}
+                            {/*<TimePicker format={'HH'+":00"}*/}
+                            {/*            onChange={(value)=>{*/}
+                            {/*                const timeString = moment(value).format("HH");*/}
+                            {/*                this.onChangeTime(timeString)*/}
+                            {/*            }}*/}
 
-                            />
+                            {/*/>*/}
 
                         </Space>
                     </Col>
