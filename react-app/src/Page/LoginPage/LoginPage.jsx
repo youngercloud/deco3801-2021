@@ -39,6 +39,7 @@ class LoginPage extends Component {
             axios.post(api, e).then((response) => {
                 if (response.data.validation === true){
                     sessionStorage.setItem("name",this.state.Name);
+                    sessionStorage.setItem("password",this.state.Password);
                     window.location.href = "http://localhost:3000/demo";
                 }else if (response.data.validation === false){
                     window.location.href = "http://localhost:3000/login";

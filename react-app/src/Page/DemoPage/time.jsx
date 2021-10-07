@@ -6,15 +6,20 @@ import axios from "axios";
 const { Step } = Steps;
 export default class doctorPage extends Component {
     state = {
-            date: "",
+
             GpName:this.props.name.Gp.GpName,
             lastName:this.props.doctor.Doctor.LastName,
             firstName:this.props.doctor.Doctor.FirstName,
-            time: "",
             demo:"none",
+            UserName:sessionStorage.getItem("name"),
+            UserPassword:sessionStorage.getItem("password"),
+            GpAddr: this.props.name.Gp.Address,
+            DocLang: this.props.doctor.Doctor.Language,
+            DocGender: this.props.doctor.Doctor.Gender,
+            DocEmail: this.props.doctor.Doctor.Email,
+            date: "",
+            time: "",
     };
-
-    timeShow;
 
     onChangeDate=(now)=> {
         let time = new Date(now._d)
@@ -53,7 +58,7 @@ export default class doctorPage extends Component {
         api = "/api/time"
         axios.post(api, this.state).then((response) => {
             if (response.data.validation === true){
-
+                this.setState({time:now+":00"})
 
             }else if (response.data.validation === false){
                 this.setState({time:""})
@@ -66,8 +71,20 @@ export default class doctorPage extends Component {
     }
 
     checkSelect(info,e,doctor,date,time){
-        if (date!="" && time != ""){
-            this.gpSelected(info,e,doctor,date,time);
+        if (date!=="" && time !== ""){
+            let api;
+            api = "/api/booking"
+            axios.post(api, this.state).then((response) => {
+                if (response.data.validation === true){
+                    console.log("send booking")
+                    this.gpSelected(info,e,doctor,date,time);
+                }else if (response.data.validation === false){
+                    alert("sorry, some errors happen")
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+
         }else{
             alert("please complete form")
         }
@@ -106,7 +123,7 @@ export default class doctorPage extends Component {
                     <Col span={24}>
                         <span>Choose a time</span>
                     </Col>
-
+                    {console.log(this.state)}
                 </Row>
                 <Row className="time-selection-body">
                     <Col span={24} className="time-selection-form">
