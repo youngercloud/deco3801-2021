@@ -1,7 +1,7 @@
 .booking-main {
   min-height: 800px;
   width: 100%;
-  background-color: #888;
+  background-color: #aaa;
 }
 .booking-space-justify {
   margin-top: 50px;
@@ -13,8 +13,11 @@
   /* Handle */
   /* Handle on hover */
   width: 88%;
-  height: 700px;
+  height: 750px;
   border-radius: 10px;
+}
+.chat-area input[type="text"][disabled] {
+  color: #000;
 }
 .chat-area ::-webkit-scrollbar {
   width: 10px;
@@ -38,7 +41,7 @@
   overflow: auto;
 }
 .chat-area .chat-language-select {
-  height: 80px;
+  height: 60px;
   width: 60%;
   margin-left: 20%;
   -webkit-box-align: center;
@@ -49,9 +52,37 @@
   display: -moz-box;
   text-align: center;
 }
-.chat-area .chat-input {
+.chat-area .chat-input-original {
   width: 80%;
   border-radius: 5px;
+  height: 56px;
+  margin-left: 10%;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  display: -webkit-box;
+  display: -moz-box;
+}
+.chat-area .chat-input-translated {
+  width: 80%;
+  border-radius: 5px;
+  height: 56px;
+  margin-left: 10%;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  display: -webkit-box;
+  display: -moz-box;
+}
+.chat-area .chat-send {
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  display: -webkit-box;
+  display: -moz-box;
 }
 .centralization {
   -webkit-box-align: center;
