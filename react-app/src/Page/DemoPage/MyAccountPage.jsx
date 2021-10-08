@@ -1,18 +1,15 @@
 import React, {Component} from "react";
 import "./static/myAccount.css";
-import {Input, Select, Space, Cascader, Button, Col, Row} from 'antd';
-import {LeftOutlined, SearchOutlined} from '@ant-design/icons';
-import { Card } from 'antd';
-import {createFromIconfontCN, SettingOutlined} from '@ant-design/icons';
-import {Option} from "antd/es/mentions";
+import {Button, Card, Col, Row} from 'antd';
 
-const { Meta } = Card;
+const {Meta} = Card;
+
 
 export default class Footer extends Component {
-    state={
+    state = {
         a: null,
-
     }
+
     render() {
         return (
             <div className="location">
@@ -23,16 +20,19 @@ export default class Footer extends Component {
                                 <Row gutter={[48, 48]} justify="center">
                                     <h1>My information</h1>
                                 </Row>
-                                <div style={{width:'75%',marginLeft:'7.5%', marginBottom:'10%'}}><hr/></div>
+                                <div style={{width: '75%', marginLeft: '7.5%', marginBottom: '10%'}}>
+                                    <hr/>
+                                </div>
 
 
                                 <Row gutter={[48, 48]} justify="left">
                                     <h2>distances:</h2>
                                     <h2>language:</h2>
                                     <Col>
-                                        <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                                             style={{width:177,float:"right", marginRight:'10%'}}/>
-                                        <Button style={{float:"right", marginRight:'10%'}}>
+                                        <img alt="example"
+                                             src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                                             style={{width: 177, float: "right", marginRight: '10%'}}/>
+                                        <Button style={{float: "right", marginRight: '10%'}}>
                                             Edit details
                                         </Button>
                                     </Col>
@@ -48,13 +48,13 @@ export default class Footer extends Component {
                                     <h2>distances:</h2>
                                     <h2>language:</h2>
                                 </Row>
-                                <div style={{width:'75%',marginLeft:'7.5%', marginTop:'20%'}}><hr/></div>
-
+                                <div style={{width: '75%', marginLeft: '7.5%', marginTop: '20%'}}>
+                                    <hr/>
+                                </div>
                             </Card>
                         </Col>
                     </Row>
                 </div>
-
             </div>
 
         );
