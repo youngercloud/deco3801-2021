@@ -9,11 +9,8 @@ import './static/arginote.css'
 import goodman from "../../Images/goodman.jpeg";
 import {SendOutlined} from "@ant-design/icons";
 import {Option} from "antd/es/mentions";
-
 let key = require('../../privateData.json');
-
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
-
 const {Meta} = Card;
 
 class ChatArea extends Component {
@@ -26,6 +23,28 @@ class ChatArea extends Component {
     state = {
         languageCodes: [],
         input: "",
+        dataSource: [{
+            position: 'right',
+            type: 'text',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+            date: new Date(),
+        }, {
+            position: 'right',
+            type: 'text',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+            date: new Date(),
+        }, {
+            position: 'right',
+            type: 'text',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+            date: new Date(),
+        }, {
+            position: 'right',
+            type: 'text',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+            date: new Date(),
+        }
+        ]
     }
 
     componentDidMount() {
@@ -58,6 +77,20 @@ class ChatArea extends Component {
         this.setState({language});
     };
 
+
+    sendMessage(e, msg) {
+        // this.props.handleSendMessage(e, msg)
+        let newData = this.state.dataSource
+        newData.push({
+                position: 'right',
+                type: 'text',
+                text: msg['content'],
+                date: new Date(),
+            }
+        );
+        this.setState({dataSource: newData})
+    }
+
     render() {
         const {languageCodes, language} = this.state;
         const GP_LIST = ["Česky", "Dansk", "Deutsch", "English", "Español", "Ελληνική", "Français", "Italiano",
@@ -76,76 +109,8 @@ class ChatArea extends Component {
                         lockable={true}
                         downButton={true}
                         toBottomHeight={'100%'}
-                        dataSource={[{
-                            position: 'right',
-                            type: 'text',
-                            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                            date: new Date(),
-                        }, {
-                            position: 'right',
-                            type: 'text',
-                            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                            date: new Date(),
-                        }, {
-                            position: 'right',
-                            type: 'text',
-                            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                            date: new Date(),
-                        }
-                            , {
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            }
-                            , {
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            }
-                            , {
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            }, {
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            },{
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            },{
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            },{
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            },{
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            },{
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            },{
-                                position: 'right',
-                                type: 'text',
-                                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                                date: new Date(),
-                            },
-                            ]}/>
+                        dataSource={this.state.dataSource}
+                    />
                 </div>
                 <div>
                     <Select
@@ -176,8 +141,10 @@ class ChatArea extends Component {
                         style={{marginTop: 10}}
                         placeholder="Message"
                         className="chat-input-translated"/>
-
-                    <Button style={{marginTop: 20}} type="primary" size="large">
+                    <Button
+                        onClick={(e) => this.sendMessage(e,
+                            {'content': this.state.input , 'type': 'user'})}
+                        style={{marginTop: 20}} type="primary" size="large">
                     Send Translated Message </Button>
                 </div>
             </div>
@@ -185,13 +152,19 @@ class ChatArea extends Component {
     }
 }
 
+
+
 export default class MyBooking extends Component {
 
     constructor() {
         super();
     }
 
-    state = {selectDoctor: null};
+    state = {
+        selectDoctor: null,
+        socket: null,
+        doctorData: null,
+    };
 
     doctorSelect = (e) => {
         if (this.state.selectDoctor != null) {
@@ -201,7 +174,34 @@ export default class MyBooking extends Component {
         e.currentTarget.style.border = 'green solid 2px';
     }
 
+    handleSendMessage(event, message){
+        let data = JSON.stringify(message);
+    }
+
     render() {
+        let Doctor_LIST =[];
+        // this.props.doctorData.forEach(function (o) {Doctor_LIST.push(o)})
+        const info = Doctor_LIST.map((d) =>
+            <Col span={8} className="doctor-selection-box">
+                <Card
+                    onClick={(e) => {
+                        this.doctorSelect(e)
+                    }}
+                    style={{width: 300}}
+                    cover={
+                        <img
+                            alt="example"
+                            src={goodman}
+                        />
+                    }>
+                    <Meta
+                        title={d.FirstName}
+                        description={d.LastName}
+                    />
+                </Card>
+            </Col>
+
+        );
         return (
             <div className="booking-main">
                 <Row>
@@ -243,7 +243,7 @@ export default class MyBooking extends Component {
                     </Col>
                     <Col span={14}>
                         <Space direction="vertical" size={36} className="booking-space-justify" style={{width: '100%'}}>
-                            <ChatArea/>
+                            <ChatArea handleSendMessage={(e, m) => {this.handleSendMessage(e, m)}}/>
                         </Space>
                     </Col>
                 </Row>

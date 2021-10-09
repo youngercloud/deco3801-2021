@@ -337,7 +337,6 @@ func CheckDocTime(c *gin.Context)  {
 	fmt.Println(info.Date + ","+ info.Time)
 	//日期格式需要一致
 	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " + info.LastName, "%" + info.Date + ","+ info.Time + "%").Find(&bookings)
-	fmt.Println(bookings)
 	if len(bookings) == 0 {
 		c.JSON(200, gin.H{
 			"validation": true,
@@ -349,4 +348,28 @@ func CheckDocTime(c *gin.Context)  {
 	}
 }
 
+func GetUserBookings(c *gin.Context)  {
+	type info struct {
+		doctor models.Doctor
+		image models.Image
+	}
+	var db = models.InitDB()
+	var userName string
+	var bookings []models.Booking
+	//var infos []info
+	err := c.Bind(&userName)
+	if err != nil {
+		fmt.Println("error booking require")
+	}
+	bookings = GetBookings(userName, *db)
 
+	//var doctors []models.Doctor
+	for _, each := range bookings {
+				strings.Split(each.DocName, " ")
+		//db.Where(" = ?", gp.GpName).Find(&doctors)
+	}
+
+	c.JSON(200, gin.H{
+		"bookings": bookings,
+	})
+}
