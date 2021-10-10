@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, lazy} from 'react';
 import Home from './Page/HomePage/Home';
 import LoginPage from "./Page/LoginPage/LoginPage";
 import SignUpPage from "./Page/SignUpPage/SignUpPage";
@@ -13,7 +13,6 @@ const googleTranslate = require("google-translate")(key[0].keyTranslate);
 class App extends Component {
     state = {
         languageCodes: [],
-        language: cookie.load("language") ? cookie.load("language") : "en",
         question: cookie.load("question")
             ? cookie.load("question")
             : "What language do you prefer to read with?"
@@ -25,14 +24,15 @@ class App extends Component {
         googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
             getLanguageCodes(languageCodes); // use a callback function to setState
         });
-
         const getLanguageCodes = languageCodes => {
             this.setState({ languageCodes });
         };
+
     }
 
     render() {
         const { languageCodes, language, question } = this.state;
+
         return (
             // <div>
             //
@@ -44,14 +44,17 @@ class App extends Component {
             // </div>
             <div style={this.divStyle}>
                 <button>Translate it!</button>
-                
+
                 <p>{question}</p>
 
                 {/* iterate through language options to create a select box */}
                 <select
                     className="select-language"
                     value={language}
-                    onChange={e => this.changeHandler(e.target.value)}
+                    onChange={(e) => {
+                        console.log(e.target.value)
+                        this.changeHandler(e.target.value)
+                    }}
                 >
                     {languageCodes.map(lang => (
                         <option key={lang.language} value={lang.language}>

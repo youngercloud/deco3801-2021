@@ -23,6 +23,5 @@ func HandleDocSearch(gpName string, db gorm.DB) []DocInfo {
 		docInfo.Image = images
 		docInfos = append(docInfos, docInfo)
 	}
-
 	return docInfos
 }

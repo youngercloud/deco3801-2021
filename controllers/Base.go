@@ -134,20 +134,23 @@ func FakeGp() {
 // FakeBooking  Insert fake book information
 func FakeBooking()  {
 	var db = models.InitDB()
-	var data models.Booking
-	data.UserName = "Kaipeng Zhang"
-	data.UserId = 1
-	data.BookTime = "2021/09/30,14:00-15:00"
-	data.GpName = "NB clinic"
-	data.DocName = "Han Li"
-	data.DocEmail = "weijiaT@gmail.com"
-	data.DocGender = "Unknown"
-	data.DocLang = "Chinese"
-	data.GpAddr = "Scape Mars"
+	//db.AutoMigrate(&models.Booking{})
+		var data models.Booking
+		data.UserName = "Kaipeng Zhang"
+		data.UserId = 1
+		data.BookTime = "2021/11/2,09:00-10:00"
+		fmt.Println(data.BookTime)
+		data.GpName = "NB clinic"
+		data.DocName = "Han Li"
+		data.DocEmail = "weijiaT@gmail.com"
+		data.DocGender = "Unknown"
+		data.DocLang = "Chinese"
+		data.GpAddr = "Scape Mars"
 
-	if err := db.Create(&data).Error; err != nil {
-		fmt.Println("error!")
-	}
+
+		if err := db.Create(&data).Error; err != nil {
+			fmt.Println("error!")
+		}
 }
 
 func FakeCreateTable() {
