@@ -12,6 +12,13 @@ import MyAccount from "./MyAccountPage"
 import DoctorSelect from "./doctorPage"
 import Time from "./time"
 import Information from "./bookInformation"
+import Emergancypage1 from "../EmergancyPage/emergancePage1"
+import Hospital from "../EmergancyPage/hospitals"
+import HelpLine from "../EmergancyPage/helpline"
+import SpecialistService from "../EmergancyPage/specialistService"
+import Gp from  "../EmergancyPage/generalPractitioner"
+import EmergencyDepartment from "../EmergancyPage/emergencyDepartment"
+import Pharmacy from "../EmergancyPage/pharmacy"
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -19,6 +26,8 @@ import {
     VideoCameraOutlined,
     UploadOutlined,
 } from '@ant-design/icons';
+import pharmacy from "../EmergancyPage/pharmacy";
+
 
 
 
@@ -127,7 +136,7 @@ class demo extends Component {
 
 
                             {
-                                this.state.showElem==='1' ? <Language/>: null
+                                this.state.showElem==='1' ? <Emergancypage1/>: null
                             }
 
                             {
