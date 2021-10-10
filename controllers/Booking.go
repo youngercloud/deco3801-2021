@@ -279,7 +279,6 @@ func CheckDocDate(c *gin.Context)  {
 		})
 		return
 	}
-
 	//已经被book过的不重复的时间
 	var antiTimes []int
 	for _, each := range bookings {

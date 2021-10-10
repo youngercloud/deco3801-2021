@@ -115,6 +115,7 @@ class ChatArea extends Component {
                 <div>
                     <Select
                         className="chat-language-select"
+                        style={{width:"30%"}}
                         showSearch
                         placeholder="Select a Language"
                         optionFilterProp="children"
@@ -135,11 +136,12 @@ class ChatArea extends Component {
                                 "input": e.target.value,
                             })
                         }}/>
+
                     <AntdInput
                         value={this.state.input}
                         disabled={true}
-                        style={{marginTop: 10}}
-                        placeholder="Message"
+                        style={{marginTop: 10,backgroundColor:"#D9E9EE",}}
+                        placeholder="Choose the language for translation"
                         className="chat-input-translated"/>
                     <Button
                         onClick={(e) => this.sendMessage(e,

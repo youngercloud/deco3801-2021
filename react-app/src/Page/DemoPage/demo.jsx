@@ -15,13 +15,13 @@ import MyBooking from "./MyBooking";
 
 const {Header, Sider, Content} = Layout;
 const MyIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_2823620_zamhq7x1cg.js', // 在 iconfont.cn 上生成
+    scriptUrl: '//at.alicdn.com/t/font_2823620_iutnvqrlwgc.js', // 在 iconfont.cn 上生成
 });
 
 class demo extends Component {
 
     state = {
-        collapsed: true,
+        collapsed: false,
         showElem: '1',
         gp: null,
         doctor: null,
@@ -75,7 +75,7 @@ class demo extends Component {
                                            onClick={() => this.handleClick("2")}>
                                     Medical Booking
                                 </Menu.Item>
-                                <Menu.Item key="4" icon={<MyIcon type="icon-yuyue1" style={{fontSize: 28}}/>}
+                                <Menu.Item key="4" icon={<MyIcon type="icon-yuyuexinxi" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("4")}>
                                     My Bookings
                                 </Menu.Item>
@@ -91,10 +91,13 @@ class demo extends Component {
 
                     </Sider>
                     <div className="controlBar">
-                        <Affix offsetTop={80}>
-                            {<MyIcon onClick={() => {
+                        <Affix offsetTop={120}>
+                            <div onClick={() => {
                                 this.toggle()
-                            }} type="icon-huadong" style={{fontSize: 15, marginTop: 5}}/>}
+                            }} style={{backgroundColor:"#BFC4C5",height:"60px",textAlign:"center",borderRadius:"3px"}}>
+                                {this.state.collapsed===true ? <MyIcon  type="icon-youfanyeyouhua" style={{fontSize: 30, marginTop: 15}}/>:<MyIcon  type="icon-zuofanyezuohua" style={{fontSize: 30, marginTop: 15}}/>}
+                            </div>
+
                         </Affix>
                     </div>
                     <Layout className="site-layout">

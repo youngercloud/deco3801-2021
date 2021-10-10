@@ -22,32 +22,38 @@ export default class doctorPage extends Component {
     };
 
     onChangeDate=(now)=> {
-        let time = new Date(now._d)
-        let d = new Date(time);
-        let dateValue = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
-        this.state.date = dateValue
-        let api;
-        console.log(this.state)
-        api = "/api/date"
+        if (now!=null){
+            let time = new Date(now._d)
+            let d = new Date(time);
+            let dateValue = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
+            this.state.date = dateValue
+            let api;
 
-        axios.post(api, this.state).then((response) => {
-            if (response.data.validation === true){
-                console.log("true")
-                this.setState({demo:"block"})
-                // this.timeShow= <TimePicker defaultValue={moment('12:00', 'HH')}
-                //                            format={'HH'+":00"}
-                //                            onChange={(value)=>{
-                //                                const timeString = moment(value).format("HH");
-                //                                this.onChangeTime(timeString)
-                //                            }}
-                // />;
-            }else if (response.data.validation === false){
-                this.setState({date:""})
-                alert("sorry, this date is not available")
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
+            api = "/api/date"
+
+            axios.post(api, this.state).then((response) => {
+                console.log(this.state)
+                if (response.data.validation === true){
+                    // console.log("true")
+                    this.setState({demo:"block"})
+                    // this.timeShow= <TimePicker defaultValue={moment('12:00', 'HH')}
+                    //                            format={'HH'+":00"}
+                    //                            onChange={(value)=>{
+                    //                                const timeString = moment(value).format("HH");
+                    //                                this.onChangeTime(timeString)
+                    //                            }}
+                    // />;
+                }else if (response.data.validation === false){
+                    this.setState({date:""})
+                    this.setState({demo:"none"})
+                    this.state.demo="none";
+                    alert("sorry, this date is not available")
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+
 
     }
 
@@ -123,7 +129,7 @@ export default class doctorPage extends Component {
                     <Col span={24}>
                         <span>Choose a time</span>
                     </Col>
-                    {console.log(this.state)}
+
                 </Row>
                 <Row className="time-selection-body">
                     <Col span={24} className="time-selection-form">
