@@ -1,21 +1,16 @@
 import React, {Component, lazy} from 'react';
-import Home from './Page/HomePage/Home';
-import LoginPage from "./Page/LoginPage/LoginPage";
-import SignUpPage from "./Page/SignUpPage/SignUpPage";
-import UserPage from "./Compoments/User";
-import MainPage from "./Page/MainPage/MainPage";
 import cookie from "react-cookies";
+import Language from "./Page/MainPage/Language";
 
 let key = require('./privateData.json');
 
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
 
+const arr = ["What language do you prefer to read with?", "Translate it!", "one", "two", "three"];
+
 class App extends Component {
     state = {
         languageCodes: [],
-        question: cookie.load("question")
-            ? cookie.load("question")
-            : "What language do you prefer to read with?"
     };
 
     componentDidMount() {
@@ -31,8 +26,7 @@ class App extends Component {
     }
 
     render() {
-        const { languageCodes, language, question } = this.state;
-
+        const { languageCodes, language} = this.state;
         return (
             // <div>
             //
@@ -43,48 +37,51 @@ class App extends Component {
             //     <MainPage/>
             // </div>
             <div style={this.divStyle}>
-                <button>Translate it!</button>
+                <button>{arr[1]}</button>
+                <p>{arr[0]}</p>
 
-                <p>{question}</p>
 
                 {/* iterate through language options to create a select box */}
-                <select
-                    className="select-language"
-                    value={language}
-                    onChange={(e) => {
-                        console.log(e.target.value)
+                <select className="select-language" value={language} onChange={(e) => {
                         this.changeHandler(e.target.value)
-                    }}
-                >
+                    }}>
+
                     {languageCodes.map(lang => (
                         <option key={lang.language} value={lang.language}>
                             {lang.name}
                         </option>
                     ))}
                 </select>
+                <p>{arr[2]}</p>
+                <p>{arr[3]}</p>
+                <p>{arr[4]}</p>
             </div>
         );
     }
 
     changeHandler = language => {
-        let { question } = this.state;
         let cookieLanguage = cookie.load("language");
         let transQuestion = "";
 
-        const translating = transQuestion => {
-            if (question !== transQuestion) {
-                this.setState({ question: transQuestion });
-                cookie.save("question", transQuestion, { path: "/" });
-            }
-        };
 
         // translate the question when selecting a different language
-        if (language !== cookieLanguage) {
-            googleTranslate.translate(question, language, function(err, translation) {
-                transQuestion = translation.translatedText;
-                translating(transQuestion);
-            });
-        }
+        arr.map((value, index) => {
+            if (language !== cookieLanguage) {
+                googleTranslate.translate(arr[index], language, function(err, translation) {
+                    console.log(translation.translatedText);
+                    transQuestion = translation.translatedText;
+                    translating(transQuestion, index);
+                });
+            }
+        })
+
+        const translating = (transQuestion, index) => {
+            if (arr !== transQuestion) {
+                arr[index] = transQuestion;
+                // cookie.save("question", transQuestion, { path: "/" });
+                this.setState({})
+            }
+        };
 
         this.setState({ language });
         cookie.save("language", language, { path: "/" });
