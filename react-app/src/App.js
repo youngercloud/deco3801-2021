@@ -27,6 +27,7 @@ class App extends Component {
 
     render() {
         const { languageCodes, language} = this.state;
+        {console.log(language)}
         return (
             // <div>
             //
@@ -62,7 +63,6 @@ class App extends Component {
     changeHandler = language => {
         let cookieLanguage = cookie.load("language");
         let transQuestion = "";
-
 
         // translate the question when selecting a different language
         arr.map((value, index) => {
