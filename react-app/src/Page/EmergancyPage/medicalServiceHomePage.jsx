@@ -33,11 +33,31 @@ const strings = {
     18:"Provide medicine for minor illness",
     19:"Helpline",
     20:"Help from Registered nurse on phone",
-    21:"Doctor who finish the general practice training"
+    21:"Doctor who finish the general practice training",
+    22:"Doctor help with general health issue and manage your health",
+    23:"First person you should see if feel unwell",
+    24:"Provide help for people in emergency for 24/7",
+    25:"If have urgent issue, call 000 to get emergency service",
+    26:"Also you can go to ED of one hospital directly under urgent case",
+    27:"Doctor who are good at a specific area of medicine, such as heart disease",
+    28:"You need referral from your GP before you wo see a specific",
+    29:"Specialist normal work in hospital",
+    30:"Provide  surgery service for patient",
+    31:"The hospital system consist of private and public hospital",
+    32:"Hospital will help with complex health issue for patient",
+    33:"Help with minor illness and injures",
+    34:"Sell health product",
+    35:"Sell medicine and can provide vaccines",
+    36:"You can get help when during after hour time",
+    37:"Provide help 24/7",
+    38:"May give you a call back from a GP"
 }
 const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"], strings["5"], strings["6"],
     strings["7"], strings["8"], strings["9"], strings["10"], strings["11"], strings["12"], strings["13"], strings["14"]
-    , strings["15"], strings["16"], strings["17"], strings["18"], strings["19"], strings["20"], strings["21"]];
+    , strings["15"], strings["16"], strings["17"], strings["18"], strings["19"], strings["20"], strings["21"],
+    strings["22"], strings["23"], strings["24"], strings["25"], strings["26"], strings["27"], strings["28"],
+    strings["29"], strings["30"], strings["31"], strings["32"], strings["33"], strings["34"], strings["35"],
+    strings["36"], strings["37"], strings["38"]];
 
 
 
@@ -168,10 +188,10 @@ class medicalServiceHomePage extends Component {
                                                     1. {arr[21]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    2. Doctor help with general health issue and manage your health
+                                                    2. {arr[22]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    3. First person you should see if feel un well
+                                                    3. {arr[23]}
                                                 </p>
                                             </div>
                                         </div>
@@ -199,13 +219,13 @@ class medicalServiceHomePage extends Component {
                                                     <img src={image4} width="69px" height="60px" id="title-image2"/>
                                                 </div>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    1. Provide help for people in emergency for 24/7
+                                                    1. {arr[24]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    2. If have urgent issue, call 000 to get emergency service
+                                                    2. {arr[25]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    3. Also you can go to ED of one hospital directly under urgent case
+                                                    3. {arr[26]}
                                                 </p>
                                             </div>
                                         </div>
@@ -242,13 +262,13 @@ class medicalServiceHomePage extends Component {
                                                     <img src={image1} width="69px" height="60px" id="title-image2"/>
                                                 </div>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    1. Doctor who are good at a specific area of medicine, such as heart disease
+                                                    1. {arr[27]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    2. You need referral from your GP before you wo see a specific
+                                                    2. {arr[28]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    3. Specialist normal work in hospital
+                                                    3. {arr[29]}
                                                 </p>
                                             </div>
                                         </div>
@@ -276,13 +296,13 @@ class medicalServiceHomePage extends Component {
                                                     <img src={image3} width="80px" height="69px" id="title-image2"/>
                                                 </div>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    1. Provide help for people in emergency for 24/7
+                                                    1. {arr[30]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    2. If have urgent issue, call 000 to get emergency service
+                                                    2. {arr[31]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    3. Also you can go to ED of one hospital directly under urgent case
+                                                    3. {arr[32]}
                                                 </p>
                                             </div>
                                         </div>
@@ -319,13 +339,13 @@ class medicalServiceHomePage extends Component {
                                                     <img src={image2} width="60px" height="52px" id="title-image2"/>
                                                 </div>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    1. Help with minor illness and injures
+                                                    1. {arr[33]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    2. Sell health product
+                                                    2. {arr[34]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    3. Sell medicine and can provide vaccines
+                                                    3. {arr[35]}
                                                 </p>
                                             </div>
                                         </div>
@@ -353,13 +373,13 @@ class medicalServiceHomePage extends Component {
                                                     <img src={image5} width="60px" height="52px" id="title-image2"/>
                                                 </div>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    1. You can get help when during after hour time
+                                                    1. {arr[36]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    2. Provide help 24/7
+                                                    2. {arr[37]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    3. May give you a call back from a GP
+                                                    3. {arr[38]}
                                                 </p>
                                             </div>
                                         </div>
