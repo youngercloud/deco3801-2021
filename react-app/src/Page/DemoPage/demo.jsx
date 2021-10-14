@@ -12,6 +12,9 @@ import DoctorSelect from "./doctorPage"
 import Time from "./time"
 import Information from "./bookInformation"
 import MyBooking from "./MyBooking";
+import MedicalService from "../EmergancyPage/medicalServiceHomePage"
+import Emergency from "../EmergancyPage/generalPractitioner"
+
 
 const {Header, Sider, Content} = Layout;
 const MyIcon = createFromIconfontCN({
@@ -131,7 +134,7 @@ class demo extends Component {
                             padding: 24,
                         }}>
                             {
-                                this.state.showElem === '1' ? <Language/> : null
+                                this.state.showElem === '1' ? <MedicalService/> : null
                             }
 
                             {
