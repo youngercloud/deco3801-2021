@@ -36,7 +36,7 @@ type AvailableTime struct {
 
 type Doctor struct {
 	BaseModel
-	Password string `gorm:"not null;size:256"`
+	Password string `gorm:"size:256"`
 	FirstName string `gorm:"not null;size:256"`
 	LastName string `gorm:"not null;size:256"`
 	DOB string `gorm:"size:256"`
@@ -45,8 +45,8 @@ type Doctor struct {
 	PhoneNumber int `gorm:"size:256"`
 	ClinicOrHospital string `gorm:"size:256"`
 	Specialty     string `gorm:"size:256"`
-	AvailableTime `gorm:"size:256"`
 	Language      string `gorm:"size:256"`
+	AvailableTime `gorm:"size:256"`
 }
 
 type HospitalGp struct {

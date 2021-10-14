@@ -9,6 +9,8 @@ import './static/arginote.css'
 import goodman from "../../Images/goodman.jpeg";
 import {SendOutlined} from "@ant-design/icons";
 import {Option} from "antd/es/mentions";
+import axios from "axios";
+import Paragraph from "antd/es/typography/Paragraph";
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
 const {Meta} = Card;
@@ -23,28 +25,7 @@ class ChatArea extends Component {
     state = {
         languageCodes: [],
         input: "",
-        dataSource: [{
-            position: 'right',
-            type: 'text',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-            date: new Date(),
-        }, {
-            position: 'right',
-            type: 'text',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-            date: new Date(),
-        }, {
-            position: 'right',
-            type: 'text',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-            date: new Date(),
-        }, {
-            position: 'right',
-            type: 'text',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-            date: new Date(),
-        }
-        ]
+        dataSource: []
     }
 
     componentDidMount() {
@@ -66,7 +47,7 @@ class ChatArea extends Component {
         const translating = transInput => {
             if (input !== transInput) {
                 this.setState({input: transInput});
-                this.forceUpdate()
+                // this.forceUpdate()
             }
         };
 
@@ -162,10 +143,11 @@ export default class MyBooking extends Component {
         super();
     }
 
+    doctorData;
+
     state = {
         selectDoctor: null,
         socket: null,
-        doctorData: null,
     };
 
     doctorSelect = (e) => {
@@ -180,67 +162,66 @@ export default class MyBooking extends Component {
         let data = JSON.stringify(message);
     }
 
-    render() {
-        let Doctor_LIST =[];
-        // this.props.doctorData.forEach(function (o) {Doctor_LIST.push(o)})
-        const info = Doctor_LIST.map((d) =>
-            <Col span={8} className="doctor-selection-box">
-                <Card
-                    onClick={(e) => {
-                        this.doctorSelect(e)
-                    }}
-                    style={{width: 300}}
-                    cover={
-                        <img
-                            alt="example"
-                            src={goodman}
-                        />
-                    }>
-                    <Meta
-                        title={d.FirstName}
-                        description={d.LastName}
-                    />
-                </Card>
-            </Col>
+    componentDidMount() {
+        let api = "/api/userBookings"
+        axios.post(api,
+            {'UserName': sessionStorage.getItem('name')}).then((response) => {
+            let json = response.data;
 
-        );
+            const arr = [];
+            let arr2 = [];
+            Object.keys(json).forEach(function(key) {
+                arr.push(json[key]);
+            });
+            arr2 = arr[0];
+            this.doctorData = arr2.map((d) =>
+                <Col span={8} className="doctor-selection-box">
+                    <Card
+                        onClick={(e) => {
+                            this.doctorSelect(e)
+                        }}
+                        style={{width: 300}}
+                        cover={
+                            <img
+                                alt="example"
+                                src={goodman}
+                            />
+                        }>
+                        <Meta
+                            title={d.FirstName + " " + d.LastName}
+                            description={
+                                <Paragraph>
+                                    <ul>
+                                        <li>
+                                            {d.GpName}
+                                        </li>
+                                        <li>
+                                            {d.DocLanguage}
+                                        </li>
+                                        <li>
+                                            {d.BookingTime}
+                                        </li>
+                                    </ul>
+                                </Paragraph>
+                            }
+                        />
+                    </Card>
+                </Col>
+            )
+            console.log(arr2)
+            this.forceUpdate()
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    render() {
         return (
             <div className="booking-main">
                 <Row>
                     <Col span={10}>
                         <Space direction="vertical" size={36} className="booking-space-justify">
-                            <Card
-                                onClick={(e) => {
-                                    this.doctorSelect(e)
-                                }}
-                                style={{width: 300}}
-                                cover={
-                                    <img
-                                        alt="example"
-                                        src={goodman}
-                                    />
-                                }>
-                                <Meta
-                                    title="Card title"
-                                    description="This is the description"
-                                />
-                            </Card>
-                            <Card
-                                style={{width: 300}}
-                                onClick={(e) => {
-                                    this.doctorSelect(e)
-                                }}
-                                cover={
-                                    <img
-                                        alt="example"
-                                        src={goodman}
-                                    />
-                                }>
-                                <Meta
-                                    title="Card title"
-                                    description="This is the description"
-                                />
-                            </Card>
+                            {this.doctorData}
                         </Space>
                     </Col>
                     <Col span={14}>
