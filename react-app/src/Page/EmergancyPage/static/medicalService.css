@@ -7,11 +7,15 @@ h1 {
 }
 
 h2 {
-    color: black;
+    color: white;
     font-size: 80px;
     font-weight: bold;
     text-align: left;
     margin-left: 10px;
+}
+
+.header-p {
+    color: white;
 }
 
 #inside-image-title {
@@ -43,6 +47,18 @@ h2 {
     float: left;
 }
 
+.front-background-wrapper {
+    height: 500px;
+    width: 100%;
+}
+
+.front-background-box {
+    width: 940px;
+    height: 100%;
+    background-image: url(m7.png);
+    background-size: 100% 100%;
+}
+
 #FirstP p {
     text-align: left;
     font-weight: normal;
@@ -62,6 +78,7 @@ h2 {
 .header-content-wrapper {
     float:left;
     margin-left: 10px;
+    margin-top: 145px;
 }
 
 #text-along-bigger {
@@ -71,7 +88,7 @@ h2 {
 }
 
 #text-along-bigger p{
-    color: black;
+    color: white;
     font-size: 28px;
     font-weight: bold;
     margin-top: 20px;
@@ -145,6 +162,41 @@ h2 {
     width: 100%;
     height: 280px;
     float: left;
+    position: relative;
+}
+
+.primary-info-content-box:hover .gp-hover {
+    opacity: 1;
+}
+
+.primary-info-content-box:hover .ed-hover {
+    opacity: 1;
+}
+
+.gp-hover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #6B6B7F;
+}
+
+.ed-hover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #547665;
 }
 
 #separate-second {
@@ -188,6 +240,30 @@ h2 {
 #ed {
     background-color: #547665;
 }
+
+.title-image {
+    width: 100%;
+    height: 82px;
+}
+
+#title-image1 {
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+#title-image2 {
+    float: left;
+    margin-top: 6px;
+    margin-left: 20px;
+}
+
+#title-image2 {
+    float: left;
+    margin-top: 4px;
+    margin-left: 20px;
+}
+
 
 
 

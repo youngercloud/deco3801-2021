@@ -159,6 +159,7 @@ class demo extends Component {
                         </Affix>
 
                     </Sider>
+
                     <div className="controlBar">
                         <Affix offsetTop={120}>
                             <div onClick={() => {
@@ -166,7 +167,6 @@ class demo extends Component {
                             }} style={{backgroundColor:"#BFC4C5",height:"60px",textAlign:"center",borderRadius:"3px"}}>
                                 {this.state.collapsed===true ? <MyIcon  type="icon-youfanyeyouhua" style={{fontSize: 30, marginTop: 15}}/>:<MyIcon  type="icon-zuofanyezuohua" style={{fontSize: 30, marginTop: 15}}/>}
                             </div>
-
                         </Affix>
                     </div>
                     <Layout className="site-layout">
