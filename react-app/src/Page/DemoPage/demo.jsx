@@ -12,6 +12,8 @@ import DoctorSelect from "./doctorPage"
 import Time from "./time"
 import Information from "./bookInformation"
 import MyBooking from "./MyBooking";
+import GeneralPractitioner from "../EmergancyPage/emergencyDepartment";
+
 
 const {Header, Sider, Content} = Layout;
 const MyIcon = createFromIconfontCN({
@@ -102,7 +104,7 @@ class demo extends Component {
                     </div>
                     <Layout className="site-layout">
                         <Header className="site-layout-background" style={{padding: 5}}>
-                            <Breadcrumb separator=">">
+                            <Breadcrumb className="breadcrumb" separator=">">
 
                                 {this.state.showElem === '1' ? <Breadcrumb.Item>
                                     <p>Medical Service</p>
@@ -131,7 +133,7 @@ class demo extends Component {
                             padding: 24,
                         }}>
                             {
-                                this.state.showElem === '1' ? <Language/> : null
+                                this.state.showElem === '1' ? <GeneralPractitioner/> : null
                             }
 
                             {
