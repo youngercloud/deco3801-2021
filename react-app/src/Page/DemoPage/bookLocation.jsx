@@ -76,7 +76,7 @@ export default class bookLocation extends Component {
                 <Col span={10} >
                     <Card>
                         <div >
-                            <img alt="example" src={require('../../Images/'+d.Images.Path).default} />
+                            <img alt="example" style={{width:"55%",height:"100%"}} src={require('../../Images/'+d.Images.Path).default} />
                         </div>
 
                         <div>
