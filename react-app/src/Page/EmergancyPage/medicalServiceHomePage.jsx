@@ -40,6 +40,7 @@ const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"
     , strings["15"], strings["16"], strings["17"], strings["18"], strings["19"], strings["20"]];
 
 class medicalServiceHomePage extends Component {
+
     state = {
         languageCodes: [],
     };
@@ -79,8 +80,17 @@ class medicalServiceHomePage extends Component {
 
         this.setState({ language });
         cookie.save("language", language, { path: "/" });
+
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            //window.requestAnimationFrame(smoothscroll);
+            window.scrollTo (0,0);
+        }
     };
 
+    serviceSelected(info){
+        this.props.serviceSelected(info)
+    }
 
     render(){
         const {languageCodes, language} = this.state;
@@ -146,7 +156,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("gp")}>
                                                 <strong>{arr[8]}</strong>
                                             </button>
                                         </div>
@@ -166,7 +176,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                     onClick={() => this.serviceSelected("emergency")}>
                                                 <strong>{arr[8]}</strong>
                                             </button>
                                         </div>
@@ -195,7 +205,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("specialist")}>
                                                 <strong>{arr[8]}</strong>
                                             </button>
                                         </div>
@@ -215,7 +225,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("hospital")}>
                                                 <strong>{arr[8]}</strong>
                                             </button>
                                         </div>
@@ -244,7 +254,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("pharmacy")}>
                                                 <strong>{arr[8]}</strong>
                                             </button>
                                         </div>
@@ -264,7 +274,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("helpline")}>
                                                 <strong>{arr[8]}</strong>
                                             </button>
                                         </div>

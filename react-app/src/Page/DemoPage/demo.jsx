@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./static/demo.css";
 import logo from "./static/logo.png"
-import {Affix, Breadcrumb, Button, Image, Layout, Menu} from 'antd';
+import {Affix, Breadcrumb, Button, Image, Layout, Menu, Row} from 'antd';
 import {createFromIconfontCN} from '@ant-design/icons';
 import Location from "./bookLocation";
 import Language from "../MainPage/Language";
@@ -14,6 +14,11 @@ import Information from "./bookInformation"
 import MyBooking from "./MyBooking";
 import MedicalService from "../EmergancyPage/medicalServiceHomePage"
 import Emergency from "../EmergancyPage/generalPractitioner"
+import Helpline from "../EmergancyPage/helpline"
+import Pharmacy from "../EmergancyPage/pharmacy"
+import Specialist from "../EmergancyPage/specialistService"
+import Hospitals from "../EmergancyPage/hospitals";
+import Gp from "../EmergancyPage/generalPractitioner"
 
 import cookie from "react-cookies";
 
@@ -48,11 +53,13 @@ class demo extends Component {
         time: null,
         date: null,
         languageCodes: [],
+        serviceLocation:null,
     };
 
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
         googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+            console.log(languageCodes);
             getLanguageCodes(languageCodes); // use a callback function to setState
         });
         const getLanguageCodes = languageCodes => {
@@ -62,15 +69,13 @@ class demo extends Component {
 
     changeHandler = language => {
         let cookieLanguage = cookie.load("language");
-        let transQuestion = "";
 
         // translate the question when selecting a different language
         arr.map((value, index) => {
             if (language !== cookieLanguage) {
                 googleTranslate.translate(arr[index], language, function(err, translation) {
                     console.log(translation.translatedText);
-                    transQuestion = translation.translatedText;
-                    translating(transQuestion, index);
+                    translating(translation.translatedText, index);
                 });
             }
         })
@@ -113,6 +118,10 @@ class demo extends Component {
         this.setState({time: time})
     }
 
+    serviceSelected(location){
+        this.setState({serviceLocation:location})
+    }
+
     render() {
         const { languageCodes, language} = this.state;
         return (
@@ -121,9 +130,9 @@ class demo extends Component {
                     <Sider className="demo" trigger={null} collapsible collapsed={this.state.collapsed} width="15%">
                         <Affix offsetTop={20}>
                             <Menu className="demo" mode="inline" defaultSelectedKeys={['1']}>
-                                <div className="image">
-                                    <Image preview={false} src={logo} width={40}/>
-                                    <p> welcome:</p> {sessionStorage.getItem('name')}
+                                <div className="image" >
+                                    <Image preview={false} src={logo} width={40} />
+                                    <p style={{color:"#EEF3F4",marginTop:20}}> welcome: {sessionStorage.getItem('name')}</p>
                                 </div>
                                 <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("1")}>
@@ -174,7 +183,8 @@ class demo extends Component {
                             <Breadcrumb separator=">">
 
                                 {this.state.showElem === '1' ? <Breadcrumb.Item>
-                                    <p>Medical Service </p>
+                                    <Row><p onClick={()=>this.setState({serviceLocation:null}) }>Medical Service</p> <p>{this.state.serviceLocation!=null ? " || "+this.state.serviceLocation:null}</p></Row>
+
                                 </Breadcrumb.Item> : null}
 
                                 {this.state.showElem === '2' ? <Breadcrumb.Item>
@@ -199,8 +209,33 @@ class demo extends Component {
                             margin: '24px 16px',
                             padding: 24,
                         }}>
+
                             {
-                                this.state.showElem === '1' ? <MedicalService/> : null
+                                this.state.showElem === '1' && this.state.serviceLocation===null ? <MedicalService serviceSelected={(location)=>{this.serviceSelected(location)}} /> : null
+                            }
+
+                            {
+                                this.state.showElem === '1' && this.state.serviceLocation==="gp" ? <Gp/> : null
+                            }
+
+                            {
+                                this.state.showElem === '1' && this.state.serviceLocation==="emergency" ? <Emergency/> : null
+                            }
+
+                            {
+                                this.state.showElem === '1' && this.state.serviceLocation==="specialist" ? <Specialist/> : null
+                            }
+
+                            {
+                                this.state.showElem === '1' && this.state.serviceLocation==="hospital" ? <Hospitals/> : null
+                            }
+
+                            {
+                                this.state.showElem === '1' && this.state.serviceLocation==="pharmacy" ? <Pharmacy/> : null
+                            }
+
+                            {
+                                this.state.showElem === '1' && this.state.serviceLocation==="helpline" ? <Helpline/> : null
                             }
 
                             {
