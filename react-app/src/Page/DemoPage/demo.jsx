@@ -12,11 +12,30 @@ import DoctorSelect from "./doctorPage"
 import Time from "./time"
 import Information from "./bookInformation"
 import MyBooking from "./MyBooking";
+import MedicalService from "../EmergancyPage/medicalServiceHomePage"
+import Emergency from "../EmergancyPage/generalPractitioner"
+
+import cookie from "react-cookies";
+
 
 const {Header, Sider, Content} = Layout;
 const MyIcon = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_2823620_iutnvqrlwgc.js', // 在 iconfont.cn 上生成
 });
+
+let key = require('../../privateData.json');
+
+const googleTranslate = require("google-translate")(key[0].keyTranslate);
+
+const strings = {
+    MenuTitle: {
+        1:"Medical Service",
+        2:"Medical Booking",
+        3:"My Bookings",
+        4:"My Account"
+    }
+}
+const arr = [strings.MenuTitle["1"], strings.MenuTitle["2"], strings.MenuTitle["3"], strings.MenuTitle["4"]];
 
 class demo extends Component {
 
@@ -28,6 +47,44 @@ class demo extends Component {
         bookingStep: null,
         time: null,
         date: null,
+        languageCodes: [],
+    };
+
+    componentDidMount() {
+        // load all of the language options from Google Translate to your app state
+        googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+            getLanguageCodes(languageCodes); // use a callback function to setState
+        });
+        const getLanguageCodes = languageCodes => {
+            this.setState({ languageCodes });
+        };
+    }
+
+    changeHandler = language => {
+        let cookieLanguage = cookie.load("language");
+        let transQuestion = "";
+
+        // translate the question when selecting a different language
+        arr.map((value, index) => {
+            if (language !== cookieLanguage) {
+                googleTranslate.translate(arr[index], language, function(err, translation) {
+                    console.log(translation.translatedText);
+                    transQuestion = translation.translatedText;
+                    translating(transQuestion, index);
+                });
+            }
+        })
+
+        const translating = (transQuestion, index) => {
+            if (arr !== transQuestion) {
+                arr[index] = transQuestion;
+                // cookie.save("question", transQuestion, { path: "/" });
+                this.setState({})
+            }
+        };
+
+        this.setState({ language });
+        cookie.save("language", language, { path: "/" });
     };
 
     toggle = () => {
@@ -57,6 +114,7 @@ class demo extends Component {
     }
 
     render() {
+        const { languageCodes, language} = this.state;
         return (
             <div className="container">
                 <Layout>
@@ -69,24 +127,35 @@ class demo extends Component {
                                 </div>
                                 <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("1")}>
-                                    Medical Service
+                                    {arr[0]}
                                 </Menu.Item>
                                 <Menu.Item key="2" icon={<MyIcon type="icon-yuyue1" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("2")}>
-                                    Medical Booking
+                                    {arr[1]}
                                 </Menu.Item>
                                 <Menu.Item key="4" icon={<MyIcon type="icon-yuyuexinxi" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("4")}>
-                                    My Bookings
+                                    {arr[2]}
                                 </Menu.Item>
                                 <Menu.Item key="3" icon={<MyIcon type="icon-account" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("3")}>
-                                    My Account
+                                    {arr[3]}
                                     <Button style={{marginBottom: 20, marginLeft: 20}} onClick={() => this.logout()}>
                                         {sessionStorage.getItem("name") === null ? "login in" : "logout"}
                                     </Button>
                                 </Menu.Item>
+
                             </Menu>
+                                <select className="select-language" value={language} onChange={(e) => {
+                                    this.changeHandler(e.target.value)
+                                }}>
+
+                                    {languageCodes.map(lang => (
+                                        <option key={lang.language} value={lang.language}>
+                                            {lang.name}
+                                        </option>
+                                    ))}
+                                </select>
                         </Affix>
 
                     </Sider>
@@ -105,7 +174,7 @@ class demo extends Component {
                             <Breadcrumb separator=">">
 
                                 {this.state.showElem === '1' ? <Breadcrumb.Item>
-                                    <p>Medical Service</p>
+                                    <p>Medical Service </p>
                                 </Breadcrumb.Item> : null}
 
                                 {this.state.showElem === '2' ? <Breadcrumb.Item>
@@ -131,7 +200,7 @@ class demo extends Component {
                             padding: 24,
                         }}>
                             {
-                                this.state.showElem === '1' ? <Language/> : null
+                                this.state.showElem === '1' ? <MedicalService/> : null
                             }
 
                             {
