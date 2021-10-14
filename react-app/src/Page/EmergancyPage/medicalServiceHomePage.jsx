@@ -33,11 +33,11 @@ const strings = {
     18:"Provide medicine for minor illness",
     19:"Helpline",
     20:"Help from Registered nurse on phone",
-
+    21:"Doctor who finish the general practice training"
 }
 const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"], strings["5"], strings["6"],
     strings["7"], strings["8"], strings["9"], strings["10"], strings["11"], strings["12"], strings["13"], strings["14"]
-    , strings["15"], strings["16"], strings["17"], strings["18"], strings["19"], strings["20"]];
+    , strings["15"], strings["16"], strings["17"], strings["18"], strings["19"], strings["20"], strings["21"]];
 
 
 
@@ -165,7 +165,7 @@ class medicalServiceHomePage extends Component {
                                                     <img src={image6} width="69px" height="60px" id="title-image1"/>
                                                 </div>
                                                 <p className="content_middle" id="inside-image-word">
-                                                    1. Doctor who finish the general practice training
+                                                    1. {arr[21]}
                                                 </p>
                                                 <p className="content_middle" id="inside-image-word">
                                                     2. Doctor help with general health issue and manage your health
