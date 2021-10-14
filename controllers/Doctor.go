@@ -2,6 +2,9 @@ package controllers
 
 import (
 	"deco3801/models"
+	"errors"
+	"fmt"
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
@@ -25,3 +28,36 @@ func HandleDocSearch(gpName string, db gorm.DB) []DocInfo {
 	}
 	return docInfos
 }
+
+func GetDoctorsByUser(c *gin.Context) {
+	type info struct {
+		name string
+		password string
+	}
+	var db = models.InitDB()
+	var userInfo info
+	var user models.User
+	var bookings []models.Booking
+
+	err := c.Bind(&userInfo)
+	if err != nil {
+		fmt.Println("error booking require")
+	}
+	err = db.Where("name = ? AND password = ?", userInfo.name, userInfo.password).First(&user).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		fmt.Println("There is such user")
+		return
+	}
+
+	err = db.Where("user_id = ? AND user_name = ?", user.ID, user.Name).Find(&bookings).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		fmt.Println("There is no bookings of this user")
+		return
+	} else if len(bookings) == 0 {
+		fmt.Println("There is no bookings of this user")
+		return
+	}
+
+
+}
+
