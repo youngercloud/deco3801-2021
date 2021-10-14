@@ -76,7 +76,7 @@ export default class bookLocation extends Component {
                 <Col span={10} >
                     <Card>
                         <div >
-                            <img alt="example" src={require('../../Images/'+d.Images.Path).default} />
+                            <img alt="example" style={{width:"55%",height:"100%"}} src={require('../../Images/'+d.Images.Path).default} />
                         </div>
 
                         <div>
@@ -92,17 +92,65 @@ export default class bookLocation extends Component {
 
                             <Button  onClick={() => {this.gpSelected(d)}}><p>$65 - Consultation</p></Button>
                         </div>
-
-
                     </Card>
                 </Col>
             );
             this.setState({getInfo:'true'});
-
         }).catch(function (error) {
             console.log(error);
         });
     };
+
+    componentDidMount() {
+
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            //window.requestAnimationFrame(smoothscroll);
+            window.scrollTo (0,0);
+        }
+
+        let api;
+        api = "/api/booking/searchGp"
+        axios.post(api, this.state).then((response) => {
+            console.log(response.data)
+            const json = response.data;
+            const arr = [];
+
+            let arr2=[];
+            Object.keys(json).forEach(function(key) {
+                arr.push(json[key]);
+            });
+
+            arr2=arr[0];
+            {console.log(arr2)}
+            this.info = arr2.map((d) =>
+                <Col span={10} >
+                    <Card>
+                        <div >
+                            <img alt="example" style={{width:"55%",height:"100%"}} src={require('../../Images/'+d.Images.Path).default} />
+                        </div>
+
+                        <div>
+                            <h1>{d.Gp.GpName}</h1>
+                            <h2>Distance: {d.Distance} Kilometer</h2>
+                            <h2>Language:</h2>
+
+                            <Row>
+                                {d.Language.map(item=>(
+                                    <Col><p>{item} &nbsp;</p></Col>
+                                ))}
+                            </Row>
+
+                            <Button  onClick={() => {this.gpSelected(d)}}><p>$65 - Consultation</p></Button>
+                        </div>
+                    </Card>
+                </Col>
+            );
+            this.setState({getInfo:'true'});
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 
     render() {
         return (

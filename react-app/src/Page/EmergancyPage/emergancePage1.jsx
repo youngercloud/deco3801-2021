@@ -8,6 +8,38 @@ import image5 from "../EmergancyPage/static/image5.jpeg";
 import image6 from "../EmergancyPage/static/image6.jpeg";
 import image7 from "../EmergancyPage/static/image7.jpeg";
 
+import cookie from "react-cookies";
+
+let key = require('../../privateData.json');
+const googleTranslate = require("google-translate")(key[0].keyTranslate);
+
+const strings = {
+    0:"",
+    1:"",
+    2:"",
+    3:"",
+    4:"",
+    5:"",
+    6:"",
+    7:"",
+    8:"",
+    9:"",
+    10:"",
+    11:"",
+    12:"",
+    13:"",
+    14:"",
+    15:"",
+    16:"",
+    17:"",
+    18:"",
+    19:"",
+    20:"",
+
+}
+const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"], strings["5"], strings["6"],
+    strings["7"], strings["8"], strings["9"], strings["10"], strings["11"], strings["12"], strings["13"], strings["14"]
+    , strings["15"], strings["16"], strings["17"], strings["18"], strings["19"], strings["20"]];
 
 
 class emergancyPage1 extends Component {
