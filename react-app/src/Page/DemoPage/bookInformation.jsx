@@ -7,11 +7,22 @@ export default class doctorPage extends Component {
     gpSelected(info,e){
         this.props.gpSelected(info,e)
     }
+
+    componentDidMount() {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            //window.requestAnimationFrame(smoothscroll);
+            window.scrollTo (0,0);
+        }
+    }
+
     render() {
         const gp = this.props.name;
         const doctor = this.props.doctor;
         const date = this.props.date;
         const time = this.props.time;
+
+
 
         return (
         <div style={{height:850}} >

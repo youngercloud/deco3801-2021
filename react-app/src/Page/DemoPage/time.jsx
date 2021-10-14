@@ -21,6 +21,14 @@ export default class doctorPage extends Component {
             time: "",
     };
 
+    componentDidMount() {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            //window.requestAnimationFrame(smoothscroll);
+            window.scrollTo (0,0);
+        }
+    }
+
     onChangeDate=(now)=> {
         if (now!=null){
             let time = new Date(now._d)
