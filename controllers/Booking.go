@@ -246,7 +246,7 @@ func HandleGetBookings(c *gin.Context) {
 
 func GetBookings(userName string, db gorm.DB) []models.Booking {
 	var bookings []models.Booking
-	err := db.Where("name = ? ", userName).Find(&bookings).Error
+	err := db.Where("user_name = ? ", userName).Find(&bookings).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("There is no Gp")
 		return nil
@@ -348,27 +348,35 @@ func CheckDocTime(c *gin.Context)  {
 }
 
 func GetUserBookings(c *gin.Context)  {
-	type info struct {
-		doctor models.Doctor
-		image models.Image
+	type ReturnData struct {
+		FirstName string
+		LastName string
+		GpName string
+		DocLanguage string
+		BookingTime string
 	}
 	var db = models.InitDB()
-	var userName string
-	var bookings []models.Booking
-	//var infos []info
-	err := c.Bind(&userName)
+	var dataList []ReturnData
+	var info models.Booking
+	err := c.Bind(&info)
 	if err != nil {
 		fmt.Println("error booking require")
 	}
-	bookings = GetBookings(userName, *db)
+	fmt.Println(info.UserName)
+	bookings := GetBookings(info.UserName, *db)
 
-	//var doctors []models.Doctor
 	for _, each := range bookings {
-				strings.Split(each.DocName, " ")
-		//db.Where(" = ?", gp.GpName).Find(&doctors)
+		n := strings.Split(each.DocName, " ")
+		var obj ReturnData
+		obj.FirstName = n[0]
+		obj.LastName = n[1]
+		obj.GpName = each.GpName
+		obj.DocLanguage = each.DocLang
+		obj.BookingTime = each.BookTime
+		dataList = append(dataList, obj)
 	}
-
+	fmt.Println(dataList)
 	c.JSON(200, gin.H{
-		"bookings": bookings,
+		"data": dataList,
 	})
 }
