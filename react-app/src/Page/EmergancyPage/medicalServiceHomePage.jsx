@@ -11,6 +11,17 @@ import image6 from "../EmergancyPage/static/m6.png";
 
 
 class medicalServiceHomePage extends Component {
+    componentDidMount() {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            //window.requestAnimationFrame(smoothscroll);
+            window.scrollTo (0,0);
+        }
+    }
+    serviceSelected(info){
+        this.props.serviceSelected(info)
+    }
+
     render(){
         return(
             <div>
@@ -62,7 +73,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("gp")}>
                                                 <strong>Learn more</strong>
                                             </button>
                                         </div>
@@ -82,7 +93,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                     onClick={() => this.serviceSelected("emergency")}>
                                                 <strong>Learn more</strong>
                                             </button>
                                         </div>
@@ -111,7 +122,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("specialist")}>
                                                 <strong>Learn more</strong>
                                             </button>
                                         </div>
@@ -131,7 +142,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("hospital")}>
                                                 <strong>Learn more</strong>
                                             </button>
                                         </div>
@@ -160,7 +171,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("pharmacy")}>
                                                 <strong>Learn more</strong>
                                             </button>
                                         </div>
@@ -180,7 +191,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                    onClick="window.location.href='#';">
+                                                    onClick={() => this.serviceSelected("helpline")}>
                                                 <strong>Learn more</strong>
                                             </button>
                                         </div>

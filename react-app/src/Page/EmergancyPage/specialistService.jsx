@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
 import logo from "../EmergancyPage/static/spelicist.png";
-
+import "./static/emergancyPage1.css";
 
 
 class specialistService extends Component {
+    componentDidMount() {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            //window.requestAnimationFrame(smoothscroll);
+            window.scrollTo (0,0);
+        }
+    }
     render(){
         return(
             <div>
