@@ -14,7 +14,7 @@ import Information from "./bookInformation"
 import MyBooking from "./MyBooking";
 
 import MedicalService from "../EmergancyPage/medicalServiceHomePage"
-import Emergency from "../EmergancyPage/generalPractitioner"
+import Emergency from "../EmergancyPage/emergencyDepartment"
 import Helpline from "../EmergancyPage/helpline"
 import Pharmacy from "../EmergancyPage/pharmacy"
 import Specialist from "../EmergancyPage/specialistService"
