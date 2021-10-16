@@ -4,7 +4,6 @@ import logo from "./static/logo.png"
 import {Affix, Breadcrumb, Button, Image, Layout, Menu, Row} from 'antd';
 import {createFromIconfontCN} from '@ant-design/icons';
 import Location from "./bookLocation";
-import Language from "../MainPage/Language";
 
 import GpSelected from "./gpSelected";
 import MyAccount from "./MyAccountPage"
@@ -24,7 +23,6 @@ import Gp from "../EmergancyPage/generalPractitioner"
 import cookie from "react-cookies";
 
 
-
 const {Header, Sider, Content} = Layout;
 const MyIcon = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_2823620_iutnvqrlwgc.js', // 在 iconfont.cn 上生成
@@ -36,10 +34,10 @@ const googleTranslate = require("google-translate")(key[0].keyTranslate);
 
 const strings = {
     MenuTitle: {
-        1:"Medical Service",
-        2:"Medical Booking",
-        3:"My Bookings",
-        4:"My Account"
+        1: "Medical Service",
+        2: "Medical Booking",
+        3: "My Bookings",
+        4: "My Account"
     }
 }
 const arr = [strings.MenuTitle["1"], strings.MenuTitle["2"], strings.MenuTitle["3"], strings.MenuTitle["4"]];
@@ -55,17 +53,17 @@ class demo extends Component {
         time: null,
         date: null,
         languageCodes: [],
-        serviceLocation:null,
+        serviceLocation: null,
     };
 
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
-        googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+        googleTranslate.getSupportedLanguages("en", function (err, languageCodes) {
             console.log(languageCodes);
             getLanguageCodes(languageCodes); // use a callback function to setState
         });
         const getLanguageCodes = languageCodes => {
-            this.setState({ languageCodes });
+            this.setState({languageCodes});
         };
     }
 
@@ -75,7 +73,7 @@ class demo extends Component {
         // translate the question when selecting a different language
         arr.map((value, index) => {
             if (language !== cookieLanguage) {
-                googleTranslate.translate(arr[index], language, function(err, translation) {
+                googleTranslate.translate(arr[index], language, function (err, translation) {
                     console.log(translation.translatedText);
                     translating(translation.translatedText, index);
                 });
@@ -90,8 +88,8 @@ class demo extends Component {
             }
         };
 
-        this.setState({ language });
-        cookie.save("language", language, { path: "/" });
+        this.setState({language});
+        cookie.save("language", language, {path: "/"});
     };
 
     toggle = () => {
@@ -120,21 +118,24 @@ class demo extends Component {
         this.setState({time: time})
     }
 
-    serviceSelected(location){
-        this.setState({serviceLocation:location})
+    serviceSelected(location) {
+        this.setState({serviceLocation: location})
     }
 
     render() {
-        const { languageCodes, language} = this.state;
+        const {languageCodes, language} = this.state;
         return (
             <div className="container">
                 <Layout>
                     <Sider className="demo" trigger={null} collapsible collapsed={this.state.collapsed} width="15%">
                         <Affix offsetTop={20}>
                             <Menu className="demo" mode="inline" defaultSelectedKeys={['1']}>
-                                <div className="image" >
-                                    <Image preview={false} src={logo} width={40} />
-                                    <p style={{color:"#EEF3F4",marginTop:20}}> welcome: {sessionStorage.getItem('name')}</p>
+                                <div className="image">
+                                    <Image preview={false} src={logo} width={40}/>
+                                    <p style={{
+                                        color: "#EEF3F4",
+                                        marginTop: 20
+                                    }}> welcome: {sessionStorage.getItem('name')}</p>
                                 </div>
                                 <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("1")}>
@@ -157,26 +158,32 @@ class demo extends Component {
                                 </Menu.Item>
 
                             </Menu>
-                                <select className="select-language" value={language} onChange={(e) => {
-                                    this.changeHandler(e.target.value)
-                                }}>
+                            <select className="select-language" value={language} onChange={(e) => {
+                                this.changeHandler(e.target.value)
+                            }}>
 
-                                    {languageCodes.map(lang => (
-                                        <option key={lang.language} value={lang.language}>
-                                            {lang.name}
-                                        </option>
-                                    ))}
-                                </select>
+                                {languageCodes.map(lang => (
+                                    <option key={lang.language} value={lang.language}>
+                                        {lang.name}
+                                    </option>
+                                ))}
+                            </select>
                         </Affix>
-
                     </Sider>
 
                     <div className="controlBar">
                         <Affix offsetTop={120}>
                             <div onClick={() => {
                                 this.toggle()
-                            }} style={{backgroundColor:"#BFC4C5",height:"60px",textAlign:"center",borderRadius:"3px"}}>
-                                {this.state.collapsed===true ? <MyIcon  type="icon-youfanyeyouhua" style={{fontSize: 30, marginTop: 15}}/>:<MyIcon  type="icon-zuofanyezuohua" style={{fontSize: 30, marginTop: 15}}/>}
+                            }} style={{
+                                backgroundColor: "#BFC4C5",
+                                height: "60px",
+                                textAlign: "center",
+                                borderRadius: "3px"
+                            }}>
+                                {this.state.collapsed === true ?
+                                    <MyIcon type="icon-youfanyeyouhua" style={{fontSize: 30, marginTop: 15}}/> :
+                                    <MyIcon type="icon-zuofanyezuohua" style={{fontSize: 30, marginTop: 15}}/>}
                             </div>
                         </Affix>
                     </div>
@@ -185,7 +192,9 @@ class demo extends Component {
                             <Breadcrumb className="breadcrumb" separator=">">
 
                                 {this.state.showElem === '1' ? <Breadcrumb.Item>
-                                    <Row><p onClick={()=>this.setState({serviceLocation:null}) }>Medical Service</p> <p>{this.state.serviceLocation!=null ? " || "+this.state.serviceLocation:null}</p></Row>
+                                    <Row><p onClick={() => this.setState({serviceLocation: null})}>Medical Service</p>
+                                        <p>{this.state.serviceLocation != null ? " || " + this.state.serviceLocation : null}</p>
+                                    </Row>
 
                                 </Breadcrumb.Item> : null}
 
@@ -213,32 +222,40 @@ class demo extends Component {
                         }}>
 
                             {
-                                this.state.showElem === '1' && this.state.serviceLocation===null ? <MedicalService serviceSelected={(location)=>{this.serviceSelected(location)}} /> : null
+                                this.state.showElem === '1' && this.state.serviceLocation === null ?
+                                    <MedicalService serviceSelected={(location) => {
+                                        this.serviceSelected(location)
+                                    }}/> : null
                             }
 
                             {
-                                this.state.showElem === '1' && this.state.serviceLocation==="gp" ? <Gp/> : null
+                                this.state.showElem === '1' && this.state.serviceLocation === "gp" ? <Gp/> : null
                             }
 
                             {
-                                this.state.showElem === '1' && this.state.serviceLocation==="emergency" ? <Emergency/> : null
+                                this.state.showElem === '1' && this.state.serviceLocation === "emergency" ?
+                                    <Emergency/> : null
                             }
 
                             {
-                                this.state.showElem === '1' && this.state.serviceLocation==="specialist" ? <Specialist/> : null
+                                this.state.showElem === '1' && this.state.serviceLocation === "specialist" ?
+                                    <Specialist/> : null
                             }
 
                             {
-                                this.state.showElem === '1' && this.state.serviceLocation==="hospital" ? <Hospitals/> : null
+                                this.state.showElem === '1' && this.state.serviceLocation === "hospital" ?
+                                    <Hospitals/> : null
                             }
 
                             {
-                                this.state.showElem === '1' && this.state.serviceLocation==="pharmacy" ? <Pharmacy/> : null
+                                this.state.showElem === '1' && this.state.serviceLocation === "pharmacy" ?
+                                    <Pharmacy/> : null
                             }
 
                             {
 
-                                this.state.showElem === '1' && this.state.serviceLocation==="helpline" ? <Helpline/> : null
+                                this.state.showElem === '1' && this.state.serviceLocation === "helpline" ?
+                                    <Helpline/> : null
 
                             }
 

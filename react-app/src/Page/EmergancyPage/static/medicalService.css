@@ -6,12 +6,12 @@ h1 {
     margin-left: 12px;
 }
 
-h2 {
+.fiveMark {
+    position: relative;
+    bottom: 30px;
     color: white;
-    font-size: 80px;
+    font-size: 150px;
     font-weight: bold;
-    text-align: left;
-    margin-left: 10px;
 }
 
 .header-p {
@@ -21,7 +21,7 @@ h2 {
 #inside-image-title {
     text-align: left;
     margin-left: 12px;
-    font-family: Microsoft YaHei UI;
+    font-family: Microsoft YaHei UI, serif;
     font-size: 30px;
     color:white;
 }
@@ -29,7 +29,7 @@ h2 {
 #inside-image-word {
     font-size: 20px;
     color:white;
-    font-family: Microsoft YaHei UI;
+    font-family: Microsoft YaHei UI, serif;
     text-align: left;
     margin-left: 12px;
 }
@@ -40,11 +40,7 @@ h2 {
 }
 
 .header-m {
-    text-align: center;
-    font-size: 30px;
-    height: 800px;
-    width: 100%;
-    float: left;
+    margin-bottom: 50px;
 }
 
 .front-background-wrapper {
@@ -61,7 +57,6 @@ h2 {
 
 #FirstP p {
     text-align: left;
-    font-weight: normal;
     font-family: Microsoft YaHei UI;
     margin-left: 12px;
     font-size: 20px;
@@ -78,7 +73,7 @@ h2 {
 .header-content-wrapper {
     float:left;
     margin-left: 10px;
-    margin-top: 145px;
+
 }
 
 #text-along-bigger {
@@ -95,9 +90,6 @@ h2 {
 }
 
 .content_container{
-    width: 100%;
-    height: 2500px;
-    padding: 10px 0px 5px;
     float:left;
 }
 
@@ -107,19 +99,16 @@ h2 {
 }
 
 .information-title-box {
-    width: 472px;
-    height: 100%;
+
     margin-left: 12px;
-    float: left;
-    font-size: 28px;
 }
 
 .information-content-box {
-    width: 472px;
+
     height: 80%;
-    margin-left: 30px;
+    margin-left: 26px;
     float: left;
-    margin-top: 40px;
+    margin-top: 20px;
 
 }
 
@@ -130,15 +119,10 @@ h2 {
     text-align: left;
 }
 
-.primary-wrapper {
-    width: 100%;
-    height: 760px;
-}
 
 .primary-box {
-    width: 95%;
+    margin-left: 26px;
     height: 750px;
-    margin: auto;
 }
 
 .primary-title-box {

@@ -366,6 +366,7 @@ func GetUserBookings(c *gin.Context)  {
 	bookings := GetBookings(info.UserName, *db)
 
 	for _, each := range bookings {
+		jkfdg
 		n := strings.Split(each.DocName, " ")
 		var obj ReturnData
 		obj.FirstName = n[0]

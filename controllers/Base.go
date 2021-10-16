@@ -9,6 +9,7 @@ import (
 )
 
 func isContain(data string, dataList []string) bool{
+	adsgagd
 	for _, str := range dataList {
 		if data == str {
 			return true
