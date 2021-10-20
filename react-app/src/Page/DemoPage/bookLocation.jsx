@@ -7,6 +7,8 @@ import { Card } from 'antd';
 
 
 import axios from "axios";
+import MapboxGl from "mapbox-gl/dist/mapbox-gl";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 const distanceOptions=[
     { value: '0,1', label: '1km' },
@@ -34,8 +36,26 @@ export default class bookLocation extends Component {
     }
     handleGetInputValue = (event) => {
         this.setState({
-            [event.target.name] : event.target.value,
+            "input" : event.target.value,
         })
+        //demo
+        MapboxGl.accessToken =
+            'pk.eyJ1IjoiZGFya3R0dDA1MTMiLCJhIjoiY2t1eG94cTR0MjdvdzJ1cTljOTlzM2gweCJ9.1sTUwqyhLz_qTgrk3tkGgg';
+        const geocoder = new MapboxGeocoder({
+            accessToken: MapboxGl.accessToken,
+            // types: 'place,postcode,locality,neighborhood'
+            types: 'country,region,place,postcode,locality,neighborhood'
+        });
+        geocoder.addTo('#geocoder');
+        geocoder.query(event.target.value);
+        geocoder.on('result', (e) => {
+
+            const x = e.result.bbox[0];
+            const y = e.result.bbox[1];
+            console.log(x)
+            console.log(y)
+
+        });
     };
 
     handleDistanceValue = distanceSelect => {
@@ -43,13 +63,13 @@ export default class bookLocation extends Component {
             distanceMin : distanceSelect.replace(",","")[0],
             distanceMax : distanceSelect.replace(",","")[1],
         })
-
     };
 
     handleLanguageValue = languageSelect => {
         this.setState({
             language : languageSelect,
         })
+
     };
 
     gpSelected(info){
@@ -81,8 +101,8 @@ export default class bookLocation extends Component {
 
                         <div>
                             <h1>{d.Gp.GpName}</h1>
-                            <h2>Distance: {d.Distance} Kilometer</h2>
-                            <h2>Language:</h2>
+                            <h3>Distance: {d.Distance} Kilometer</h3>
+                            <h3>Language:</h3>
                        
                             <Row>
                                 {d.Language.map(item=>(
@@ -155,10 +175,13 @@ export default class bookLocation extends Component {
     render() {
         return (
             <div className="location">
+
                 <div className="inputData">
                     <Input.Group compact>
-                        <Input size="large" style={{ width: '50%' }} placeholder="Type Clinic name or Post Code" name="input"
-                               onChange={this.handleGetInputValue} />
+                        <Input  size="large" style={{ width: '50%' }} placeholder="Type Clinic name or Post Code"  onChange={this.handleGetInputValue}
+                                />
+                        <div id="geocoder" style={{display:"none"}}></div>
+                        <pre id="result"></pre>
                         <Select size="large" placeholder="Distance" style={{ width: 120 }} value={this.state.distanceSelect}
                                 onChange={this.handleDistanceValue} options={distanceOptions}>
                             {/*<Option value="1km">1km</Option>*/}

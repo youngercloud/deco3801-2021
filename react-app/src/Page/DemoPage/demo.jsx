@@ -20,6 +20,7 @@ import Pharmacy from "../EmergancyPage/pharmacy"
 import Specialist from "../EmergancyPage/specialistService"
 import Hospitals from "../EmergancyPage/hospitals";
 import Gp from "../EmergancyPage/generalPractitioner"
+import Box from "./aaaa"
 
 import cookie from "react-cookies";
 
@@ -252,6 +253,8 @@ class demo extends Component {
                                         this.gpSelected(info, e)
                                     }}/> : null
                             }
+
+
 
                             {
                                 this.state.showElem === '2' && this.state.bookingStep === "GpSelected" ?

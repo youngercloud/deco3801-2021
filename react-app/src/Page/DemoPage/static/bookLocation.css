@@ -62,7 +62,7 @@ body {
 }
 
 .ant-card-body h1{
-    font-size: 24px;
+    font-size: 20px;
     color: #354E57;
     text-align: left;
 }
@@ -73,7 +73,7 @@ body {
 
 .ant-card-body h3{
     text-align: left;
-    font-size: 15px;
+    font-size: 14px;
     color: #354E57;
 }
 
@@ -90,8 +90,8 @@ body {
 }
 
 .ant-card-body button {
-    width: 40%;
-    font-size: 15px;
+    width: 37%;
+
     color: #FFFFFF;
     border: none;
 
@@ -99,7 +99,7 @@ body {
 
 .ant-card-body button p{
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 12px;
     padding-top: 1px !important;
 
 
