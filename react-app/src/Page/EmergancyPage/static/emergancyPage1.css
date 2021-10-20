@@ -19,11 +19,17 @@
     float: right;
 }
 
-
-
-p{
-    color: #354E57;
-
+.header-content-5items {
+    position: relative;
+    padding: 0;
+    margin: -25px;
+    right: 50px;
+    top: 35px
+}
+.header-content-5items-topic {
+    width: 50%;
+    position: relative;
+    top: 30px
 }
 
 h2 {

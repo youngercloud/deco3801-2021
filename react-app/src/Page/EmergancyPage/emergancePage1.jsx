@@ -37,9 +37,11 @@ const strings = {
     20:"",
 
 }
-const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"], strings["5"], strings["6"],
-    strings["7"], strings["8"], strings["9"], strings["10"], strings["11"], strings["12"], strings["13"], strings["14"]
-    , strings["15"], strings["16"], strings["17"], strings["18"], strings["19"], strings["20"]];
+
+const arr = []
+for (let k of Object.keys(strings)) {
+    arr.push(strings[k])
+}
 
 
 class emergancyPage1 extends Component {
@@ -75,7 +77,7 @@ class emergancyPage1 extends Component {
 
                         order to buy the drugs they need.</p>
                 </div>
-                <div className="line"></div>
+                <div className="line"/>
                 <div className="divFragment">
                     <h1>What you can do:</h1>
                     <div className="segment1">

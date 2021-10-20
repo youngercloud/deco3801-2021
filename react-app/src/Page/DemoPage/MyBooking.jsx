@@ -3,14 +3,13 @@ import React, {Component} from 'react';
 import 'react-chat-elements/dist/main.css';
 // MessageBox component
 import {MessageList} from 'react-chat-elements'
-
-import {Button, Card, Col, Input as AntdInput, Row, Select, Space} from "antd";
+import Card from "./DoctorCard";
+import {Affix, Col, Input as AntdInput, Row, Select, Space} from "antd";
 import './static/arginote.css'
 import goodman from "../../Images/goodman.jpeg";
-import {SendOutlined} from "@ant-design/icons";
 import {Option} from "antd/es/mentions";
 import axios from "axios";
-import Paragraph from "antd/es/typography/Paragraph";
+
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
 const {Meta} = Card;
@@ -29,14 +28,12 @@ class ChatArea extends Component {
     }
 
 
-
-
     componentDidMount() {
         //回到顶部（weijia）
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
-            window.scrollTo (0,0);
+            window.scrollTo(0, 0);
         }
 
         // load all of the language options from Google Translate to your app state
@@ -103,10 +100,10 @@ class ChatArea extends Component {
                         dataSource={this.state.dataSource}
                     />
                 </div>
-                <div>
+                <div className="chat-input">
                     <Select
                         className="chat-language-select"
-                        style={{width:"30%"}}
+                        style={{}}
                         showSearch
                         placeholder="Select a Language"
                         optionFilterProp="children"
@@ -119,6 +116,7 @@ class ChatArea extends Component {
                         }>
                         {orig}
                     </Select>
+
                     <AntdInput
                         placeholder="Message"
                         className="chat-input-original"
@@ -128,23 +126,33 @@ class ChatArea extends Component {
                             })
                         }}/>
 
-                    <AntdInput
-                        value={this.state.input}
-                        disabled={true}
-                        style={{marginTop: 10,backgroundColor:"#D9E9EE",}}
-                        placeholder="Choose the language for translation"
-                        className="chat-input-translated"/>
-                    <Button
-                        onClick={(e) => this.sendMessage(e,
-                            {'content': this.state.input , 'type': 'user'})}
-                        style={{marginTop: 20}} type="primary" size="large">
-                    Send Translated Message </Button>
+
+                    <div className="chat-translation">
+                        <Row>
+                            <Col span={18}>
+                                <AntdInput
+                                    value={this.state.input}
+                                    disabled={true}
+
+                                    placeholder="Choose the language for translation"
+                                    className="chat-input-translated"/>
+                            </Col>
+                            <Col span={6}>
+                                <button
+                                    onClick={(e) => this.sendMessage(e,
+                                        {'content': this.state.input, 'type': 'user'})}
+                                    className="chat-send-msg-btn">
+                                    Send Translated Message
+                                </button>
+                            </Col>
+                        </Row>
+                    </div>
+
                 </div>
             </div>
         )
     }
 }
-
 
 
 export default class MyBooking extends Component {
@@ -168,7 +176,7 @@ export default class MyBooking extends Component {
         e.currentTarget.style.border = 'green solid 2px';
     }
 
-    handleSendMessage(event, message){
+    handleSendMessage(event, message) {
         let data = JSON.stringify(message);
     }
 
@@ -180,43 +188,23 @@ export default class MyBooking extends Component {
 
             const arr = [];
             let arr2 = [];
-            Object.keys(json).forEach(function(key) {
+            Object.keys(json).forEach(function (key) {
                 arr.push(json[key]);
             });
             arr2 = arr[0];
             this.doctorData = arr2.map((d) =>
-                <Col span={8} className="doctor-selection-box">
-                    <Card
-                        onClick={(e) => {
-                            this.doctorSelect(e)
-                        }}
-                        style={{width: 300}}
-                        cover={
-                            <img
-                                alt="example"
-                                src={goodman}
-                            />
-                        }>
-                        <Meta
-                            title={d.FirstName + " " + d.LastName}
-                            description={
-                                <Paragraph>
-                                    <ul>
-                                        <li>
-                                            {d.GpName}
-                                        </li>
-                                        <li>
-                                            {d.DocLanguage}
-                                        </li>
-                                        <li>
-                                            {d.BookingTime}
-                                        </li>
-                                    </ul>
-                                </Paragraph>
-                            }
-                        />
-                    </Card>
-                </Col>
+                <Card
+                    onClick={(e) => {
+                        this.doctorSelect(e)
+                    }}
+                    style={{width: 300, boxShadow: "5px 7.5px #888888"}}
+                    image={goodman}
+                    firstName={d.FirstName}
+                    lastName={d.LastName}
+                    docLanguage={d.DocLanguage}
+                    bookingTime={d.BookingTime}
+                    gpName={d.GpName}
+                />
             )
             console.log(arr2)
             this.forceUpdate()
@@ -235,9 +223,14 @@ export default class MyBooking extends Component {
                         </Space>
                     </Col>
                     <Col span={14}>
-                        <Space direction="vertical" size={36} className="booking-space-justify" style={{width: '100%'}}>
-                            <ChatArea handleSendMessage={(e, m) => {this.handleSendMessage(e, m)}}/>
-                        </Space>
+                        <Affix offsetTop={20} style={{width: '100%'}}>
+                            <Space direction="vertical" size={36} className="booking-space-justify"
+                                   style={{width: '100%'}}>
+                                <ChatArea handleSendMessage={(e, m) => {
+                                    this.handleSendMessage(e, m)
+                                }}/>
+                            </Space>
+                        </Affix>
                     </Col>
                 </Row>
             </div>

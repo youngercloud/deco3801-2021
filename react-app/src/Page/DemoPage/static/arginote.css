@@ -12,6 +12,7 @@
   /* Track */
   /* Handle */
   /* Handle on hover */
+  background-color: #EEF3F4;
   width: 88%;
   height: 750px;
   border-radius: 10px;
@@ -35,15 +36,34 @@
 }
 .chat-area .chat-area-content {
   height: 500px;
-  background-color: #EEF3F4;
   border-radius: 5px;
   padding: 3%;
+  margin-bottom: 20px;
   overflow: auto;
 }
-.chat-area .chat-language-select {
+.chat-area .chat-input {
+  background-color: #ccc;
+  padding-bottom: 20px;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 10px;
+}
+.chat-area .chat-input .chat-input-original {
+  width: 90%;
+  border-radius: 5px;
+  margin-left: 5%;
+  height: 50px;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  display: -webkit-box;
+  display: -moz-box;
+}
+.chat-area .chat-input .chat-language-select {
   height: 60px;
-  width: 60%;
-  margin-left: 20%;
+  width: 30%;
+  margin-left: 5%;
   -webkit-box-align: center;
   -webkit-box-pack: center;
   -moz-box-align: center;
@@ -52,37 +72,26 @@
   display: -moz-box;
   text-align: center;
 }
-.chat-area .chat-input-original {
-  width: 80%;
-  border-radius: 5px;
-  height: 56px;
-  margin-left: 10%;
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
-  -moz-box-align: center;
-  -moz-box-pack: center;
-  display: -webkit-box;
-  display: -moz-box;
+.chat-area .chat-input .chat-translation {
+  width: 90%;
+  margin-left: 5%;
 }
-.chat-area .chat-input-translated {
-  width: 80%;
+.chat-area .chat-input .chat-translation .chat-input-translated {
   border-radius: 5px;
-  height: 56px;
-  margin-left: 10%;
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
-  -moz-box-align: center;
-  -moz-box-pack: center;
-  display: -webkit-box;
-  display: -moz-box;
+  height: 50px;
+  margin-top: 20px;
+  background-color: #D9E9EE;
 }
-.chat-area .chat-send {
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
-  -moz-box-align: center;
-  -moz-box-pack: center;
-  display: -webkit-box;
-  display: -moz-box;
+.chat-area .chat-input .chat-translation .chat-send-msg-btn {
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: #354E57;
+  height: 50px;
+  margin-left: 10%;
+  width: 90%;
+  color: white;
+  cursor: pointer;
+  border: none;
 }
 .centralization {
   -webkit-box-align: center;

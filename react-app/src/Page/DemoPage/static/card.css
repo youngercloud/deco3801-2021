@@ -1,0 +1,13 @@
+.card-style {
+    border: 1px solid rgba(0,0,0,0.3);
+    background-color: #eee;
+    box-shadow: 3px 5px #888;
+    border-radius: 2px;
+}
+
+.doctor-card-info-display {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    text-align: left;
+}

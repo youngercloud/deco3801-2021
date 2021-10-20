@@ -9,6 +9,7 @@ import (
 )
 
 func isContain(data string, dataList []string) bool{
+	fmt.Println("完成医生多重语言的list检测！")
 	for _, str := range dataList {
 		if data == str {
 			return true

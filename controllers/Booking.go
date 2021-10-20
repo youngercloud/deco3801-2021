@@ -366,6 +366,7 @@ func GetUserBookings(c *gin.Context)  {
 	bookings := GetBookings(info.UserName, *db)
 
 	for _, each := range bookings {
+		fmt.Println("完成医生多重语言的list检测！")
 		n := strings.Split(each.DocName, " ")
 		var obj ReturnData
 		obj.FirstName = n[0]

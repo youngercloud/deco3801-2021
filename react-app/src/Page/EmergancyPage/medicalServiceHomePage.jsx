@@ -11,12 +11,12 @@ import cookie from "react-cookies";
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
 
-const strings = {
+let strings = {
     0:"Medical Service",
     1:"In Australia",
     2:"The medical system in Australia have many different types and times to provide health care for you",
     3:"Main place to offer medical care for you!",
-    4:"More detail Here",
+    4:"More Detail Here",
     5:"In Australia, in the first place, people usually go to GP when they need medical care.",
     6:"Primary",
     7:"Help with general health issue",
@@ -50,15 +50,19 @@ const strings = {
     35:"Sell medicine and can provide vaccines",
     36:"You can get help when during after hour time",
     37:"Provide help 24/7",
-    38:"May give you a call back from a GP"
-}
-const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"], strings["5"], strings["6"],
-    strings["7"], strings["8"], strings["9"], strings["10"], strings["11"], strings["12"], strings["13"], strings["14"]
-    , strings["15"], strings["16"], strings["17"], strings["18"], strings["19"], strings["20"], strings["21"],
-    strings["22"], strings["23"], strings["24"], strings["25"], strings["26"], strings["27"], strings["28"],
-    strings["29"], strings["30"], strings["31"], strings["32"], strings["33"], strings["34"], strings["35"],
-    strings["36"], strings["37"], strings["38"]];
+    38:"May give you a call back from a GP",
+    39:"General Practitioner",
+    40:"Emergency Department",
+    41:"Specialist",
+    42:"Hospital",
+    43:"Pharmacy",
 
+}
+
+const arr = []
+for (let k of Object.keys(strings)) {
+    arr.push(strings[k])
+}
 
 
 class medicalServiceHomePage extends Component {
@@ -133,25 +137,27 @@ class medicalServiceHomePage extends Component {
                         <h1>{arr[0]}</h1>
                         <h1>{arr[1]}</h1>
                         <div id="FirstP">
-                            <p>
-                                {arr[2]}
-                            </p>
+                            <p>{arr[2]}</p>
                         </div>
                         <br/>
                         <div className="front-background-wrapper">
                             <div className="front-background-box">
                                 <div className="header-content-wrapper">
-                                    <h2>5</h2>
+                                    <h2 className="fiveMark">5</h2>
                                 </div>
                                 <div className="header-content-wrapper" id="text-along-bigger">
-                                    <p>{arr[3]}</p>
-                                    <br/>
+                                    <p className="header-content-5items-topic">{arr[3]}</p>
+                                    <p className="header-content-5items">{arr[39]}</p>
+                                    <p className="header-content-5items">{arr[40]}</p>
+                                    <p className="header-content-5items">{arr[41]}</p>
+                                    <p className="header-content-5items">{arr[42]}</p>
+                                    <p className="header-content-5items">{arr[43]}</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                    <div className="content_container">
+
+                    <div>
                         <div className="information-wrapper">
                             <div className="information-box">
                                 <div className="information-title-box">
@@ -398,7 +404,6 @@ class medicalServiceHomePage extends Component {
             </div>
         );
     }
-
 }
 
 export default medicalServiceHomePage;
