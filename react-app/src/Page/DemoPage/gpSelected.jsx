@@ -17,6 +17,14 @@ export default class gpSelected extends Component {
         time: "none",
     };
 
+    componentDidMount() {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            //window.requestAnimationFrame(smoothscroll);
+            window.scrollTo (0,0);
+        }
+    }
+
     onChangeStrength = () => {
         if (this.state.strength === "none") {
             this.setState({strength: "block"})

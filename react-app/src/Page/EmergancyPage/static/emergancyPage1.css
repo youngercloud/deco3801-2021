@@ -27,9 +27,9 @@ p{
 }
 
 h2 {
-    color: #354E57;
+    color: white;
     font-size: 45px;
-    float: left;
+    /*float: left;*/
     margin-left: 30px;
     margin-top:20px;
 }

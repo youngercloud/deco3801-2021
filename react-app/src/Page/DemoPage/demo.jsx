@@ -12,8 +12,9 @@ import DoctorSelect from "./doctorPage"
 import Time from "./time"
 import Information from "./bookInformation"
 import MyBooking from "./MyBooking";
+
 import MedicalService from "../EmergancyPage/medicalServiceHomePage"
-import Emergency from "../EmergancyPage/generalPractitioner"
+import Emergency from "../EmergancyPage/emergencyDepartment"
 import Helpline from "../EmergancyPage/helpline"
 import Pharmacy from "../EmergancyPage/pharmacy"
 import Specialist from "../EmergancyPage/specialistService"
@@ -21,6 +22,7 @@ import Hospitals from "../EmergancyPage/hospitals";
 import Gp from "../EmergancyPage/generalPractitioner"
 
 import cookie from "react-cookies";
+
 
 
 const {Header, Sider, Content} = Layout;
@@ -168,6 +170,7 @@ class demo extends Component {
                         </Affix>
 
                     </Sider>
+
                     <div className="controlBar">
                         <Affix offsetTop={120}>
                             <div onClick={() => {
@@ -175,12 +178,11 @@ class demo extends Component {
                             }} style={{backgroundColor:"#BFC4C5",height:"60px",textAlign:"center",borderRadius:"3px"}}>
                                 {this.state.collapsed===true ? <MyIcon  type="icon-youfanyeyouhua" style={{fontSize: 30, marginTop: 15}}/>:<MyIcon  type="icon-zuofanyezuohua" style={{fontSize: 30, marginTop: 15}}/>}
                             </div>
-
                         </Affix>
                     </div>
                     <Layout className="site-layout">
                         <Header className="site-layout-background" style={{padding: 5}}>
-                            <Breadcrumb separator=">">
+                            <Breadcrumb className="breadcrumb" separator=">">
 
                                 {this.state.showElem === '1' ? <Breadcrumb.Item>
                                     <Row><p onClick={()=>this.setState({serviceLocation:null}) }>Medical Service</p> <p>{this.state.serviceLocation!=null ? " || "+this.state.serviceLocation:null}</p></Row>
@@ -235,7 +237,9 @@ class demo extends Component {
                             }
 
                             {
+
                                 this.state.showElem === '1' && this.state.serviceLocation==="helpline" ? <Helpline/> : null
+
                             }
 
                             {

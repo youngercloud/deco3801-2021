@@ -28,7 +28,17 @@ class ChatArea extends Component {
         dataSource: []
     }
 
+
+
+
     componentDidMount() {
+        //回到顶部（weijia）
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            //window.requestAnimationFrame(smoothscroll);
+            window.scrollTo (0,0);
+        }
+
         // load all of the language options from Google Translate to your app state
 
         googleTranslate.getSupportedLanguages("en", function (err, languageCodes) {
