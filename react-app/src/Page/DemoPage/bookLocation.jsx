@@ -126,8 +126,8 @@ export default class bookLocation extends Component {
 
                         <div>
                             <h1>{d.Gp.GpName}</h1>
-                            <h2>Distance: {d.Distance} Kilometer</h2>
-                            <h2>Language:</h2>
+                            <h3>Distance: {d.Distance} Kilometer</h3>
+                            <h3>Language:</h3>
 
                             <Row>
                                 {d.Language.map(item=>(
