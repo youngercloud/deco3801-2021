@@ -92,6 +92,7 @@
   color: white;
   cursor: pointer;
   border: none;
+  font-size: 12px;
 }
 .centralization {
   -webkit-box-align: center;

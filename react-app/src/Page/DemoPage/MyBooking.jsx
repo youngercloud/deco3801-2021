@@ -223,13 +223,14 @@ export default class MyBooking extends Component {
                         </Space>
                     </Col>
                     <Col span={14}>
-                        <Affix offsetTop={20} style={{width: '100%'}}>
+                        <Affix style={{width: '100%'}}>
                             <Space direction="vertical" size={36} className="booking-space-justify"
                                    style={{width: '100%'}}>
                                 <ChatArea handleSendMessage={(e, m) => {
                                     this.handleSendMessage(e, m)
                                 }}/>
                             </Space>
+
                         </Affix>
                     </Col>
                 </Row>

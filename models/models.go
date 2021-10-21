@@ -53,8 +53,8 @@ type HospitalGp struct {
 	BaseModel
 	GpName string `gorm:"not null;size:256"`
 	PostCode string `gorm:"not null;size:256"`
-	LocationX int `gorm:"not null;size:256"`
-	LocationY int `gorm:"not null;size:256"`
+	LocationX float64 `gorm:"not null;size:256"`
+	LocationY float64 `gorm:"not null;size:256"`
 	Address string `gorm:"not null;size:256"`
 	About string `gorm:"not null;size:65536"`
 	Strengths string `gorm:"not null;size:256"`

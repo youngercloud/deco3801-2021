@@ -91,10 +91,10 @@ class emergencyDepartment extends Component {
         const {languageCodes, language} = this.state;
         return(
             <div>
-                <select className="select-language" value={language} onChange={(e) => {
+                <select className="medical-service-select-language" value={language} onChange={(e) => {
                     this.changeHandler(e.target.value)
                 }}>
-
+                    <option value="" selected disabled hidden>Choose a language</option>
                     {languageCodes.map(lang => (
                         <option key={lang.language} value={lang.language}>
                             {lang.name}
