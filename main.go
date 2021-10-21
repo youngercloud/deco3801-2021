@@ -9,7 +9,7 @@ import (
 
 func main()  {
 	//controllers.FakeCreateTable()
-	controllers.FakeGp()
+	//controllers.FakeGp()
 	router:= gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 	api := router.Group("./api")
