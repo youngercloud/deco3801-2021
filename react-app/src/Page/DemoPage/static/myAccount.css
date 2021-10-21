@@ -2,5 +2,30 @@ html,
 body {
     margin: 0;
     padding: 0;
+}
 
+.account{
+    margin-left: 10%;
+    background-color: #FAFAFA;
+    width: 80%;
+}
+
+.account h1{
+    font-size: 40px;
+    color: #354E57;
+    font-weight: bold;
+    margin-top: 2%;
+}
+
+.account h2{
+    margin-left: 0;
+    font-size: 18px;
+    color: #354E57;
+    font-weight: bold;
+}
+
+.account h3{
+    font-size: 16px;
+    color: #354E57;
+    text-align: left;
 }
