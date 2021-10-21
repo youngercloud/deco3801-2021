@@ -42,7 +42,7 @@ type Doctor struct {
 	DOB string `gorm:"size:256"`
 	Gender string `gorm:"not null;size:256"`
 	Email string `gorm:"not null;size:256"`
-	PhoneNumber int `gorm:"size:256"`
+	PhoneNumber string `gorm:"size:256"`
 	ClinicOrHospital string `gorm:"size:256"`
 	Specialty     string `gorm:"size:256"`
 	Language      string `gorm:"size:256"`
@@ -53,8 +53,8 @@ type HospitalGp struct {
 	BaseModel
 	GpName string `gorm:"not null;size:256"`
 	PostCode string `gorm:"not null;size:256"`
-	LocationX int `gorm:"not null;size:256"`
-	LocationY int `gorm:"not null;size:256"`
+	LocationX float64 `gorm:"not null;size:256"`
+	LocationY float64 `gorm:"not null;size:256"`
 	Address string `gorm:"not null;size:256"`
 	About string `gorm:"not null;size:65536"`
 	Strengths string `gorm:"not null;size:256"`

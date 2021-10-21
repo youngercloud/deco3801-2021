@@ -7,6 +7,7 @@ import image4 from "../EmergancyPage/static/m4.png";
 import image5 from "../EmergancyPage/static/m5.png";
 import image6 from "../EmergancyPage/static/m6.png";
 import cookie from "react-cookies";
+import {Select} from "antd";
 
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
@@ -122,10 +123,11 @@ class medicalServiceHomePage extends Component {
         const {languageCodes, language} = this.state;
         return(
             <div>
-                <select className="select-language" value={language} onChange={(e) => {
+                <select className="medical-service-select-language" style={{width: '20%'}}
+                        value={language} onChange={(e) => {
                     this.changeHandler(e.target.value)
                 }}>
-
+                    <option value="" selected disabled hidden>Choose a language</option>
                     {languageCodes.map(lang => (
                         <option key={lang.language} value={lang.language}>
                             {lang.name}

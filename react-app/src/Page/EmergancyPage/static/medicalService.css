@@ -248,6 +248,27 @@
     margin-left: 20px;
 }
 
+.medical-service-select-language {
+    position: absolute;
+    top: 3.5%;
+    right: 10%;
+    background-color:#354E57;
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: auto 50%;
+    border-radius:2px;
+    border:none;
+    color: #ffffff;
+    padding: 10px 30px 10px 10px;
+    outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
 
-
-
+@-moz-document url-prefix() {
+    select {
+        color: rgba(0,0,0,0);
+        text-shadow: 0 0 0 #ffffff;
+    }
+}

@@ -8,7 +8,8 @@ import (
 )
 
 func main()  {
-	//controllers.FakeBooking()
+	//controllers.FakeCreateTable()
+	controllers.FakeGp()
 	router:= gin.Default()
 	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 	api := router.Group("./api")
