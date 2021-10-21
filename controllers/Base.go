@@ -98,9 +98,29 @@ func FakeCl() {
 func FakeImage() {
 	var db = models.InitDB()
 	var data models.Image
-	data.Path = "3.png"
-	data.Name = "testData"
-	data.OwnerName = "NB clinic"
+	data.Path = ".png"
+	data.Name = "UQ St Lucia Medical Centre.main"
+	data.OwnerName = "UQ St Lucia Medical Centre"
+	data.Type = models.GP
+	data.IsMain = true
+
+	if err := db.Create(&data).Error; err != nil {
+		fmt.Println("error!")
+	}
+
+	data.Path = ".png"
+	data.Name = "Toowong Gps.main"
+	data.OwnerName = "Toowong Gps"
+	data.Type = models.GP
+	data.IsMain = true
+
+	if err := db.Create(&data).Error; err != nil {
+		fmt.Println("error!")
+	}
+
+	data.Path = ".png"
+	data.Name = "MyHealth.main"
+	data.OwnerName = "MyHealth"
 	data.Type = models.GP
 	data.IsMain = true
 

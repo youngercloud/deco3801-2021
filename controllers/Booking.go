@@ -121,6 +121,7 @@ func HandleGpSearch(c *gin.Context)  {
 
 type searchReData struct {
 	Gp models.HospitalGp
+	GpStrength []string
 	Language []string
 	Distance string
 	Images models.Image
@@ -182,6 +183,7 @@ func gPSearch(data InputData) []searchReData {
 		}
 		eachData.GpImages = GetImages(models.GP, gp.GpName, 0, *db)
 		eachData.DocInfos = HandleDocSearch(gp.GpName, *db)
+		eachData.GpStrength = strings.Split(gp.Strengths, "%")
 		rawList = append(rawList, eachData)
 	}
 
