@@ -17,7 +17,7 @@ body {
 
 .bookingInformation p{
     word-wrap: break-word;
-    word-break: break-all;
+    /*word-break: break-all;*/
     font-weight: unset;
     color: #354E57;
     font-size: 16px;

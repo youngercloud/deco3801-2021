@@ -29,3 +29,20 @@ body {
     color: #354E57;
     text-align: left;
 }
+
+.account button{
+    margin-top: 5%;
+    width: 60%;
+    border-radius: 3px;
+    background-color: #B9C1C4;
+    color: #354E57;
+    border: #B9C1C4;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.account button:hover{
+    background-color: #DAE3E7;
+
+}
