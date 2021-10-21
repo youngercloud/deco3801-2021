@@ -113,13 +113,13 @@ func FakeImage() {
 func FakeGp() {
 	var db = models.InitDB()
 	var data models.HospitalGp
-	data.GpName = "NB clinic"
-	data.PostCode = "4066"
-	data.LocationX = 6
-	data.LocationY = 6
-	data.Address = "Level 10/39 Sherwood Rd, Toowong QLD 4066"
-	data.About = "Proud to be a Better Medical Practice\nWe are excited to announce that our SmartClinics centres have now joined the Better Medical group of practices.\n\nBetter Medical operates 85 high-quality practices across Australia, which all have one thing in common – we want to be the best we can be for our patients.\n\nBeing part of the Better Medical Group provides our doctors and team members with many benefits, including more opportunities for professional development and better access to enhanced technologies, meaning we are better equipped and supported to help you.\n\nBetter still, the same doctors and staff who have always provided you with the highest standard of care will continue to do so in our clinics.\n\nFor more information about Better Medical, please visit"
-	data.Strengths = "1"
+	data.GpName = "UQ St Lucia Medical Centre"
+	data.PostCode = "4072"
+	data.LocationX = -27.496472451479686
+	data.LocationY = 153.01557213301874
+	data.Address = "The University of Queensland Level 1, Gordon Greenwood Building (Blg 32, St Lucia QLD 4067)"
+	data.About = "The UQ St Lucia Medical Centre offers quality care for the University’s domestic students, international students and their dependents as well as staff right here on campus. Our experienced doctors and allied health professionals care about issues that affect student and staff health, from mental health to sexual health, skin checks and travel consults.\n"
+	data.Strengths = "General medical consults%Immunisation%Mental health%Sexual health%Paediatric consults%Psychological counselling and psychiatric care%"
 	data.Monday = "9:00-17:00"
 	data.Tuesday = "9:00-17:00"
 	data.Wednesday = "9:00-17:00"
@@ -156,7 +156,7 @@ func FakeBooking()  {
 
 func FakeCreateTable() {
 	var db = models.InitDB()
-	err := db.AutoMigrate(&models.Doctor{})
+	err := db.AutoMigrate(&models.HospitalGp{})
 	if err != nil {
 		return 
 	}
