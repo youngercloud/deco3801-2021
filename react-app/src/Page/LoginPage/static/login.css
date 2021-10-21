@@ -63,3 +63,25 @@ span{
 .form-content{
     float: left;
 }
+
+.login-left-text {
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 40px;
+    padding-top: 50%;
+}
+
+.login-left-text-points {
+    padding-top: 20px;
+    margin-left: 40px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 22px;
+}
+
+.login-sidebar {
+    background-color: #354E57;
+    height:100%;
+}
+

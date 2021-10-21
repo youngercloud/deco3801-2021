@@ -153,22 +153,14 @@ class demo extends Component {
                                 <Menu.Item key="3" icon={<MyIcon type="icon-account" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("3")}>
                                     {arr[3]}
-                                    <Button style={{marginBottom: 20, marginLeft: 20}} onClick={() => this.logout()}>
-                                        {sessionStorage.getItem("name") === null ? "login in" : "logout"}
-                                    </Button>
+
                                 </Menu.Item>
-
+                                <Button className="sider-logout-button" onClick={() => this.logout()}>
+                                    {sessionStorage.getItem("name") === null ? "Sign in" :
+                                        <span>Logout</span>}
+                                </Button>
                             </Menu>
-                            <select className="select-language" value={language} onChange={(e) => {
-                                this.changeHandler(e.target.value)
-                            }}>
 
-                                {languageCodes.map(lang => (
-                                    <option key={lang.language} value={lang.language}>
-                                        {lang.name}
-                                    </option>
-                                ))}
-                            </select>
                         </Affix>
                     </Sider>
 
@@ -193,8 +185,12 @@ class demo extends Component {
                             <Breadcrumb className="breadcrumb" separator=">">
 
                                 {this.state.showElem === '1' ? <Breadcrumb.Item>
-                                    <Row><p onClick={() => this.setState({serviceLocation: null})}>Medical Service</p>
-                                        <p>{this.state.serviceLocation != null ? " || " + this.state.serviceLocation : null}</p>
+                                    <Row><p style={{marginRight: '10px', cursor: "pointer"}} onClick={() => this.setState({serviceLocation: null})}>Medical Service</p>
+                                        <p>{this.state.serviceLocation != null ?
+                                            " > " + this.state.serviceLocation.charAt(0).toUpperCase() +
+                                            this.state.serviceLocation.slice(1)
+                                            : null}
+                                        </p>
                                     </Row>
 
                                 </Breadcrumb.Item> : null}
