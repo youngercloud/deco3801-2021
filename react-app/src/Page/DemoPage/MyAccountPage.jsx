@@ -18,10 +18,10 @@ export default class Footer extends Component {
 
     componentDidMount() {
         let api;
-        api = "/api/myInformation"
+        api = "/api/login/user"
         axios.post(api, this.state).then((response) => {
             console.log(response.data)
-            this.setState({myInfo:response.data});
+            this.setState({myInfo:response.data.user});
         }).catch(function (error) {
             console.log(error);
         });
@@ -54,10 +54,11 @@ export default class Footer extends Component {
                                 <Row>
                                     <Col span={12}>
                                         <h2>Name: </h2>
-                                        <h3 style={{display:this.state.status}}>{sessionStorage.getItem("name")}</h3>
+                                        <h3>{sessionStorage.getItem("name")}</h3>
                                     </Col>
                                     <Col span={12}>
                                         <h2>Gender:  </h2>
+                                        <h3 style={{display:this.state.status}}>{this.state.myInfo}</h3>
                                         {this.state.status==="none" ? <select><option value selected disabled hidden>{this.state.myInfo }</option>
                                             <option value="male">male</option>
                                             <option value="female">female</option></select>:null}
