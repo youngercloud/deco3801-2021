@@ -75,9 +75,9 @@ func BookingInsert(c *gin.Context)  {
 	})
 }
 
-func calDistance(cunX int, cunY int, gpX int, gpY int) int {
-	var distance = math.Cbrt(float64((cunX - gpX)*(cunX-gpX) + (cunY - gpY)*(cunY-gpY)))
-	return int(distance)
+func calDistance(cunX float64, cunY float64, gpX float64, gpY float64) float64 {
+	var distance = math.Cbrt((cunX - gpX)*(cunX-gpX) + (cunY - gpY)*(cunY-gpY))
+	return distance
 }
 
 /**
@@ -173,7 +173,7 @@ func gPSearch(data InputData) []searchReData {
 		}
 		eachData.Language = language
 		//distance int -> string
-		eachData.Distance = strconv.Itoa(calDistance(myLocationX, myLocationY, gp.LocationX, gp.LocationY))
+		eachData.Distance = fmt.Sprintf("%f", calDistance(float64(myLocationX), float64(myLocationY), gp.LocationX, gp.LocationY))
 		images := GetImages(models.GP, gp.GpName, 1, *db)
 		if len(images) == 0 {
 			eachData.Images = models.Image{}
