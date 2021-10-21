@@ -133,10 +133,11 @@ class demo extends Component {
                             <Menu className="demo" mode="inline" defaultSelectedKeys={['1']}>
                                 <div className="image">
                                     <Image preview={false} src={logo} width={40}/>
-                                    <p style={{
+                                    {this.state.collapsed===false ? <p style={{
                                         color: "#EEF3F4",
                                         marginTop: 20
-                                    }}> welcome: {sessionStorage.getItem('name')}</p>
+                                    }}> welcome: {sessionStorage.getItem('name')}</p>:null}
+
                                 </div>
                                 <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("1")}>
@@ -155,10 +156,11 @@ class demo extends Component {
                                     {arr[3]}
 
                                 </Menu.Item>
-                                <Button className="sider-logout-button" onClick={() => this.logout()}>
+                                {this.state.collapsed===false ? <Button className="sider-logout-button" onClick={() => this.logout()}>
                                     {sessionStorage.getItem("name") === null ? "Sign in" :
                                         <span>Logout</span>}
-                                </Button>
+                                </Button>:null}
+
                             </Menu>
 
                         </Affix>
