@@ -193,8 +193,12 @@ class demo extends Component {
                             <Breadcrumb className="breadcrumb" separator=">">
 
                                 {this.state.showElem === '1' ? <Breadcrumb.Item>
-                                    <Row><p onClick={() => this.setState({serviceLocation: null})}>Medical Service</p>
-                                        <p>{this.state.serviceLocation != null ? " || " + this.state.serviceLocation : null}</p>
+                                    <Row><p style={{marginRight: '10px', cursor: "pointer"}} onClick={() => this.setState({serviceLocation: null})}>Medical Service</p>
+                                        <p>{this.state.serviceLocation != null ?
+                                            " > " + this.state.serviceLocation.charAt(0).toUpperCase() +
+                                            this.state.serviceLocation.slice(1)
+                                            : null}
+                                        </p>
                                     </Row>
 
                                 </Breadcrumb.Item> : null}
