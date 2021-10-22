@@ -77,18 +77,22 @@ func MainImage(images []models.Image) models.Image {
 func FakeCl() {
 	var db = models.InitDB()
 	var data models.Doctor
-	data.FirstName = "Han"
-	data.LastName = "Li"
+	data.FirstName = "GEETHA "
+	data.LastName = "DHILEEPAN"
+	data.Email = "geeDh@gmail.com"
+	data.PhoneNumber = "0458523533"
 	data.Password = "1"
-	data.ClinicOrHospital = "NB clinic"
-	data.Language = models.EN
-	data.Monday = "9:00-17:00"
-	data.Tuesday = "9:00-17:00"
-	data.Wednesday = "9:00-17:00"
-	data.Thursday = "9:00-17:00"
-	data.Friday = "9:00-17:00"
-	data.Saturday = "9:00-17:00"
-	data.Sunday = "9:00-17:00"
+	data.ClinicOrHospital = "MyHealth"
+	data.Specialty = "Women’s health, Child Health, Travel Medicine, Skin Cancer Checks and Surgery, Chronic Medical conditions including Preventative health\n"
+	data.Language = models.TA
+	data.Gender = "Female"
+	data.Monday = "9:00-13:00"
+	data.Tuesday = "9:00-14:00"
+	data.Wednesday = "9:00-14:00"
+	data.Thursday = "9:00-12:00"
+	data.Friday = "9:00-12:00"
+	data.Saturday = "9:00-10:00"
+	data.Sunday = "9:00-11:00"
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
 	}
@@ -98,11 +102,11 @@ func FakeCl() {
 func FakeImage() {
 	var db = models.InitDB()
 	var data models.Image
-	data.Path = "3.png"
-	data.Name = "testData"
-	data.OwnerName = "NB clinic"
+	data.Name = "MyHealth_NotMain3"
+	data.Path =  "MyHealth_NotMain3.png"
 	data.Type = models.GP
-	data.IsMain = true
+	data.OwnerName = "MyHealth"
+	data.IsMain = false
 
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
@@ -110,23 +114,24 @@ func FakeImage() {
 }
 
 // FakeGp Insert fake Gp
+
 func FakeGp() {
 	var db = models.InitDB()
 	var data models.HospitalGp
-	data.GpName = "UQ St Lucia Medical Centre"
-	data.PostCode = "4072"
-	data.LocationX = -27.496472451479686
-	data.LocationY = 153.01557213301874
-	data.Address = "The University of Queensland Level 1, Gordon Greenwood Building (Blg 32, St Lucia QLD 4067)"
-	data.About = "The UQ St Lucia Medical Centre offers quality care for the University’s domestic students, international students and their dependents as well as staff right here on campus. Our experienced doctors and allied health professionals care about issues that affect student and staff health, from mental health to sexual health, skin checks and travel consults.\n"
-	data.Strengths = "General medical consults%Immunisation%Mental health%Sexual health%Paediatric consults%Psychological counselling and psychiatric care%"
-	data.Monday = "9:00-17:00"
-	data.Tuesday = "9:00-17:00"
-	data.Wednesday = "9:00-17:00"
-	data.Thursday = "9:00-17:00"
-	data.Friday = "9:00-17:00"
-	data.Saturday = "9:00-17:00"
-	data.Sunday = "9:00-17:00"
+	data.GpName = "MyHealth"
+	data.PostCode = "4066"
+	data.LocationX = -27.483970183572385
+	data.LocationY = 152.9925428430241
+	data.Address = "Shop 17, Level 1 Toowong Village 9 Sherwood Road Toowong QLD 4066"
+	data.About = "Myhealth Toowong is a mixed billing clinic which is conveniently situated on Level 1 (the Kmart Level) in Toowong Village Shopping Centre.\nOur doctors strive to provide utmost quality care to their patients. We welcome new patients and also accommodate walk-in patients where possible. We are RACGP 4th edition standard accredited.\nWe offer a full range of medical services with pathology and a physiotherapist onsite for added convenience. We also offer Travel Vaccines, and are also Yellow Fever and Q Fever accredited.\n"
+	data.Strengths = "full range of medical services%pathology and a physiotherapist"
+	data.Monday = "8:00-17:00"
+	data.Tuesday = "8:00-17:00"
+	data.Wednesday = "8:00-17:00"
+	data.Thursday = "8:00-17:00"
+	data.Friday = "8:00-17:00"
+	data.Saturday = "9:00-15:00"
+	data.Sunday = "9:00-15:00"
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
 	}
@@ -156,7 +161,7 @@ func FakeBooking()  {
 
 func FakeCreateTable() {
 	var db = models.InitDB()
-	err := db.AutoMigrate(&models.HospitalGp{})
+	err := db.AutoMigrate(&models.Doctor{})
 	if err != nil {
 		return 
 	}

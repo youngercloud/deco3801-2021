@@ -98,6 +98,9 @@ const (
 	CN = "Chinese"
 	EN = "English"
 	JP = "Japanese"
+	TA = "Tamil"
+	HI = "Hindi"
+	MA = "Malayalam"
 )
 
 func InitDB() *gorm.DB {
