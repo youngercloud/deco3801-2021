@@ -13,6 +13,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 const distanceOptions=[
     { value: '0,1', label: '1km' },
     { value: '1,3', label: '1km-3km' },
+    { value: '3,999999', label: 'more than 3Km' },
 ];
 
 const languageOptions = [
@@ -33,6 +34,8 @@ export default class bookLocation extends Component {
         language:'',
         distanceSelect: undefined,
         getInfo:'false',
+        CurrentDisX:0,
+        CurrentDisY:0,
     }
     handleGetInputValue = (event) => {
         this.setState({
@@ -47,22 +50,28 @@ export default class bookLocation extends Component {
             types: 'country,region,place,postcode,locality,neighborhood'
         });
         geocoder.addTo('#geocoder');
-        geocoder.query(event.target.value);
+        geocoder.query("Australia "+ event.target.value);
         geocoder.on('result', (e) => {
 
             const x = e.result.bbox[0];
             const y = e.result.bbox[1];
-            console.log(x)
-            console.log(y)
+
+            this.setState({
+                CurrentDisX : e.result.bbox[1],
+                CurrentDisY : e.result.bbox[0],
+            })
+
+            console.log("SATE:",this.state)
 
         });
     };
 
     handleDistanceValue = distanceSelect => {
         this.setState({
-            distanceMin : distanceSelect.replace(",","")[0],
-            distanceMax : distanceSelect.replace(",","")[1],
+            CurrentDisX : distanceSelect.replace(",","")[0],
+            CurrentDisY : distanceSelect.replace(",","")[1],
         })
+
     };
 
     handleLanguageValue = languageSelect => {

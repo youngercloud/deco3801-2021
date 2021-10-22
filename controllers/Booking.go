@@ -75,9 +75,19 @@ func BookingInsert(c *gin.Context)  {
 	})
 }
 
-func calDistance(cunX float64, cunY float64, gpX float64, gpY float64) float64 {
-	var distance = math.Cbrt((cunX - gpX)*(cunX-gpX) + (cunY - gpY)*(cunY-gpY))
-	return distance
+func calDistance( gpX float64,  cunX float64, gpY float64, cunY float64) float64 {
+
+	radius := 6371000.0 //6378137.0
+	rad := math.Pi / 180.0
+	cunX = cunX * rad
+	gpX = gpX * rad
+	cunY = cunY * rad
+	gpY = gpY * rad
+
+	theta := cunY - gpY
+	dist := math.Acos(math.Sin(gpX)*math.Sin(cunX) + math.Cos(gpX)*math.Cos(cunX)*math.Cos(theta))
+	finalDis := math.Trunc(dist * radius / 1000*1e2+0.5)*1e-2
+	return   finalDis
 }
 
 /**
@@ -100,6 +110,8 @@ type InputData struct{
 	Input string
 	DistanceMin string
 	DistanceMax string
+	CurrentDisX float64
+	CurrentDisY float64
 	Language string
 }
 
@@ -136,8 +148,6 @@ func gPSearch(data InputData) []searchReData {
 	var rawList []searchReData
 	//var dataList []*searchReData
 	var db = models.InitDB()
-	var myLocationX = 0
-	var myLocationY = 0
 	var command = "SELECT * FROM hospital_gps"
 	var GpInformation []models.HospitalGp
 
@@ -149,14 +159,21 @@ func gPSearch(data InputData) []searchReData {
 	//Step 1: Get all the Gp that match the input data
 	if data.Input != "" {
 		if checkedPost(data.Input) {
-			command += " WHERE post_code LIKE ?"
+			db.Raw(command).Find(&GpInformation)
+			//经度
+			fmt.Println(data.CurrentDisX)
+			//纬度
+			fmt.Println(data.CurrentDisY)
 		} else {
-			//以后可能会变为模糊搜索
 			command += " WHERE gp_name LIKE ?"
+			data.CurrentDisX = -27.497982097934575
+			data.CurrentDisY = 153.01119711268808
 		}
 		db.Raw(command, "%" + data.Input + "%").Find(&GpInformation)
 	} else {
 		db.Raw(command).Find(&GpInformation)
+		data.CurrentDisX = -27.497982097934575
+		data.CurrentDisY = 153.01119711268808
 	}
 
 	//Step 2: Get the corresponding languages and distance of each gp
@@ -174,7 +191,7 @@ func gPSearch(data InputData) []searchReData {
 		}
 		eachData.Language = language
 		//distance int -> string
-		eachData.Distance = fmt.Sprintf("%f", calDistance(float64(myLocationX), float64(myLocationY), gp.LocationX, gp.LocationY))
+		eachData.Distance = fmt.Sprintf("%f", calDistance(data.CurrentDisX, gp.LocationX, data.CurrentDisY, gp.LocationY))
 		images := GetImages(models.GP, gp.GpName, 1, *db)
 		if len(images) == 0 {
 			eachData.Images = models.Image{}
