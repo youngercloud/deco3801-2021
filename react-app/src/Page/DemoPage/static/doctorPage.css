@@ -16,6 +16,16 @@ body {
 }
 
 .doctorContent h2{
+    text-align: left;
+    color: #354E57;
+    font-size: 14px;
     word-wrap: break-word;
-    word-break: break-all;
+    /*word-break: break-all;*/
+}
+
+.doctorContent h1{
+
+    color: #354E57;
+    font-size: 40px;
+
 }

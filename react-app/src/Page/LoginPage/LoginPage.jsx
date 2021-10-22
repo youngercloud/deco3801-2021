@@ -63,7 +63,14 @@ class LoginPage extends Component {
         return (
             <Row>
                 <Col span={8}>
-                    <div className="sidebar">
+                    <div className="login-sidebar">
+                        <p className="login-left-text">Why our service?</p>
+
+                        <p className="login-left-text-points">1. We’re professional medical platform</p>
+
+                        <p className="login-left-text-points">2. The most convenient medical booking</p>
+
+                        <p className="login-left-text-points">3. Detail medical information</p>
                     </div>
                 </Col>
                 <Col span={16}>

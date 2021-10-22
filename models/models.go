@@ -18,7 +18,7 @@ type User struct {
 	Password string `gorm:"not null;size:256"`
 	Gender string `gorm:"size:256"`
 	DoB string `gorm:"size:256"`
-	Mail string `gorm:"not null;size:256"`
+	Mail string `gorm:"size:256"`
 	PhoneNumber string `gorm:"size:256"`
 	Language string `gorm:"size:256"`
 	Nationality string `gorm:"size:256"`

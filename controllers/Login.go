@@ -24,22 +24,22 @@ func LoginUser(c *gin.Context)  {
 	}
 	//insertCl()
 	//bookSearch()
-	var validation = Login(userLoginData.Name, userLoginData.Password, *db)
+	var user, validation = Login(userLoginData.Name, userLoginData.Password, *db)
 	c.JSON(http.StatusOK, gin.H{
-		"UserName" : userLoginData.Name,
+		"User" : user,
 		"validation" : validation,
 	})
 }
 
 
 
-func Login(UserName string, Password string, db gorm.DB) bool {
+func Login(UserName string, Password string, db gorm.DB) (models.User, bool) {
 	user := models.User{}
 	err := db.Where("name = ? AND password = ?",UserName,Password).First(&user).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println("There is no result")
-		return false
+		return models.User{}, false
 	}  else{
-		return true
+		return user, true
 	}
 }

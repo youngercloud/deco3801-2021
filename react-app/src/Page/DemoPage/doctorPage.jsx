@@ -63,14 +63,15 @@ export default class doctorPage extends Component {
 
         return (
             <div>
-                <div className="steps">
-                    <Steps current={1}>
-                        <Step title="Location"/>
-                        <Step title="Doctor"/>
-                        <Step title="Time"/>
-                    </Steps>
-                </div>
+
                 <div className="doctorContent">
+                    <div className="steps">
+                        <Steps current={1}>
+                            <Step title="Location"/>
+                            <Step title="Doctor"/>
+                            <Step title="Time"/>
+                        </Steps>
+                    </div>
                     <h1>Choose the doctor you prefer</h1>
 
                     <Row ref={this.rowRef} gutter={[48, 48]}>

@@ -133,10 +133,11 @@ class demo extends Component {
                             <Menu className="demo" mode="inline" defaultSelectedKeys={['1']}>
                                 <div className="image">
                                     <Image preview={false} src={logo} width={40}/>
-                                    <p style={{
+                                    {this.state.collapsed===false ? <p style={{
                                         color: "#EEF3F4",
                                         marginTop: 20
-                                    }}> welcome: {sessionStorage.getItem('name')}</p>
+                                    }}> welcome: {sessionStorage.getItem('name')}</p>:null}
+
                                 </div>
                                 <Menu.Item key="1" icon={<MyIcon type="icon-searchforfiles" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("1")}>
@@ -153,22 +154,15 @@ class demo extends Component {
                                 <Menu.Item key="3" icon={<MyIcon type="icon-account" style={{fontSize: 28}}/>}
                                            onClick={() => this.handleClick("3")}>
                                     {arr[3]}
-                                    <Button style={{marginBottom: 20, marginLeft: 20}} onClick={() => this.logout()}>
-                                        {sessionStorage.getItem("name") === null ? "login in" : "logout"}
-                                    </Button>
+
                                 </Menu.Item>
+                                {this.state.collapsed===false ? <Button className="sider-logout-button" onClick={() => this.logout()}>
+                                    {sessionStorage.getItem("name") === null ? "Sign in" :
+                                        <span>Logout</span>}
+                                </Button>:null}
 
                             </Menu>
-                            <select className="select-language" value={language} onChange={(e) => {
-                                this.changeHandler(e.target.value)
-                            }}>
 
-                                {languageCodes.map(lang => (
-                                    <option key={lang.language} value={lang.language}>
-                                        {lang.name}
-                                    </option>
-                                ))}
-                            </select>
                         </Affix>
                     </Sider>
 
@@ -193,8 +187,12 @@ class demo extends Component {
                             <Breadcrumb className="breadcrumb" separator=">">
 
                                 {this.state.showElem === '1' ? <Breadcrumb.Item>
-                                    <Row><p onClick={() => this.setState({serviceLocation: null})}>Medical Service</p>
-                                        <p>{this.state.serviceLocation != null ? " || " + this.state.serviceLocation : null}</p>
+                                    <Row><p style={{marginRight: '10px', cursor: "pointer"}} onClick={() => this.setState({serviceLocation: null})}>Medical Service</p>
+                                        <p>{this.state.serviceLocation != null ?
+                                            " > " + this.state.serviceLocation.charAt(0).toUpperCase() +
+                                            this.state.serviceLocation.slice(1)
+                                            : null}
+                                        </p>
                                     </Row>
 
                                 </Breadcrumb.Item> : null}
