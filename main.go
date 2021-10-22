@@ -22,6 +22,7 @@ func main()  {
 		api.POST("/date", controllers.CheckDocDate)
 		api.POST("/time", controllers.CheckDocTime)
 		api.POST("/userBookings", controllers.GetUserBookings)
+		api.POST("/changeInformation", controllers.ChangeUserInfo)
 	}
 	router.NoRoute(controllers.NoResponse)
 
