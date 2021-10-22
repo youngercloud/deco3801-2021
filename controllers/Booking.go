@@ -228,24 +228,6 @@ func GetAvailability(c *gin.Context)  {
 	}
 }
 
-func HandleGetBookings(c *gin.Context) {
-	//type doctorCons struct {
-	//	name string
-	//	data string
-	//}
-	//var db = models.InitDB()
-	//var userName string
-	//var info doctorCons
-	//var bookings []models.Booking
-	//err := c.Bind(&userName)
-	//if err != nil {
-	//	fmt.Println("error booking require")
-	//}
-	//bookings = GetBookings(userName, *db)
-	//
-
-}
-
 func GetBookings(userName string, db gorm.DB) []models.Booking {
 	var bookings []models.Booking
 	err := db.Where("user_name = ? ", userName).Find(&bookings).Error
@@ -335,7 +317,6 @@ func CheckDocTime(c *gin.Context)  {
 		fmt.Println("error booking search")
 		return
 	}
-	fmt.Println(info.Date + ","+ info.Time)
 	//日期格式需要一致
 	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " + info.LastName, "%" + info.Date + ","+ info.Time + "%").Find(&bookings)
 	if len(bookings) == 0 {
@@ -364,7 +345,6 @@ func GetUserBookings(c *gin.Context)  {
 	if err != nil {
 		fmt.Println("error booking require")
 	}
-	fmt.Println(info.UserName)
 	bookings := GetBookings(info.UserName, *db)
 
 	for _, each := range bookings {
@@ -378,7 +358,6 @@ func GetUserBookings(c *gin.Context)  {
 		obj.BookingTime = each.BookTime
 		dataList = append(dataList, obj)
 	}
-	fmt.Println(dataList)
 	c.JSON(200, gin.H{
 		"data": dataList,
 	})

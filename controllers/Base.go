@@ -103,33 +103,11 @@ func FakeImage() {
 	var db = models.InitDB()
 	var data models.Image
 
-	data.Path = ".png"
-	data.Name = "UQ St Lucia Medical Centre.main"
-	data.OwnerName = "UQ St Lucia Medical Centre"
-	data.Type = models.GP
+	data.Path = "Vinay.png"
+	data.Name = "Vinay"
+	data.OwnerName = "Vinay Mishra"
+	data.Type = models.DOCTOR
 	data.IsMain = true
-
-	if err := db.Create(&data).Error; err != nil {
-		fmt.Println("error!")
-	}
-
-	data.Path = ".png"
-	data.Name = "Toowong Gps.main"
-	data.OwnerName = "Toowong Gps"
-	data.Type = models.GP
-	data.IsMain = true
-
-	if err := db.Create(&data).Error; err != nil {
-		fmt.Println("error!")
-	}
-
-	data.Path = ".png"
-	data.Name = "MyHealth.main"
-	data.OwnerName = "MyHealth"
-
-	data.Type = models.GP
-	data.OwnerName = "MyHealth"
-	data.IsMain = false
 
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
