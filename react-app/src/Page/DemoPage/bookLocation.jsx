@@ -146,9 +146,9 @@ export default class bookLocation extends Component {
             this.info = arr2.map((d) =>
                 <Col span={10} >
                     <Card>
-                        {/*<div >*/}
-                        {/*    <img alt="example" style={{width:"55%",height:"100%"}} src={require('../../Images/'+d.Images.Path).default} />*/}
-                        {/*</div>*/}
+                        <div >
+                            <img alt="example" style={{width:"55%",height:"200px"}} src={require('../../Images/'+d.Images.Path).default} />
+                        </div>
 
                         <div>
                             <h1>{d.Gp.GpName}</h1>

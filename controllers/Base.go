@@ -102,10 +102,7 @@ func FakeCl() {
 func FakeImage() {
 	var db = models.InitDB()
 	var data models.Image
-<<<<<<< HEAD
-	data.Name = "MyHealth_NotMain3"
-	data.Path =  "MyHealth_NotMain3.png"
-=======
+
 	data.Path = ".png"
 	data.Name = "UQ St Lucia Medical Centre.main"
 	data.OwnerName = "UQ St Lucia Medical Centre"
@@ -129,7 +126,7 @@ func FakeImage() {
 	data.Path = ".png"
 	data.Name = "MyHealth.main"
 	data.OwnerName = "MyHealth"
->>>>>>> d1ef43d8b5bcb0186634e850b54d17762f2d4170
+
 	data.Type = models.GP
 	data.OwnerName = "MyHealth"
 	data.IsMain = false
