@@ -1,10 +1,11 @@
 import React, {Component, useRef} from "react";
 import "./static/myAccount.css";
 
-import {Alert, Button, Card, Col, DatePicker, Image, Row} from 'antd';
+import {Alert, Button, Card, Col, DatePicker, Image, Popover, Row} from 'antd';
 import doctorImage from "../../Images/goodman.jpeg";
 import axios from "axios";
 import Time from "../MainPage/Time";
+import {save} from "react-cookies";
 
 const {Meta} = Card;
 
@@ -50,6 +51,7 @@ export default class Footer extends Component {
         }else if(this.state.status==="none"){
             this.setState({status:"block"})
         }
+
     }
 
     onChangeDate=(now)=> {
@@ -60,13 +62,7 @@ export default class Footer extends Component {
     }
 
     saveData(){
-        if (this.state.status==="block"){
-            this.setState({status:"none"})
 
-        }else if(this.state.status==="none"){
-            this.setState({status:"block"})
-
-        }
         // store value
         this.setState({Language:Language.value})
         this.setState({Gender:Gender.value});
@@ -74,14 +70,30 @@ export default class Footer extends Component {
         this.setState({Mail:Mail.value});
         this.setState({PhoneNumber:PhoneNumber.value});
 
+        console.log(this.state)
+        this.state.demo=null;
+
+
+
+    }
+
+    test(){
+        this.setState({demo:null})
+
+
         let api;
         api = "/api/changeInformation"
         axios.post(api, this.state).then((response) => {
-            console.log("change data")
         }).catch(function (error) {
             console.log(error);
         });
+        if (this.state.status==="block"){
+            this.setState({status:"none"})
 
+        }else if(this.state.status==="none"){
+            this.setState({status:"block"})
+
+        }
     }
 
     render() {
@@ -149,7 +161,7 @@ export default class Footer extends Component {
                         </Col>
                         <Col span={6}>
                             <Image src={doctorImage}/>
-                            {this.state.status==="none" ? <button onClick={()=>this.saveData()}>Save Data</button>:<button onClick={()=>this.changeState()}>Edit profile</button>}
+                            {this.state.status==="none" ? <Popover placement="bottom"  title={"Are you sure you keep it?"} content={<div><button onClick={()=>{this.test(); }}>Yes</button></div>} trigger="click"><button onClick={()=>{this.saveData(); }}>Save Data</button></Popover>:<button onClick={()=>this.changeState()}>Edit profile</button>}
                         </Col>
                     </Row>
 
