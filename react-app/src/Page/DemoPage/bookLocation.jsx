@@ -105,7 +105,7 @@ export default class bookLocation extends Component {
                 <Col span={10}>
                     <Card>
                         <div>
-                            <img alt="example" style={{width: "55%", height: "100%"}}
+                            <img alt="example" style={{width: "55%", height: "200px"}}
                                  src={require('../../Images/' + d.Images.Path).default}/>
                         </div>
 
@@ -118,7 +118,7 @@ export default class bookLocation extends Component {
                                     <Col><p>{item} &nbsp;</p></Col>
                                 ))}
                             </Row>
-                            
+
                             <Button onClick={() => {
                                 this.gpSelected(d)
                             }}><p>$65 - Consultation</p></Button>
