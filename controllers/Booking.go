@@ -14,6 +14,7 @@ import (
 	"strings"
 )
 
+// BookingInsert Insert a new booking into database
 func BookingInsert(c *gin.Context)  {
 	type Info struct {
 		GpName string
@@ -75,7 +76,8 @@ func BookingInsert(c *gin.Context)  {
 	})
 }
 
-func calDistance( gpX float64,  cunX float64, gpY float64, cunY float64) float64 {
+//calDistance Calculate distance between current position and gp position
+func calDistance(gpX float64,  cunX float64, gpY float64, cunY float64) float64 {
 
 	radius := 6371000.0 //6378137.0
 	rad := math.Pi / 180.0
@@ -90,9 +92,7 @@ func calDistance( gpX float64,  cunX float64, gpY float64, cunY float64) float64
 	return   finalDis
 }
 
-/**
-Check if the given string is a post code
- */
+//checkedPost Check if the given string is a post code
 func checkedPost(input string) bool{
 	var data = regexp.MustCompile(`\d{4}`)
 	var result = data.FindAllString(input, -1)
@@ -105,7 +105,7 @@ func checkedPost(input string) bool{
 	return false
 }
 
-// InputData 名字开头必须大写才能在其他文件被外部call
+// InputData The data inputted from the input bar in front end
 type InputData struct{
 	Input string
 	DistanceMin string
@@ -114,8 +114,6 @@ type InputData struct{
 	CurrentDisY float64
 	Language string
 }
-
-
 
 // HandleGpSearch This is the function that transfer the data of gp searching to front-end/**
 func HandleGpSearch(c *gin.Context)  {
@@ -131,6 +129,7 @@ func HandleGpSearch(c *gin.Context)  {
 	})
 }
 
+//searchReData A single gp information that will be returned to front-end as a list
 type searchReData struct {
 	Gp models.HospitalGp
 	GpStrength []string
@@ -141,9 +140,7 @@ type searchReData struct {
 	DocInfos []DocInfo
 }
 
-/**
-This is the function that return the data of gp searching in booking interface
- */
+//gPSearch Return the data of gp searching in booking interface
 func gPSearch(data InputData) []searchReData {
 	var rawList []searchReData
 	//var dataList []*searchReData
@@ -151,10 +148,7 @@ func gPSearch(data InputData) []searchReData {
 	var command = "SELECT * FROM hospital_gps"
 	var GpInformation []models.HospitalGp
 
-	//去除首尾空格
 	data.Input = strings.TrimSpace(data.Input)
-
-
 
 	//Step 1: Get all the Gp that match the input data
 	if data.Input != "" {
@@ -204,7 +198,6 @@ func gPSearch(data InputData) []searchReData {
 		rawList = append(rawList, eachData)
 	}
 
-	//待测试
 	for i := 0; i < len(rawList); i++ {
 		//Filtering languages and distance of data list
 		//If not match then delete it from data list
@@ -224,27 +217,10 @@ func gPSearch(data InputData) []searchReData {
 			continue
 		}
 	}
-
-
 	return rawList
 }
 
-func GetAvailability(c *gin.Context)  {
-	var db = models.InitDB()
-	var userName string
-	var bookings []models.Booking
-	err := c.Bind(&userName)
-	if err != nil {
-		fmt.Println("error booking require")
-	}
-	bookings = GetBookings(userName, *db)
-	if bookings != nil {
-		c.JSON(200, gin.H{
-			"myBookings": bookings,
-		})
-	}
-}
-
+//GetBookings get all the booking of the given user
 func GetBookings(userName string, db gorm.DB) []models.Booking {
 	var bookings []models.Booking
 	err := db.Where("user_name = ? ", userName).Find(&bookings).Error
@@ -256,6 +232,7 @@ func GetBookings(userName string, db gorm.DB) []models.Booking {
 	}
 }
 
+//CheckDocDate Check if the doctor are available in the given date
 func CheckDocDate(c *gin.Context)  {
 	type DocInfo struct {
 		Date string
@@ -318,6 +295,7 @@ func CheckDocDate(c *gin.Context)  {
 	}
 }
 
+//CheckDocTime Check if the doctor are available in the given time
 func CheckDocTime(c *gin.Context)  {
 	type DocInfo struct {
 		Date string
@@ -335,7 +313,8 @@ func CheckDocTime(c *gin.Context)  {
 		return
 	}
 	//日期格式需要一致
-	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " + info.LastName, "%" + info.Date + ","+ info.Time + "%").Find(&bookings)
+	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " +
+		info.LastName, "%" + info.Date + ","+ info.Time + "%").Find(&bookings)
 	if len(bookings) == 0 {
 		c.JSON(200, gin.H{
 			"validation": true,
@@ -347,6 +326,7 @@ func CheckDocTime(c *gin.Context)  {
 	}
 }
 
+//GetUserBookings Return all the booking information as a list to front-end of a corresponding user
 func GetUserBookings(c *gin.Context)  {
 	type ReturnData struct {
 		FirstName string
