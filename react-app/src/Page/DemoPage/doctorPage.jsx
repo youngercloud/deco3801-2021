@@ -51,7 +51,7 @@ export default class doctorPage extends Component {
                     this.changeColor(e)
                     this.doctorSelect(doctor)
                 }}>
-                    <img alt="example" src={require('../../Images/' + doctor.Image[0].Path).default} style={{width: 177,}}/>
+                    <img alt="example" src={require('../../Images/' + doctor.Image[0].Path).default} style={{width: "70%",height:"200px"}}/>
                     <h1>Name: {doctor.Doctor.LastName}</h1>
                     <h2>Gender: {doctor.Doctor.Gender}</h2>
                     <h2>Language: {doctor.Doctor.Language}</h2>
