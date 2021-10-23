@@ -138,7 +138,7 @@ class medicalServiceHomePage extends Component {
                     <div className="header-m">
                         <h1>{arr[0]}</h1>
                         <h1>{arr[1]}</h1>
-                        <div id="FirstP">
+                        <div id="FirstP" style={{width:"35%"}}>
                             <p>{arr[2]}</p>
                         </div>
                         <br/>
@@ -149,11 +149,11 @@ class medicalServiceHomePage extends Component {
                                 </div>
                                 <div className="header-content-wrapper" id="text-along-bigger">
                                     <p className="header-content-5items-topic">{arr[3]}</p>
-                                    <p className="header-content-5items">{arr[39]}</p>
-                                    <p className="header-content-5items">{arr[40]}</p>
-                                    <p className="header-content-5items">{arr[41]}</p>
-                                    <p className="header-content-5items">{arr[42]}</p>
-                                    <p className="header-content-5items">{arr[43]}</p>
+                                    <p style={{fontSize:"24px",marginTop:"18%"}} className="header-content-5items">{arr[39]}</p>
+                                    <p style={{fontSize:"24px"}} className="header-content-5items">{arr[40]}</p>
+                                    <p style={{fontSize:"24px"}} className="header-content-5items">{arr[41]}</p>
+                                    <p style={{fontSize:"24px"}} className="header-content-5items">{arr[42]}</p>
+                                    <p style={{fontSize:"24px"}} className="header-content-5items">{arr[43]}</p>
                                 </div>
                             </div>
                         </div>
@@ -161,21 +161,22 @@ class medicalServiceHomePage extends Component {
 
                     <div>
                         <div className="information-wrapper">
-                            <div className="information-box">
+                            <div className="information-box" >
                                 <div className="information-title-box">
                                     <h1>{arr[4]}</h1>
                                 </div>
-                                <div className="information-content-box">
-                                    <p id="SecondP">{arr[5]}</p>
+                                <div className="information-content-box" style={{width:"35%"}}>
+                                    <p id="SecondP" >{arr[5]}</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="primary-wrapper">
+                        <div className="primary-wrapper" style={{marginTop:"5%"}}>
                             <div className="primary-box">
-                                <div className="primary-title-box">
+                                <div  className="primary-title-box">
                                     <h1 id="margin-fixed">{arr[6]}</h1>
                                 </div>
                                 <div className="primary-content-box">
+
                                     <div className="primary-information-box">
                                         <div className="horizontal-line-box">
                                             <hr/>

@@ -61,20 +61,20 @@ export default class gpSelected extends Component {
                         <Row>
                             <Col span={9}/>
                             <Col span={12}>
-                                {/*<img style={{marginTop: 20}} alt="example"*/}
-                                {/*     src={require('../../Images/' + this.props.name.Images.Path).default}/>*/}
+                                <img style={{marginTop: 20,width:"100%",height:"300px"}} alt="example"
+                                     src={require('../../Images/' + this.props.name.Images.Path).default}/>
                             </Col>
                         </Row>
                         <Row>
                             <Col span={9}/>
                             <Col span={4}>
-                                <Image src={gp1}/>
+                                <Image style={{height:"80px"}} src={require('../../Images/' + this.props.name.GpImages[0].Path).default}/>
                             </Col>
                             <Col span={4}>
-                                <Image src={gp1}/>
+                                <Image style={{height:"80px"}} src={require('../../Images/' + this.props.name.GpImages[1].Path).default}/>
                             </Col>
                             <Col span={4}>
-                                <Image src={gp1}/>
+                                <Image style={{height:"80px"}} src={require('../../Images/' + this.props.name.GpImages[2].Path).default}/>
                             </Col>
                         </Row>
 

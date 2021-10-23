@@ -21,7 +21,7 @@ func HandleDocSearch(gpName string, db gorm.DB) []DocInfo {
 	for _, doctor := range doctors {
 		var images []models.Image
 		var docInfo DocInfo
-		db.Where("owner_name = ? AND type = ?", doctor.FirstName + " " + doctor.LastName, models.DOCTOR).Find(&images)
+		db.Where("owner_name LIKE ? AND type = ?", doctor.FirstName + " " + doctor.LastName, models.DOCTOR).Find(&images)
 		docInfo.Doctor = doctor
 		docInfo.Image = images
 		docInfos = append(docInfos, docInfo)
