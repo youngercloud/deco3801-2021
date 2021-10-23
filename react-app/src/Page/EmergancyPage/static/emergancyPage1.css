@@ -322,11 +322,11 @@ h2 {
 }
 
 
-
-/*Hospitals*/
 .fontLeft2 {
     text-align: left;
-    margin-left: 3%;
+    margin-left: 7%;
+    color: #ddd;
+    font-size: 24px;
 }
 
 .head1 {
@@ -336,6 +336,12 @@ h2 {
 .head2 {
     float: left;
     font-size: 35px;
+    color: #fff;
+}
+.head2-second {
+    float: left;
+    font-size: 35px;
+    color: #ddd;
 }
 
 .head3 {
@@ -344,61 +350,44 @@ h2 {
 }
 
 .nextPart{
-    margin-top:15%;
-    background-color: #C1C6C8;
+    margin-top: 6%;
+    background-color: #354E57;
     margin-left: 7%;
     margin-right: 7%;
+    box-shadow: 5px 10px rgba(163,163,163,0.8);
 }
 .nextPart3{
-    margin-top:15%;
-    background-color: #E7EAF1;
+    margin-top:8%;
+    background-color: #354E57;
     margin-left: 7%;
     margin-right: 7%;
-}
-.nextPart2{
-    margin-top:15%;
-    background-color:#E7EAF1;
-    margin-left: 7%;
-    margin-right:    7%;
-    height:1100px;
+    box-shadow: 5px 10px rgba(163,163,163,0.8);
 }
 
 .nextPart4{
-    margin-top:15%;
-    background-color:#E7EAF1;
+    margin-top:6%;
+    background-color:#354E57;
     margin-left: 7%;
-    margin-right:    7%;
-    height:550px;
+    margin-right:7%;
+    box-shadow: 5px 10px rgba(163,163,163,0.8);
 }
 
-#noticefont{
 
-}
 #redfont{
-    color: #DE3B35;
+    color: deepskyblue;
+    text-align: center;
+    font-size: 32px;
  }
 
-.leftDiv{
-    float: left;
-    margin-left:30px;
-    height:400px;
-    width:400px;
-}
-
-
-.rightDiv{
-    margin-left:660px;
-    height:400px;
-    width:400px;
-}
 
 .imageRight2{
-    float: right;
-    height: 30%;
-    width: 30%;
+    position: absolute;
+    width: 22%;
+    right: 10%;
+    top: 30%;
 }
 .mainDiv{
-    background-color: #C1C6C8;
+    background-color: #000000;
 }
 
 .medical-service-select-language {
