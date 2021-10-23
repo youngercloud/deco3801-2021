@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-
+//GetAge Get users age
 func GetAge(Dob string) int {
 	var DobList = strings.Split(Dob, "/")
 	var year, err = strconv.Atoi(DobList[0])
@@ -20,6 +20,7 @@ func GetAge(Dob string) int {
 	return time.Time{}.Year() - year
 }
 
+//SignUpUser Sign a new user into database
 func SignUpUser(c *gin.Context) {
 	var db = models.InitDB()
 	var userData models.User
@@ -39,6 +40,7 @@ func SignUpUser(c *gin.Context) {
 	})
 }
 
+//SignUpDoctor Sign a new doctor into database
 func SignUpDoctor(c *gin.Context) {
 	var db = models.InitDB()
 	var doctorData models.Doctor

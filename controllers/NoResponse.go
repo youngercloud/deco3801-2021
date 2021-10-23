@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+//NoResponse Called when back-end starting failed
 func NoResponse(c *gin.Context) {
 	c.JSON(http.StatusNotFound, gin.H{
 		"status": 404,
