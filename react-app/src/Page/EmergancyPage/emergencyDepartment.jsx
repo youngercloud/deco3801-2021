@@ -16,12 +16,12 @@ const strings = {
         " help in general practitioner.  ",
     3:"When should use Emergency Department(ED)",
     4:"Under any urgent situation, for example",
-    5:"injuries from accidents, physical assaults or falls",
-    6:"severe pain",
-    7:"heart attack and stroke",
-    8:"broken bones",
-    9:"allergic reactions",
-    10:"etc",
+    5:"Injuries from accidents, physical assaults or falls",
+    6:"Severe pain",
+    7:"Heart attack and stroke",
+    8:"Broken bones",
+    9:"Allergic reactions",
+    10:"Others",
     11:"Things about specialist you should know",
     12:"You should get the referral from your GP first before you go to see the specialist, the referral can help the " +
         "specialist know your background information and health issue, then they can provide a better treatment for you.",
@@ -103,10 +103,10 @@ class emergencyDepartment extends Component {
                 </select>
                 <div className="mainDiv">
                     <h2 className="head1">{arr[0]}</h2>
-
                     <br/>
                     <br/>
-                    <br/><img className="imageRight2" src={logo}/>
+                    <br/>
+                    <img className="imageRight2" src={logo}/>
                     <br/>
                     <br/>
                     <br/>
@@ -117,9 +117,9 @@ class emergencyDepartment extends Component {
                         <br/><br/>
                         <br/>
                         <br/>
-
-
-                        <p className="fontLeft2">{arr[2]}</p>
+                        <div style={{width: "50%"}}>
+                            <p className="fontLeft2">{arr[2]}</p>
+                        </div>
                         <br/>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ class emergencyDepartment extends Component {
                     <br/>
                     <br/>
                     <p className="fontLeft2">
-                        {arr[4]}
+                        - {arr[4]}
                         <br/><br/>
                         - {arr[5]}
                         <br/><br/>
@@ -155,13 +155,16 @@ class emergencyDepartment extends Component {
                     <br/><br/>
                     <br/>
                     <br/>
-                    <p className="fontLeft2">
-                        - {arr[12]}
-                        <br/><br/>
-                        - {arr[13]}
-                        <br/><br/>
-                        - {arr[14]} </p>
-                    <br/>
+                    <div style={{width: '70%'}}>
+                        <p className="fontLeft2">
+                            - {arr[12]}
+                            <br/><br/>
+                            - {arr[13]}
+                            <br/><br/>
+                            - {arr[14]} </p>
+                        <br/>
+                    </div>
+
                 </div>
             </div>
         );
