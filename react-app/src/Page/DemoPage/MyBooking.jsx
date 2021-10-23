@@ -12,21 +12,21 @@ import axios from "axios";
 
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
-const {Meta} = Card;
+
+let dummyStorage = {}
+
 
 class ChatArea extends Component {
 
     constructor() {
         super();
         this.inputReference = React.createRef();
+        this.state = {
+            languageCodes: [],
+            input: "",
+            dataSource: []
+        }
     }
-
-    state = {
-        languageCodes: [],
-        input: "",
-        dataSource: []
-    }
-
 
     componentDidMount() {
         //回到顶部（weijia）
@@ -67,16 +67,17 @@ class ChatArea extends Component {
 
 
     sendMessage(e, msg) {
-        // this.props.handleSendMessage(e, msg)
-        let newData = this.state.dataSource
-        newData.push({
+        if (!dummyStorage.hasOwnProperty(this.props.docsFirstName)) {
+            dummyStorage[this.props.docsFirstName] = []
+        }
+        dummyStorage[this.props.docsFirstName].push({
                 position: 'right',
                 type: 'text',
                 text: msg['content'],
                 date: new Date(),
             }
         );
-        this.setState({dataSource: newData})
+        this.forceUpdate()
     }
 
     render() {
@@ -89,6 +90,7 @@ class ChatArea extends Component {
         const orig = languageCodes.map(
             lang => <Option key={lang.language} value={lang.language}>{lang.name}</Option>
         )
+
         return (
             <div className="chat-area">
                 <div className="chat-area-content">
@@ -97,7 +99,7 @@ class ChatArea extends Component {
                         lockable={true}
                         downButton={true}
                         toBottomHeight={'100%'}
-                        dataSource={this.state.dataSource}
+                        dataSource={dummyStorage[this.props.docsFirstName]}
                     />
                 </div>
                 <div className="chat-input">
@@ -147,7 +149,6 @@ class ChatArea extends Component {
                             </Col>
                         </Row>
                     </div>
-
                 </div>
             </div>
         )
@@ -162,10 +163,12 @@ export default class MyBooking extends Component {
     }
 
     doctorData;
+    doctorChatArea = {};
 
     state = {
         selectDoctor: null,
         socket: null,
+        selectDoctorName: "",
     };
 
     doctorSelect = (e) => {
@@ -176,10 +179,6 @@ export default class MyBooking extends Component {
         e.currentTarget.style.border = 'green solid 2px';
     }
 
-    handleSendMessage(event, message) {
-        let data = JSON.stringify(message);
-    }
-
     componentDidMount() {
         let api = "/api/userBookings"
         axios.post(api,
@@ -187,15 +186,14 @@ export default class MyBooking extends Component {
             let json = response.data;
 
             const arr = [];
-            let arr2 = [];
             Object.keys(json).forEach(function (key) {
                 arr.push(json[key]);
             });
-            arr2 = arr[0];
-            this.doctorData = arr2.map((d) =>
+            this.doctorData = arr[0].map((d) =>
                 <Card
                     onClick={(e) => {
                         this.doctorSelect(e)
+                        this.setState({selectDoctorName: d.FirstName})
                     }}
                     style={{width: 300, boxShadow: "5px 7.5px #888888"}}
                     image={goodman}
@@ -206,14 +204,27 @@ export default class MyBooking extends Component {
                     gpName={d.GpName}
                 />
             )
-            console.log(arr2)
-            this.forceUpdate()
+            for (let i = 0; i < arr[0].length; i++) {
+                this.doctorChatArea[arr[0][i].FirstName] = <ChatArea docsFirstName={arr[0][i].FirstName} />
+            }
+            console.log(12)
+            this.setState({selectDoctorName: arr[0][0].FirstName})
         }).catch(function (error) {
             console.log(error);
         });
     }
 
     render() {
+        let displayChat;
+        console.log(this.doctorChatArea)
+        for (var k in this.doctorChatArea) {
+            if (this.doctorChatArea.hasOwnProperty(k)) {
+                if (k === this.state.selectDoctorName) {
+                    displayChat = this.doctorChatArea[k]
+                }
+            }
+        }
+
         return (
             <div className="booking-main">
                 <Row>
@@ -226,11 +237,8 @@ export default class MyBooking extends Component {
                         <Affix style={{width: '100%'}}>
                             <Space direction="vertical" size={36} className="booking-space-justify"
                                    style={{width: '100%'}}>
-                                <ChatArea handleSendMessage={(e, m) => {
-                                    this.handleSendMessage(e, m)
-                                }}/>
+                                {displayChat}
                             </Space>
-
                         </Affix>
                     </Col>
                 </Row>
