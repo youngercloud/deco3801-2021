@@ -11,7 +11,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 const distanceOptions = [
     {value: '0,1', label: '1km'},
     {value: '1,3', label: '1km-3km'},
-    {value: '3,999999', label: 'more than 3Km'},
+    {value: '3,9999', label: 'more than 3Km'},
 ];
 
 const languageOptions = [
@@ -28,7 +28,7 @@ export default class bookLocation extends Component {
     state = {
         input: '',
         distanceMin: '0',
-        distanceMax: '9999',
+        distanceMax: '99999',
         language: '',
         distanceSelect: undefined,
         getInfo: 'false',
@@ -66,9 +66,14 @@ export default class bookLocation extends Component {
 
     handleDistanceValue = distanceSelect => {
         this.setState({
-            CurrentDisX: distanceSelect.replace(",", "")[0],
-            CurrentDisY: distanceSelect.replace(",", "")[1],
+            distanceMin: distanceSelect.replace(",", "")[0],
         })
+        if (distanceSelect.replace(",", "")[1]!=="9"){
+            this.setState({
+                distanceMax: distanceSelect.replace(",", "")[1],
+            })
+        }
+
 
     };
 
@@ -84,6 +89,7 @@ export default class bookLocation extends Component {
     }
 
     submit = (e) => {
+
         console.log(e)
         let api;
         api = "/api/booking/searchGp"
