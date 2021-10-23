@@ -190,8 +190,8 @@ func gPSearch(data InputData) []searchReData {
 			}
 		}
 		eachData.Language = language
-		//distance int -> string
-		eachData.Distance = fmt.Sprintf("%f", calDistance(data.CurrentDisX, gp.LocationX, data.CurrentDisY, gp.LocationY))
+		//distance float -> string
+		eachData.Distance = fmt.Sprintf("%.2f", calDistance(data.CurrentDisX, gp.LocationX, data.CurrentDisY, gp.LocationY))
 		images := GetImages(models.GP, gp.GpName, 1, *db)
 		if len(images) == 0 {
 			eachData.Images = models.Image{}
