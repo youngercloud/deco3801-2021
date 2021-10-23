@@ -17,6 +17,12 @@ let dummyStorage = {}
 
 
 class ChatArea extends Component {
+    _handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            console.log('do validate');
+            this.sendMessage(e, {'content': this.state.input})
+        }
+    }
 
     constructor() {
         super();
@@ -92,7 +98,7 @@ class ChatArea extends Component {
         )
 
         return (
-            <div className="chat-area">
+            <div className="chat-area" onKeyDown={this._handleKeyDown}>
                 <div className="chat-area-content">
                     <MessageList
                         className='message-list'
@@ -135,14 +141,14 @@ class ChatArea extends Component {
                                 <AntdInput
                                     value={this.state.input}
                                     disabled={true}
-
                                     placeholder="Choose the language for translation"
                                     className="chat-input-translated"/>
                             </Col>
                             <Col span={6}>
                                 <button
                                     onClick={(e) => this.sendMessage(e,
-                                        {'content': this.state.input, 'type': 'user'})}
+                                        {'content': this.state.input})
+                                    }
                                     className="chat-send-msg-btn">
                                     Send Translated Message
                                 </button>
@@ -207,7 +213,6 @@ export default class MyBooking extends Component {
             for (let i = 0; i < arr[0].length; i++) {
                 this.doctorChatArea[arr[0][i].FirstName] = <ChatArea docsFirstName={arr[0][i].FirstName} />
             }
-            console.log(12)
             this.setState({selectDoctorName: arr[0][0].FirstName})
         }).catch(function (error) {
             console.log(error);
