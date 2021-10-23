@@ -8,7 +8,7 @@ class DoctorCard extends Component {
             <div onClick={this.props.onClick} className="card-style"
                 style={{height: "360px", width: "100%"}}>
                 <div style={{height: "200px"}}>
-                    <Image preview={false}  height="200px"
+                    <Image preview={false}  height="200px" style={{marginTop: '15px'}}
                         alt="example" src={this.props.image} />
                 </div>
                 <div style={{height: "100px", padding: "20px"}}>
