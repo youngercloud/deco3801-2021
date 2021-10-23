@@ -59,8 +59,8 @@ export default class gpSelected extends Component {
                 <div className="gpIntroduction">
                     <div className="imagePart">
                         <Row>
-                            <Col span={9}/>
-                            <Col span={12}>
+                            <Col span={7}/>
+                            <Col span={16}>
                                 <img style={{marginTop: 20,width:"100%",height:"300px"}} alt="example"
                                      src={require('../../Images/' + this.props.name.Images.Path).default}/>
                             </Col>
