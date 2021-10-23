@@ -354,6 +354,7 @@ func GetUserBookings(c *gin.Context)  {
 		GpName string
 		DocLanguage string
 		BookingTime string
+		Image models.Image
 	}
 	var db = models.InitDB()
 	var dataList []ReturnData
@@ -368,6 +369,7 @@ func GetUserBookings(c *gin.Context)  {
 		fmt.Println("完成医生多重语言的list检测！")
 		n := strings.Split(each.DocName, " ")
 		var obj ReturnData
+		obj.Image = GetImages(models.DOCTOR, n[0] + " " + n[1], 1, *db)[0]
 		obj.FirstName = n[0]
 		obj.LastName = n[1]
 		obj.GpName = each.GpName

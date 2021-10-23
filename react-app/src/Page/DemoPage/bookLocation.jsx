@@ -113,11 +113,11 @@ export default class bookLocation extends Component {
                             <h3>Distance: {d.Distance} Kilometer</h3>
                             <h3>Language:</h3>
                        
-                            <Row>
-                                {d.Language.map(item=>(
-                                    <Col><p>{item} &nbsp;</p></Col>
-                                ))}
-                            </Row>
+                            {/*<Row>*/}
+                            {/*    {d.Language.map(item=>(*/}
+                            {/*        <Col><p>{item} &nbsp;</p></Col>*/}
+                            {/*    ))}*/}
+                            {/*</Row>*/}
 
                             <Button  onClick={() => {this.gpSelected(d)}}><p>$65 - Consultation</p></Button>
                         </div>

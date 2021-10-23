@@ -6,7 +6,6 @@ import {MessageList} from 'react-chat-elements'
 import Card from "./DoctorCard";
 import {Affix, Col, Input as AntdInput, Row, Select, Space} from "antd";
 import './static/arginote.css'
-import goodman from "../../Images/goodman.jpeg";
 import {Option} from "antd/es/mentions";
 import axios from "axios";
 
@@ -195,6 +194,7 @@ export default class MyBooking extends Component {
             Object.keys(json).forEach(function (key) {
                 arr.push(json[key]);
             });
+
             this.doctorData = arr[0].map((d) =>
                 <Card
                     onClick={(e) => {
@@ -202,7 +202,7 @@ export default class MyBooking extends Component {
                         this.setState({selectDoctorName: d.FirstName})
                     }}
                     style={{width: 300, boxShadow: "5px 7.5px #888888"}}
-                    image={goodman}
+                    image={require('../../Images/' + d.Image.Path).default}
                     firstName={d.FirstName}
                     lastName={d.LastName}
                     docLanguage={d.DocLanguage}
