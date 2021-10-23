@@ -111,7 +111,7 @@ export default class bookLocation extends Component {
 
                         <div>
                             <h1>{d.Gp.GpName}</h1>
-                            <h3>Distance: {d.Distance} Kilometer</h3>
+                            <h3>Distance: {d.Distance}KM</h3>
                             <h3>Language:</h3>
                             <Row>
                                 {d.Language.map(item => (
@@ -163,7 +163,7 @@ export default class bookLocation extends Component {
 
                         <div>
                             <h1>{d.Gp.GpName}</h1>
-                            <h3>Distance: {d.Distance} Kilometer</h3>
+                            <h3>Distance: {d.Distance}KM</h3>
                             <h3>Language:</h3>
 
                             <Row>
