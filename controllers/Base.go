@@ -74,38 +74,40 @@ func MainImage(images []models.Image) models.Image {
 //Testing method
 
 // FakeCl Insert fake client
+
 func FakeCl() {
 	var db = models.InitDB()
 	var data models.Doctor
-	data.FirstName = "Keyoren"
-	data.LastName = "Fernandes"
-	data.Email = "KeyFer@gmail.com"
-	data.PhoneNumber = "0498800147"
+	data.FirstName = "Fabrina"
+	data.LastName = "Hossain"
+	data.Email = "FabrinaHossain@gmail.com"
+	data.PhoneNumber = "0411148123"
 	data.Password = "1"
-	data.ClinicOrHospital = "Brisbane GP and Travel Doctor"
-	data.Specialty = "Travel medicine, Diving and underwater medicine"
-	data.Language = models.EN
-	data.Gender = "Male"
+	data.ClinicOrHospital = "UQ St Lucia Medical Centre"
+	data.Specialty = "Child health, Chronic disease management, Women’s health"
+	data.Language = models.FR
+	data.Gender = "Female"
 	data.Monday = "9:00-13:00"
-	data.Tuesday = "9:00-13:00"
-	data.Wednesday = "9:00-13:00"
-	data.Thursday = "9:00-13:00"
-	data.Friday = "9:00-14:00"
-	data.Saturday = "Closed"
+	data.Tuesday = "9:00-14:00"
+	data.Wednesday = "9:00-14:00"
+	data.Thursday = "9:00-12:00"
+	data.Friday = "9:00-12:00"
+	data.Saturday = "9:00-10:00"
 	data.Sunday = "Closed"
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
 	}
 }
 
+
 // FakeImage Insert fake images
 func FakeImage() {
 	var db = models.InitDB()
 	var data models.Image
-	data.Name = "Dr"
-	data.Path =  "Dr.png"
-	data.Type = models.GP
-	data.OwnerName = "Dr. Natasha Christa"
+	data.Name = "Fabrina"
+	data.Path = "Fabrina.png"
+	data.Type = models.DOCTOR
+	data.OwnerName = "Fabrina Hossain"
 	data.IsMain = true
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
@@ -113,30 +115,27 @@ func FakeImage() {
 }
 
 // FakeGp Insert fake Gp
-
 func FakeGp() {
 	var db = models.InitDB()
 	var data models.HospitalGp
-	data.GpName = "Dr. Natasha Christa	"
+	data.GpName = "Brisbane GP and Travel Doctor"
 	data.PostCode = "4000"
-	data.LocationX = -27.460249000565096
-	data.LocationY = 153.02335695804226
-	data.Address = "448 Boundary St, Spring Hill QLD 4000"
-	data.About = "Welcome to Our GP Medical Centre in Spring Hill, where we have friendly staff and experienced General Practitioners who care for their patients health and well-being.\nWith support of healthcare professionals including nurses, admin and internal/external management sources, our doctors strive to achieve the best for you and your family."
-	data.Strengths = "full range of medical services pathology and a physiotherapist"
-	data.Monday = "8:30-17:00"
-	data.Tuesday = "8:30-17:00"
-	data.Wednesday = "8:30-17:00"
-	data.Thursday = "10:00-19:00"
-	data.Friday = "10:00-13:00"
-	data.Saturday = "Closed"
+	data.LocationX = -27.45474988865088
+	data.LocationY = 153.02546326754143
+	data.Address = "4/400 Gregory Terrace, Spring Hill QLD"
+	data.About = "We are a family practice that prides itself on the quality care we provide. Our patient’s health and wellbeing are – and always have been our greatest priorities. As a fully accredited general practice and travel vaccination clinic, our GPs and Allied Health professionals are all highly trained and passionate about what they do. Conveniently located close to the Brisbane CBD, our spacious and well-equipped rooms enable our experienced and friendly GPs to provide high-quality medical services, including general check-ups, vaccinations, skin checks, nutritional medicine, travel medicine, and dive medicals."
+	data.Strengths = "General Medicine%Aviation and Occupational Medicine%Women’s Health"
+	data.Monday = "8:30-16:30"
+	data.Tuesday = "8:30-16:30"
+	data.Wednesday = "8:30-16:30"
+	data.Thursday = "8:00-16:30"
+	data.Friday = "8:00-16:30"
+	data.Saturday = "9:00-13:00"
 	data.Sunday = "Closed"
 	if err := db.Create(&data).Error; err != nil {
 		fmt.Println("error!")
 	}
 }
-
-
 // FakeBooking  Insert fake book information
 func FakeBooking()  {
 	var db = models.InitDB()

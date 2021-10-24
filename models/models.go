@@ -101,6 +101,7 @@ const (
 	TA = "Tamil"
 	HI = "Hindi"
 	MA = "Malayalam"
+	FR = "French"
 )
 
 func InitDB() *gorm.DB {
