@@ -22,8 +22,6 @@ export default class doctorPage extends Component {
         const date = this.props.date;
         const time = this.props.time;
 
-
-
         return (
         <div style={{height:850}} >
             <div className="steps">
@@ -74,8 +72,9 @@ export default class doctorPage extends Component {
                         </div>
                     </Col>
                     <Col span={6}>
-                        <Image src={doctorImage}/>
-                        <Image src={doctor.Image}/>
+
+                        <Image src={require('../../Images/' + doctor.Image[0].Path).default}/>
+
                     </Col>
                 </Row>
             </div>

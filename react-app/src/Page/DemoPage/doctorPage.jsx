@@ -47,7 +47,7 @@ export default class doctorPage extends Component {
     render() {
         const doctorInfo = this.props.name.DocInfos.map((doctor) => (
             <Col span={7}>
-                <Card onClick={(e) => {
+                <Card  onClick={(e) => {
                     this.changeColor(e)
                     this.doctorSelect(doctor)
                 }}>

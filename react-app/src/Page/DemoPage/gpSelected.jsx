@@ -59,8 +59,8 @@ export default class gpSelected extends Component {
                 <div className="gpIntroduction">
                     <div className="imagePart">
                         <Row>
-                            <Col span={9}/>
-                            <Col span={12}>
+                            <Col span={7}/>
+                            <Col span={16}>
                                 <img style={{marginTop: 20,width:"100%",height:"300px"}} alt="example"
                                      src={require('../../Images/' + this.props.name.Images.Path).default}/>
                             </Col>
@@ -106,7 +106,10 @@ export default class gpSelected extends Component {
                             <Col span={14}>
                                 <h3>Strength</h3>
                                 <div style={{display: this.state.strength}}>
-                                    <p>{this.props.name.Gp.Strengths}</p>
+                                    {/*<p>{this.props.name.GpStrength}</p>*/}
+                                    {this.props.name.GpStrength.map(item => (
+                                        <p>{item} &nbsp;</p>
+                                    ))}
                                 </div>
                             </Col>
                             <Col>

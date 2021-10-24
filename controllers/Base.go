@@ -20,7 +20,7 @@ func isContain(data string, dataList []string) bool{
 
 //Inserting to databases
 
-//InsertImage Insert images
+//InsertImage Insert images to database
 func InsertImage(c *gin.Context)  {
 	var db = models.InitDB()
 	var data models.Image
@@ -42,7 +42,7 @@ func InsertImage(c *gin.Context)  {
 
 //Get from databases
 
-// GetImages Get images
+// GetImages Get images from database
 func GetImages(imType models.ImageType, owner string, isMain int, db gorm.DB) []models.Image {
 	var images []models.Image
 	if isMain != 1 && isMain != 0 {
@@ -61,7 +61,7 @@ func GetImages(imType models.ImageType, owner string, isMain int, db gorm.DB) []
 	return images
 }
 
-// MainImage Check which image is the main one and return it
+// MainImage Check which image is the main one and return it from database
 func MainImage(images []models.Image) models.Image {
 	for _, image := range images {
 		if image.IsMain == true {
@@ -74,7 +74,6 @@ func MainImage(images []models.Image) models.Image {
 //Testing method
 
 // FakeCl Insert fake client
-
 func FakeCl() {
 	var db = models.InitDB()
 	var data models.Doctor
@@ -100,7 +99,9 @@ func FakeCl() {
 }
 
 
+
 // FakeImage Insert fake images
+
 func FakeImage() {
 	var db = models.InitDB()
 	var data models.Image
@@ -114,7 +115,9 @@ func FakeImage() {
 	}
 }
 
+
 // FakeGp Insert fake Gp
+
 func FakeGp() {
 	var db = models.InitDB()
 	var data models.HospitalGp
@@ -136,7 +139,9 @@ func FakeGp() {
 		fmt.Println("error!")
 	}
 }
+
 // FakeBooking  Insert fake book information
+
 func FakeBooking()  {
 	var db = models.InitDB()
 	//db.AutoMigrate(&models.Booking{})
@@ -158,6 +163,7 @@ func FakeBooking()  {
 		}
 }
 
+// FakeCreateTable Create a new data table in database
 func FakeCreateTable() {
 	var db = models.InitDB()
 	err := db.AutoMigrate(&models.Doctor{})

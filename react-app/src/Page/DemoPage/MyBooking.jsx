@@ -6,7 +6,6 @@ import {MessageList} from 'react-chat-elements'
 import Card from "./DoctorCard";
 import {Affix, Col, Input as AntdInput, Row, Select, Space} from "antd";
 import './static/arginote.css'
-import goodman from "../../Images/goodman.jpeg";
 import {Option} from "antd/es/mentions";
 import axios from "axios";
 
@@ -17,6 +16,12 @@ let dummyStorage = {}
 
 
 class ChatArea extends Component {
+    _handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            console.log('do validate');
+            this.sendMessage(e, {'content': this.state.input})
+        }
+    }
 
     constructor() {
         super();
@@ -92,7 +97,7 @@ class ChatArea extends Component {
         )
 
         return (
-            <div className="chat-area">
+            <div className="chat-area" onKeyDown={this._handleKeyDown}>
                 <div className="chat-area-content">
                     <MessageList
                         className='message-list'
@@ -135,14 +140,14 @@ class ChatArea extends Component {
                                 <AntdInput
                                     value={this.state.input}
                                     disabled={true}
-
                                     placeholder="Choose the language for translation"
                                     className="chat-input-translated"/>
                             </Col>
                             <Col span={6}>
                                 <button
                                     onClick={(e) => this.sendMessage(e,
-                                        {'content': this.state.input, 'type': 'user'})}
+                                        {'content': this.state.input})
+                                    }
                                     className="chat-send-msg-btn">
                                     Send Translated Message
                                 </button>
@@ -189,6 +194,7 @@ export default class MyBooking extends Component {
             Object.keys(json).forEach(function (key) {
                 arr.push(json[key]);
             });
+
             this.doctorData = arr[0].map((d) =>
                 <Card
                     onClick={(e) => {
@@ -196,7 +202,7 @@ export default class MyBooking extends Component {
                         this.setState({selectDoctorName: d.FirstName})
                     }}
                     style={{width: 300, boxShadow: "5px 7.5px #888888"}}
-                    image={goodman}
+                    image={require('../../Images/' + d.Image.Path).default}
                     firstName={d.FirstName}
                     lastName={d.LastName}
                     docLanguage={d.DocLanguage}
@@ -207,7 +213,6 @@ export default class MyBooking extends Component {
             for (let i = 0; i < arr[0].length; i++) {
                 this.doctorChatArea[arr[0][i].FirstName] = <ChatArea docsFirstName={arr[0][i].FirstName} />
             }
-            console.log(12)
             this.setState({selectDoctorName: arr[0][0].FirstName})
         }).catch(function (error) {
             console.log(error);

@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
+//ChangeUserInfo Update a new user information into database
 func ChangeUserInfo(c *gin.Context) {
 	type Info struct {
 		Name string

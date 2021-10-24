@@ -115,9 +115,10 @@ class specialistService extends Component {
                         <br/><br/>
                         <br/>
                         <br/>
+                        <div style={{width: '50%'}}>
+                            <p className="fontLeft2">{arr[2]}</p>
+                        </div>
 
-
-                        <p className="fontLeft2">{arr[2]} </p>
                         <br/>
                     </div>
                 </div>
@@ -128,9 +129,11 @@ class specialistService extends Component {
                     <br/><br/>
                     <br/>
                     <br/>
-                    <p className="fontLeft2">
-                        {arr[4]}
-                    </p>
+                    <div style={{width: '70%'}}>
+                        <p className="fontLeft2">
+                            {arr[4]}
+                        </p>
+                    </div>
                     <br/>
 
                 </div>
@@ -141,13 +144,16 @@ class specialistService extends Component {
                     <br/><br/>
                     <br/>
                     <br/>
-                    <p className="fontLeft2">
-                        - {arr[6]}
-                        <br/><br/>
-                        - {arr[7]}
-                        <br/><br/>
-                        - {arr[8]} </p>
-                    <br/>
+                    <div style={{width: '70%'}}>
+                        <p className="fontLeft2">
+                            - {arr[6]}
+                            <br/><br/>
+                            - {arr[7]}
+                            <br/><br/>
+                            - {arr[8]}
+                        </p>
+                        <br/>
+                    </div>
                 </div>
             </div>
         );

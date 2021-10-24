@@ -12,6 +12,7 @@ type BaseModel struct {
 	UpdatedAt time.Time
 }
 
+//User The information of a user
 type User struct {
 	BaseModel
 	Name string `gorm:"index:idx_name,unique;size:256"`
@@ -24,6 +25,7 @@ type User struct {
 	Nationality string `gorm:"size:256"`
 }
 
+//AvailableTime The opening time of a gp or available time of doctor
 type AvailableTime struct {
 	Monday string `gorm:"size:256"`
 	Tuesday string `gorm:"size:256"`
@@ -34,6 +36,7 @@ type AvailableTime struct {
 	Sunday string `gorm:"size:256"`
 }
 
+//Doctor The information of a doctor
 type Doctor struct {
 	BaseModel
 	Password string `gorm:"size:256"`
@@ -49,6 +52,7 @@ type Doctor struct {
 	AvailableTime `gorm:"size:256"`
 }
 
+//HospitalGp The information of a hospitalGp
 type HospitalGp struct {
 	BaseModel
 	GpName string `gorm:"not null;size:256"`
@@ -61,6 +65,7 @@ type HospitalGp struct {
 	AvailableTime `gorm:"size:256"`
 }
 
+//Booking The information of book
 type Booking struct {
 	BaseModel
 	UserId int `gorm:"not null;size:256"`
@@ -74,9 +79,8 @@ type Booking struct {
 	BookTime string `gorm:"not null;size:256"`
 }
 
-
+//ImageType Enum for the image type
 type ImageType int32
-
 const (
 	GP ImageType = 0
 	DOCTOR ImageType = 1
@@ -84,6 +88,7 @@ const (
 	LANGUAGE ImageType = 4
 )
 
+//Image The information of image
 type Image struct {
 	BaseModel
 	Name string `gorm:"not null;size:256"`
@@ -93,7 +98,7 @@ type Image struct {
 	IsMain bool `gorm:"not null;size:256"`
 }
 
-
+//Enum for the language type
 const (
 	CN = "Chinese"
 	EN = "English"
@@ -104,6 +109,7 @@ const (
 	FR = "French"
 )
 
+//InitDB Initialize the database
 func InitDB() *gorm.DB {
 	dsn := "stu:deco3801@tcp(34.87.198.176:3306)/users?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})

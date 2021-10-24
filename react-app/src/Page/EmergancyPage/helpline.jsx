@@ -108,8 +108,9 @@ class helpline extends Component {
                         <br/><br/>
                         <br/>
                         <br/>
-
-                        <p className="fontLeft2">{arr[2]}</p>
+                        <div style={{width: '50%'}}>
+                            <p className="fontLeft2">{arr[2]}</p>
+                        </div>
                         <br/>
                     </div>
                 </div>
@@ -120,12 +121,13 @@ class helpline extends Component {
                     <br/><br/>
                     <br/>
                     <br/>
-                    <p className="fontLeft2">
-                        - {arr[4]}<br/>
-
-                        - {arr[5]}<br/>
-                        <br/>
-                    </p>
+                    <div style={{width: '70%'}}>
+                        <p className="fontLeft2">
+                            - {arr[4]}<br/>
+                            - {arr[5]}<br/>
+                            <br/>
+                        </p>
+                    </div>
                 </div>
             </div>
         );
