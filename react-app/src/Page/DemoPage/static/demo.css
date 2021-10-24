@@ -9,8 +9,8 @@ body {
 }
 
 
-.container{
-    text-align:center;
+.container {
+    text-align: center;
 
 }
 
@@ -33,7 +33,7 @@ body {
 }
 
 /*设置高度出现问题？*/
-.site-layout{
+.site-layout {
     height: inherit;
 
 }
@@ -43,64 +43,66 @@ body {
     margin-left: 50px;
     margin-top: 20px;
 }
-.site-layout-background .breadcrumb p{
+
+.site-layout-background .breadcrumb p {
     color: #354E57;
     font-size: 28px;
     font-weight: bold;
 }
 
-.ant-breadcrumb-separator{
+.ant-breadcrumb-separator {
     color: #354E57;
     font-size: 28px;
     font-weight: bold;
 }
 
 
-.demo{
+.demo {
     background-color: #354E57;
 }
 
 
-
-.ant-menu-item-selected{
+.ant-menu-item-selected {
     color: #EEF3F4 !important;
 }
 
-.ant-menu-root{
+.ant-menu-root {
     border-right: 0.5px;
 }
-.ant-menu-item:active{
+
+.ant-menu-item:active {
     background-color: #A67744;
 }
 
-.ant-menu-item{
+.ant-menu-item {
     color: #EEF3F4;
 }
 
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: #A67744;
 }
 
-.image{
-    text-align:center;
+.image {
+    text-align: center;
     padding-bottom: 50px;
 }
 
-.image p{
+.image p {
     margin-top: 5px;
 }
 
 
-.controlBar{
+.controlBar {
     float: left;
     margin-top: 50px;
 }
 
-html,body,#root{
+html, body, #root {
     width: 100%;
     height: 100%;
 }
-.ant-layout{
+
+.ant-layout {
     height: 100%;
 }
 

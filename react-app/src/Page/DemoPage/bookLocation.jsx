@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import "./static/bookLocation.css";
 import {Button, Card, Col, Input, Row, Select} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
-
-
 import axios from "axios";
 import MapboxGl from "mapbox-gl/dist/mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
@@ -24,7 +22,6 @@ const {Meta} = Card;
 
 export default class bookLocation extends Component {
     info;
-    languages;
     state = {
         input: '',
         distanceMin: '0',
@@ -35,6 +32,8 @@ export default class bookLocation extends Component {
         CurrentDisX: 0,
         CurrentDisY: 0,
     }
+
+    //get the position information of input postcode
     handleGetInputValue = (event) => {
         this.setState({
             "input": event.target.value,
@@ -50,33 +49,29 @@ export default class bookLocation extends Component {
         geocoder.addTo('#geocoder');
         geocoder.query("Australia " + event.target.value);
         geocoder.on('result', (e) => {
-
             const x = e.result.bbox[0];
             const y = e.result.bbox[1];
-
             this.setState({
                 CurrentDisX: e.result.bbox[1],
                 CurrentDisY: e.result.bbox[0],
             })
-
             console.log("SATE:", this.state)
-
         });
     };
 
+    ////fix page to top when enter
     handleDistanceValue = distanceSelect => {
         this.setState({
             distanceMin: distanceSelect.replace(",", "")[0],
         })
-        if (distanceSelect.replace(",", "")[1]!=="9"){
+        if (distanceSelect.replace(",", "")[1] !== "9") {
             this.setState({
                 distanceMax: distanceSelect.replace(",", "")[1],
             })
         }
-
-
     };
 
+    //get language selected
     handleLanguageValue = languageSelect => {
         this.setState({
             language: languageSelect,
@@ -84,12 +79,13 @@ export default class bookLocation extends Component {
 
     };
 
+    //send information to demo component
     gpSelected(info) {
         this.props.gpSelected(info, "GpSelected")
     }
 
+    //send response to end-back
     submit = (e) => {
-
         console.log(e)
         let api;
         api = "/api/booking/searchGp"
@@ -138,8 +134,8 @@ export default class bookLocation extends Component {
         });
     };
 
+    //fix page to top when enter and get all gp inforamtion from back-end
     componentDidMount() {
-
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
@@ -171,11 +167,10 @@ export default class bookLocation extends Component {
                             <h1>{d.Gp.GpName}</h1>
                             <h3>Distance: {d.Distance}KM</h3>
                             <h3>Language:</h3>
-
                             <Row>
                                 {
                                     d.Language.map(item => (
-                                        <Col><p>{item} &nbsp;</p></Col>
+                                            <Col><p>{item} &nbsp;</p></Col>
                                         )
                                     )
                                 }
@@ -208,23 +203,17 @@ export default class bookLocation extends Component {
                         <Select size="large" placeholder="Distance" style={{width: 120}}
                                 value={this.state.distanceSelect}
                                 onChange={this.handleDistanceValue} options={distanceOptions}>
-                            {/*<Option value="1km">1km</Option>*/}
-                            {/*<Option value="1km-3km">1km-3km</Option>*/}
                         </Select>
 
                         <Select size="large" placeholder="Language" style={{width: 120}}
                                 value={this.state.languageSelect}
                                 onChange={this.handleLanguageValue} options={languageOptions}>
-                            {/*<Option value="English">English</Option>*/}
-                            {/*<Option value="Chinese">Chinese</Option>*/}
-                            {/*<Option value="Japanese">Japanese</Option>*/}
                         </Select>
                         <Button type="primary" icon={<SearchOutlined style={{fontSize: 20, paddingLeft: 8}}/>}
                                 size="large" onClick={() => this.submit(this.state)}/>
                     </Input.Group>
                 </div>
                 <div className="cards">
-
                     <Row gutter={[48, 48]}>
                         {this.info}
                     </Row>

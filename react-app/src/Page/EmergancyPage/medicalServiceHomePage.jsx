@@ -7,11 +7,9 @@ import image4 from "../EmergancyPage/static/m4.png";
 import image5 from "../EmergancyPage/static/m5.png";
 import image6 from "../EmergancyPage/static/m6.png";
 import cookie from "react-cookies";
-import {Select} from "antd";
 
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
-
 let strings = {
     0:"Medical Service",
     1:"In Australia",
@@ -59,19 +57,17 @@ let strings = {
     43:"Pharmacy",
 
 }
-
 const arr = []
 for (let k of Object.keys(strings)) {
     arr.push(strings[k])
 }
 
-
 class medicalServiceHomePage extends Component {
-
     state = {
         languageCodes: [],
     };
 
+    //set page on the top when enter to this page
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
         googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
@@ -82,6 +78,7 @@ class medicalServiceHomePage extends Component {
         };
     }
 
+    //translate language
     changeHandler = language => {
         let cookieLanguage = cookie.load("language");
         let transQuestion = "";
@@ -408,5 +405,4 @@ class medicalServiceHomePage extends Component {
         );
     }
 }
-
 export default medicalServiceHomePage;

@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import logo from "./static/pharmacy.png";
 import "./static/emergancyPage1.css";
-
 import cookie from "react-cookies";
 
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
-
 const strings = {
     0: "Pharmacy",
     1: "What is pharmacy ?",
@@ -33,11 +31,11 @@ const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"
     strings["7"], strings["8"], strings["9"], strings["10"], strings["11"], strings["12"], strings["13"], strings["14"], strings["15"], strings["16"]];
 
 class pharmacy extends Component {
-
     state = {
         languageCodes: [],
     };
 
+    //set page on the top when enter to this page
     componentDidMount() {
 
         // load all of the language options from Google Translate to your app state
@@ -55,6 +53,7 @@ class pharmacy extends Component {
         }
     }
 
+    //translate language
     changeHandler = language => {
         let cookieLanguage = cookie.load("language");
         let transQuestion = "";
@@ -87,7 +86,6 @@ class pharmacy extends Component {
             window.scrollTo(0, 0);
         }
     };
-
 
     render() {
         const {languageCodes, language} = this.state;

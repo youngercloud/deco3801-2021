@@ -1,6 +1,6 @@
-import React, {Component, lazy} from 'react';
+import React, {Component} from 'react';
 import cookie from "react-cookies";
-import Language from "./Page/MainPage/Language";
+
 
 let key = require('./privateData.json');
 
@@ -15,37 +15,29 @@ class App extends Component {
 
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
-
-        googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+        googleTranslate.getSupportedLanguages("en", function (err, languageCodes) {
             getLanguageCodes(languageCodes); // use a callback function to setState
         });
         const getLanguageCodes = languageCodes => {
-            this.setState({ languageCodes });
+            this.setState({languageCodes});
         };
 
     }
 
     render() {
-        const { languageCodes, language} = this.state;
-        {console.log(language)}
+        const {languageCodes, language} = this.state;
+        {
+            console.log(language)
+        }
         return (
-            // <div>
-            //
-            //     {/*<Home/>*/}
-            //     {/*<LoginPage/>*/}
-            //     {/*<SignUpPage/>*/}
-            //     {/*<UserPage/>*/}
-            //     <MainPage/>
-            // </div>
             <div style={this.divStyle}>
                 <button>{arr[1]}</button>
                 <p>{arr[0]}</p>
 
-
                 {/* iterate through language options to create a select box */}
                 <select className="select-language" value={language} onChange={(e) => {
-                        this.changeHandler(e.target.value)
-                    }}>
+                    this.changeHandler(e.target.value)
+                }}>
 
                     {languageCodes.map(lang => (
                         <option key={lang.language} value={lang.language}>
@@ -67,7 +59,7 @@ class App extends Component {
         // translate the question when selecting a different language
         arr.map((value, index) => {
             if (language !== cookieLanguage) {
-                googleTranslate.translate(arr[index], language, function(err, translation) {
+                googleTranslate.translate(arr[index], language, function (err, translation) {
                     console.log(translation.translatedText);
                     transQuestion = translation.translatedText;
                     translating(transQuestion, index);
@@ -83,8 +75,8 @@ class App extends Component {
             }
         };
 
-        this.setState({ language });
-        cookie.save("language", language, { path: "/" });
+        this.setState({language});
+        cookie.save("language", language, {path: "/"});
     };
 
     // just some inline css to center our demo

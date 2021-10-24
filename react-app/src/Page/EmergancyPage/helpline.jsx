@@ -1,26 +1,22 @@
 import React, {Component} from 'react';
 import logo from "../EmergancyPage/static/helpline.png";
 import "./static/emergancyPage1.css";
-
-
 import cookie from "react-cookies";
 
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
-
 const strings = {
-    0:"Helpline",
-    1:"What is Helpline ?",
-    2:"When you need health care during after hour of your GP or pharmacy, you can call helpline. A registered nurse " +
+    0: "Helpline",
+    1: "What is Helpline ?",
+    2: "When you need health care during after hour of your GP or pharmacy, you can call helpline. A registered nurse " +
         "provide help to you and may offer you a call back from a GP. The number of helpline is 1800 022222. The GP " +
         "will contact you in 15 minutes or 1 hour according to the severity of your illness. ",
-    3:"Things about helpline you should know",
-    4:"The helpline provide 24/7 service to you",
-    5:"The helpline can deal with general problem, if under urgency please go to the emergency department of hospital or call 000.",
+    3: "Things about helpline you should know",
+    4: "The helpline provide 24/7 service to you",
+    5: "The helpline can deal with general problem, if under urgency please go to the emergency department of hospital or call 000.",
 
 }
 const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"], strings["5"]];
-
 
 class helpline extends Component {
 
@@ -28,23 +24,24 @@ class helpline extends Component {
         languageCodes: [],
     };
 
+    //set page on the top when enter to this page
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
-        googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+        googleTranslate.getSupportedLanguages("en", function (err, languageCodes) {
             getLanguageCodes(languageCodes); // use a callback function to setState
         });
         const getLanguageCodes = languageCodes => {
-            this.setState({ languageCodes });
+            this.setState({languageCodes});
         };
-
 
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
-            window.scrollTo (0,0);
+            window.scrollTo(0, 0);
         }
     }
 
+    //translate language
     changeHandler = language => {
         let cookieLanguage = cookie.load("language");
         let transQuestion = "";
@@ -52,7 +49,7 @@ class helpline extends Component {
         // translate the question when selecting a different language
         arr.map((value, index) => {
             if (language !== cookieLanguage) {
-                googleTranslate.translate(arr[index], language, function(err, translation) {
+                googleTranslate.translate(arr[index], language, function (err, translation) {
                     console.log(translation.translatedText);
                     transQuestion = translation.translatedText;
                     translating(transQuestion, index);
@@ -68,20 +65,19 @@ class helpline extends Component {
             }
         };
 
-        this.setState({ language });
-        cookie.save("language", language, { path: "/" });
+        this.setState({language});
+        cookie.save("language", language, {path: "/"});
 
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
-            window.scrollTo (0,0);
+            window.scrollTo(0, 0);
         }
     };
 
-
-    render(){
+    render() {
         const {languageCodes, language} = this.state;
-        return(
+        return (
             <div>
                 <select className="medical-service-select-language" value={language} onChange={(e) => {
                     this.changeHandler(e.target.value)
@@ -132,7 +128,5 @@ class helpline extends Component {
             </div>
         );
     }
-
 }
-
 export default helpline;

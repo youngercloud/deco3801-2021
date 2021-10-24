@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-// RCE CSS
 import 'react-chat-elements/dist/main.css';
-// MessageBox component
 import {MessageList} from 'react-chat-elements'
 import Card from "./DoctorCard";
 import {Affix, Col, Input as AntdInput, Row, Select, Space} from "antd";
@@ -11,9 +9,7 @@ import axios from "axios";
 
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
-
 let dummyStorage = {}
-
 
 class ChatArea extends Component {
     _handleKeyDown = (e) => {
@@ -33,8 +29,8 @@ class ChatArea extends Component {
         }
     }
 
+    //fix to top and translate
     componentDidMount() {
-        //回到顶部（weijia）
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
@@ -52,17 +48,16 @@ class ChatArea extends Component {
         };
     }
 
+    //get input information
     translateInput = language => {
         let {input} = this.state;
         let transInput = "";
-
         const translating = transInput => {
             if (input !== transInput) {
                 this.setState({input: transInput});
                 // this.forceUpdate()
             }
         };
-
         googleTranslate.translate(input, language, function (err, translation) {
             transInput = translation.translatedText;
             translating(transInput);
@@ -70,7 +65,7 @@ class ChatArea extends Component {
         this.setState({language});
     };
 
-
+    //send message
     sendMessage(e, msg) {
         if (!dummyStorage.hasOwnProperty(this.props.docsFirstName)) {
             dummyStorage[this.props.docsFirstName] = []
@@ -133,7 +128,6 @@ class ChatArea extends Component {
                             })
                         }}/>
 
-
                     <div className="chat-translation">
                         <Row>
                             <Col span={18}>
@@ -160,7 +154,6 @@ class ChatArea extends Component {
     }
 }
 
-
 export default class MyBooking extends Component {
 
     constructor() {
@@ -176,6 +169,7 @@ export default class MyBooking extends Component {
         selectDoctorName: "",
     };
 
+    //get selected doctor
     doctorSelect = (e) => {
         if (this.state.selectDoctor != null) {
             this.state.selectDoctor.style.border = 'none';
@@ -184,6 +178,7 @@ export default class MyBooking extends Component {
         e.currentTarget.style.border = 'green solid 2px';
     }
 
+    //get all booking information
     componentDidMount() {
         let api = "/api/userBookings"
         axios.post(api,
@@ -211,7 +206,7 @@ export default class MyBooking extends Component {
                 />
             )
             for (let i = 0; i < arr[0].length; i++) {
-                this.doctorChatArea[arr[0][i].FirstName] = <ChatArea docsFirstName={arr[0][i].FirstName} />
+                this.doctorChatArea[arr[0][i].FirstName] = <ChatArea docsFirstName={arr[0][i].FirstName}/>
             }
             this.setState({selectDoctorName: arr[0][0].FirstName})
         }).catch(function (error) {

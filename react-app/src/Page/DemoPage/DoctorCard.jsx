@@ -6,10 +6,10 @@ class DoctorCard extends Component {
     render() {
         return (
             <div onClick={this.props.onClick} className="card-style"
-                style={{height: "360px", width: "100%"}}>
+                 style={{height: "360px", width: "100%"}}>
                 <div style={{height: "200px"}}>
-                    <Image preview={false}  height="200px" style={{marginTop: '15px'}}
-                        alt="example" src={this.props.image} />
+                    <Image preview={false} height="200px" style={{marginTop: '15px'}}
+                           alt="example" src={this.props.image}/>
                 </div>
                 <div style={{height: "100px", padding: "20px"}}>
                     <p children={this.props.firstName + " " + this.props.lastName} style={{

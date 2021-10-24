@@ -24,12 +24,12 @@
     margin-left: 12px;
     font-family: Microsoft YaHei UI, serif;
     font-size: 30px;
-    color:white;
+    color: white;
 }
 
 #inside-image-word {
     font-size: 20px;
-    color:white;
+    color: white;
     font-family: Microsoft YaHei UI, serif;
     text-align: left;
     margin-left: 12px;
@@ -73,7 +73,7 @@
 }
 
 .header-content-wrapper {
-    float:left;
+    float: left;
     margin-left: 10px;
 
 }
@@ -84,15 +84,15 @@
     margin-left: 20px;
 }
 
-#text-along-bigger p{
+#text-along-bigger p {
     color: white;
     font-size: 28px;
     font-weight: bold;
     margin-top: 20px;
 }
 
-.content_container{
-    float:left;
+.content_container {
+    float: left;
 }
 
 .information-wrapper {
@@ -133,7 +133,7 @@
     margin-left: 5%;
 }
 
-.primary-title-box h1{
+.primary-title-box h1 {
     font-size: 50px;
 
 }
@@ -151,7 +151,7 @@
     border: none;
 }
 
-.horizontal-line-box hr{
+.horizontal-line-box hr {
     border-top: 3px solid #27292B;
     border-left: none;
 }
@@ -214,7 +214,7 @@
     float: left;
 }
 
-.learn-more-button{
+.learn-more-button {
     width: 40%;
     height: 1px !important;
     padding-left: 20px;
@@ -266,12 +266,12 @@
     position: absolute;
     top: 3.5%;
     right: 10%;
-    background-color:#354E57;
+    background-color: #354E57;
     background-position: right 10px center;
     background-repeat: no-repeat;
     background-size: auto 50%;
-    border-radius:2px;
-    border:none;
+    border-radius: 2px;
+    border: none;
     color: #ffffff;
     padding: 10px 30px 10px 10px;
     outline: none;
@@ -282,18 +282,18 @@
 
 @-moz-document url-prefix() {
     select {
-        color: rgba(0,0,0,0);
+        color: rgba(0, 0, 0, 0);
         text-shadow: 0 0 0 #ffffff;
     }
 }
 
-.primary-info-content-top{
+.primary-info-content-top {
     margin-top: 40px;
     left: 20px;
     margin-bottom: 0;
 }
 
 
-#inside-image-word{
+#inside-image-word {
 
 }

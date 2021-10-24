@@ -5,11 +5,11 @@ body {
 
 }
 
-.location{
+.location {
     min-height: 900px;
 }
 
-.location button{
+.location button {
     background-color: #354E57;
 }
 
@@ -29,56 +29,57 @@ body {
     width: 65px;
 }
 
-.ant-select-selection-placeholder{
+.ant-select-selection-placeholder {
 
     font-size: 14px;
     font-weight: bold;
     color: #354E57;
 }
-.ant-select-selection-item{
+
+.ant-select-selection-item {
     font-size: 14px;
     font-weight: bold;
     color: #354E57;
 
 }
 
-.ant-input-lg{
+.ant-input-lg {
     color: #354E57;
     font-size: 16.5px;
     font-weight: bold;
     /*border-color: red;*/
 }
 
-.inputData{
+.inputData {
     padding-bottom: 80px;
 }
 
 
-.ant-card-body{
+.ant-card-body {
     /*background-color: #FAFAFA;*/
     background-color: #CECECE;
     /*margin-bottom: 50px;*/
 
 }
 
-.ant-card-body h1{
+.ant-card-body h1 {
     font-size: 17px;
     color: #354E57;
     text-align: left;
     font-weight: bold;
 }
 
-.ant-card-body img{
+.ant-card-body img {
     margin-right: 20px;
 }
 
-.ant-card-body h3{
+.ant-card-body h3 {
     text-align: left;
     font-size: 14px;
     color: #354E57;
 }
 
-.ant-card-body p{
+.ant-card-body p {
 
     font-size: 13px;
     font-weight: unset;
@@ -86,7 +87,7 @@ body {
 }
 
 .ant-card-body button:hover {
-    background-color:#AAAAAA;
+    background-color: #AAAAAA;
     color: #FFFFFF;
 }
 
@@ -98,19 +99,20 @@ body {
 
 }
 
-.ant-card-body button p{
+.ant-card-body button p {
     color: #FFFFFF;
     font-size: 12px;
     padding-top: 1px !important;
 }
-.cards{
+
+.cards {
     margin-left: 10%;
 }
 
-.cards img{
-    width:40%;
+.cards img {
+    width: 40%;
     height: 100%;
-    float:left;
+    float: left;
     padding-top: 2%;
 }
 

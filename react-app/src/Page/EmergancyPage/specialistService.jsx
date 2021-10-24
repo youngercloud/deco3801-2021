@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import logo from "../EmergancyPage/static/spelicist.png";
 import "./static/emergancyPage1.css";
-
 import cookie from "react-cookies";
 
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
-
 const strings = {
     0:"Specialist Service",
     1:"What is Specialist ?",
@@ -27,13 +25,13 @@ const strings = {
 const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"], strings["5"], strings["6"],
     strings["7"], strings["8"]];
 
-
 class specialistService extends Component {
 
     state = {
         languageCodes: [],
     };
 
+    //set page on the top when enter to this page
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
         googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
@@ -50,6 +48,7 @@ class specialistService extends Component {
         }
     }
 
+    //translate language
     changeHandler = language => {
         let cookieLanguage = cookie.load("language");
         let transQuestion = "";
@@ -87,7 +86,6 @@ class specialistService extends Component {
         const {languageCodes, language} = this.state;
         return(
             <div>
-
                 <select className="medical-service-select-language" value={language} onChange={(e) => {
                     this.changeHandler(e.target.value)
                 }}>
@@ -158,7 +156,5 @@ class specialistService extends Component {
             </div>
         );
     }
-
 }
-
 export default specialistService;

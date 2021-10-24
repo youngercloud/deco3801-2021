@@ -46,13 +46,13 @@ func InsertImage(c *gin.Context)  {
 func GetImages(imType models.ImageType, owner string, isMain int, db gorm.DB) []models.Image {
 	var images []models.Image
 	if isMain != 1 && isMain != 0 {
-		err := db.Where("type = ? AND owner_name = ?", imType, owner).Find(&images).Error
+		err := db.Where("type = ? AND owner_name LIKE ?", imType, "%" + owner + "%").Find(&images).Error
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			fmt.Println("There is no result")
 			return []models.Image{}
 		}
 	} else {
-		err := db.Where("type = ? AND owner_name = ? AND is_main = ?", imType, owner, isMain).Find(&images).Error
+		err := db.Where("type = ? AND owner_name LIKE ? AND is_main = ?", imType, "%" + owner + "%", isMain).Find(&images).Error
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			fmt.Println("There is no result")
 			return []models.Image{}

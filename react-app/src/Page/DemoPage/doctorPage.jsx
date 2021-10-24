@@ -4,7 +4,6 @@ import {Card, Col, Row, Steps} from "antd";
 
 const {Step} = Steps;
 
-
 export default class doctorPage extends Component {
     constructor() {
         super();
@@ -13,6 +12,7 @@ export default class doctorPage extends Component {
 
     state = {select: null};
 
+    //change color when card selected
     changeColor = (e) => {
         this.rowRef.current.childNodes.forEach((re) => {
             re.firstChild.style.border = '1px solid rgba(0,0,0,0.3)';
@@ -20,14 +20,17 @@ export default class doctorPage extends Component {
         e.currentTarget.style.border = 'green solid 2px';
     }
 
+    //get selected information
     doctorSelect = (e) => {
         this.setState({select: e})
     }
 
+    //send information to demo component
     gpSelected(info, e) {
         this.props.gpSelected(info, e, this.state.select)
     }
 
+    //judge whether a doctor is selected
     doctorCheck(info, e) {
         if (this.state.select != null) {
             this.gpSelected(info, e);
@@ -36,22 +39,24 @@ export default class doctorPage extends Component {
         }
     }
 
+    //fix to top
     componentDidMount() {
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
-            window.scrollTo (0,0);
+            window.scrollTo(0, 0);
         }
     }
 
     render() {
         const doctorInfo = this.props.name.DocInfos.map((doctor) => (
             <Col span={7}>
-                <Card  onClick={(e) => {
+                <Card onClick={(e) => {
                     this.changeColor(e)
                     this.doctorSelect(doctor)
                 }}>
-                    <img alt="example" src={require('../../Images/' + doctor.Image[0].Path).default} style={{width: "70%",height:"200px"}}/>
+                    <img alt="example" src={require('../../Images/' + doctor.Image[0].Path).default}
+                         style={{width: "70%", height: "200px"}}/>
                     <h1>Name: {doctor.Doctor.LastName}</h1>
                     <h2>Gender: {doctor.Doctor.Gender}</h2>
                     <h2>Language: {doctor.Doctor.Language}</h2>

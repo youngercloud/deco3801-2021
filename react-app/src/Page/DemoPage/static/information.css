@@ -4,18 +4,18 @@ body {
     padding: 0;
 }
 
-.steps h1{
+.steps h1 {
     color: #354E57;
     font-size: 35px;
 }
 
-.bookingInformation h1{
+.bookingInformation h1 {
     color: #354E57;
     font-weight: bold;
     font-size: 18px;
 }
 
-.bookingInformation p{
+.bookingInformation p {
     word-wrap: break-word;
     /*word-break: break-all;*/
     font-weight: unset;
@@ -23,6 +23,6 @@ body {
     font-size: 16px;
 }
 
-.bookingInformation hr{
+.bookingInformation hr {
     width: 70%;
 }

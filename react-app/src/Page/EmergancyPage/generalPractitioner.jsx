@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import logo from "../EmergancyPage/static/gp.png";
 import "./static/emergancyPage1.css";
-
 import cookie from "react-cookies";
 import {Col, Row} from "antd";
 
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
-
 const strings = {
     0: "General Practitioner",
     1: "What is GP ?",
@@ -49,6 +47,7 @@ class generalPractitioner extends Component {
         languageCodes: [],
     };
 
+    //set page on the top when enter to this page
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
         googleTranslate.getSupportedLanguages("en", function (err, languageCodes) {
@@ -65,6 +64,7 @@ class generalPractitioner extends Component {
         }
     }
 
+    //translate language
     changeHandler = language => {
         let cookieLanguage = cookie.load("language");
         let transQuestion = "";

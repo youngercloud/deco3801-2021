@@ -4,37 +4,37 @@ body {
     padding: 0;
 }
 
-.gp{
+.gp {
     height: 900px;
 
 }
 
-.steps{
+.steps {
     width: 50%;
     margin-left: 25%;
     margin-bottom: 2%;
     font-size: 50px;
 }
 
-.steps p{
-    color:#354E57;
+.steps p {
+    color: #354E57;
     font-size: 20px;
 }
 
-.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after{
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
     background-color: #B9C1C4;
 }
 
-.gpIntroduction{
+.gpIntroduction {
     min-height: inherit;
 }
 
-.imagePart{
+.imagePart {
     float: left;
     width: 50%;
 }
 
-.imagePart img{
+.imagePart img {
     width: 90%;
 }
 
@@ -43,30 +43,31 @@ body {
     margin-right: 1%;
 }
 
-.gpContent{
+.gpContent {
     margin-left: 51%;
     width: 50%;
 }
 
-.gpContent .ant-col{
+.gpContent .ant-col {
     margin-left: 2%;
 }
 
 
-.gpContent .ant-col h2{
+.gpContent .ant-col h2 {
     color: #354E57;
     font-size: 32px;
     font-weight: bold;
 }
 
-.gpContent .ant-col h3{
+.gpContent .ant-col h3 {
     color: #354E57;
     font-weight: bold;
     text-align: left;
 }
-.gpContent .ant-col p{
+
+.gpContent .ant-col p {
     color: #354E57;
-    font-size: 15px ;
+    font-size: 15px;
     font-weight: normal;
     text-align: left;
     word-wrap: break-word;
@@ -77,14 +78,14 @@ body {
     background-color: royalblue;
 }
 
-.changePage{
+.changePage {
     float: left;
     width: 100%;
 
     margin-top: 30px;
 }
 
-.changePage .continueButton{
+.changePage .continueButton {
     width: 70%;
     background-color: #354E57 !important;
     border-style: none;
@@ -92,79 +93,83 @@ body {
 
 }
 
-.changePage .continueButton:hover{
+.changePage .continueButton:hover {
     background-color: #B9C1C4 !important;
 
 }
 
 
-
-.changePage .continueButton p{
+.changePage .continueButton p {
     padding-top: 10px;
     font-size: 20px;
     color: #FFFFFF !important;
     font-weight: bold;
 }
 
-.backButton{
+.backButton {
     width: 70%;
     background-color: #B9C1C4;
     border-style: none;
     border-radius: 6px;
 }
 
-.changePage .backButton:hover{
+.changePage .backButton:hover {
     background-color: #354E57 !important;
 
 }
 
-.backButton p{
+.backButton p {
     padding-top: 10px;
     font-size: 20px;
     color: #FFFFFF;
     font-weight: bold;
 }
 
-#ni{
+#ni {
     color: royalblue;
     white-space: pre-line;
 }
 
 
-.ant-steps-item-process .ant-steps-item-icon{
+.ant-steps-item-process .ant-steps-item-icon {
     border: #354E57 !important;
     background: #354E57 !important;
 }
+
 .ant-steps-item-finish .ant-steps-item-icon {
     padding-top: 2px;
     background: #354E57 !important;
     border: #B9C1C4 !important;
     color: #B9C1C4 !important;
 }
-.ant-steps-item-wait .ant-steps-item-icon{
+
+.ant-steps-item-wait .ant-steps-item-icon {
     border: #354E57 !important;
     background: #B9C1C4 !important;
 }
 
-.ant-steps-item-finish .ant-steps-icon{
+.ant-steps-item-finish .ant-steps-icon {
     color: #B9C1C4 !important;
     font-weight: bolder;
-    top:8px;
+    top: 8px;
     left: 10px;
 }
-.ant-steps-item-process .ant-steps-icon{
+
+.ant-steps-item-process .ant-steps-icon {
     color: #B9C1C4 !important;
     font-weight: bolder;
-    top:9px;
+    top: 9px;
     left: 12px;
 }
-.ant-steps-item-wait .ant-steps-icon{
+
+.ant-steps-item-wait .ant-steps-icon {
     color: #354E57 !important;
     font-weight: bolder;
-    top:9px;
+    top: 9px;
     left: 13px;
 }
-.ant-steps-item-title::after{
+
+.ant-steps-item-title::after {
     background-color: #354E57 !important;
     height: 3px !important;
     top: 13px;

@@ -1,15 +1,12 @@
 import React, {Component} from "react";
 import "./static/gpSelected.css";
 import {Col, Image, Row, Steps} from 'antd';
-import gp1 from "../../Images/gp1.png";
 import {createFromIconfontCN} from '@ant-design/icons';
 
 const {Step} = Steps;
-
 const MyIcon = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_2823620_rrtlotzyts.js', // 在 iconfont.cn 上生成
 });
-
 
 export default class gpSelected extends Component {
     state = {
@@ -17,6 +14,7 @@ export default class gpSelected extends Component {
         time: "none",
     };
 
+    //fix to top
     componentDidMount() {
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
@@ -25,6 +23,7 @@ export default class gpSelected extends Component {
         }
     }
 
+    //display information or not
     onChangeStrength = () => {
         if (this.state.strength === "none") {
             this.setState({strength: "block"})
@@ -33,6 +32,7 @@ export default class gpSelected extends Component {
         }
     }
 
+    //display information or not
     onChangeTime = () => {
         if (this.state.time === "none") {
             this.setState({time: "block"})
@@ -41,6 +41,7 @@ export default class gpSelected extends Component {
         }
     }
 
+    //send information to main page
     gpSelected(info, e) {
         this.props.gpSelected(info, e)
     }
@@ -84,7 +85,6 @@ export default class gpSelected extends Component {
                         <Row>
                             <Col span={15}>
                                 <h2>{this.props.name.Gp.GpName}</h2>
-                                {/*<h2>{this.props.name}</h2>*/}
                             </Col>
                         </Row>
                         <Row>
@@ -106,7 +106,6 @@ export default class gpSelected extends Component {
                             <Col span={14}>
                                 <h3>Strength</h3>
                                 <div style={{display: this.state.strength}}>
-                                    {/*<p>{this.props.name.GpStrength}</p>*/}
                                     {this.props.name.GpStrength.map(item => (
                                         <p>{item} &nbsp;</p>
                                     ))}
@@ -159,10 +158,8 @@ export default class gpSelected extends Component {
                             </Col>
                             <Col span={6}/>
                         </Row>
-
                     </div>
                 </div>
-
             </div>
         )
     }

@@ -5,17 +5,15 @@ body {
 
 }
 
-
-
 .hightlight:focus-within {
     background: #a1c084;
 }
 
-.doctorContent{
+.doctorContent {
     margin-left: 8%;
 }
 
-.doctorContent h2{
+.doctorContent h2 {
     text-align: left;
     color: #354E57;
     font-size: 14px;
@@ -23,8 +21,8 @@ body {
     /*word-break: break-all;*/
 }
 
-.doctorContent h1{
+.doctorContent h1 {
     color: #354E57;
-    font-size: 25px;
+    font-size: 35px;
 
 }
