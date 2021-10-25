@@ -15,19 +15,19 @@ import (
 )
 
 // BookingInsert Insert a new booking into database
-func BookingInsert(c *gin.Context)  {
+func BookingInsert(c *gin.Context) {
 	type Info struct {
-		GpName string
-		GpAddr string
-		FirstName string
-		LastName string
-		UserName string
+		GpName       string
+		GpAddr       string
+		FirstName    string
+		LastName     string
+		UserName     string
 		UserPassword string
-		DocLang string
-		DocGender string
-		DocEmail string
-		Date string
-		Time string
+		DocLang      string
+		DocGender    string
+		DocEmail     string
+		Date         string
+		Time         string
 	}
 	var db = models.InitDB()
 	var info Info
@@ -42,10 +42,10 @@ func BookingInsert(c *gin.Context)  {
 		fmt.Println("There is no result")
 		return
 	}
-	time, err := strconv.Atoi( strings.Split(info.Time, ":")[0])
+	time, err := strconv.Atoi(strings.Split(info.Time, ":")[0])
 	if err != nil {
 
-		return 
+		return
 	}
 
 	newBooking.GpName = info.GpName
@@ -57,12 +57,12 @@ func BookingInsert(c *gin.Context)  {
 	newBooking.DocGender = info.DocGender
 	newBooking.DocEmail = info.DocEmail
 
-	if  0 <= time && time <= 8 {
-		newBooking.BookTime = info.Date + "," + "0" + strconv.Itoa(time) + ":00" + "-" + "0" + strconv.Itoa(time + 1) + ":00"
+	if 0 <= time && time <= 8 {
+		newBooking.BookTime = info.Date + "," + "0" + strconv.Itoa(time) + ":00" + "-" + "0" + strconv.Itoa(time+1) + ":00"
 	} else if time == 9 {
-		newBooking.BookTime = info.Date + "," + "0" + strconv.Itoa(time) + ":00" + "-" + strconv.Itoa(time + 1) + ":00"
+		newBooking.BookTime = info.Date + "," + "0" + strconv.Itoa(time) + ":00" + "-" + strconv.Itoa(time+1) + ":00"
 	} else {
-		newBooking.BookTime = info.Date + "," + strconv.Itoa(time) + ":00" + "-" + strconv.Itoa(time + 1) + ":00"
+		newBooking.BookTime = info.Date + "," + strconv.Itoa(time) + ":00" + "-" + strconv.Itoa(time+1) + ":00"
 	}
 
 	if err := db.Create(&newBooking).Error; err != nil {
@@ -77,7 +77,7 @@ func BookingInsert(c *gin.Context)  {
 }
 
 //calDistance Calculate distance between current position and gp position
-func calDistance(gpX float64,  cunX float64, gpY float64, cunY float64) float64 {
+func calDistance(gpX float64, cunX float64, gpY float64, cunY float64) float64 {
 
 	radius := 6371000.0 //6378137.0
 	rad := math.Pi / 180.0
@@ -88,12 +88,12 @@ func calDistance(gpX float64,  cunX float64, gpY float64, cunY float64) float64 
 
 	theta := cunY - gpY
 	dist := math.Acos(math.Sin(gpX)*math.Sin(cunX) + math.Cos(gpX)*math.Cos(cunX)*math.Cos(theta))
-	finalDis := math.Trunc(dist * radius / 1000*1e2+0.5)*1e-2
-	return   finalDis
+	finalDis := math.Trunc(dist*radius/1000*1e2+0.5) * 1e-2
+	return finalDis
 }
 
 //checkedPost Check if the given string is a post code
-func checkedPost(input string) bool{
+func checkedPost(input string) bool {
 	var data = regexp.MustCompile(`\d{4}`)
 	var result = data.FindAllString(input, -1)
 	if len(result) == 1 {
@@ -106,17 +106,17 @@ func checkedPost(input string) bool{
 }
 
 // InputData The data inputted from the input bar in front end
-type InputData struct{
-	Input string
+type InputData struct {
+	Input       string
 	DistanceMin string
 	DistanceMax string
 	CurrentDisX float64
 	CurrentDisY float64
-	Language string
+	Language    string
 }
 
 // HandleGpSearch This is the function that transfer the data of gp searching to front-end/**
-func HandleGpSearch(c *gin.Context)  {
+func HandleGpSearch(c *gin.Context) {
 	var searchCond InputData
 	err := c.Bind(&searchCond)
 	if err != nil {
@@ -131,13 +131,13 @@ func HandleGpSearch(c *gin.Context)  {
 
 //searchReData A single gp information that will be returned to front-end as a list
 type searchReData struct {
-	Gp models.HospitalGp
+	Gp         models.HospitalGp
 	GpStrength []string
-	Language []string
-	Distance string
-	Images models.Image
-	GpImages []models.Image
-	DocInfos []DocInfo
+	Language   []string
+	Distance   string
+	Images     models.Image
+	GpImages   []models.Image
+	DocInfos   []DocInfo
 }
 
 //gPSearch Return the data of gp searching in booking interface
@@ -163,7 +163,7 @@ func gPSearch(data InputData) []searchReData {
 			data.CurrentDisX = -27.497982097934575
 			data.CurrentDisY = 153.01119711268808
 		}
-		db.Raw(command, "%" + data.Input + "%").Find(&GpInformation)
+		db.Raw(command, "%"+data.Input+"%").Find(&GpInformation)
 	} else {
 		db.Raw(command).Find(&GpInformation)
 		data.CurrentDisX = -27.497982097934575
@@ -233,11 +233,11 @@ func GetBookings(userName string, db gorm.DB) []models.Booking {
 }
 
 //CheckDocDate Check if the doctor are available in the given date
-func CheckDocDate(c *gin.Context)  {
+func CheckDocDate(c *gin.Context) {
 	type DocInfo struct {
-		Date string
-		GpName string
-		LastName string
+		Date      string
+		GpName    string
+		LastName  string
 		FirstName string
 	}
 	var db = models.InitDB()
@@ -250,7 +250,7 @@ func CheckDocDate(c *gin.Context)  {
 	}
 
 	//日期格式需要一致
-	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " + info.LastName, "%" + info.Date + "%").Find(&bookings)
+	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?", info.GpName, info.FirstName+" "+info.LastName, "%"+info.Date+"%").Find(&bookings)
 	if len(bookings) == 0 {
 		c.JSON(200, gin.H{
 			"validation": true,
@@ -260,7 +260,7 @@ func CheckDocDate(c *gin.Context)  {
 	//已经被book过的不重复的时间
 	var antiTimes []int
 	for _, each := range bookings {
-		antiTime, _ :=  strconv.Atoi(strings.Split(strings.Split(strings.Split(each.BookTime, ",")[1], "-")[0], ":")[0])
+		antiTime, _ := strconv.Atoi(strings.Split(strings.Split(strings.Split(each.BookTime, ",")[1], "-")[0], ":")[0])
 		antiTimes = append(antiTimes, antiTime)
 	}
 
@@ -268,8 +268,8 @@ func CheckDocDate(c *gin.Context)  {
 	var doctor models.Doctor
 	db.Where("first_name = ? AND last_name = ? AND clinic_or_hospital = ?", info.FirstName, info.LastName, info.GpName).Find(&doctor)
 
-	minTime, _ :=  strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[0], ":")[0])
-	maxTime, _ :=  strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[1], ":")[0])
+	minTime, _ := strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[0], ":")[0])
+	maxTime, _ := strconv.Atoi(strings.Split(strings.Split(doctor.Monday, "-")[1], ":")[0])
 
 	//算出医生可用时间的总合
 	var sum = 0
@@ -296,12 +296,12 @@ func CheckDocDate(c *gin.Context)  {
 }
 
 //CheckDocTime Check if the doctor are available in the given time
-func CheckDocTime(c *gin.Context)  {
+func CheckDocTime(c *gin.Context) {
 	type DocInfo struct {
-		Date string
-		Time string
-		GpName string
-		LastName string
+		Date      string
+		Time      string
+		GpName    string
+		LastName  string
 		FirstName string
 	}
 	var db = models.InitDB()
@@ -313,8 +313,8 @@ func CheckDocTime(c *gin.Context)  {
 		return
 	}
 	//日期格式需要一致
-	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?",info.GpName, info.FirstName + " " +
-		info.LastName, "%" + info.Date + ","+ info.Time + "%").Find(&bookings)
+	db.Where("gp_name = ? AND doc_name = ? AND book_time LIKE ?", info.GpName, info.FirstName+" "+
+		info.LastName, "%"+info.Date+","+info.Time+"%").Find(&bookings)
 	if len(bookings) == 0 {
 		c.JSON(200, gin.H{
 			"validation": true,
@@ -327,14 +327,14 @@ func CheckDocTime(c *gin.Context)  {
 }
 
 //GetUserBookings Return all the booking information as a list to front-end of a corresponding user
-func GetUserBookings(c *gin.Context)  {
+func GetUserBookings(c *gin.Context) {
 	type ReturnData struct {
-		FirstName string
-		LastName string
-		GpName string
+		FirstName   string
+		LastName    string
+		GpName      string
 		DocLanguage string
 		BookingTime string
-		Image models.Image
+		Image       models.Image
 	}
 	var db = models.InitDB()
 	var dataList []ReturnData
@@ -349,8 +349,8 @@ func GetUserBookings(c *gin.Context)  {
 		n := strings.Split(each.DocName, " ")
 		var obj ReturnData
 		fmt.Println(n[0] + " " + n[1])
-		fmt.Println(GetImages(models.DOCTOR, n[0] + " " + n[1], 1, *db))
-		obj.Image = GetImages(models.DOCTOR, n[0] + " " + n[1], 1, *db)[0]
+		fmt.Println(GetImages(models.DOCTOR, n[0]+" "+n[1], 1, *db))
+		obj.Image = GetImages(models.DOCTOR, n[0]+" "+n[1], 1, *db)[0]
 		obj.FirstName = n[0]
 		obj.LastName = n[1]
 		obj.GpName = each.GpName

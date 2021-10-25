@@ -35,7 +35,6 @@ export default class Footer extends Component {
             this.setState({DoB: response.data.User.DoB});
             this.setState({Mail: response.data.User.Mail});
             this.setState({PhoneNumber: response.data.User.PhoneNumber});
-            console.log(this.state)
         }).catch(function (error) {
             console.log(error);
         });
@@ -67,7 +66,6 @@ export default class Footer extends Component {
         this.setState({DoB: this.state.demo});
         this.setState({Mail: Mail.value});
         this.setState({PhoneNumber: PhoneNumber.value});
-        console.log(this.state)
         this.state.demo = null;
     }
 

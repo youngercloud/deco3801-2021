@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func isContain(data string, dataList []string) bool{
+func isContain(data string, dataList []string) bool {
 	fmt.Println("完成医生多重语言的list检测！")
 	for _, str := range dataList {
 		if data == str {
@@ -21,7 +21,7 @@ func isContain(data string, dataList []string) bool{
 //Inserting to databases
 
 //InsertImage Insert images to database
-func InsertImage(c *gin.Context)  {
+func InsertImage(c *gin.Context) {
 	var db = models.InitDB()
 	var data models.Image
 	err := c.Bind(&data)
@@ -46,13 +46,13 @@ func InsertImage(c *gin.Context)  {
 func GetImages(imType models.ImageType, owner string, isMain int, db gorm.DB) []models.Image {
 	var images []models.Image
 	if isMain != 1 && isMain != 0 {
-		err := db.Where("type = ? AND owner_name LIKE ?", imType, "%" + owner + "%").Find(&images).Error
+		err := db.Where("type = ? AND owner_name LIKE ?", imType, "%"+owner+"%").Find(&images).Error
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			fmt.Println("There is no result")
 			return []models.Image{}
 		}
 	} else {
-		err := db.Where("type = ? AND owner_name LIKE ? AND is_main = ?", imType, "%" + owner + "%", isMain).Find(&images).Error
+		err := db.Where("type = ? AND owner_name LIKE ? AND is_main = ?", imType, "%"+owner+"%", isMain).Find(&images).Error
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			fmt.Println("There is no result")
 			return []models.Image{}
@@ -98,8 +98,6 @@ func FakeCl() {
 	}
 }
 
-
-
 // FakeImage Insert fake images
 
 func FakeImage() {
@@ -114,7 +112,6 @@ func FakeImage() {
 		fmt.Println("error!")
 	}
 }
-
 
 // FakeGp Insert fake Gp
 
@@ -142,25 +139,24 @@ func FakeGp() {
 
 // FakeBooking  Insert fake book information
 
-func FakeBooking()  {
+func FakeBooking() {
 	var db = models.InitDB()
 	//db.AutoMigrate(&models.Booking{})
-		var data models.Booking
-		data.UserName = "Kaipeng Zhang"
-		data.UserId = 1
-		data.BookTime = "2021/11/2,09:00-10:00"
-		fmt.Println(data.BookTime)
-		data.GpName = "NB clinic"
-		data.DocName = "Han Li"
-		data.DocEmail = "weijiaT@gmail.com"
-		data.DocGender = "Unknown"
-		data.DocLang = "Chinese"
-		data.GpAddr = "Scape Mars"
+	var data models.Booking
+	data.UserName = "Kaipeng Zhang"
+	data.UserId = 1
+	data.BookTime = "2021/11/2,09:00-10:00"
+	fmt.Println(data.BookTime)
+	data.GpName = "NB clinic"
+	data.DocName = "Han Li"
+	data.DocEmail = "weijiaT@gmail.com"
+	data.DocGender = "Unknown"
+	data.DocLang = "Chinese"
+	data.GpAddr = "Scape Mars"
 
-
-		if err := db.Create(&data).Error; err != nil {
-			fmt.Println("error!")
-		}
+	if err := db.Create(&data).Error; err != nil {
+		fmt.Println("error!")
+	}
 }
 
 // FakeCreateTable Create a new data table in database
@@ -168,6 +164,6 @@ func FakeCreateTable() {
 	var db = models.InitDB()
 	err := db.AutoMigrate(&models.Doctor{})
 	if err != nil {
-		return 
+		return
 	}
 }

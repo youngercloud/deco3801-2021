@@ -50,7 +50,6 @@ class helpline extends Component {
         arr.map((value, index) => {
             if (language !== cookieLanguage) {
                 googleTranslate.translate(arr[index], language, function (err, translation) {
-                    console.log(translation.translatedText);
                     transQuestion = translation.translatedText;
                     translating(transQuestion, index);
                 });
@@ -129,4 +128,5 @@ class helpline extends Component {
         );
     }
 }
+
 export default helpline;

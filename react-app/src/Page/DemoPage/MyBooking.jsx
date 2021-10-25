@@ -14,7 +14,6 @@ let dummyStorage = {}
 class ChatArea extends Component {
     _handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            console.log('do validate');
             this.sendMessage(e, {'content': this.state.input})
         }
     }

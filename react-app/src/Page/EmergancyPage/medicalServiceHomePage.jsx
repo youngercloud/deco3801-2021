@@ -11,51 +11,50 @@ import cookie from "react-cookies";
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
 let strings = {
-    0:"Medical Service",
-    1:"In Australia",
-    2:"The medical system in Australia have many different types and times to provide health care for you",
-    3:"Main place to offer medical care for you!",
-    4:"More Detail Here",
-    5:"In Australia, in the first place, people usually go to GP when they need medical care.",
-    6:"Primary",
-    7:"Help with general health issue",
-    8:"Learn more",
-    9:"Emergency Department",
-    10:"Help with urgent issue",
-    11:"Advanced",
-    12:"Specialist Service",
-    13:"Provide help in specific area of medicine",
-    14:"Hospitals",
-    15:"Offer surgery, deal with serious diseases",
-    16:"Other",
-    17:"Pharmacy",
-    18:"Provide medicine for minor illness",
-    19:"Helpline",
-    20:"Help from Registered nurse on phone",
-    21:"Doctor who finish the general practice training",
-    22:"Doctor help with general health issue and manage your health",
-    23:"First person you should see if feel unwell",
-    24:"Provide help for people in emergency for 24/7",
-    25:"If have urgent issue, call 000 to get emergency service",
-    26:"Also you can go to ED of one hospital directly under urgent case",
-    27:"Doctor who are good at a specific area of medicine, such as heart disease",
-    28:"You need referral from your GP before you wo see a specific",
-    29:"Specialist normal work in hospital",
-    30:"Provide  surgery service for patient",
-    31:"The hospital system consist of private and public hospital",
-    32:"Hospital will help with complex health issue for patient",
-    33:"Help with minor illness and injures",
-    34:"Sell health product",
-    35:"Sell medicine and can provide vaccines",
-    36:"You can get help when during after hour time",
-    37:"Provide help 24/7",
-    38:"May give you a call back from a GP",
-    39:"General Practitioner",
-    40:"Emergency Department",
-    41:"Specialist",
-    42:"Hospital",
-    43:"Pharmacy",
-
+    0: "Medical Service",
+    1: "In Australia",
+    2: "The medical system in Australia have many different types and times to provide health care for you",
+    3: "Main place to offer medical care for you!",
+    4: "More Detail Here",
+    5: "In Australia, in the first place, people usually go to GP when they need medical care.",
+    6: "Primary",
+    7: "Help with general health issue",
+    8: "Learn more",
+    9: "Emergency Department",
+    10: "Help with urgent issue",
+    11: "Advanced",
+    12: "Specialist Service",
+    13: "Provide help in specific area of medicine",
+    14: "Hospitals",
+    15: "Offer surgery, deal with serious diseases",
+    16: "Other",
+    17: "Pharmacy",
+    18: "Provide medicine for minor illness",
+    19: "Helpline",
+    20: "Help from Registered nurse on phone",
+    21: "Doctor who finish the general practice training",
+    22: "Doctor help with general health issue and manage your health",
+    23: "First person you should see if feel unwell",
+    24: "Provide help for people in emergency for 24/7",
+    25: "If have urgent issue, call 000 to get emergency service",
+    26: "Also you can go to ED of one hospital directly under urgent case",
+    27: "Doctor who are good at a specific area of medicine, such as heart disease",
+    28: "You need referral from your GP before you wo see a specific",
+    29: "Specialist normal work in hospital",
+    30: "Provide  surgery service for patient",
+    31: "The hospital system consist of private and public hospital",
+    32: "Hospital will help with complex health issue for patient",
+    33: "Help with minor illness and injures",
+    34: "Sell health product",
+    35: "Sell medicine and can provide vaccines",
+    36: "You can get help when during after hour time",
+    37: "Provide help 24/7",
+    38: "May give you a call back from a GP",
+    39: "General Practitioner",
+    40: "Emergency Department",
+    41: "Specialist",
+    42: "Hospital",
+    43: "Pharmacy",
 }
 const arr = []
 for (let k of Object.keys(strings)) {
@@ -70,28 +69,23 @@ class medicalServiceHomePage extends Component {
     //set page on the top when enter to this page
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
-        googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+        googleTranslate.getSupportedLanguages("en", function (err, languageCodes) {
             getLanguageCodes(languageCodes); // use a callback function to setState
         });
         const getLanguageCodes = languageCodes => {
-            this.setState({ languageCodes });
+            this.setState({languageCodes});
         };
     }
 
     //translate language
     changeHandler = language => {
-        let cookieLanguage = cookie.load("language");
         let transQuestion = "";
-
         // translate the question when selecting a different language
         arr.map((value, index) => {
-            if (language !== cookieLanguage) {
-                googleTranslate.translate(arr[index], language, function(err, translation) {
-                    console.log(translation.translatedText);
-                    transQuestion = translation.translatedText;
-                    translating(transQuestion, index);
-                });
-            }
+            googleTranslate.translate(arr[index], language, function (err, translation) {
+                transQuestion = translation.translatedText;
+                translating(transQuestion, index);
+            });
         })
 
         const translating = (transQuestion, index) => {
@@ -102,23 +96,23 @@ class medicalServiceHomePage extends Component {
             }
         };
 
-        this.setState({ language });
-        cookie.save("language", language, { path: "/" });
+        this.setState({language});
+        cookie.save("language", language, {path: "/"});
 
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
-            window.scrollTo (0,0);
+            window.scrollTo(0, 0);
         }
     };
 
-    serviceSelected(info){
+    serviceSelected(info) {
         this.props.serviceSelected(info)
     }
 
-    render(){
+    render() {
         const {languageCodes, language} = this.state;
-        return(
+        return (
             <div>
                 <select className="medical-service-select-language" style={{width: '20%'}}
                         value={language} onChange={(e) => {
@@ -135,7 +129,7 @@ class medicalServiceHomePage extends Component {
                     <div className="header-m">
                         <h1>{arr[0]}</h1>
                         <h1>{arr[1]}</h1>
-                        <div id="FirstP" style={{width:"35%"}}>
+                        <div id="FirstP" style={{width: "35%"}}>
                             <p>{arr[2]}</p>
                         </div>
                         <br/>
@@ -146,11 +140,12 @@ class medicalServiceHomePage extends Component {
                                 </div>
                                 <div className="header-content-wrapper" id="text-along-bigger">
                                     <p className="header-content-5items-topic">{arr[3]}</p>
-                                    <p style={{fontSize:"24px",marginTop:"18%"}} className="header-content-5items">{arr[39]}</p>
-                                    <p style={{fontSize:"24px"}} className="header-content-5items">{arr[40]}</p>
-                                    <p style={{fontSize:"24px"}} className="header-content-5items">{arr[41]}</p>
-                                    <p style={{fontSize:"24px"}} className="header-content-5items">{arr[42]}</p>
-                                    <p style={{fontSize:"24px"}} className="header-content-5items">{arr[43]}</p>
+                                    <p style={{fontSize: "24px", marginTop: "18%"}}
+                                       className="header-content-5items">{arr[39]}</p>
+                                    <p style={{fontSize: "24px"}} className="header-content-5items">{arr[40]}</p>
+                                    <p style={{fontSize: "24px"}} className="header-content-5items">{arr[41]}</p>
+                                    <p style={{fontSize: "24px"}} className="header-content-5items">{arr[42]}</p>
+                                    <p style={{fontSize: "24px"}} className="header-content-5items">{arr[43]}</p>
                                 </div>
                             </div>
                         </div>
@@ -158,18 +153,18 @@ class medicalServiceHomePage extends Component {
 
                     <div>
                         <div className="information-wrapper">
-                            <div className="information-box" >
+                            <div className="information-box">
                                 <div className="information-title-box">
                                     <h1>{arr[4]}</h1>
                                 </div>
-                                <div className="information-content-box" style={{width:"35%"}}>
-                                    <p id="SecondP" >{arr[5]}</p>
+                                <div className="information-content-box" style={{width: "35%"}}>
+                                    <p id="SecondP">{arr[5]}</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="primary-wrapper" style={{marginTop:"5%"}}>
+                        <div className="primary-wrapper" style={{marginTop: "5%"}}>
                             <div className="primary-box">
-                                <div  className="primary-title-box">
+                                <div className="primary-title-box">
                                     <h1 id="margin-fixed">{arr[6]}</h1>
                                 </div>
                                 <div className="primary-content-box">
@@ -237,7 +232,7 @@ class medicalServiceHomePage extends Component {
                                         </div>
                                         <div className="primary-button-box">
                                             <button className="learn-more-button" id="button-all"
-                                                     onClick={() => this.serviceSelected("emergency")}>
+                                                    onClick={() => this.serviceSelected("emergency")}>
                                                 <strong>{arr[8]}</strong>
                                             </button>
                                         </div>
@@ -405,4 +400,5 @@ class medicalServiceHomePage extends Component {
         );
     }
 }
+
 export default medicalServiceHomePage;

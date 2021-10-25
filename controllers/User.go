@@ -11,12 +11,12 @@ import (
 //ChangeUserInfo Update a new user information into database
 func ChangeUserInfo(c *gin.Context) {
 	type Info struct {
-		Name string
-		Password string
-		Gender string
-		Language string
-		DoB string
-		Mail string
+		Name        string
+		Password    string
+		Gender      string
+		Language    string
+		DoB         string
+		Mail        string
 		PhoneNumber string
 	}
 	var db = models.InitDB()

@@ -17,7 +17,6 @@ import Pharmacy from "../EmergancyPage/pharmacy"
 import Specialist from "../EmergancyPage/specialistService"
 import Hospitals from "../EmergancyPage/hospitals";
 import Gp from "../EmergancyPage/generalPractitioner"
-import cookie from "react-cookies";
 
 const {Header, Sider, Content} = Layout;
 const MyIcon = createFromIconfontCN({
@@ -52,7 +51,7 @@ class demo extends Component {
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
         googleTranslate.getSupportedLanguages("en", function (err, languageCodes) {
-            console.log(languageCodes);
+
             getLanguageCodes(languageCodes); // use a callback function to setState
         });
         const getLanguageCodes = languageCodes => {

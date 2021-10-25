@@ -66,18 +66,17 @@ class generalPractitioner extends Component {
 
     //translate language
     changeHandler = language => {
-        let cookieLanguage = cookie.load("language");
+
         let transQuestion = "";
 
         // translate the question when selecting a different language
         arr.map((value, index) => {
-            if (language !== cookieLanguage) {
+
                 googleTranslate.translate(arr[index], language, function (err, translation) {
-                    console.log(translation.translatedText);
                     transQuestion = translation.translatedText;
                     translating(transQuestion, index);
                 });
-            }
+
         })
 
         const translating = (transQuestion, index) => {

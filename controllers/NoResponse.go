@@ -12,4 +12,3 @@ func NoResponse(c *gin.Context) {
 		"error":  "404, page not exists!",
 	})
 }
-

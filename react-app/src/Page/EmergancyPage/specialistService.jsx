@@ -6,21 +6,21 @@ import cookie from "react-cookies";
 let key = require('../../privateData.json');
 const googleTranslate = require("google-translate")(key[0].keyTranslate);
 const strings = {
-    0:"Specialist Service",
-    1:"What is Specialist ?",
-    2:"The specialist is doctor who are good at a specific area of medicine, such as heart disease, joint disease, cardiology etc. " +
+    0: "Specialist Service",
+    1: "What is Specialist ?",
+    2: "The specialist is doctor who are good at a specific area of medicine, such as heart disease, joint disease, cardiology etc. " +
         "Specialist may work in public/ private hospital, private practice and public hospital system. ",
-    3:"What can Specialist do for you",
-    4:"Specialist are doctor who good at a specific area of medicine, they can provide better treatment for you in the " +
+    3: "What can Specialist do for you",
+    4: "Specialist are doctor who good at a specific area of medicine, they can provide better treatment for you in the " +
         "specific medicine area. Different specialist can offer different medical care for you. In order to help with " +
         "your health need, it is recommended that see your GP before see a specialist, your GP can help you to find the " +
         "most suitable specialist for you.olve the complex health problems for patient, when GP can not help you, " +
         "hospital will take you and give you treatment.",
-    5:"Things about specialist you should know",
-    6:"You should get the referral from your GP first before you go to see the specialist, the referral can help the " +
+    5: "Things about specialist you should know",
+    6: "You should get the referral from your GP first before you go to see the specialist, the referral can help the " +
         "specialist know your background information and health issue, then they can provide a better treatment for you.",
-    7:"If you don't have a referral and go to see the specialist, some of the specialist may reject provide health service for you.",
-    8:"If you want to use Medicare to cover the cost, you need to get a referral from your GP.",
+    7: "If you don't have a referral and go to see the specialist, some of the specialist may reject provide health service for you.",
+    8: "If you want to use Medicare to cover the cost, you need to get a referral from your GP.",
 }
 const arr = [strings["0"], strings["1"], strings["2"], strings["3"], strings["4"], strings["5"], strings["6"],
     strings["7"], strings["8"]];
@@ -34,34 +34,30 @@ class specialistService extends Component {
     //set page on the top when enter to this page
     componentDidMount() {
         // load all of the language options from Google Translate to your app state
-        googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+        googleTranslate.getSupportedLanguages("en", function (err, languageCodes) {
             getLanguageCodes(languageCodes); // use a callback function to setState
         });
         const getLanguageCodes = languageCodes => {
-            this.setState({ languageCodes });
+            this.setState({languageCodes});
         };
 
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
-            window.scrollTo (0,0);
+            window.scrollTo(0, 0);
         }
     }
 
     //translate language
     changeHandler = language => {
-        let cookieLanguage = cookie.load("language");
         let transQuestion = "";
 
         // translate the question when selecting a different language
         arr.map((value, index) => {
-            if (language !== cookieLanguage) {
-                googleTranslate.translate(arr[index], language, function(err, translation) {
-                    console.log(translation.translatedText);
-                    transQuestion = translation.translatedText;
-                    translating(transQuestion, index);
-                });
-            }
+            googleTranslate.translate(arr[index], language, function (err, translation) {
+                transQuestion = translation.translatedText;
+                translating(transQuestion, index);
+            });
         })
 
         const translating = (transQuestion, index) => {
@@ -72,19 +68,19 @@ class specialistService extends Component {
             }
         };
 
-        this.setState({ language });
-        cookie.save("language", language, { path: "/" });
+        this.setState({language});
+        cookie.save("language", language, {path: "/"});
 
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
             //window.requestAnimationFrame(smoothscroll);
-            window.scrollTo (0,0);
+            window.scrollTo(0, 0);
         }
     };
 
-    render(){
+    render() {
         const {languageCodes, language} = this.state;
-        return(
+        return (
             <div>
                 <select className="medical-service-select-language" value={language} onChange={(e) => {
                     this.changeHandler(e.target.value)
@@ -157,4 +153,5 @@ class specialistService extends Component {
         );
     }
 }
+
 export default specialistService;

@@ -38,7 +38,6 @@ export default class doctorPage extends Component {
             let api;
             api = "/api/date"
             axios.post(api, this.state).then((response) => {
-                console.log(this.state)
                 if (response.data.validation === true) {
                     this.setState({demo: "block"})
                 } else if (response.data.validation === false) {
@@ -77,7 +76,6 @@ export default class doctorPage extends Component {
             api = "/api/booking"
             axios.post(api, this.state).then((response) => {
                 if (response.data.validation === true) {
-                    console.log("send booking")
                     this.gpSelected(info, e, doctor, date, time);
                 } else if (response.data.validation === false) {
                     alert("sorry, some errors happen")
@@ -103,14 +101,16 @@ export default class doctorPage extends Component {
             }
             return result;
         }
+
         const {RangePicker} = DatePicker;
+
         // Can not select days before today and today
         function disabledDate(current) {
             return current && current < moment().endOf('day');
         }
 
         return (
-            <div className="time-selection" style={{height:"900px"}}>
+            <div className="time-selection" style={{height: "900px"}}>
                 <div className="steps">
                     <Steps current={2}>
                         <Step title="Location"/>
@@ -120,8 +120,8 @@ export default class doctorPage extends Component {
                 </div>
                 <Row className="time-selection-title">
                     <Col span={24}>
-                        <div style={{textAlign:"center"}}>
-                            <h3 style={{fontSize:"35px",color:"#354E57"}}>Choose a time</h3>
+                        <div style={{textAlign: "center"}}>
+                            <h3 style={{fontSize: "35px", color: "#354E57"}}>Choose a time</h3>
                         </div>
 
                     </Col>

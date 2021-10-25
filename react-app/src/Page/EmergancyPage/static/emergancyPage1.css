@@ -5,17 +5,17 @@
     height: 150px;
 }
 
-#FirstRcorners p{
+#FirstRcorners p {
     color: #354E57;
-    text-align:center;
+    text-align: center;
     margin-top: 25px;
 }
 
-.imageLeft{
-    float:left;
+.imageLeft {
+    float: left;
 }
 
-.imageRight{
+.imageRight {
     float: right;
 }
 
@@ -26,6 +26,7 @@
     right: 50px;
     top: 35px
 }
+
 .header-content-5items-topic {
     width: 50%;
     position: relative;
@@ -37,287 +38,297 @@ h2 {
     font-size: 45px;
     /*float: left;*/
     margin-left: 30px;
-    margin-top:20px;
+    margin-top: 20px;
 }
+
 .leftFont {
     text-align: left;
     margin-left: 545px;
 }
 
-.divFragment{
+.divFragment {
     margin-top: 80px;
 }
 
-.divFragment h1{
+.divFragment h1 {
     color: #354E57;
     font-size: 45px;
 }
 
 .SecondRcorners {
-    float:right;
+    float: right;
     border-radius: 2500px;
     background-color: #D7CCDD;
     border: 1.5px solid #707070;
     height: 150px;
-    width:750px;
+    width: 750px;
     margin-top: 15%;
 }
 
 .SecondRcorners2 {
-    float:right;
+    float: right;
     border-radius: 2500px;
     background-color: #D7CCDD;
     border: 1.5px solid #707070;
     height: 150px;
-    width:750px;
+    width: 750px;
     margin-top: 15%;
 }
+
 .thirdRcorners {
-    float:left;
+    float: left;
     border-radius: 2500px;
     background-color: #D7CCDD;
     border: 1.5px solid #707070;
     height: 150px;
-    width:750px;
+    width: 750px;
     margin-top: 15%;
 }
 
 
-.SecondRcorners p{
+.SecondRcorners p {
     color: #354E57;
-    text-align:center;
+    text-align: center;
     margin-top: 25px;
 }
 
-.SecondRcorners2 p{
+.SecondRcorners2 p {
     color: #354E57;
-    text-align:center;
+    text-align: center;
     margin-top: 45px;
 }
 
-.thirdRcorners p{
+.thirdRcorners p {
     color: #354E57;
-    text-align:center;
+    text-align: center;
     margin-top: 30px;
 }
 
 .segment1 {
-    margin-top:1%;
-}
-.segment3 {
-    margin-top:50%;
-}
-.segment2 {
-    margin-top:100%;
+    margin-top: 1%;
 }
 
-.line{
-    height:5px;
+.segment3 {
+    margin-top: 50%;
+}
+
+.segment2 {
+    margin-top: 100%;
+}
+
+.line {
+    height: 5px;
     margin-top: 10%;
     background-color: #354E57;
 }
 
 
-.divFragment2{
+.divFragment2 {
     margin-top: 150%;
 }
-.divFragment3{
+
+.divFragment3 {
     margin-top: 10%;
 }
 
 
-.div1{
+.div1 {
     float: left;
-    margin-top:10%;
+    margin-top: 10%;
     border: 1.5px solid #707070;
     height: 80px;
-    width:250px;
+    width: 250px;
     margin-left: 3.5%;
 }
 
-.shortLine{
+.shortLine {
     float: left;
-    margin-top:12.5%;
+    margin-top: 12.5%;
     margin-left: 5%;
-    height:4px;
-    width:80px;
+    height: 4px;
+    width: 80px;
     background-color: #354E57;
 }
 
 
-.div2{
+.div2 {
     float: left;
-    margin-top:10%;
-    margin-left:5%;
+    margin-top: 10%;
+    margin-left: 5%;
     border: 1.5px solid #707070;
     height: 80px;
-    width:250px;
+    width: 250px;
 }
 
-.shortLine2{
+.shortLine2 {
     float: left;
-    margin-top:12.5%;
+    margin-top: 12.5%;
     margin-left: 5%;
-    height:4px;
-    width:80px;
+    height: 4px;
+    width: 80px;
     background-color: #354E57;
 }
 
-.div3{
-    margin-top:10%;
+.div3 {
+    margin-top: 10%;
     margin-left: 5%;
     border: 1.5px solid #707070;
     height: 80px;
-    width:250px;
+    width: 250px;
     float: left;
 }
 
-.div11{
+.div11 {
     float: left;
-    margin-top:10%;
+    margin-top: 10%;
     border: 1.5px solid #707070;
     height: 200px;
-    width:250px;
+    width: 250px;
     margin-left: 3.5%;
     border-radius: 50px;
     background-color: #D7CCDD;
 
 }
-.shortLine3{
+
+.shortLine3 {
     float: left;
-    margin-top:17.5%;
+    margin-top: 17.5%;
     margin-left: 5%;
-    height:4px;
-    width:80px;
+    height: 4px;
+    width: 80px;
     background-color: #354E57;
 }
 
-.div22{
+.div22 {
     float: left;
-    margin-top:10%;
-    margin-left:5%;
-    border: 1.5px solid #707070;
-    height: 200px;
-    width:250px;
-    border-radius: 50px;
-    background-color: #D7CCDD;
-
-}
-.shortLine4{
-    float: left;
-    margin-top:17.5%;
-    margin-left: 5%;
-    height:4px;
-    width:80px;
-    background-color: #354E57;
-}
-.div33{
-    margin-top:10%;
+    margin-top: 10%;
     margin-left: 5%;
     border: 1.5px solid #707070;
     height: 200px;
-    width:250px;
-    float: left;
+    width: 250px;
     border-radius: 50px;
     background-color: #D7CCDD;
 
 }
 
-.div111{
+.shortLine4 {
     float: left;
-    margin-top:10%;
+    margin-top: 17.5%;
+    margin-left: 5%;
+    height: 4px;
+    width: 80px;
+    background-color: #354E57;
+}
+
+.div33 {
+    margin-top: 10%;
+    margin-left: 5%;
+    border: 1.5px solid #707070;
+    height: 200px;
+    width: 250px;
+    float: left;
+    border-radius: 50px;
+    background-color: #D7CCDD;
+
+}
+
+.div111 {
+    float: left;
+    margin-top: 10%;
     border: 1.5px solid #707070;
     height: 300px;
-    width:250px;
+    width: 250px;
     margin-left: 3.5%;
     background-color: #EEF2F4;
 
 }
-.shortLine5{
+
+.shortLine5 {
     float: left;
-    margin-top:17.5%;
+    margin-top: 17.5%;
     margin-left: 5%;
-    height:4px;
-    width:80px;
+    height: 4px;
+    width: 80px;
     background-color: #354E57;
 }
 
-.div222{
+.div222 {
     float: left;
-    margin-top:10%;
-    margin-left:5%;
+    margin-top: 10%;
+    margin-left: 5%;
     border: 1.5px solid #707070;
     height: 300px;
-    width:250px;
+    width: 250px;
     background-color: #EEF2F4;
 }
 
-.shortLine6{
+.shortLine6 {
     float: left;
-    margin-top:17.5%;
+    margin-top: 17.5%;
     margin-left: 5%;
-    height:4px;
-    width:80px;
+    height: 4px;
+    width: 80px;
     background-color: #354E57;
 }
-.div333{
-    margin-top:10%;
+
+.div333 {
+    margin-top: 10%;
     margin-left: 5%;
     border: 1.5px solid #707070;
     height: 300px;
-    width:250px;
+    width: 250px;
     float: left;
     background-color: #EEF2F4;
 
 }
 
-.image5{
-    margin-top:30px;
+.image5 {
+    margin-top: 30px;
     height: 120px;
     width: 150px;
 }
 
-.image6{
-    margin-top:30px;
+.image6 {
+    margin-top: 30px;
     height: 120px;
     width: 150px;
 }
 
-.image7{
-    margin-top:30px;
+.image7 {
+    margin-top: 30px;
     height: 120px;
     width: 150px;
 }
 
-.div11 p{
+.div11 p {
     margin-top: 45px;
 }
-.div22 p{
+
+.div22 p {
     margin-top: 30px;
 }
-.div33 p{
+
+.div33 p {
     margin-top: 10px;
 }
 
-.div1 p{
+.div1 p {
     color: #354E57;
-    text-align:center;
+    text-align: center;
     margin-top: 13px;
 }
 
 
-
-
-.div2 p{
+.div2 p {
     color: #354E57;
-    text-align:center;
+    text-align: center;
     margin-top: 13px;
 }
 
 
-.div3 p{
+.div3 p {
     color: #354E57;
-    text-align:center;
+    text-align: center;
     margin-top: 13px;
 }
 
@@ -331,13 +342,15 @@ h2 {
 
 .head1 {
     float: left;
-    font-size:50px
+    font-size: 50px
 }
+
 .head2 {
     float: left;
     font-size: 35px;
     color: #fff;
 }
+
 .head2-second {
     float: left;
     font-size: 35px;
@@ -349,44 +362,46 @@ h2 {
     font-size: 35px;
 }
 
-.nextPart{
+.nextPart {
     margin-top: 6%;
     background-color: #354E57;
     margin-left: 7%;
     margin-right: 7%;
-    box-shadow: 5px 10px rgba(163,163,163,0.8);
+    box-shadow: 5px 10px rgba(163, 163, 163, 0.8);
 }
-.nextPart3{
-    margin-top:8%;
+
+.nextPart3 {
+    margin-top: 8%;
     background-color: #354E57;
     margin-left: 7%;
     margin-right: 7%;
-    box-shadow: 5px 10px rgba(163,163,163,0.8);
+    box-shadow: 5px 10px rgba(163, 163, 163, 0.8);
 }
 
-.nextPart4{
-    margin-top:6%;
-    background-color:#354E57;
+.nextPart4 {
+    margin-top: 6%;
+    background-color: #354E57;
     margin-left: 7%;
-    margin-right:7%;
-    box-shadow: 5px 10px rgba(163,163,163,0.8);
+    margin-right: 7%;
+    box-shadow: 5px 10px rgba(163, 163, 163, 0.8);
 }
 
 
-#redfont{
+#redfont {
     color: deepskyblue;
     text-align: center;
     font-size: 32px;
- }
+}
 
 
-.imageRight2{
+.imageRight2 {
     position: absolute;
     width: 18%;
     right: 10%;
     top: 24%;
 }
-.mainDiv{
+
+.mainDiv {
     background-color: #000000;
 }
 
@@ -394,12 +409,12 @@ h2 {
     position: absolute;
     top: 3.5%;
     right: 10%;
-    background-color:#354E57;
+    background-color: #354E57;
     background-position: right 10px center;
     background-repeat: no-repeat;
     background-size: auto 50%;
-    border-radius:2px;
-    border:none;
+    border-radius: 2px;
+    border: none;
     color: #ffffff;
     padding: 10px 30px 10px 10px;
     outline: none;
@@ -410,7 +425,7 @@ h2 {
 
 @-moz-document url-prefix() {
     select {
-        color: rgba(0,0,0,0);
+        color: rgba(0, 0, 0, 0);
         text-shadow: 0 0 0 #ffffff;
     }
 }

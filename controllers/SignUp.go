@@ -28,6 +28,7 @@ func SignUpUser(c *gin.Context) {
 	if err != nil {
 		return
 	}
+
 	fmt.Println(userData)
 	if err := db.Create(&userData).Error; err != nil {
 		c.JSON(200, gin.H{

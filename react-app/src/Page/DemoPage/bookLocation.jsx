@@ -86,11 +86,10 @@ export default class bookLocation extends Component {
 
     //send response to end-back
     submit = (e) => {
-        console.log(e)
         let api;
         api = "/api/booking/searchGp"
         axios.post(api, e).then((response) => {
-            console.log(response.data)
+
             const json = response.data;
             const arr = [];
 
@@ -100,9 +99,6 @@ export default class bookLocation extends Component {
             });
 
             arr2 = arr[0];
-            {
-                console.log(arr2)
-            }
             this.info = arr2.map((d) =>
                 <Col span={10}>
                     <Card>
@@ -145,7 +141,7 @@ export default class bookLocation extends Component {
         let api;
         api = "/api/booking/searchGp"
         axios.post(api, this.state).then((response) => {
-            console.log(response.data)
+
             const json = response.data;
             const arr = [];
 

@@ -14,16 +14,15 @@ export default class gpSelected extends Component {
         time: "none",
     };
 
-    //fix to top
+    // fix to top
     componentDidMount() {
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
-            //window.requestAnimationFrame(smoothscroll);
-            window.scrollTo (0,0);
+            window.scrollTo(0, 0);
         }
     }
 
-    //display information or not
+    // display information or not
     onChangeStrength = () => {
         if (this.state.strength === "none") {
             this.setState({strength: "block"})
@@ -41,7 +40,7 @@ export default class gpSelected extends Component {
         }
     }
 
-    //send information to main page
+    // send information to main page
     gpSelected(info, e) {
         this.props.gpSelected(info, e)
     }
@@ -62,20 +61,23 @@ export default class gpSelected extends Component {
                         <Row>
                             <Col span={7}/>
                             <Col span={16}>
-                                <img style={{marginTop: 20,width:"100%",height:"300px"}} alt="example"
+                                <img style={{marginTop: 20, width: "100%", height: "300px"}} alt="example"
                                      src={require('../../Images/' + this.props.name.Images.Path).default}/>
                             </Col>
                         </Row>
                         <Row>
                             <Col span={9}/>
                             <Col span={4}>
-                                <Image style={{height:"80px"}} src={require('../../Images/' + this.props.name.GpImages[0].Path).default}/>
+                                <Image style={{height: "80px"}}
+                                       src={require('../../Images/' + this.props.name.GpImages[0].Path).default}/>
                             </Col>
                             <Col span={4}>
-                                <Image style={{height:"80px"}} src={require('../../Images/' + this.props.name.GpImages[1].Path).default}/>
+                                <Image style={{height: "80px"}}
+                                       src={require('../../Images/' + this.props.name.GpImages[1].Path).default}/>
                             </Col>
                             <Col span={4}>
-                                <Image style={{height:"80px"}} src={require('../../Images/' + this.props.name.GpImages[2].Path).default}/>
+                                <Image style={{height: "80px"}}
+                                       src={require('../../Images/' + this.props.name.GpImages[2].Path).default}/>
                             </Col>
                         </Row>
 

@@ -25,6 +25,7 @@ class SignUpPage extends Component {
             enter: '',
         };
     }
+
     //record input to state
     handlerChange = (e) => {
         this.setState({
