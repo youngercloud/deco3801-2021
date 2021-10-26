@@ -110,8 +110,8 @@ class LoginPage extends Component {
                                         <Radio.Group name="identity" defaultValue={1}>
                                             <Radio onClick={() => this.setState({currentUser: "1"})} className="chosen"
                                                    value={1}>User</Radio>
-                                            <Radio onClick={() => this.setState({currentUser: "2"})} className="chosen"
-                                                   value={2}>Clinic / Hospital</Radio>
+                                            <Radio disabled onClick={() => this.setState({currentUser: "2"})} className="chosen"
+                                                   value={2}>Doctor</Radio>
                                         </Radio.Group>
                                     </div>
 

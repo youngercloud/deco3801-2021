@@ -153,7 +153,7 @@ class SignUpPage extends Component {
                                         <Radio.Group name="identity" defaultValue={1}>
                                             <Radio value={1} onClick={() => this.setState({currentUser: "1"})}
                                                    className="chosen">User</Radio>
-                                            <Radio value={2} onClick={() => this.setState({currentUser: "2"})}
+                                            <Radio disabled value={2} onClick={() => this.setState({currentUser: "2"})}
                                                    className="chosen">Doctor</Radio>
                                         </Radio.Group>
                                     </div>

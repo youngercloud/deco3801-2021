@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./static/bookLocation.css";
-import {Button, Card, Col, Input, Row, Select} from 'antd';
-import {SearchOutlined} from '@ant-design/icons';
+import {Button, Card, Col, Input, Popover, Row, Select} from 'antd';
+import {InfoCircleOutlined, SearchOutlined} from '@ant-design/icons';
 import axios from "axios";
 import MapboxGl from "mapbox-gl/dist/mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
@@ -191,6 +191,8 @@ export default class bookLocation extends Component {
 
                 <div className="inputData">
                     <Input.Group compact>
+                        <Popover placement="top"  content={"Your location information is used"} trigger="click">
+                            <InfoCircleOutlined style={{fontSize:"25px",marginRight:"10px",marginTop:"6px"}}/></Popover>
                         <Input size="large" style={{width: '50%'}} placeholder="Type Clinic name or Post Code"
                                onChange={this.handleGetInputValue}
                         />

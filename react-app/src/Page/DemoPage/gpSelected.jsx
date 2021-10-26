@@ -93,10 +93,14 @@ export default class gpSelected extends Component {
                             <Col>
                                 <h3>{this.props.name.Distance} kilometer</h3>
                             </Col>
-                            <Col><p>||</p></Col>
-                            <Col>
-                                <h3>{this.props.name.Language}</h3>
-                            </Col>
+                            <p> &nbsp;||&nbsp;</p>
+                                    {
+                                        this.props.name.Language.map(item => (
+                                                <h3 style={{fontWeight:"bold", color:"#354E57"}}  span={3}>{item} &nbsp;</h3>
+                                            )
+                                        )
+                                    }
+
                         </Row>
                         <Row>
                             <Col span={15}>
