@@ -7,15 +7,21 @@ import MapboxGl from "mapbox-gl/dist/mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 const distanceOptions = [
-    {value: '0,1', label: '1km'},
+    {value: '0,99999', label: 'All'},
+    {value: '0,1', label: '0km-1km'},
     {value: '1,3', label: '1km-3km'},
-    {value: '3,9999', label: 'more than 3Km'},
+    {value: '3,5', label: '3km-5km'},
+    {value: '5,9999', label: 'more than 5Km'},
 ];
 
 const languageOptions = [
+    {value: '', label: 'All'},
     {value: 'English', label: 'English'},
     {value: 'Chinese', label: 'Chinese'},
     {value: 'Japanese', label: 'Japanese'},
+    {value: 'Tamil', label: 'Tamil'},
+    {value: 'Hindi', label: 'Hindi'},
+    {value: 'French', label: 'French'},
 ];
 
 const {Meta} = Card;
@@ -68,6 +74,10 @@ export default class bookLocation extends Component {
             this.setState({
                 distanceMax: distanceSelect.replace(",", "")[1],
             })
+        }else{
+            this.setState({
+                distanceMax: "99999",
+            })
         }
     };
 
@@ -86,6 +96,7 @@ export default class bookLocation extends Component {
 
     //send response to end-back
     submit = (e) => {
+        console.log(this.state)
         let api;
         api = "/api/booking/searchGp"
         axios.post(api, e).then((response) => {
